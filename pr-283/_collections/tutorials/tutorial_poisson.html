@@ -1,0 +1,1641 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Solving the Poisson equation &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_collections/tutorials/tutorial_poisson';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Maxwell’s equations: Light Wave and Coaxial Waveguide" href="tutorial_maxwell.html" />
+    <link rel="prev" title="Tutorials" href="../../sections/tutorials.html" />
+    <link href="../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../../sections/tutorials.html"
+                          title="previous chapter">Tutorials</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="tutorial_maxwell.html"
+                          title="next chapter">Maxwell’s equations: Light Wave and Coaxial Waveguide</a></p>
+  </div></div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../sections/tutorials.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Solving the Poisson equation</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Solving-the-Poisson-equation">
+<h1>Solving the Poisson equation<a class="headerlink" href="#Solving-the-Poisson-equation" title="Link to this heading">#</a></h1>
+<section id="Overview">
+<h2>Overview<a class="headerlink" href="#Overview" title="Link to this heading">#</a></h2>
+<p>The <strong>Poisson equation</strong> is a fundamental elliptic partial differential equation that appears throughout physics and engineering:</p>
+<ul class="simple">
+<li><p>Electrostatics (Coulomb’s law)</p></li>
+<li><p>Magnetostatics</p></li>
+<li><p>Gravitational potential</p></li>
+<li><p>Fluid dynamics (pressure Poisson equation)</p></li>
+<li><p>And many coupled multiphysics systems</p></li>
+</ul>
+<p>This tutorial demonstrates how to solve various manufactured Poisson problems using Struphy’s <code class="docutils literal notranslate"><span class="pre">Poisson</span></code> model, with verification against analytical solutions.</p>
+</section>
+<section id="Solving-1D-Poisson-with-periodic-boundary-conditions">
+<h2>Solving 1D Poisson with periodic boundary conditions<a class="headerlink" href="#Solving-1D-Poisson-with-periodic-boundary-conditions" title="Link to this heading">#</a></h2>
+<p>We begin with the simplest case: a <strong>1D periodic Poisson problem</strong>. The model solves the stabilized equation:</p>
+<div class="math notranslate nohighlight">
+\[-\frac{d^2\phi}{dx^2} + \varepsilon\phi = \rho(x),\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\phi(x)\)</span> is the potential</p></li>
+<li><p><span class="math notranslate nohighlight">\(\rho(x)\)</span> is the source (charge/forcing)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\varepsilon\)</span> is a small stabilization parameter (needed for uniqueness in periodic domains)</p></li>
+</ul>
+<p>For a manufactured test, we choose the analytical solution:</p>
+<div class="math notranslate nohighlight">
+\[\phi_\mathrm{exact}(x) = \cos(kx),\]</div>
+<p>where <span class="math notranslate nohighlight">\(kx\)</span> is the wavenumber. This determines the required source as:</p>
+<div class="math notranslate nohighlight">
+\[\rho(x) = (k^2 + \varepsilon)\cos(kx).\]</div>
+<p>We solve on a periodic domain <span class="math notranslate nohighlight">\(x \in [0, L)\)</span>, run a Struphy <code class="docutils literal notranslate"><span class="pre">Simulation</span></code>, and compare numerical and exact solutions.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">DerhamOptions</span><span class="p">,</span> <span class="n">domains</span><span class="p">,</span> <span class="n">grids</span><span class="p">,</span> <span class="n">perturbations</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.initial.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">GenericPerturbation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Poisson</span>
+
+<span class="n">Poisson</span><span class="o">.</span><span class="n">pde</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<h5>PDEs solved by model:</h5>
+
+<p>        Find <code>φ ∈ H¹</code> such that</p>
+
+<p><span style="display:block;text-align:center;font-size:1.18em;line-height:1.6;margin:0.35em 0;">-∇ · D₀(𝐱) ∇ φ + n₀(𝐱) φ = ρ(t, 𝐱)</span></p>
+
+<p>        where <code>n₀, ρ(t) : Ω → ℝ</code> are real-valued functions, <code>ρ(t)</code> is parametrized by time <code>t</code>, and <code>D₀ : Ω → ℝ<sup>3 × 3</sup></code> is a positive matrix.
+        Boundary terms from integration by parts are assumed to vanish.
+</p></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Manufactured periodic test case in 1D (aligned with verification test pattern)</span>
+<span class="n">Lx</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">mode</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">k</span> <span class="o">=</span> <span class="n">mode</span> <span class="o">*</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">Lx</span>
+
+<span class="c1"># Tiny stabilization makes the periodic problem uniquely solvable</span>
+<span class="n">stab_eps</span> <span class="o">=</span> <span class="mf">1e-8</span>
+
+<span class="c1"># Build the source through the model variable as in test_verif_Poisson.py</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Poisson</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span>
+    <span class="n">stab_eps</span><span class="o">=</span><span class="n">stab_eps</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">source_amp</span> <span class="o">=</span> <span class="n">k</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">stab_eps</span>
+<span class="n">model</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span>
+    <span class="n">perturbations</span><span class="o">.</span><span class="n">ModesCos</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="p">(</span><span class="n">mode</span><span class="p">,),</span> <span class="n">amps</span><span class="o">=</span><span class="p">(</span><span class="n">source_amp</span><span class="p">,))</span>
+    <span class="p">)</span>
+
+<span class="n">phi_exact</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">e1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="Setting-up-the-1D-periodic-case">
+<h3>Setting up the 1D periodic case<a class="headerlink" href="#Setting-up-the-1D-periodic-case" title="Link to this heading">#</a></h3>
+<p>To run a Poisson solve in Struphy, we need to:</p>
+<ol class="arabic simple">
+<li><p><strong>Create a model</strong> with the appropriate equation parameters</p></li>
+<li><p><strong>Define a manufactured source</strong> that will be used as the right-hand side</p></li>
+<li><p><strong>Specify solver options</strong> (stabilization, numerical parameters)</p></li>
+<li><p><strong>Create a simulation</strong> with domain, grid, and solver settings</p></li>
+<li><p><strong>Execute the solve</strong> and post-process results</p></li>
+</ol>
+<p>Below, <code class="docutils literal notranslate"><span class="pre">Poisson.Options</span></code> controls the elliptic solve. We specify:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">stab_eps</span></code>: a tiny stabilization to remove the constant null-space in the periodic case</p></li>
+</ul>
+<p>The source term (<code class="docutils literal notranslate"><span class="pre">rho</span></code>) is wired up automatically when the <code class="docutils literal notranslate"><span class="pre">Poisson</span></code> model is constructed (it passes <code class="docutils literal notranslate"><span class="pre">em_fields.source</span></code> to the propagator internally). All other option fields use defaults (solver choice, preconditioner, tolerances, etc.).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1D periodic setup: periodic bcs are the default (None in each direction)</span>
+<span class="n">domain</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">Cuboid</span><span class="p">(</span><span class="n">l1</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">r1</span><span class="o">=</span><span class="n">Lx</span><span class="p">)</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">TensorProductGrid</span><span class="p">(</span><span class="n">num_elements</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">derham_opts</span> <span class="o">=</span> <span class="n">DerhamOptions</span><span class="p">()</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">,</span>
+    <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+    <span class="n">derham_opts</span><span class="o">=</span><span class="n">derham_opts</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="c1"># For a stationary Poisson solve, one step is enough</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">one_time_step</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model Poisson ...
+WARNING: Class &#34;BasisProjectionOperators&#34; called with degree=(1, 1, 1) (interpolation of piece-wise constants should be avoided).
+Time stepping: 100%|██████████| 1/1 [00:00&lt;00:00, 134.14step/s]
+Struphy run finished.
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1
+
+Reading hdf5 data of following species:
+em_fields:
+  phi: &lt;HDF5 dataset &#34;phi&#34;: shape (2, 66, 3, 3), type &#34;&lt;f8&#34;&gt;
+  source: &lt;HDF5 dataset &#34;source&#34;: shape (2, 66, 3, 3), type &#34;&lt;f8&#34;&gt;
+
+100%|██████████| 2/2 [00:00&lt;00:00, 1240.37it/s]
+Creation of Struphy Fields done.
+
+Evaluating fields ...
+100%|██████████| 2/2 [00:00&lt;00:00, 1455.34it/s]
+
+Creating vtk in /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1/post_processing/fields_data ...
+100%|██████████| 2/2 [00:00&lt;00:00, 1469.11it/s]
+
+No kinetic data found in hdf5 file, skipping post-processing of kinetic data.
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(2,)
+self.grids_log[0].shape =(65,)
+self.grids_log[1].shape =(2,)
+self.grids_log[2].shape =(2,)
+self.grids_phy[0].shape =(65, 2, 2)
+self.grids_phy[1].shape =(65, 2, 2)
+self.grids_phy[2].shape =(65, 2, 2)
+
+self.spline_values:
+    em_fields
+        phi_log
+        source_log
+
+self.orbits:
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract 1D line data and compare to analytic solution</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">grids_phy</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">t_last</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">spline_values</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">phi_log</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">phi_num</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">spline_values</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">phi_log</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">t_last</span><span class="p">][</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">phi_ref</span> <span class="o">=</span> <span class="n">phi_exact</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+<span class="n">err</span> <span class="o">=</span> <span class="n">phi_num</span> <span class="o">-</span> <span class="n">phi_ref</span>
+<span class="n">err_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">phi_ref</span><span class="p">,</span> <span class="s2">&quot;k--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;analytic&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">phi_num</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Struphy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\phi(x)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Poisson solution&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\phi_h - \phi_\mathrm</span><span class="si">{exact}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Pointwise error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;max-norm error ||phi_h - phi_exact||_inf = </span><span class="si">{</span><span class="n">err_max</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Electric field comparison: E = -grad(phi)</span>
+<span class="n">E_num</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">phi_num</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">edge_order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">E_ref</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">E_err</span> <span class="o">=</span> <span class="n">E_num</span> <span class="o">-</span> <span class="n">E_ref</span>
+<span class="n">E_err_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">E_err</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">E_ref</span><span class="p">,</span> <span class="s2">&quot;k--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;analytic $-\nabla\phi$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">E_num</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Struphy $-\nabla\phi_h$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$E_x(x)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Electric field comparison&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">E_err</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$E_{x,h} - E_{x,\mathrm</span><span class="si">{exact}</span><span class="s2">}$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Electric field pointwise error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;max-norm error ||E_h - E_exact||_inf = </span><span class="si">{</span><span class="n">E_err_max</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+max-norm error ||phi_h - phi_exact||_inf = 3.207e-03
+max-norm error ||E_h - E_exact||_inf = 1.920e-02
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_poisson_5_1.png" src="../../_images/_collections_tutorials_tutorial_poisson_5_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_poisson_5_2.png" src="../../_images/_collections_tutorials_tutorial_poisson_5_2.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="2D-Manufactured-Test-on-a-Rectangle">
+<h2>2D Manufactured Test on a Rectangle<a class="headerlink" href="#2D-Manufactured-Test-on-a-Rectangle" title="Link to this heading">#</a></h2>
+<p>We now solve a <strong>2D Poisson problem on a rectangular domain</strong> with different side lengths. This tests:</p>
+<ul class="simple">
+<li><p>Multi-dimensional elliptic solves</p></li>
+<li><p>Non-square domains</p></li>
+<li><p>Homogeneous Dirichlet (zero) boundary conditions</p></li>
+</ul>
+<p>The rectangular domain is:</p>
+<div class="math notranslate nohighlight">
+\[(x,y) \in [0,L_x] \times [0,L_y], \quad L_x \neq L_y.\]</div>
+<p>We choose a separable manufactured solution that vanishes on all four boundaries:</p>
+<div class="math notranslate nohighlight">
+\[\phi_\mathrm{exact}(x,y) = \sin\left(\frac{2\pi x}{L_x}\right)\sin\left(\frac{2\pi y}{L_y}\right).\]</div>
+<p>For the Poisson equation <span class="math notranslate nohighlight">\(-\Delta\phi + \varepsilon\phi = \rho\)</span>, the required manufactured source is:</p>
+<div class="math notranslate nohighlight">
+\[\rho(x,y) = \left[\left(\frac{2\pi}{L_x}\right)^2 + \left(\frac{2\pi}{L_y}\right)^2 + \varepsilon\right] \phi_\mathrm{exact}(x,y).\]</div>
+<p>Unlike the periodic case, we now enforce <strong>Dirichlet boundary conditions</strong> (<span class="math notranslate nohighlight">\(\phi = 0\)</span> on all boundaries). The solution is unique without any stabilization (<span class="math notranslate nohighlight">\(\varepsilon\)</span> can be very small).</p>
+<p>We construct this 2D test through model perturbations (<code class="docutils literal notranslate"><span class="pre">ModesSinSin</span></code>) and compare solution fields at select points using contour plots.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2D manufactured Poisson setup and solve</span>
+<span class="n">Lx2</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">Ly2</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">eps2</span> <span class="o">=</span> <span class="mf">1e-8</span>
+
+<span class="n">kx2</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">Lx2</span>
+<span class="n">ky2</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">Ly2</span>
+
+<span class="n">phi2_exact</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">kx2</span> <span class="o">*</span> <span class="n">e1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ky2</span> <span class="o">*</span> <span class="n">e2</span><span class="p">)</span>
+
+<span class="n">model2</span> <span class="o">=</span> <span class="n">Poisson</span><span class="p">()</span>
+<span class="n">model2</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span>
+    <span class="n">stab_eps</span><span class="o">=</span><span class="n">eps2</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">source_amp2</span> <span class="o">=</span> <span class="n">kx2</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">ky2</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">eps2</span>
+<span class="n">model2</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span>
+    <span class="n">perturbations</span><span class="o">.</span><span class="n">ModesSinSin</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="n">ms</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="n">amps</span><span class="o">=</span><span class="p">(</span><span class="n">source_amp2</span><span class="p">,))</span>
+    <span class="p">)</span>
+
+<span class="n">domain2</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">Cuboid</span><span class="p">(</span><span class="n">l1</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">r1</span><span class="o">=</span><span class="n">Lx2</span><span class="p">,</span> <span class="n">l2</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">r2</span><span class="o">=</span><span class="n">Ly2</span><span class="p">)</span>
+<span class="n">grid2</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">TensorProductGrid</span><span class="p">(</span><span class="n">num_elements</span><span class="o">=</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">derham_opts2</span> <span class="o">=</span> <span class="n">DerhamOptions</span><span class="p">(</span>
+    <span class="n">degree</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">bcs</span><span class="o">=</span><span class="p">((</span><span class="s2">&quot;dirichlet&quot;</span><span class="p">,</span> <span class="s2">&quot;dirichlet&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;dirichlet&quot;</span><span class="p">,</span> <span class="s2">&quot;dirichlet&quot;</span><span class="p">),</span> <span class="kc">None</span><span class="p">),</span>
+    <span class="p">)</span>
+
+<span class="n">sim2</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model2</span><span class="p">,</span>
+    <span class="n">domain</span><span class="o">=</span><span class="n">domain2</span><span class="p">,</span>
+    <span class="n">grid</span><span class="o">=</span><span class="n">grid2</span><span class="p">,</span>
+    <span class="n">derham_opts</span><span class="o">=</span><span class="n">derham_opts2</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">sim2</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">one_time_step</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sim2</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+<span class="n">sim2</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model Poisson ...
+Time stepping: 100%|██████████| 1/1 [00:00&lt;00:00, 83.43step/s]
+Struphy run finished.
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1
+
+Reading hdf5 data of following species:
+em_fields:
+  phi: &lt;HDF5 dataset &#34;phi&#34;: shape (2, 57, 41, 3), type &#34;&lt;f8&#34;&gt;
+  source: &lt;HDF5 dataset &#34;source&#34;: shape (2, 57, 41, 3), type &#34;&lt;f8&#34;&gt;
+
+100%|██████████| 2/2 [00:00&lt;00:00, 1150.23it/s]
+Creation of Struphy Fields done.
+
+Evaluating fields ...
+100%|██████████| 2/2 [00:00&lt;00:00, 319.76it/s]
+
+Creating vtk in /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1/post_processing/fields_data ...
+100%|██████████| 2/2 [00:00&lt;00:00, 276.22it/s]
+
+No kinetic data found in hdf5 file, skipping post-processing of kinetic data.
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(2,)
+self.grids_log[0].shape =(49,)
+self.grids_log[1].shape =(33,)
+self.grids_log[2].shape =(2,)
+self.grids_phy[0].shape =(49, 33, 2)
+self.grids_phy[1].shape =(49, 33, 2)
+self.grids_phy[2].shape =(49, 33, 2)
+
+self.spline_values:
+    em_fields
+        phi_log
+        source_log
+
+self.orbits:
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2D diagnostics and plots</span>
+<span class="n">t2_last</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">sim2</span><span class="o">.</span><span class="n">spline_values</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">phi_log</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">sim2</span><span class="o">.</span><span class="n">grids_phy</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">sim2</span><span class="o">.</span><span class="n">grids_phy</span><span class="p">[</span><span class="mi">1</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">phi2_num</span> <span class="o">=</span> <span class="n">sim2</span><span class="o">.</span><span class="n">spline_values</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">phi_log</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">t2_last</span><span class="p">][</span><span class="mi">0</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">phi2_ref</span> <span class="o">=</span> <span class="n">phi2_exact</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">err2</span> <span class="o">=</span> <span class="n">phi2_num</span> <span class="o">-</span> <span class="n">phi2_ref</span>
+<span class="n">err2_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">err2</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">im0</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">phi2_num</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Numerical $</span><span class="se">\\</span><span class="s2">phi_h(x,y)$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im0</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">im1</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">phi2_ref</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Analytic $</span><span class="se">\\</span><span class="s2">phi_{</span><span class="se">\\</span><span class="s2">mathrm</span><span class="si">{exact}</span><span class="s2">}(x,y)$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">im2</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">err2</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Error $</span><span class="se">\\</span><span class="s2">phi_h-</span><span class="se">\\</span><span class="s2">phi_{</span><span class="se">\\</span><span class="s2">mathrm</span><span class="si">{exact}</span><span class="s2">}$&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;2D max-norm error ||phi_h - phi_exact||_inf = </span><span class="si">{</span><span class="n">err2_max</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2D max-norm error ||phi_h - phi_exact||_inf = 1.589e-07
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_poisson_8_1.png" src="../../_images/_collections_tutorials_tutorial_poisson_8_1.png" />
+</div>
+</div>
+</section>
+<section id="2D-Manufactured-Test-on-a-Thin-Annulus-(Polar-Coordinates)">
+<h2>2D Manufactured Test on a Thin Annulus (Polar Coordinates)<a class="headerlink" href="#2D-Manufactured-Test-on-a-Thin-Annulus-(Polar-Coordinates)" title="Link to this heading">#</a></h2>
+<p>As a second 2D geometry test, we solve Poisson on a <strong>thin annulus</strong> (a disc-shaped domain with a small hole). This demonstrates:</p>
+<ul class="simple">
+<li><p>Non-Cartesian geometries (polar coordinates via conformal mapping)</p></li>
+<li><p>Dirichlet boundary conditions at both inner and outer radii</p></li>
+<li><p>Manufactured solutions expressed in polar coordinates</p></li>
+</ul>
+<p>The geometry is a thin annulus with radii <span class="math notranslate nohighlight">\(a_1 &lt; r &lt; a_2\)</span>. We use the manufactured solution in polar coordinates <span class="math notranslate nohighlight">\((r, \theta)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\phi_\mathrm{exact}(r,\theta) = \sin\left(\pi\frac{r-a_1}{a_2-a_1}\right)\sin(m\theta),\]</div>
+<p>where <span class="math notranslate nohighlight">\(m\)</span> is an azimuthal mode number. This solution automatically satisfies:</p>
+<ul class="simple">
+<li><p><strong>Inner boundary</strong> (<span class="math notranslate nohighlight">\(r=a_1\)</span>): <span class="math notranslate nohighlight">\(\phi = 0\)</span> (since <span class="math notranslate nohighlight">\(\sin(0) = 0\)</span>)</p></li>
+<li><p><strong>Outer boundary</strong> (<span class="math notranslate nohighlight">\(r=a_2\)</span>): <span class="math notranslate nohighlight">\(\phi = 0\)</span> (since <span class="math notranslate nohighlight">\(\sin(\pi) = 0\)</span>)</p></li>
+</ul>
+<p>The source term <span class="math notranslate nohighlight">\(\rho\)</span> is computed analytically in polar coordinates, accounting for the Laplacian in polar form:</p>
+<div class="math notranslate nohighlight">
+\[\Delta\phi = \frac{d^2\phi}{dr^2} + \frac{1}{r}\frac{d\phi}{dr} + \frac{1}{r^2}\frac{d^2\phi}{d\theta^2}.\]</div>
+<p>This manufactured solution is injected via a <code class="docutils literal notranslate"><span class="pre">GenericPerturbation</span></code> directly in physical space. Plots are shown in physical <span class="math notranslate nohighlight">\((x,y)\)</span> coordinates for visualization.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HollowCylinder manufactured annulus test (physical-space definition)</span>
+<span class="n">a1</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">a2</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">Lz3</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">m3</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">eps3</span> <span class="o">=</span> <span class="mf">1e-8</span>
+<span class="n">w3</span> <span class="o">=</span> <span class="n">a2</span> <span class="o">-</span> <span class="n">a1</span>
+<span class="n">alpha3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">w3</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">phi3_exact</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">alpha3</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">a1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">m3</span> <span class="o">*</span> <span class="n">theta</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rho3_exact</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">alpha3</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">a1</span><span class="p">)</span>
+
+    <span class="n">sin_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">cos_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">sin_mt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">m3</span> <span class="o">*</span> <span class="n">theta</span><span class="p">)</span>
+
+    <span class="c1"># -Delta(phi) + eps*phi for phi(r,theta)=sin(s)sin(m theta)</span>
+    <span class="n">term</span> <span class="o">=</span> <span class="p">(</span><span class="n">alpha3</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin_s</span> <span class="o">-</span> <span class="p">(</span><span class="n">alpha3</span> <span class="o">/</span> <span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos_s</span> <span class="o">+</span> <span class="p">(</span><span class="n">m3</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin_s</span> <span class="o">+</span> <span class="n">eps3</span> <span class="o">*</span> <span class="n">sin_s</span>
+    <span class="k">return</span> <span class="n">term</span> <span class="o">*</span> <span class="n">sin_mt</span>
+
+<span class="n">model3</span> <span class="o">=</span> <span class="n">Poisson</span><span class="p">()</span>
+<span class="n">model3</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model3</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span>
+    <span class="n">stab_eps</span><span class="o">=</span><span class="n">eps3</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">model3</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span>
+    <span class="n">GenericPerturbation</span><span class="p">(</span><span class="n">rho3_exact</span><span class="p">,</span> <span class="n">given_in_basis</span><span class="o">=</span><span class="s2">&quot;physical&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="n">domain3</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">HollowCylinder</span><span class="p">(</span><span class="n">a1</span><span class="o">=</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="o">=</span><span class="n">a2</span><span class="p">,</span> <span class="n">Lz</span><span class="o">=</span><span class="n">Lz3</span><span class="p">)</span>
+<span class="n">grid3</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">TensorProductGrid</span><span class="p">(</span><span class="n">num_elements</span><span class="o">=</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">96</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">derham_opts3</span> <span class="o">=</span> <span class="n">DerhamOptions</span><span class="p">(</span>
+    <span class="n">degree</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">bcs</span><span class="o">=</span><span class="p">((</span><span class="s2">&quot;dirichlet&quot;</span><span class="p">,</span> <span class="s2">&quot;dirichlet&quot;</span><span class="p">),</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+    <span class="p">)</span>
+
+<span class="n">sim3</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model3</span><span class="p">,</span>
+    <span class="n">domain</span><span class="o">=</span><span class="n">domain3</span><span class="p">,</span>
+    <span class="n">grid</span><span class="o">=</span><span class="n">grid3</span><span class="p">,</span>
+    <span class="n">derham_opts</span><span class="o">=</span><span class="n">derham_opts3</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">sim3</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">one_time_step</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sim3</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+<span class="n">sim3</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model Poisson ...
+Time stepping: 100%|██████████| 1/1 [00:00&lt;00:00, 59.31step/s]
+Struphy run finished.
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1
+
+Reading hdf5 data of following species:
+em_fields:
+  phi: &lt;HDF5 dataset &#34;phi&#34;: shape (2, 45, 102, 3), type &#34;&lt;f8&#34;&gt;
+  source: &lt;HDF5 dataset &#34;source&#34;: shape (2, 45, 102, 3), type &#34;&lt;f8&#34;&gt;
+
+100%|██████████| 2/2 [00:00&lt;00:00, 1105.80it/s]
+Creation of Struphy Fields done.
+
+Evaluating fields ...
+100%|██████████| 2/2 [00:00&lt;00:00, 159.04it/s]
+
+Creating vtk in /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1/post_processing/fields_data ...
+100%|██████████| 2/2 [00:00&lt;00:00, 134.65it/s]
+
+No kinetic data found in hdf5 file, skipping post-processing of kinetic data.
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(2,)
+self.grids_log[0].shape =(37,)
+self.grids_log[1].shape =(97,)
+self.grids_log[2].shape =(2,)
+self.grids_phy[0].shape =(37, 97, 2)
+self.grids_phy[1].shape =(37, 97, 2)
+self.grids_phy[2].shape =(37, 97, 2)
+
+self.spline_values:
+    em_fields
+        phi_log
+        source_log
+
+self.orbits:
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Annulus diagnostics and plots in physical coordinates only</span>
+<span class="n">t3_last</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">sim3</span><span class="o">.</span><span class="n">spline_values</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">phi_log</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">X3</span> <span class="o">=</span> <span class="n">sim3</span><span class="o">.</span><span class="n">grids_phy</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">Y3</span> <span class="o">=</span> <span class="n">sim3</span><span class="o">.</span><span class="n">grids_phy</span><span class="p">[</span><span class="mi">1</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">phi3_num</span> <span class="o">=</span> <span class="n">sim3</span><span class="o">.</span><span class="n">spline_values</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">phi_log</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">t3_last</span><span class="p">][</span><span class="mi">0</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">phi3_ref</span> <span class="o">=</span> <span class="n">phi3_exact</span><span class="p">(</span><span class="n">X3</span><span class="p">,</span> <span class="n">Y3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">err3</span> <span class="o">=</span> <span class="n">phi3_num</span> <span class="o">-</span> <span class="n">phi3_ref</span>
+<span class="n">err3_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">err3</span><span class="p">))</span>
+
+<span class="n">fig3</span><span class="p">,</span> <span class="n">axs3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">im30</span> <span class="o">=</span> <span class="n">axs3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X3</span><span class="p">,</span> <span class="n">Y3</span><span class="p">,</span> <span class="n">phi3_num</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+<span class="n">axs3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Numerical $</span><span class="se">\\</span><span class="s2">phi_h(x,y)$ on annulus&quot;</span><span class="p">)</span>
+<span class="n">axs3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">axs3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">axs3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im30</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs3</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">im31</span> <span class="o">=</span> <span class="n">axs3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X3</span><span class="p">,</span> <span class="n">Y3</span><span class="p">,</span> <span class="n">phi3_ref</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+<span class="n">axs3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Analytic $</span><span class="se">\\</span><span class="s2">phi_{</span><span class="se">\\</span><span class="s2">mathrm</span><span class="si">{exact}</span><span class="s2">}(x,y)$ on annulus&quot;</span><span class="p">)</span>
+<span class="n">axs3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">axs3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">axs3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im31</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs3</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">im32</span> <span class="o">=</span> <span class="n">axs3</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X3</span><span class="p">,</span> <span class="n">Y3</span><span class="p">,</span> <span class="n">err3</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">)</span>
+<span class="n">axs3</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Error $</span><span class="se">\\</span><span class="s2">phi_h-</span><span class="se">\\</span><span class="s2">phi_{</span><span class="se">\\</span><span class="s2">mathrm</span><span class="si">{exact}</span><span class="s2">}$&quot;</span><span class="p">)</span>
+<span class="n">axs3</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">axs3</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">axs3</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im32</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs3</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Annulus max-norm error ||phi_h - phi_exact||_inf = </span><span class="si">{</span><span class="n">err3_max</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Annulus max-norm error ||phi_h - phi_exact||_inf = 1.101e-05
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_poisson_11_1.png" src="../../_images/_collections_tutorials_tutorial_poisson_11_1.png" />
+</div>
+</div>
+</section>
+<section id="1D-Time-Dependent-Source-Test-Case">
+<h2>1D Time-Dependent Source Test Case<a class="headerlink" href="#1D-Time-Dependent-Source-Test-Case" title="Link to this heading">#</a></h2>
+<p>So far we have solved stationary Poisson problems where the source term is independent of time. Now we consider a <strong>time-dependent source</strong> where the right-hand side of the Poisson equation evolves in time.</p>
+<p>This scenario arises in many applications, such as:</p>
+<ul class="simple">
+<li><p>Plasma physics simulations where the source term varies with time due to wave activity</p></li>
+<li><p>Electromagnetic problems with oscillating charge or current distributions</p></li>
+<li><p>Coupled multiphysics systems where sources depend on time-evolving quantities</p></li>
+</ul>
+<section id="Mathematical-Setup">
+<h3>Mathematical Setup<a class="headerlink" href="#Mathematical-Setup" title="Link to this heading">#</a></h3>
+<p>We solve the time-dependent Poisson equation on a 1D periodic domain with a <strong>sinusoidal source</strong>:</p>
+<div class="math notranslate nohighlight">
+\[-\phi'' + \varepsilon\phi = \rho(x,t),\]</div>
+<p>where the manufactured source is:</p>
+<div class="math notranslate nohighlight">
+\[\rho(x,t) = A\cos\left(kx\right)\cos(\omega t),\]</div>
+<p>with wavenumber <span class="math notranslate nohighlight">\(k\)</span>, spatial amplitude <span class="math notranslate nohighlight">\(A\)</span>, and angular frequency <span class="math notranslate nohighlight">\(\omega\)</span>.</p>
+<p>The exact solution is:</p>
+<div class="math notranslate nohighlight">
+\[\phi_\mathrm{exact}(x,t) = \frac{A}{k^2 + \varepsilon}\cos(kx)\cos(\omega t).\]</div>
+<p>The source varies periodically in time, and the solution follows this oscillation. We use Struphy’s <code class="docutils literal notranslate"><span class="pre">TimeDependentSource</span></code> propagator to evolve both the source and the solution over multiple time steps, comparing numerical and exact solutions at each time.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Time-dependent source setup</span>
+<span class="c1"># Parameters: domain extent, wavenumber, frequency, and stabilization</span>
+<span class="n">Lx4</span> <span class="o">=</span> <span class="mf">10.0</span>  <span class="c1"># Domain: x in [-Lx4/2, Lx4/2]</span>
+<span class="n">l4</span> <span class="o">=</span> <span class="mi">2</span>      <span class="c1"># Wavenumber mode: k = 2*pi*l/Lx</span>
+<span class="n">k4</span> <span class="o">=</span> <span class="n">l4</span> <span class="o">*</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">Lx4</span>
+<span class="n">omega4</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>  <span class="c1"># Angular frequency (one period in [0,1] of normalized time)</span>
+<span class="n">amp4</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># Spatial amplitude of source</span>
+<span class="n">eps4</span> <span class="o">=</span> <span class="mf">1e-8</span>  <span class="c1"># Tiny stabilization for periodic domain</span>
+
+<span class="c1"># Create a Poisson model with time-dependent source enabled</span>
+<span class="n">model4</span> <span class="o">=</span> <span class="n">Poisson</span><span class="p">(</span><span class="n">with_t_dep_source</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Configure the time-dependent source propagator with the frequency</span>
+<span class="n">model4</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model4</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span><span class="n">omega</span><span class="o">=</span><span class="n">omega4</span><span class="p">)</span>
+
+<span class="c1"># Configure the Poisson solver: set the source field as the RHS</span>
+<span class="n">model4</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model4</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">poisson</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span>
+    <span class="n">stab_eps</span><span class="o">=</span><span class="n">eps4</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Initialize the source with a cosine perturbation</span>
+<span class="c1"># The source will be: rho(x,t) = amp * cos(k*x) * cos(omega*t)</span>
+<span class="n">model4</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span>
+    <span class="n">perturbations</span><span class="o">.</span><span class="n">ModesCos</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="p">(</span><span class="n">l4</span><span class="p">,),</span> <span class="n">amps</span><span class="o">=</span><span class="p">(</span><span class="n">amp4</span><span class="p">,))</span>
+<span class="p">)</span>
+
+<span class="c1"># Define exact solutions for comparison</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rho4_exact</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exact time-dependent source: amplitude * cos(kx) * cos(omega*t)&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">amp4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">k4</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">omega4</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">phi4_exact</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exact solution: (amplitude / k^2) * cos(kx) * cos(omega*t)&quot;&quot;&quot;</span>
+    <span class="c1"># The Poisson equation -phi&#39;&#39; + eps*phi = rho has solution</span>
+    <span class="c1"># phi(x,t) = rho(x,t) / (k^2 + eps) for this cosine mode</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">amp4</span> <span class="o">/</span> <span class="p">(</span><span class="n">k4</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">eps4</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">k4</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">omega4</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up domain, grid, and simulation for time-dependent case</span>
+<span class="n">l1_4</span> <span class="o">=</span> <span class="o">-</span><span class="n">Lx4</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="n">r1_4</span> <span class="o">=</span> <span class="n">Lx4</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="n">domain4</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">Cuboid</span><span class="p">(</span><span class="n">l1</span><span class="o">=</span><span class="n">l1_4</span><span class="p">,</span> <span class="n">r1</span><span class="o">=</span><span class="n">r1_4</span><span class="p">)</span>
+
+<span class="c1"># Use a moderate grid resolution for reasonable compute time</span>
+<span class="n">grid4</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">TensorProductGrid</span><span class="p">(</span><span class="n">num_elements</span><span class="o">=</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Time stepping: evolve from t=0 to t=2.0 with dt=0.1 (20 time steps)</span>
+<span class="c1"># This covers 2 full periods of oscillation (since omega = 2*pi)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Time</span>
+<span class="n">time_opts4</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">Tend</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+
+<span class="n">derham_opts4</span> <span class="o">=</span> <span class="n">DerhamOptions</span><span class="p">()</span>
+
+<span class="c1"># Create and run the simulation</span>
+<span class="n">sim4</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model4</span><span class="p">,</span>
+    <span class="n">domain</span><span class="o">=</span><span class="n">domain4</span><span class="p">,</span>
+    <span class="n">grid</span><span class="o">=</span><span class="n">grid4</span><span class="p">,</span>
+    <span class="n">derham_opts</span><span class="o">=</span><span class="n">derham_opts4</span><span class="p">,</span>
+    <span class="n">time_opts</span><span class="o">=</span><span class="n">time_opts4</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Run the full time-dependent simulation</span>
+<span class="n">sim4</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">sim4</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+<span class="n">sim4</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model Poisson ...
+WARNING: Class &#34;BasisProjectionOperators&#34; called with degree=(1, 1, 1) (interpolation of piece-wise constants should be avoided).
+Time stepping: 100%|██████████| 20/20 [00:00&lt;00:00, 190.59step/s]
+Struphy run finished.
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1
+
+Reading hdf5 data of following species:
+em_fields:
+  phi: &lt;HDF5 dataset &#34;phi&#34;: shape (21, 50, 3, 3), type &#34;&lt;f8&#34;&gt;
+  source: &lt;HDF5 dataset &#34;source&#34;: shape (21, 50, 3, 3), type &#34;&lt;f8&#34;&gt;
+
+100%|██████████| 2/2 [00:00&lt;00:00, 673.62it/s]
+Creation of Struphy Fields done.
+
+Evaluating fields ...
+100%|██████████| 21/21 [00:00&lt;00:00, 2008.17it/s]
+
+Creating vtk in /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1/post_processing/fields_data ...
+100%|██████████| 21/21 [00:00&lt;00:00, 2432.22it/s]
+
+No kinetic data found in hdf5 file, skipping post-processing of kinetic data.
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(21,)
+self.grids_log[0].shape =(49,)
+self.grids_log[1].shape =(2,)
+self.grids_log[2].shape =(2,)
+self.grids_phy[0].shape =(49, 2, 2)
+self.grids_phy[1].shape =(49, 2, 2)
+self.grids_phy[2].shape =(49, 2, 2)
+
+self.spline_values:
+    em_fields
+        phi_log
+        source_log
+
+self.orbits:
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract and visualize time-dependent results</span>
+<span class="n">x4</span> <span class="o">=</span> <span class="n">sim4</span><span class="o">.</span><span class="n">grids_phy</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">phi4_log</span> <span class="o">=</span> <span class="n">sim4</span><span class="o">.</span><span class="n">spline_values</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">phi_log</span><span class="o">.</span><span class="n">data</span>
+<span class="n">source4_log</span> <span class="o">=</span> <span class="n">sim4</span><span class="o">.</span><span class="n">spline_values</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">source_log</span><span class="o">.</span><span class="n">data</span>
+<span class="n">t_times</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">phi4_log</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solution saved at </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">t_times</span><span class="p">)</span><span class="si">}</span><span class="s2"> time points&quot;</span><span class="p">)</span>
+
+<span class="c1"># Compute maximum error over all time steps</span>
+<span class="n">err_max_global</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_times</span><span class="p">:</span>
+    <span class="n">phi_h</span> <span class="o">=</span> <span class="n">phi4_log</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># Numerical solution</span>
+    <span class="n">phi_e</span> <span class="o">=</span> <span class="n">phi4_exact</span><span class="p">(</span><span class="n">x4</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>         <span class="c1"># Exact solution</span>
+    <span class="n">err_local</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">phi_h</span> <span class="o">-</span> <span class="n">phi_e</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">err_local</span> <span class="o">&gt;</span> <span class="n">err_max_global</span><span class="p">:</span>
+        <span class="n">err_max_global</span> <span class="o">=</span> <span class="n">err_local</span>
+
+<span class="c1"># Normalize by the solution amplitude for a relative error measure</span>
+<span class="n">phi_amplitude</span> <span class="o">=</span> <span class="n">amp4</span> <span class="o">/</span> <span class="p">(</span><span class="n">k4</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">eps4</span><span class="p">)</span>
+<span class="n">rel_err</span> <span class="o">=</span> <span class="n">err_max_global</span> <span class="o">/</span> <span class="n">phi_amplitude</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Global max-norm error: </span><span class="si">{</span><span class="n">err_max_global</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Relative error: </span><span class="si">{</span><span class="n">rel_err</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2"> (normalized by solution amplitude </span><span class="si">{</span><span class="n">phi_amplitude</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create time snapshots at select time steps</span>
+<span class="n">fig_snaps</span><span class="p">,</span> <span class="n">axs_snaps</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axs_snaps</span> <span class="o">=</span> <span class="n">axs_snaps</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">select_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">t_times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">t_times</span><span class="p">)</span><span class="o">//</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">t_times</span><span class="p">)</span><span class="o">//</span><span class="mi">5</span><span class="p">,</span>
+                                      <span class="mi">3</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">t_times</span><span class="p">)</span><span class="o">//</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">t_times</span><span class="p">)</span><span class="o">//</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">select_times</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axs_snaps</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="n">phi_num</span> <span class="o">=</span> <span class="n">phi4_log</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">phi_ref</span> <span class="o">=</span> <span class="n">phi4_exact</span><span class="p">(</span><span class="n">x4</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x4</span><span class="p">,</span> <span class="n">phi_ref</span><span class="p">,</span> <span class="s2">&quot;k--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Exact&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x4</span><span class="p">,</span> <span class="n">phi_num</span><span class="p">,</span> <span class="s2">&quot;bo&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Struphy&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\phi(x,t)$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time $t = </span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="n">phi_amplitude</span> <span class="o">*</span> <span class="mf">1.2</span><span class="p">,</span> <span class="n">phi_amplitude</span> <span class="o">*</span> <span class="mf">1.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Solution saved at 21 time points
+Global max-norm error: 3.604e-04
+Relative error: 5.692e-03 (normalized by solution amplitude 6.333e-02)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_poisson_15_1.png" src="../../_images/_collections_tutorials_tutorial_poisson_15_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot error evolution over time</span>
+<span class="n">fig_err</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">times_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t_times</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_times</span><span class="p">:</span>
+    <span class="n">phi_h</span> <span class="o">=</span> <span class="n">phi4_log</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">phi_e</span> <span class="o">=</span> <span class="n">phi4_exact</span><span class="p">(</span><span class="n">x4</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">phi_h</span> <span class="o">-</span> <span class="n">phi_e</span><span class="p">))</span>
+    <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times_array</span><span class="p">,</span> <span class="n">errors</span><span class="p">,</span> <span class="s2">&quot;ro-&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time $t$&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Max-norm error $||</span><span class="se">\\</span><span class="s2">phi_h - </span><span class="se">\\</span><span class="s2">phi_{</span><span class="se">\\</span><span class="s2">mathrm</span><span class="si">{exact}</span><span class="s2">}||_</span><span class="se">\\</span><span class="s2">infty$&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Pointwise error evolution in time&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Plot source and solution at a single point in space (center)</span>
+<span class="n">center_idx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x4</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="n">phi_center</span> <span class="o">=</span> <span class="p">[</span><span class="n">phi4_log</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="n">center_idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_times</span><span class="p">]</span>
+<span class="n">phi_exact_center</span> <span class="o">=</span> <span class="p">[</span><span class="n">phi4_exact</span><span class="p">(</span><span class="n">x4</span><span class="p">[</span><span class="n">center_idx</span><span class="p">],</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_times</span><span class="p">]</span>
+<span class="n">source_center</span> <span class="o">=</span> <span class="p">[</span><span class="n">source4_log</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="n">center_idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_times</span><span class="p">]</span>
+<span class="n">source_exact_center</span> <span class="o">=</span> <span class="p">[</span><span class="n">rho4_exact</span><span class="p">(</span><span class="n">x4</span><span class="p">[</span><span class="n">center_idx</span><span class="p">],</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_times</span><span class="p">]</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times_array</span><span class="p">,</span> <span class="n">phi_exact_center</span><span class="p">,</span> <span class="s2">&quot;k--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">phi_{</span><span class="se">\\</span><span class="s2">mathrm</span><span class="si">{exact}</span><span class="s2">}$ at center&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times_array</span><span class="p">,</span> <span class="n">phi_center</span><span class="p">,</span> <span class="s2">&quot;bo-&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">phi_h$ at center (Struphy)&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time $t$&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\phi$ at $x = 0$&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Solution time evolution at domain center&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_poisson_16_0.png" src="../../_images/_collections_tutorials_tutorial_poisson_16_0.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../sections/tutorials.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tutorials</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tutorial_maxwell.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Maxwell’s equations: Light Wave and Coaxial Waveguide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Solving-1D-Poisson-with-periodic-boundary-conditions">Solving 1D Poisson with periodic boundary conditions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Setting-up-the-1D-periodic-case">Setting up the 1D periodic case</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2D-Manufactured-Test-on-a-Rectangle">2D Manufactured Test on a Rectangle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2D-Manufactured-Test-on-a-Thin-Annulus-(Polar-Coordinates)">2D Manufactured Test on a Thin Annulus (Polar Coordinates)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#1D-Time-Dependent-Source-Test-Case">1D Time-Dependent Source Test Case</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Mathematical-Setup">Mathematical Setup</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/_collections/tutorials/tutorial_poisson.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

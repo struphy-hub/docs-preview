@@ -1,0 +1,1228 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Available Maxwellians &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sections/subsections/kinetic-bckgr-avail';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Base classes" href="kinetic-bckgr-base.html" />
+    <link rel="prev" title="Kinetic Equilibrium" href="../kinetic-equils.html" />
+    <link href="../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="../kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../kinetic-equils.html"
+                          title="previous chapter">Kinetic Equilibrium</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="kinetic-bckgr-base.html"
+                          title="next chapter">Base classes</a></p>
+  </div></div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../kinetic-equils.html" class="nav-link">Kinetic Equilibrium</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Available Maxwellians</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-struphy.kinetic_background.maxwellians">
+<span id="available-maxwellians"></span><h1>Available Maxwellians<a class="headerlink" href="#module-struphy.kinetic_background.maxwellians" title="Link to this heading">#</a></h1>
+<p>Maxwellian (Gaussian) distributions in velocity space.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.Maxwellian3D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.kinetic_background.maxwellians.</span></span><span class="sig-name descname"><span class="pre">Maxwellian3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vth1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vth2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vth3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">None)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#Maxwellian3D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.Maxwellian3D" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="kinetic-bckgr-base.html#struphy.kinetic_background.base.Maxwellian" title="struphy.kinetic_background.base.Maxwellian"><code class="xref py py-class docutils literal notranslate"><span class="pre">Maxwellian</span></code></a></p>
+<p>A <a class="reference internal" href="kinetic-bckgr-base.html#struphy.kinetic_background.base.Maxwellian" title="struphy.kinetic_background.base.Maxwellian"><code class="xref py py-class docutils literal notranslate"><span class="pre">Maxwellian</span></code></a> depending on three (<span class="math notranslate nohighlight">\(n=3\)</span>) Cartesian velocities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>tuple</em>) – Moments of the Maxwellian as tuples. The first entry defines the background
+(float for constant background or callable), the second entry defines a Perturbation (can be None).</p></li>
+<li><p><strong>ui</strong> (<em>tuple</em>) – Moments of the Maxwellian as tuples. The first entry defines the background
+(float for constant background or callable), the second entry defines a Perturbation (can be None).</p></li>
+<li><p><strong>vthi</strong> (<em>tuple</em>) – Moments of the Maxwellian as tuples. The first entry defines the background
+(float for constant background or callable), the second entry defines a Perturbation (can be None).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.Maxwellian3D.coords">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coords</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.coords" title="Link to this definition">#</a></dt>
+<dd><p>Coordinates of the Maxwellian6D, <span class="math notranslate nohighlight">\((v_1, v_2, v_3)\)</span>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.Maxwellian3D.vdim">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vdim</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.vdim" title="Link to this definition">#</a></dt>
+<dd><p>Dimension of the velocity space.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.Maxwellian3D.is_polar">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_polar</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.is_polar" title="Link to this definition">#</a></dt>
+<dd><p>List of booleans of length vdim. True for a velocity coordinate that is a radial polar coordinate (v_perp).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.Maxwellian3D.velocity_jacobian_det">
+<span class="sig-name descname"><span class="pre">velocity_jacobian_det</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eta1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta3</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#Maxwellian3D.velocity_jacobian_det"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.velocity_jacobian_det" title="Link to this definition">#</a></dt>
+<dd><p>Jacobian determinant of the velocity coordinate transformation from Maxwellian6D(‘cartesian’) to Particles6D(‘cartesian’).</p>
+<p>Input parameters should be slice of 2d numpy marker array. (i.e. <a href="#id1"><span class="problematic" id="id2">*</span></a>self.phasespace_coords.T)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eta1</strong> (<em>array_like</em>) – Logical evaluation points.</p></li>
+<li><p><strong>eta2</strong> (<em>array_like</em>) – Logical evaluation points.</p></li>
+<li><p><strong>eta3</strong> (<em>array_like</em>) – Logical evaluation points.</p></li>
+<li><p><strong>*v</strong> (<em>array_like</em>) – Velocity evaluation points.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>out</strong> (<em>array-like</em>) – The Jacobian determinant evaluated at given logical coordinates.</p></li>
+<li><p><em>——-</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.Maxwellian3D.volume_form">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">volume_form</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.volume_form" title="Link to this definition">#</a></dt>
+<dd><p>Boolean. True if the background is represented as a volume form (thus including the velocity Jacobian).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.Maxwellian3D.moment_factors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">moment_factors</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.moment_factors" title="Link to this definition">#</a></dt>
+<dd><p>Collection of factors multiplied onto the defined moments n, u, and vth.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.Maxwellian3D.n">
+<span class="sig-name descname"><span class="pre">n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eta1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#Maxwellian3D.n"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.n" title="Link to this definition">#</a></dt>
+<dd><p>Zero-th moment (density).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.Maxwellian3D.u">
+<span class="sig-name descname"><span class="pre">u</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eta1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#Maxwellian3D.u"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.u" title="Link to this definition">#</a></dt>
+<dd><p>Mean velocities.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.Maxwellian3D.vth">
+<span class="sig-name descname"><span class="pre">vth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eta1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#Maxwellian3D.vth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.vth" title="Link to this definition">#</a></dt>
+<dd><p>Thermal velocities.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.GyroMaxwellian2D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.kinetic_background.maxwellians.</span></span><span class="sig-name descname"><span class="pre">GyroMaxwellian2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u_para</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u_perp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vth_para</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vth_perp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equil</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB" title="struphy.fields_background.base.FluidEquilibriumWithB"><span class="pre">FluidEquilibriumWithB</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_form</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#GyroMaxwellian2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="kinetic-bckgr-base.html#struphy.kinetic_background.base.Maxwellian" title="struphy.kinetic_background.base.Maxwellian"><code class="xref py py-class docutils literal notranslate"><span class="pre">Maxwellian</span></code></a></p>
+<p>A gyrotropic <a class="reference internal" href="kinetic-bckgr-base.html#struphy.kinetic_background.base.Maxwellian" title="struphy.kinetic_background.base.Maxwellian"><code class="xref py py-class docutils literal notranslate"><span class="pre">Maxwellian</span></code></a> depending on
+two velocities <span class="math notranslate nohighlight">\((v_\parallel, v_\perp)\)</span>, <span class="math notranslate nohighlight">\(n=2\)</span>,
+where <span class="math notranslate nohighlight">\(v_\parallel = \matbf v \cdot \mathbf b_0\)</span> and <span class="math notranslate nohighlight">\(v_\perp\)</span>
+is the radial component of a polar coordinate system perpendicular
+to the magentic direction <span class="math notranslate nohighlight">\(\mathbf b_0\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>tuple</em>) – Moments of the Maxwellian as tuples. The first entry defines the background
+(float for constant background or callable), the second entry defines a Perturbation (can be None).</p></li>
+<li><p><strong>u_para</strong> (<em>tuple</em>) – Moments of the Maxwellian as tuples. The first entry defines the background
+(float for constant background or callable), the second entry defines a Perturbation (can be None).</p></li>
+<li><p><strong>u_perp</strong> (<em>tuple</em>) – Moments of the Maxwellian as tuples. The first entry defines the background
+(float for constant background or callable), the second entry defines a Perturbation (can be None).</p></li>
+<li><p><strong>vth_para</strong> (<em>tuple</em>) – Moments of the Maxwellian as tuples. The first entry defines the background
+(float for constant background or callable), the second entry defines a Perturbation (can be None).</p></li>
+<li><p><strong>vth_perp</strong> (<em>tuple</em>) – Moments of the Maxwellian as tuples. The first entry defines the background
+(float for constant background or callable), the second entry defines a Perturbation (can be None).</p></li>
+<li><p><strong>equil</strong> (<a class="reference internal" href="equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB" title="struphy.fields_background.base.FluidEquilibriumWithB"><em>FluidEquilibriumWithB</em></a>) – Fluid background.</p></li>
+<li><p><strong>volume_form</strong> (<em>bool</em>) – Whether to represent the Maxwellian as a volume form;
+if True it is multiplied by the Jacobian determinant <a href="#id5"><span class="problematic" id="id6">|v_perp|</span></a>
+of the polar coordinate transofrmation (default = False).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.GyroMaxwellian2D.coords">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coords</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.coords" title="Link to this definition">#</a></dt>
+<dd><p>Coordinates of the Maxwellian5D, <span class="math notranslate nohighlight">\((v_\parallel, v_\perp)\)</span>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.GyroMaxwellian2D.vdim">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vdim</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.vdim" title="Link to this definition">#</a></dt>
+<dd><p>Dimension of the velocity space.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.GyroMaxwellian2D.is_polar">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_polar</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.is_polar" title="Link to this definition">#</a></dt>
+<dd><p>List of booleans of length vdim. True for a velocity coordinate that is a radial polar coordinate (v_perp).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.GyroMaxwellian2D.velocity_jacobian_det">
+<span class="sig-name descname"><span class="pre">velocity_jacobian_det</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eta1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta3</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#GyroMaxwellian2D.velocity_jacobian_det"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.velocity_jacobian_det" title="Link to this definition">#</a></dt>
+<dd><p>Jacobian determinant of the velocity coordinate transformation from Maxwellian5D(‘vpara_vperp’) to Particles5D(‘vpara_mu’).</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+F &amp;: (v_\parallel, v_\perp) \to (v_\parallel, \mu) \,,
+\\[3mm]
+DF &amp;= \begin{bmatrix} \frac{\partial v_\parallel}{\partial v_\parallel} &amp; \frac{\partial v_\parallel}{\partial v_\perp} \\
+     \frac{\partial \mu}{\partial v_\parallel} &amp; \frac{\partial \mu}{\partial v_\perp}  \end{bmatrix} =
+     \begin{bmatrix} 1 &amp; 0 \\
+     0 &amp; \frac{v_\perp}{B}  \end{bmatrix} \,,
+\\[3mm]
+J_F &amp;= \frac{v_\perp}{B} \,,
+\end{aligned}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu = \frac{v_\perp^2}{2B}\)</span>.</p>
+<p>Input parameters should be slice of 2d numpy marker array. (i.e. <a href="#id3"><span class="problematic" id="id4">*</span></a>self.phasespace_coords.T)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eta1</strong> (<em>array_like</em>) – Logical evaluation points.</p></li>
+<li><p><strong>eta2</strong> (<em>array_like</em>) – Logical evaluation points.</p></li>
+<li><p><strong>eta3</strong> (<em>array_like</em>) – Logical evaluation points.</p></li>
+<li><p><strong>*v</strong> (<em>array_like</em>) – Velocity evaluation points.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>out</strong> (<em>array-like</em>) – The Jacobian determinant evaluated at given logical coordinates.</p></li>
+<li><p><em>——-</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.GyroMaxwellian2D.volume_form">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">volume_form</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.volume_form" title="Link to this definition">#</a></dt>
+<dd><p>Boolean. True if the background is represented as a volume form (thus including the velocity Jacobian <a href="#id7"><span class="problematic" id="id8">|v_perp|</span></a>).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.GyroMaxwellian2D.equil">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">equil</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB" title="struphy.fields_background.base.FluidEquilibriumWithB"><span class="pre">FluidEquilibriumWithB</span></a></em><a class="headerlink" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.equil" title="Link to this definition">#</a></dt>
+<dd><p>Fluid background with B-field.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.GyroMaxwellian2D.moment_factors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">moment_factors</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.moment_factors" title="Link to this definition">#</a></dt>
+<dd><p>Collection of factors multiplied onto the defined moments n, u, and vth.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.GyroMaxwellian2D.n">
+<span class="sig-name descname"><span class="pre">n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eta1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#GyroMaxwellian2D.n"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.n" title="Link to this definition">#</a></dt>
+<dd><p>Zero-th moment (density).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.GyroMaxwellian2D.u">
+<span class="sig-name descname"><span class="pre">u</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eta1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#GyroMaxwellian2D.u"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.u" title="Link to this definition">#</a></dt>
+<dd><p>Mean velocities.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.GyroMaxwellian2D.vth">
+<span class="sig-name descname"><span class="pre">vth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eta1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#GyroMaxwellian2D.vth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.vth" title="Link to this definition">#</a></dt>
+<dd><p>Thermal velocities.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.GyroMaxwellian2D.plot_density_profile">
+<span class="sig-name descname"><span class="pre">plot_density_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'e1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'e2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'e3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v3'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'e1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'e1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'e2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'e3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v3'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_lim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrate_resol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logical_coord</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.5,</span> <span class="pre">0.5,</span> <span class="pre">0.5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_physical</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="domains-base.html#struphy.geometry.base.Domain" title="struphy.geometry.base.Domain"><span class="pre">Domain</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_3D</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equil</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB" title="struphy.fields_background.base.FluidEquilibriumWithB"><span class="pre">FluidEquilibriumWithB</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#GyroMaxwellian2D.plot_density_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.plot_density_profile" title="Link to this definition">#</a></dt>
+<dd><p>Plots the density profile (slices) of the phase space background distribution. The slice can either be 1D or 2D, in logical or in Cartesian coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_1</strong> (<em>LiteralOptions.KineticDimensionsToPlot =</em><em> [</em><em>&quot;e1&quot;</em><em>,</em><em>&quot;e2&quot;</em><em>,</em><em>&quot;e3&quot;</em><em>,</em><em>&quot;v1&quot;</em><em>,</em><em>&quot;v2&quot;</em><em>,</em><em>&quot;v3&quot;</em><em>]</em>) – The axes used in the projection, they refere to logical space axes. If dim_2 is not defined the projection is 1D, it is 2D if dim_2 is attributed.</p></li>
+<li><p><strong>dim_2</strong> (<em>LiteralOptions.KineticDimensionsToPlot =</em><em> [</em><em>&quot;e1&quot;</em><em>,</em><em>&quot;e2&quot;</em><em>,</em><em>&quot;e3&quot;</em><em>,</em><em>&quot;v1&quot;</em><em>,</em><em>&quot;v2&quot;</em><em>,</em><em>&quot;v3&quot;</em><em>]</em>) – The axes used in the projection, they refere to logical space axes. If dim_2 is not defined the projection is 1D, it is 2D if dim_2 is attributed.</p></li>
+<li><p><strong>v_lim</strong> (<em>float = 5.0</em>) – Limit value of the velocity axes.</p></li>
+<li><p><strong>resol</strong> (<em>int = 100</em>) – Resolution along each axes</p></li>
+<li><p><strong>integrate_resol</strong> (<em>int = 10</em>) – Resolution along not used velocity axes. The density is reduced (with a maximum function) over these axes before being plotted. High values (&gt;50) may require much memory.</p></li>
+<li><p><strong>logical_coord</strong> (<em>tuple</em><em>[</em><em>float</em><em>] </em><em>=</em><em> (</em><em>0.5</em><em>, </em><em>0.5</em><em>, </em><em>0.5</em><em>)</em>) – Refere to the default coordinate (in logical space) attributed to each axe which is not used in the projection.</p></li>
+<li><p><strong>in_physical</strong> (<em>bool = False</em>) – Specify if the result is plotted in logical coordinates or in Cartesian coordinates, has a effect in 2D plotting. If True, you must specify a domain.</p></li>
+<li><p><strong>domain</strong> (<a class="reference internal" href="domains-base.html#struphy.geometry.base.Domain" title="struphy.geometry.base.Domain"><em>Domain</em></a><em> | </em><em>None = None</em>) – Domain used to plot the density if in_physical=True.</p></li>
+<li><p><strong>proj_axis</strong> (<em>tuple</em><em>[</em><em>float</em><em>] </em><em>=</em><em> (</em><em>0</em><em>,</em><em>1</em><em>)</em>) – Axes of the Cartesian coordinates used to plot the density: 0-&gt;x, 1-&gt;y, 2-&gt;z.
+I you do not see the density profile in 2D, you may change these axes.</p></li>
+<li><p><strong>plot_3D</strong> (<em>bool = False</em>) – Plots a surface in a 3D environment. Only for physical projection.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.CanonicalMaxwellian">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.kinetic_background.maxwellians.</span></span><span class="sig-name descname"><span class="pre">CanonicalMaxwellian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equil</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB" title="struphy.fields_background.base.FluidEquilibriumWithB"><span class="pre">FluidEquilibriumWithB</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_form</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#CanonicalMaxwellian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Canonical Maxwellian distribution function in constants-of-motion coordinates.</p>
+<p>The distribution is parameterized by the density and thermal speed as functions of the
+canonical toroidal momentum <span class="math notranslate nohighlight">\(\psi_c\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\psi_c = \psi + \frac{m_s F}{q_s B}v_\parallel - \text{sign}(v_\parallel)\sqrt{2(\epsilon - \mu B)}\frac{m_sF}{q_sB} \mathcal{H}(\epsilon - \mu B),\]</div>
+<ul class="simple">
+<li><p>Energy</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\epsilon = \frac{1}{2}m_sv_\parallel² + \mu B,\]</div>
+<ul class="simple">
+<li><p>Magnetic moment</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mu = \frac{m_s v_\perp²}{2B},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\psi\)</span> is the poloidal magnetic flux function, <span class="math notranslate nohighlight">\(F=F(\psi)\)</span> is the poloidal current function and <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> is the Heaviside function.</p>
+<p>With the three constants of motion, a canonical Maxwellian distribution function is defined as</p>
+<div class="math notranslate nohighlight">
+\[F(\psi_c, \epsilon, \mu) = \frac{n(\psi_c)}{(2\pi)^{3/2}v_\text{th}³(\psi_c)} \text{exp}\left[ - \frac{\epsilon}{v_\text{th}²(\psi_c)}\right].\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>tuple</em><em>[</em><em>float</em><em> | </em><em>Callable</em><em>, </em><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><em>Perturbation</em></a><em>]</em>) – Density background and optional perturbation.</p></li>
+<li><p><strong>vth</strong> (<em>tuple</em><em>[</em><em>float</em><em> | </em><em>Callable</em><em>, </em><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><em>Perturbation</em></a><em>]</em>) – Thermal-speed background and optional perturbation.</p></li>
+<li><p><strong>equil</strong> (<a class="reference internal" href="equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB" title="struphy.fields_background.base.FluidEquilibriumWithB"><em>FluidEquilibriumWithB</em></a><em>, </em><em>optional</em>) – Fluid equilibrium used to evaluate background profiles in the magnetic geometry.</p></li>
+<li><p><strong>volume_form</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, represent the distribution as a volume form and include the appropriate
+velocity-space Jacobian when evaluating it.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.CanonicalMaxwellian.coords">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coords</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.coords" title="Link to this definition">#</a></dt>
+<dd><p>Coordinates of the CanonicalMaxwellian, <span class="math notranslate nohighlight">\((\epsilon, \mu, \psi_c)\)</span>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.CanonicalMaxwellian.equil">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">equil</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB" title="struphy.fields_background.base.FluidEquilibriumWithB"><span class="pre">FluidEquilibriumWithB</span></a></em><a class="headerlink" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.equil" title="Link to this definition">#</a></dt>
+<dd><p>One of <a class="reference internal" href="equils-avail.html#module-struphy.fields_background.equils" title="struphy.fields_background.equils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">equils</span></code></a>
+in case that moments are to be set in that way, None otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.CanonicalMaxwellian.check_maxw_params">
+<span class="sig-name descname"><span class="pre">check_maxw_params</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#CanonicalMaxwellian.check_maxw_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.check_maxw_params" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.CanonicalMaxwellian.velocity_jacobian_det">
+<span class="sig-name descname"><span class="pre">velocity_jacobian_det</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eta1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#CanonicalMaxwellian.velocity_jacobian_det"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.velocity_jacobian_det" title="Link to this definition">#</a></dt>
+<dd><p>TODO</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.CanonicalMaxwellian.gaussian">
+<span class="sig-name descname"><span class="pre">gaussian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#CanonicalMaxwellian.gaussian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.gaussian" title="Link to this definition">#</a></dt>
+<dd><p>3-dim. normal distribution, to which array-valued thermal velocities can be passed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e</strong> (<em>float</em><em> | </em><em>array-like</em>) – Energy.</p></li>
+<li><p><strong>vth</strong> (<em>float</em><em> | </em><em>array-like</em>) – Thermal velocity evaluated at psic.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>An array of size(e).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.CanonicalMaxwellian.volume_form">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">volume_form</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.volume_form" title="Link to this definition">#</a></dt>
+<dd><p>Boolean. True if the background is represented as a volume form (thus including the velocity Jacobian <a href="#id9"><span class="problematic" id="id10">|v_perp|</span></a>).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.CanonicalMaxwellian.moment_factors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">moment_factors</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.moment_factors" title="Link to this definition">#</a></dt>
+<dd><p>Collection of factors multiplied onto the defined moments n, u, and vth.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.CanonicalMaxwellian.rc">
+<span class="sig-name descname"><span class="pre">rc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">psic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#CanonicalMaxwellian.rc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.rc" title="Link to this definition">#</a></dt>
+<dd><p>Square root of radially normalized canonical toroidal momentum.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+r_c^2 &amp;= \frac{\psi_c - \psi_\text{axis}}{\psi_\text{edge} - \psi_\text{axis}} \,,
+\\[3mm]
+r_c &amp;= \begin{cases}
+\sqrt{\frac{\psi_c - \psi_\text{axis}}{\psi_\text{edge} - \psi_\text{axis}}} &amp; \text{if} \quad \frac{\psi_c - \psi_\text{axis}}{\psi_\text{edge} - \psi_\text{axis}} \geq 0 \,, \\
+-\sqrt{\frac{\psi_c - \psi_\text{axis}}{\psi_\text{edge} - \psi_\text{axis}}} &amp; \text{if} \quad \frac{\psi_c - \psi_\text{axis}}{\psi_\text{edge} - \psi_\text{axis}} &lt; 0 \,,
+\end{cases}
+\end{aligned}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\psi_\text{axis}\)</span> and <span class="math notranslate nohighlight">\(\psi_\text{edge}\)</span> are poloidal magnetic flux function at the center and edge of poloidal plane respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>psic</strong> (<em>numpy.arrays</em>) – Evaluation points. All arrays must be of same shape (can be 1d for flat evaluation).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>A numpy.array of the evaluated <span class="math notranslate nohighlight">\(r_c\)</span>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.CanonicalMaxwellian.n">
+<span class="sig-name descname"><span class="pre">n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">psic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_perturbation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#CanonicalMaxwellian.n"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.n" title="Link to this definition">#</a></dt>
+<dd><p>Density as background + perturbation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>psic</strong> (<em>numpy.array</em>) – Evaluation points. All arrays must be of same shape (can be 1d for flat evaluation).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>A float (background value) or a numpy.array of the evaluated density.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.CanonicalMaxwellian.vth">
+<span class="sig-name descname"><span class="pre">vth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">psic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#CanonicalMaxwellian.vth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.vth" title="Link to this definition">#</a></dt>
+<dd><p>Thermal velocities as background + perturbation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>psic</strong> (<em>numpy.arrays</em>) – Evaluation points. All arrays must be of same shape (can be 1d for flat evaluation).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list[float] (background value) or a list[numpy.array] of the evaluated thermal velocities.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.CanonicalMaxwellian.add_perturbation">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_perturbation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.add_perturbation" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.ColdPlasma">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.kinetic_background.maxwellians.</span></span><span class="sig-name descname"><span class="pre">ColdPlasma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><span class="pre">Perturbation</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equil</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB" title="struphy.fields_background.base.FluidEquilibriumWithB"><span class="pre">FluidEquilibriumWithB</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#ColdPlasma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.ColdPlasma" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="kinetic-bckgr-base.html#struphy.kinetic_background.base.Maxwellian" title="struphy.kinetic_background.base.Maxwellian"><code class="xref py py-class docutils literal notranslate"><span class="pre">Maxwellian</span></code></a></p>
+<p>Base class for a distribution as a Dirac-delta in velocity (vth = 0).
+The __call__ method returns the density evaluation.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.ColdPlasma.default_maxw_params">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_maxw_params</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#ColdPlasma.default_maxw_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.ColdPlasma.default_maxw_params" title="Link to this definition">#</a></dt>
+<dd><p>Default parameters dictionary defining the constant value of the constant background.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.ColdPlasma.coords">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coords</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.ColdPlasma.coords" title="Link to this definition">#</a></dt>
+<dd><p>Coordinates of the constant background.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.ColdPlasma.vdim">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vdim</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.ColdPlasma.vdim" title="Link to this definition">#</a></dt>
+<dd><p>Dimension of the velocity space (vdim = 0).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.ColdPlasma.is_polar">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_polar</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.ColdPlasma.is_polar" title="Link to this definition">#</a></dt>
+<dd><p>List of booleans of length vdim. True for a velocity coordinate that is a radial polar coordinate (v_perp).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.ColdPlasma.volume_form">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">volume_form</span></span><a class="headerlink" href="#struphy.kinetic_background.maxwellians.ColdPlasma.volume_form" title="Link to this definition">#</a></dt>
+<dd><p>Boolean. True if the background is represented as a volume form (thus including the velocity Jacobian).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.ColdPlasma.equil">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">equil</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB" title="struphy.fields_background.base.FluidEquilibriumWithB"><span class="pre">FluidEquilibriumWithB</span></a></em><a class="headerlink" href="#struphy.kinetic_background.maxwellians.ColdPlasma.equil" title="Link to this definition">#</a></dt>
+<dd><p>Fluid background with B-field.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.ColdPlasma.velocity_jacobian_det">
+<span class="sig-name descname"><span class="pre">velocity_jacobian_det</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eta1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta3</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#ColdPlasma.velocity_jacobian_det"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.ColdPlasma.velocity_jacobian_det" title="Link to this definition">#</a></dt>
+<dd><p>Jacobian determinant of the velocity coordinate transformation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.ColdPlasma.n">
+<span class="sig-name descname"><span class="pre">n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eta1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#ColdPlasma.n"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.ColdPlasma.n" title="Link to this definition">#</a></dt>
+<dd><p>Zero-th moment (density).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.ColdPlasma.u">
+<span class="sig-name descname"><span class="pre">u</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eta1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#ColdPlasma.u"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.ColdPlasma.u" title="Link to this definition">#</a></dt>
+<dd><p>Mean velocities.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.kinetic_background.maxwellians.ColdPlasma.vth">
+<span class="sig-name descname"><span class="pre">vth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eta1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/kinetic_background/maxwellians.html#ColdPlasma.vth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.kinetic_background.maxwellians.ColdPlasma.vth" title="Link to this definition">#</a></dt>
+<dd><p>Thermal velocities (are zero here, see __init__).</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../kinetic-equils.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Kinetic Equilibrium</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="kinetic-bckgr-base.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Base classes</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.Maxwellian3D"><code class="docutils literal notranslate"><span class="pre">Maxwellian3D</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.coords"><code class="docutils literal notranslate"><span class="pre">Maxwellian3D.coords</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.vdim"><code class="docutils literal notranslate"><span class="pre">Maxwellian3D.vdim</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.is_polar"><code class="docutils literal notranslate"><span class="pre">Maxwellian3D.is_polar</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.velocity_jacobian_det"><code class="docutils literal notranslate"><span class="pre">Maxwellian3D.velocity_jacobian_det()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.volume_form"><code class="docutils literal notranslate"><span class="pre">Maxwellian3D.volume_form</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.moment_factors"><code class="docutils literal notranslate"><span class="pre">Maxwellian3D.moment_factors</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.n"><code class="docutils literal notranslate"><span class="pre">Maxwellian3D.n()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.u"><code class="docutils literal notranslate"><span class="pre">Maxwellian3D.u()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.Maxwellian3D.vth"><code class="docutils literal notranslate"><span class="pre">Maxwellian3D.vth()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D"><code class="docutils literal notranslate"><span class="pre">GyroMaxwellian2D</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.coords"><code class="docutils literal notranslate"><span class="pre">GyroMaxwellian2D.coords</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.vdim"><code class="docutils literal notranslate"><span class="pre">GyroMaxwellian2D.vdim</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.is_polar"><code class="docutils literal notranslate"><span class="pre">GyroMaxwellian2D.is_polar</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.velocity_jacobian_det"><code class="docutils literal notranslate"><span class="pre">GyroMaxwellian2D.velocity_jacobian_det()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.volume_form"><code class="docutils literal notranslate"><span class="pre">GyroMaxwellian2D.volume_form</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.equil"><code class="docutils literal notranslate"><span class="pre">GyroMaxwellian2D.equil</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.moment_factors"><code class="docutils literal notranslate"><span class="pre">GyroMaxwellian2D.moment_factors</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.n"><code class="docutils literal notranslate"><span class="pre">GyroMaxwellian2D.n()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.u"><code class="docutils literal notranslate"><span class="pre">GyroMaxwellian2D.u()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.vth"><code class="docutils literal notranslate"><span class="pre">GyroMaxwellian2D.vth()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.GyroMaxwellian2D.plot_density_profile"><code class="docutils literal notranslate"><span class="pre">GyroMaxwellian2D.plot_density_profile()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian"><code class="docutils literal notranslate"><span class="pre">CanonicalMaxwellian</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.coords"><code class="docutils literal notranslate"><span class="pre">CanonicalMaxwellian.coords</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.equil"><code class="docutils literal notranslate"><span class="pre">CanonicalMaxwellian.equil</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.check_maxw_params"><code class="docutils literal notranslate"><span class="pre">CanonicalMaxwellian.check_maxw_params()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.velocity_jacobian_det"><code class="docutils literal notranslate"><span class="pre">CanonicalMaxwellian.velocity_jacobian_det()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.gaussian"><code class="docutils literal notranslate"><span class="pre">CanonicalMaxwellian.gaussian()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.volume_form"><code class="docutils literal notranslate"><span class="pre">CanonicalMaxwellian.volume_form</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.moment_factors"><code class="docutils literal notranslate"><span class="pre">CanonicalMaxwellian.moment_factors</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.rc"><code class="docutils literal notranslate"><span class="pre">CanonicalMaxwellian.rc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.n"><code class="docutils literal notranslate"><span class="pre">CanonicalMaxwellian.n()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.vth"><code class="docutils literal notranslate"><span class="pre">CanonicalMaxwellian.vth()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.CanonicalMaxwellian.add_perturbation"><code class="docutils literal notranslate"><span class="pre">CanonicalMaxwellian.add_perturbation</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.ColdPlasma"><code class="docutils literal notranslate"><span class="pre">ColdPlasma</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.ColdPlasma.default_maxw_params"><code class="docutils literal notranslate"><span class="pre">ColdPlasma.default_maxw_params()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.ColdPlasma.coords"><code class="docutils literal notranslate"><span class="pre">ColdPlasma.coords</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.ColdPlasma.vdim"><code class="docutils literal notranslate"><span class="pre">ColdPlasma.vdim</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.ColdPlasma.is_polar"><code class="docutils literal notranslate"><span class="pre">ColdPlasma.is_polar</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.ColdPlasma.volume_form"><code class="docutils literal notranslate"><span class="pre">ColdPlasma.volume_form</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.ColdPlasma.equil"><code class="docutils literal notranslate"><span class="pre">ColdPlasma.equil</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.ColdPlasma.velocity_jacobian_det"><code class="docutils literal notranslate"><span class="pre">ColdPlasma.velocity_jacobian_det()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.ColdPlasma.n"><code class="docutils literal notranslate"><span class="pre">ColdPlasma.n()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.ColdPlasma.u"><code class="docutils literal notranslate"><span class="pre">ColdPlasma.u()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.kinetic_background.maxwellians.ColdPlasma.vth"><code class="docutils literal notranslate"><span class="pre">ColdPlasma.vth()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/sections/subsections/kinetic-bckgr-avail.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

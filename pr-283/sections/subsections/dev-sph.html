@@ -1,0 +1,1448 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SPH &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sections/subsections/dev-sph';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="PIC" href="dev-pic.html" />
+    <link href="../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="../dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="dev-pic.html"
+                          title="previous chapter">PIC</a></p>
+  </div></div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../dev_reference.html" class="nav-link">Developer reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">SPH</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="sph">
+<h1>SPH<a class="headerlink" href="#sph" title="Link to this heading">#</a></h1>
+<section id="module-struphy.pic.pushing.pusher_kernels_sph">
+<span id="pusher-kernels"></span><span id="pusher-kernels-sph"></span><h2>Pusher kernels<a class="headerlink" href="#module-struphy.pic.pushing.pusher_kernels_sph" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.pushing.pusher_kernels_sph.push_v_sph_pressure">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.pushing.pusher_kernels_sph.</span></span><span class="sig-name descname"><span class="pre">push_v_sph_pressure</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.pushing.pusher_kernels_sph.push_v_sph_pressure" title="Link to this definition">#</a></dt>
+<dd><p>Update each marker <span class="math notranslate nohighlight">\(p\)</span> according to</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathbf v_p^{n+1} - \mathbf v_p^n}{\Delta t} = \mathbf g - \sum_{i=1}^N w_i \left( \frac{\kappa}{\rho^{N,h}(\boldsymbol \eta_p)} + \frac{\kappa}{\rho^{N,h}(\boldsymbol \eta_i)} \right) DF^{-\top}\nabla W_h(\boldsymbol \eta_p - \boldsymbol \eta_i) \,,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf g\)</span> is a constant acceleration, the second term corresponds to the pressure gradient
+in the isothermal closure (with constant <span class="math notranslate nohighlight">\(\kappa\)</span>), and <span class="math notranslate nohighlight">\(DF^{-\top}\)</span> denotes the inverse transpose Jacobian
+arising in the pull back of the gradient of the smoothing kernel <span class="math notranslate nohighlight">\(W_h\)</span>
+chosen from <a class="reference internal" href="#module-struphy.pic.sph_smoothing_kernels" title="struphy.pic.sph_smoothing_kernels"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sph_smoothing_kernels</span></code></a>.</p>
+<p>The smoothed SPH density is given by</p>
+<div class="math notranslate nohighlight">
+\[\rho^{N,h}(\boldsymbol \eta_p) = \sum_j w_j \, W_h(\boldsymbol \eta_p - \boldsymbol \eta_j)\,.\]</div>
+<p>This kernel requires:</p>
+<ul class="simple">
+<li><p>The density <span class="math notranslate nohighlight">\(\rho^{N,h}(\boldsymbol \eta_p)\)</span> to be pre-computed for each particle and stored at <code class="docutils literal notranslate"><span class="pre">markers[:,</span> <span class="pre">first_free_idx]</span></code>)</p></li>
+<li><p>The coefficient <span class="math notranslate nohighlight">\(w_i/\rho^{N,h}(\boldsymbol \eta_i)\)</span> to be pre-computed for each particle and stored at <code class="docutils literal notranslate"><span class="pre">markers[:,</span> <span class="pre">first_free_idx</span> <span class="pre">+</span> <span class="pre">1]</span></code>)</p></li>
+</ul>
+<p>This is accomplished by the kernel <a class="reference internal" href="#struphy.pic.pushing.eval_kernels_sph.sph_pressure_coeffs" title="struphy.pic.pushing.eval_kernels_sph.sph_pressure_coeffs"><code class="xref py py-func docutils literal notranslate"><span class="pre">sph_pressure_coeffs()</span></code></a>, which needs
+to be passed as an <code class="docutils literal notranslate"><span class="pre">init_kernel</span></code> to the <a class="reference internal" href="dev-pic.html#struphy.pic.pushing.pusher.Pusher" title="struphy.pic.pushing.pusher.Pusher"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pusher</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>boxes</strong> (<em>2d array</em>) – Box array of the sorting boxes structure.</p></li>
+<li><p><strong>neighbours</strong> (<em>2d array</em>) – Array containing the 27 neighbouring boxes of each box.</p></li>
+<li><p><strong>holes</strong> (<em>bool</em>) – 1D array of length markers.shape[0]. True if markers[i] is a hole.</p></li>
+<li><p><strong>periodic1</strong> (<em>bool</em>) – True if periodic in that dimension.</p></li>
+<li><p><strong>periodic2</strong> (<em>bool</em>) – True if periodic in that dimension.</p></li>
+<li><p><strong>periodic3</strong> (<em>bool</em>) – True if periodic in that dimension.</p></li>
+<li><p><strong>kernel_type</strong> (<em>int</em>) – Number of the smoothing kernel.</p></li>
+<li><p><strong>h1</strong> (<em>float</em>) – Kernel width in respective dimension.</p></li>
+<li><p><strong>h2</strong> (<em>float</em>) – Kernel width in respective dimension.</p></li>
+<li><p><strong>h3</strong> (<em>float</em>) – Kernel width in respective dimension.</p></li>
+<li><p><strong>gravity</strong> (<em>xp.ndarray</em>) – Constant gravitational force as 3-vector.</p></li>
+<li><p><strong>kappa</strong> (<em>float</em>) – Constant isothermal coefficient.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.pushing.pusher_kernels_sph.push_v_sph_pressure_ideal_gas">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.pushing.pusher_kernels_sph.</span></span><span class="sig-name descname"><span class="pre">push_v_sph_pressure_ideal_gas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.pushing.pusher_kernels_sph.push_v_sph_pressure_ideal_gas" title="Link to this definition">#</a></dt>
+<dd><p>Update each marker <span class="math notranslate nohighlight">\(p\)</span> according to</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathbf v_p^{n+1} - \mathbf v_p^n}{\Delta t} = \mathbf g - \sum_{i=1}^N w_i \left( \kappa (\rho^{N,h}(\boldsymbol \eta_p))^{\gamma - 2} + \kappa (\rho^{N,h}(\boldsymbol \eta_i))^{\gamma - 2} \right) DF^{-\top}\nabla W_h(\boldsymbol \eta_p - \boldsymbol \eta_i) \,,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf g\)</span> is a constant acceleration, the second term corresponds to the pressure gradient
+in the polytropic closure (with constant <span class="math notranslate nohighlight">\(\kappa\)</span> and <span class="math notranslate nohighlight">\(\gamma = 5/3\)</span>),
+and <span class="math notranslate nohighlight">\(DF^{-\top}\)</span> denotes the inverse transpose Jacobian
+arising in the pull back of the gradient of the smoothing kernel <span class="math notranslate nohighlight">\(W_h\)</span>
+chosen from <a class="reference internal" href="#module-struphy.pic.sph_smoothing_kernels" title="struphy.pic.sph_smoothing_kernels"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sph_smoothing_kernels</span></code></a>.</p>
+<p>The smoothed SPH density is given by</p>
+<div class="math notranslate nohighlight">
+\[\rho^{N,h}(\boldsymbol \eta_p) = \sum_j w_j \, W_h(\boldsymbol \eta_p - \boldsymbol \eta_j)\,.\]</div>
+<p>This kernel requires:</p>
+<ul class="simple">
+<li><p>The density <span class="math notranslate nohighlight">\(\rho^{N,h}(\boldsymbol \eta_p)\)</span> to be pre-computed for each particle and stored at <code class="docutils literal notranslate"><span class="pre">markers[:,</span> <span class="pre">first_free_idx]</span></code>)</p></li>
+<li><p>The coefficient <span class="math notranslate nohighlight">\(w_i (\rho^{N,h}(\boldsymbol \eta_i))^{\gamma - 2}\)</span> to be pre-computed for each particle and stored at <code class="docutils literal notranslate"><span class="pre">markers[:,</span> <span class="pre">first_free_idx</span> <span class="pre">+</span> <span class="pre">2]</span></code>)</p></li>
+</ul>
+<p>This is accomplished by the kernel <a class="reference internal" href="#struphy.pic.pushing.eval_kernels_sph.sph_pressure_coeffs" title="struphy.pic.pushing.eval_kernels_sph.sph_pressure_coeffs"><code class="xref py py-func docutils literal notranslate"><span class="pre">sph_pressure_coeffs()</span></code></a>, which needs
+to be passed as an <code class="docutils literal notranslate"><span class="pre">init_kernel</span></code> to the <a class="reference internal" href="dev-pic.html#struphy.pic.pushing.pusher.Pusher" title="struphy.pic.pushing.pusher.Pusher"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pusher</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>boxes</strong> (<em>2d array</em>) – Box array of the sorting boxes structure.</p></li>
+<li><p><strong>neighbours</strong> (<em>2d array</em>) – Array containing the 27 neighbouring boxes of each box.</p></li>
+<li><p><strong>holes</strong> (<em>bool</em>) – 1D array of length markers.shape[0]. True if markers[i] is a hole.</p></li>
+<li><p><strong>periodic1</strong> (<em>bool</em>) – True if periodic in that dimension.</p></li>
+<li><p><strong>periodic2</strong> (<em>bool</em>) – True if periodic in that dimension.</p></li>
+<li><p><strong>periodic3</strong> (<em>bool</em>) – True if periodic in that dimension.</p></li>
+<li><p><strong>kernel_type</strong> (<em>int</em>) – Number of the smoothing kernel.</p></li>
+<li><p><strong>h1</strong> (<em>float</em>) – Kernel width in respective dimension.</p></li>
+<li><p><strong>h2</strong> (<em>float</em>) – Kernel width in respective dimension.</p></li>
+<li><p><strong>h3</strong> (<em>float</em>) – Kernel width in respective dimension.</p></li>
+<li><p><strong>gravity</strong> (<em>xp.ndarray</em>) – Constant gravitational force as 3-vector.</p></li>
+<li><p><strong>kappa</strong> (<em>float</em>) – Polytropic coefficient in the ideal gas closure.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.pushing.pusher_kernels_sph.push_v_viscosity">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.pushing.pusher_kernels_sph.</span></span><span class="sig-name descname"><span class="pre">push_v_viscosity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.pushing.pusher_kernels_sph.push_v_viscosity" title="Link to this definition">#</a></dt>
+<dd><p>Update each marker <span class="math notranslate nohighlight">\(p\)</span> according to</p>
+<div class="math notranslate nohighlight">
+\[\frac{v_{p,j}^{n+1} - v_{p,j}^n}{\Delta t}
+= \sum_{i=1}^N
+  \frac{w_i \, \sigma_{jk}(\boldsymbol \eta_i)}{\rho^{N,h}(\boldsymbol \eta_i)} \,
+  \bigl(DF^{-\top} \nabla W_h\bigr)_k(\boldsymbol \eta_p - \boldsymbol \eta_i)\,,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma_{jk} = \mu \left[(\partial_k v_j^{N,h} + \partial_j v_k^{N,h}) - \tfrac{2}{3}\delta_{jk}\partial_l v_l^{N,h}\right]\)</span>
+is the deviatoric strain rate, and <span class="math notranslate nohighlight">\(DF^{-\top}\)</span> denotes the inverse transpose Jacobian
+arising in the pull back of the gradient of the smoothing kernel <span class="math notranslate nohighlight">\(W_h\)</span>
+chosen from <a class="reference internal" href="#module-struphy.pic.sph_smoothing_kernels" title="struphy.pic.sph_smoothing_kernels"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sph_smoothing_kernels</span></code></a>.</p>
+<p>This kernel requires the 9 coefficients</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_i \, \sigma_{jk}(\boldsymbol \eta_i) / \rho^{N,h}(\boldsymbol \eta_i)\)</span> to be
+pre-computed for each particle and stored at <code class="docutils literal notranslate"><span class="pre">markers[:,</span> <span class="pre">first_free_idx</span> <span class="pre">+</span> <span class="pre">3*(j+1)</span> <span class="pre">+</span> <span class="pre">k]</span></code>
+for <span class="math notranslate nohighlight">\(j, k = 0, 1, 2\)</span></p></li>
+</ul>
+<p>This is accomplished by the kernel
+<a class="reference internal" href="#struphy.pic.pushing.eval_kernels_sph.sph_viscosity_tensor" title="struphy.pic.pushing.eval_kernels_sph.sph_viscosity_tensor"><code class="xref py py-func docutils literal notranslate"><span class="pre">sph_viscosity_tensor()</span></code></a>, which itself requires
+the mean velocity coefficients
+<span class="math notranslate nohighlight">\(w_i v_{k,i} / \rho^{N,h}(\boldsymbol \eta_i)\)</span> to be stored at
+<code class="docutils literal notranslate"><span class="pre">markers[:,</span> <span class="pre">first_free_idx:first_free_idx</span> <span class="pre">+</span> <span class="pre">3]</span></code> via
+<a class="reference internal" href="#struphy.pic.pushing.eval_kernels_sph.sph_mean_velocity_coeffs" title="struphy.pic.pushing.eval_kernels_sph.sph_mean_velocity_coeffs"><code class="xref py py-func docutils literal notranslate"><span class="pre">sph_mean_velocity_coeffs()</span></code></a>.
+Both kernels must be passed as <code class="docutils literal notranslate"><span class="pre">init_kernel</span></code> entries to the
+<a class="reference internal" href="dev-pic.html#struphy.pic.pushing.pusher.Pusher" title="struphy.pic.pushing.pusher.Pusher"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pusher</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>boxes</strong> (<em>2d array</em>) – Box array of the sorting boxes structure.</p></li>
+<li><p><strong>neighbours</strong> (<em>2d array</em>) – Array containing the 27 neighbouring boxes of each box.</p></li>
+<li><p><strong>holes</strong> (<em>bool</em>) – 1D array of length markers.shape[0]. True if markers[i] is a hole.</p></li>
+<li><p><strong>periodic1</strong> (<em>bool</em>) – True if periodic in that dimension.</p></li>
+<li><p><strong>periodic2</strong> (<em>bool</em>) – True if periodic in that dimension.</p></li>
+<li><p><strong>periodic3</strong> (<em>bool</em>) – True if periodic in that dimension.</p></li>
+<li><p><strong>kernel_type</strong> (<em>int</em>) – Number of the smoothing kernel.</p></li>
+<li><p><strong>h1</strong> (<em>float</em>) – Kernel width in respective dimension.</p></li>
+<li><p><strong>h2</strong> (<em>float</em>) – Kernel width in respective dimension.</p></li>
+<li><p><strong>h3</strong> (<em>float</em>) – Kernel width in respective dimension.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-struphy.pic.pushing.eval_kernels_sph">
+<span id="coefficient-kernels"></span><span id="coeff-kernels-sph"></span><h2>Coefficient kernels<a class="headerlink" href="#module-struphy.pic.pushing.eval_kernels_sph" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.pushing.eval_kernels_sph.sph_isotherm_kappa">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.pushing.eval_kernels_sph.</span></span><span class="sig-name descname"><span class="pre">sph_isotherm_kappa</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.pushing.eval_kernels_sph.sph_isotherm_kappa" title="Link to this definition">#</a></dt>
+<dd><p>None yet.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.pushing.eval_kernels_sph.sph_mean_velocity_coeffs">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.pushing.eval_kernels_sph.</span></span><span class="sig-name descname"><span class="pre">sph_mean_velocity_coeffs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.pushing.eval_kernels_sph.sph_mean_velocity_coeffs" title="Link to this definition">#</a></dt>
+<dd><p>For each particle, evaluate the smoothed SPH density <span class="math notranslate nohighlight">\(\rho^{N,h}(\boldsymbol \eta_i)\)</span> and store the
+coefficient</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_i v_{k,i} / \rho^{N,h}(\boldsymbol \eta_i)\)</span> at <code class="docutils literal notranslate"><span class="pre">markers[:,</span> <span class="pre">column_nr</span> <span class="pre">+</span> <span class="pre">k]</span></code> for <span class="math notranslate nohighlight">\(k = 0, 1, 2\)</span></p></li>
+</ul>
+<p>where the smoothed SPH density is given by</p>
+<div class="math notranslate nohighlight">
+\[\rho^{N,h}(\boldsymbol \eta_i) = \sum_j w_j \, W_h(\boldsymbol \eta_i - \boldsymbol \eta_j)\,.\]</div>
+<p>These coefficients serve as kernel weights so that one can evaluate
+the SPH mean velocity field</p>
+<div class="math notranslate nohighlight">
+\[v_k^{N,h}(\boldsymbol \eta_i)
+= \sum_j \frac{w_j \, v_{k,j}}{\rho^{N,h}(\boldsymbol \eta_j)} \,
+  W_h(\boldsymbol \eta_i - \boldsymbol \eta_j)\,.\]</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.pushing.eval_kernels_sph.sph_pressure_coeffs">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.pushing.eval_kernels_sph.</span></span><span class="sig-name descname"><span class="pre">sph_pressure_coeffs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.pushing.eval_kernels_sph.sph_pressure_coeffs" title="Link to this definition">#</a></dt>
+<dd><p>For each particle, evaluate</p>
+<ul class="simple">
+<li><p>the density <span class="math notranslate nohighlight">\(\rho^{N,h}(\boldsymbol \eta_i)\)</span> abd stored it at <code class="docutils literal notranslate"><span class="pre">markers[:,</span> <span class="pre">column_nr]</span></code>)</p></li>
+<li><p>the coefficient <span class="math notranslate nohighlight">\(w_i/\rho^{N,h}(\boldsymbol \eta_i)\)</span> and stored it at <code class="docutils literal notranslate"><span class="pre">markers[:,</span> <span class="pre">column_nr</span> <span class="pre">+</span> <span class="pre">1]</span></code>)</p></li>
+<li><p>the coefficient <span class="math notranslate nohighlight">\(w_i (\rho^{N,h}(\boldsymbol \eta_i))^{\gamma - 2}\)</span> and stored it at <code class="docutils literal notranslate"><span class="pre">markers[:,</span> <span class="pre">column_nr</span> <span class="pre">+</span> <span class="pre">2]</span></code>)</p></li>
+</ul>
+<p>where the smoothed SPH density is given by</p>
+<div class="math notranslate nohighlight">
+\[\rho^{N,h}(\boldsymbol \eta_i) = \sum_j w_j \, W_h(\boldsymbol \eta_i - \boldsymbol \eta_j)\,.\]</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.pushing.eval_kernels_sph.sph_viscosity_tensor">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.pushing.eval_kernels_sph.</span></span><span class="sig-name descname"><span class="pre">sph_viscosity_tensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.pushing.eval_kernels_sph.sph_viscosity_tensor" title="Link to this definition">#</a></dt>
+<dd><p>For each particle, evaluate the smoothed SPH density <span class="math notranslate nohighlight">\(\rho^{N,h}(\boldsymbol \eta_i)\)</span> and the
+deviatoric strain rate, and store the 9 coefficients</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(- w_i \, \sigma_{jk}(\boldsymbol \eta_i) / \rho^{N,h}(\boldsymbol \eta_i)\)</span> at
+<code class="docutils literal notranslate"><span class="pre">markers[:,</span> <span class="pre">column_nr</span> <span class="pre">+</span> <span class="pre">3*j</span> <span class="pre">+</span> <span class="pre">k]</span></code> for <span class="math notranslate nohighlight">\(j, k = 0, 1, 2\)</span></p></li>
+</ul>
+<p>where the smoothed SPH density is given by</p>
+<div class="math notranslate nohighlight">
+\[\rho^{N,h}(\boldsymbol \eta_i) = \sum_l w_l \, W_h(\boldsymbol \eta_i - \boldsymbol \eta_l)\,,\]</div>
+<p>and the deviatoric strain rate is the traceless symmetric part of the mean velocity gradient,</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{jk}(\boldsymbol \eta_i)
+= \mu\bigl[ \partial_j v_k^{N,h}(\boldsymbol \eta_i) + \partial_k v_j^{N,h}(\boldsymbol \eta_i)
+- \tfrac{2}{3}\delta_{jk}\bigr] \, \partial_l v_l^{N,h}(\boldsymbol \eta_i)\,.\]</div>
+<p>These coefficients serve as kernel weights so that one can evaluate the viscous force</p>
+<div class="math notranslate nohighlight">
+\[(-\nabla \cdot \Pi_{\textrm{vis}})^{N,h}_j(\boldsymbol \eta_i)
+= \sum_l \frac{ w_l \, \sigma_{jk}(\boldsymbol \eta_l)}{\rho^{N,h}(\boldsymbol \eta_l)} \,
+  (\nabla W_h)_k(\boldsymbol \eta_i - \boldsymbol \eta_l)\,.\]</div>
+<p>This kernel requires the coefficients of the mean velocity <span class="math notranslate nohighlight">\(v_k^{N,h}\)</span>
+for each particle to be pre-evaluated and stored at <code class="docutils literal notranslate"><span class="pre">markers[:,</span> <span class="pre">first_free_idx:first_free_idx</span> <span class="pre">+</span> <span class="pre">3]</span></code>,
+which can be achieved by the kernel <a class="reference internal" href="#struphy.pic.pushing.eval_kernels_sph.sph_mean_velocity_coeffs" title="struphy.pic.pushing.eval_kernels_sph.sph_mean_velocity_coeffs"><code class="xref py py-func docutils literal notranslate"><span class="pre">sph_mean_velocity_coeffs()</span></code></a>.</p>
+</dd></dl>
+
+</section>
+<section id="module-struphy.pic.sph_eval_kernels">
+<span id="evaluation-kernels"></span><span id="eval-kernels-sph"></span><h2>Evaluation kernels<a class="headerlink" href="#module-struphy.pic.sph_eval_kernels" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_eval_kernels.box_based_evaluation_flat">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_eval_kernels.</span></span><span class="sig-name descname"><span class="pre">box_based_evaluation_flat</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_eval_kernels.box_based_evaluation_flat" title="Link to this definition">#</a></dt>
+<dd><p>Box-based SPH evaluation on a flat array of points, see <a class="reference internal" href="#struphy.pic.sph_eval_kernels.box_based_kernel" title="struphy.pic.sph_eval_kernels.box_based_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">box_based_kernel()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args_markers</strong> (<em>MarkerArguments</em>) – Container holding the markers array and the total number of particles <code class="docutils literal notranslate"><span class="pre">Np</span></code>.</p></li>
+<li><p><strong>eta1</strong> (<em>float</em><em>[</em><em>:</em><em>]</em>) – Evaluation points in logical space.  The <span class="math notranslate nohighlight">\(i\)</span>-th point is
+<code class="docutils literal notranslate"><span class="pre">(eta1[i],</span> <span class="pre">eta2[i],</span> <span class="pre">eta3[i])</span></code>.</p></li>
+<li><p><strong>eta2</strong> (<em>float</em><em>[</em><em>:</em><em>]</em>) – Evaluation points in logical space.  The <span class="math notranslate nohighlight">\(i\)</span>-th point is
+<code class="docutils literal notranslate"><span class="pre">(eta1[i],</span> <span class="pre">eta2[i],</span> <span class="pre">eta3[i])</span></code>.</p></li>
+<li><p><strong>eta3</strong> (<em>float</em><em>[</em><em>:</em><em>]</em>) – Evaluation points in logical space.  The <span class="math notranslate nohighlight">\(i\)</span>-th point is
+<code class="docutils literal notranslate"><span class="pre">(eta1[i],</span> <span class="pre">eta2[i],</span> <span class="pre">eta3[i])</span></code>.</p></li>
+<li><p><strong>n1</strong> (<em>int</em>) – Number of sorting boxes in each dimension.</p></li>
+<li><p><strong>n2</strong> (<em>int</em>) – Number of sorting boxes in each dimension.</p></li>
+<li><p><strong>n3</strong> (<em>int</em>) – Number of sorting boxes in each dimension.</p></li>
+<li><p><strong>domain_array</strong> (<em>float</em><em>[</em><em>:</em><em>]</em>) – Flat description of the local MPI sub-domain, used by
+<code class="xref py py-func docutils literal notranslate"><span class="pre">find_box()</span></code> to locate boxes.</p></li>
+<li><p><strong>boxes</strong> (<em>int</em><em>[</em><em>:</em><em>,</em><em>:</em><em>]</em>) – Box array of the sorting-box structure (particles sorted into boxes).</p></li>
+<li><p><strong>neighbours</strong> (<em>int</em><em>[</em><em>:</em><em>,</em><em>:</em><em>]</em>) – <code class="docutils literal notranslate"><span class="pre">neighbours[b,</span> <span class="pre">:]</span></code> lists the 27 box indices neighbouring box <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p></li>
+<li><p><strong>holes</strong> (<em>bool</em><em>[</em><em>:</em><em>]</em>) – 1D array of length <code class="docutils literal notranslate"><span class="pre">markers.shape[0]</span></code>.  <code class="docutils literal notranslate"><span class="pre">True</span></code> if particle <code class="docutils literal notranslate"><span class="pre">i</span></code> is a hole (inactive).</p></li>
+<li><p><strong>periodic1</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain is periodic in that dimension.</p></li>
+<li><p><strong>periodic2</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain is periodic in that dimension.</p></li>
+<li><p><strong>periodic3</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain is periodic in that dimension.</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – Column index in the markers array of the coefficient <span class="math notranslate nohighlight">\(\beta_k\)</span> multiplying the kernel.</p></li>
+<li><p><strong>kernel_type</strong> (<em>int</em>) – Integer identifier of the smoothing kernel.  See <a class="reference internal" href="#smoothing-kernels"><span class="std std-ref">Smoothing kernels</span></a>.</p></li>
+<li><p><strong>h1</strong> (<em>float</em>) – Kernel width in the respective dimension.</p></li>
+<li><p><strong>h2</strong> (<em>float</em>) – Kernel width in the respective dimension.</p></li>
+<li><p><strong>h3</strong> (<em>float</em>) – Kernel width in the respective dimension.</p></li>
+<li><p><strong>out</strong> (<em>float</em><em>[</em><em>:</em><em>]</em>) – Output array of the same length as <code class="docutils literal notranslate"><span class="pre">eta1</span></code>.  Modified in place.
+Points outside the local domain are left at zero.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_eval_kernels.box_based_evaluation_meshgrid">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_eval_kernels.</span></span><span class="sig-name descname"><span class="pre">box_based_evaluation_meshgrid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_eval_kernels.box_based_evaluation_meshgrid" title="Link to this definition">#</a></dt>
+<dd><p>Box-based SPH evaluation on a 3-D meshgrid of points, see <a class="reference internal" href="#struphy.pic.sph_eval_kernels.box_based_kernel" title="struphy.pic.sph_eval_kernels.box_based_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">box_based_kernel()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args_markers</strong> (<em>MarkerArguments</em>) – Container holding the markers array and the total number of particles <code class="docutils literal notranslate"><span class="pre">Np</span></code>.</p></li>
+<li><p><strong>eta1</strong> (<em>float</em><em>[</em><em>:</em><em>,</em><em>:</em><em>,</em><em>:</em><em>]</em>) – Evaluation points in logical space on a 3-D meshgrid.</p></li>
+<li><p><strong>eta2</strong> (<em>float</em><em>[</em><em>:</em><em>,</em><em>:</em><em>,</em><em>:</em><em>]</em>) – Evaluation points in logical space on a 3-D meshgrid.</p></li>
+<li><p><strong>eta3</strong> (<em>float</em><em>[</em><em>:</em><em>,</em><em>:</em><em>,</em><em>:</em><em>]</em>) – Evaluation points in logical space on a 3-D meshgrid.</p></li>
+<li><p><strong>n1</strong> (<em>int</em>) – Number of sorting boxes in each dimension.</p></li>
+<li><p><strong>n2</strong> (<em>int</em>) – Number of sorting boxes in each dimension.</p></li>
+<li><p><strong>n3</strong> (<em>int</em>) – Number of sorting boxes in each dimension.</p></li>
+<li><p><strong>domain_array</strong> (<em>float</em><em>[</em><em>:</em><em>]</em>) – Flat description of the local MPI sub-domain, used by
+<code class="xref py py-func docutils literal notranslate"><span class="pre">find_box()</span></code> to locate boxes.</p></li>
+<li><p><strong>boxes</strong> (<em>int</em><em>[</em><em>:</em><em>,</em><em>:</em><em>]</em>) – Box array of the sorting-box structure (particles sorted into boxes).</p></li>
+<li><p><strong>neighbours</strong> (<em>int</em><em>[</em><em>:</em><em>,</em><em>:</em><em>]</em>) – <code class="docutils literal notranslate"><span class="pre">neighbours[b,</span> <span class="pre">:]</span></code> lists the 27 box indices neighbouring box <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p></li>
+<li><p><strong>holes</strong> (<em>bool</em><em>[</em><em>:</em><em>]</em>) – 1D array of length <code class="docutils literal notranslate"><span class="pre">markers.shape[0]</span></code>.  <code class="docutils literal notranslate"><span class="pre">True</span></code> if particle <code class="docutils literal notranslate"><span class="pre">i</span></code> is a hole (inactive).</p></li>
+<li><p><strong>periodic1</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain is periodic in that dimension.</p></li>
+<li><p><strong>periodic2</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain is periodic in that dimension.</p></li>
+<li><p><strong>periodic3</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain is periodic in that dimension.</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – Column index in the markers array of the coefficient <span class="math notranslate nohighlight">\(\beta_k\)</span> multiplying the kernel.</p></li>
+<li><p><strong>kernel_type</strong> (<em>int</em>) – Integer identifier of the smoothing kernel.  See <a class="reference internal" href="#smoothing-kernels"><span class="std std-ref">Smoothing kernels</span></a>.</p></li>
+<li><p><strong>h1</strong> (<em>float</em>) – Kernel width in the respective dimension.</p></li>
+<li><p><strong>h2</strong> (<em>float</em>) – Kernel width in the respective dimension.</p></li>
+<li><p><strong>h3</strong> (<em>float</em>) – Kernel width in the respective dimension.</p></li>
+<li><p><strong>out</strong> (<em>float</em><em>[</em><em>:</em><em>,</em><em>:</em><em>,</em><em>:</em><em>]</em>) – Output array of the same shape as <code class="docutils literal notranslate"><span class="pre">eta1</span></code>.  Modified in place.
+Points outside the local domain are left at zero.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_eval_kernels.box_based_kernel">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_eval_kernels.</span></span><span class="sig-name descname"><span class="pre">box_based_kernel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_eval_kernels.box_based_kernel" title="Link to this definition">#</a></dt>
+<dd><p>Perform a single-point SPH evaluation of a function <span class="math notranslate nohighlight">\(\rho: [0, 1]^3 \to \mathbb R\)</span> in the following sense:</p>
+<div class="math notranslate nohighlight">
+\[\rho(\boldsymbol \eta_i) = \sum_{j=0}^{N-1} \rho_j\, W_h(\boldsymbol \eta_i - \boldsymbol \eta_j)\,.\]</div>
+<p>The coefficients <span class="math notranslate nohighlight">\(\rho_j\)</span> must be available in the marker array, stored at some index <code class="docutils literal notranslate"><span class="pre">self.markers[j,</span> <span class="pre">index]</span></code>.
+In case that <cite>derivative=k</cite> where <cite>k</cite> is not zero, the <cite>k</cite>-th component of the gradient of <span class="math notranslate nohighlight">\(\rho\)</span> is computed:</p>
+<div class="math notranslate nohighlight">
+\[\textrm{derivative}=k:\qquad [\nabla \rho(\boldsymbol \eta_i)]_k = \sum_{j=0}^{N-1} \rho_j \frac{\partial W_h}{\partial \eta_k}(\boldsymbol \eta_i - \boldsymbol \eta_j)\,.\]</div>
+<p>The possible choices for <span class="math notranslate nohighlight">\(W_h\)</span> are listed in <a class="reference internal" href="#smoothing-kernels"><span class="std std-ref">Smoothing kernels</span></a>
+and in <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.ker_dct" title="struphy.pic.base.Particles.ker_dct"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ker_dct()</span></code></a>.</p>
+<p>The sum is restricted to the 27 neighbouring boxes of the box containing
+<span class="math notranslate nohighlight">\(\boldsymbol\eta_i\)</span>, making the cost <span class="math notranslate nohighlight">\(\mathcal{O}(1)\)</span> in the number
+of particles when the kernel support is proportional to the box size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eta1</strong> (<em>float</em>) – Evaluation point in logical space.</p></li>
+<li><p><strong>eta2</strong> (<em>float</em>) – Evaluation point in logical space.</p></li>
+<li><p><strong>eta3</strong> (<em>float</em>) – Evaluation point in logical space.</p></li>
+<li><p><strong>loc_box</strong> (<em>int</em>) – Box of the evaluation point.</p></li>
+<li><p><strong>boxes</strong> (<em>2d array</em>) – Box array of the sorting boxes structure.</p></li>
+<li><p><strong>neighbours</strong> (<em>2d array</em>) – Array containing the 27 neighbouring boxes of each box.</p></li>
+<li><p><strong>markers</strong> (<em>array</em><em>[</em><em>float</em><em>]</em>) – Markers array.</p></li>
+<li><p><strong>Np</strong> (<em>int</em>) – Total number of particles.</p></li>
+<li><p><strong>holes</strong> (<em>bool</em>) – 1D array of length markers.shape[0]. True if markers[i] is a hole.</p></li>
+<li><p><strong>periodic1</strong> (<em>bool</em>) – True if periodic in that dimension.</p></li>
+<li><p><strong>periodic2</strong> (<em>bool</em>) – True if periodic in that dimension.</p></li>
+<li><p><strong>periodic3</strong> (<em>bool</em>) – True if periodic in that dimension.</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – Column index in markers array where the value multiplying the kernel in the evaluation is stored.</p></li>
+<li><p><strong>kernel_type</strong> (<em>int</em>) – Number of the smoothing kernel.</p></li>
+<li><p><strong>h1</strong> (<em>float</em>) – Kernel width in respective dimension.</p></li>
+<li><p><strong>h2</strong> (<em>float</em>) – Kernel width in respective dimension.</p></li>
+<li><p><strong>h3</strong> (<em>float</em>) – Kernel width in respective dimension.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_eval_kernels.distance">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_eval_kernels.</span></span><span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_eval_kernels.distance" title="Link to this definition">#</a></dt>
+<dd><p>Return the signed one-dimensional distance <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">-</span> <span class="pre">y</span></code>, adjusted for periodicity on <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – Two coordinates on the domain.</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – Two coordinates on the domain.</p></li>
+<li><p><strong>periodic</strong> (<em>bool</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the result is folded into <span class="math notranslate nohighlight">\((-\tfrac{1}{2}, \tfrac{1}{2}]\)</span> so that
+the shortest path across the periodic boundary is returned.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Signed distance <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">-</span> <span class="pre">y</span></code>, adjusted for periodicity.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_eval_kernels.naive_evaluation_flat">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_eval_kernels.</span></span><span class="sig-name descname"><span class="pre">naive_evaluation_flat</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_eval_kernels.naive_evaluation_flat" title="Link to this definition">#</a></dt>
+<dd><p>Naive SPH evaluation on a flat array of points, see <a class="reference internal" href="#struphy.pic.sph_eval_kernels.naive_evaluation_kernel" title="struphy.pic.sph_eval_kernels.naive_evaluation_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">naive_evaluation_kernel()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args_markers</strong> (<em>MarkerArguments</em>) – Container holding the markers array and the total number of particles <code class="docutils literal notranslate"><span class="pre">Np</span></code>.</p></li>
+<li><p><strong>eta1</strong> (<em>float</em><em>[</em><em>:</em><em>]</em>) – Evaluation points in logical space.  The <span class="math notranslate nohighlight">\(i\)</span>-th point is
+<code class="docutils literal notranslate"><span class="pre">(eta1[i],</span> <span class="pre">eta2[i],</span> <span class="pre">eta3[i])</span></code>.</p></li>
+<li><p><strong>eta2</strong> (<em>float</em><em>[</em><em>:</em><em>]</em>) – Evaluation points in logical space.  The <span class="math notranslate nohighlight">\(i\)</span>-th point is
+<code class="docutils literal notranslate"><span class="pre">(eta1[i],</span> <span class="pre">eta2[i],</span> <span class="pre">eta3[i])</span></code>.</p></li>
+<li><p><strong>eta3</strong> (<em>float</em><em>[</em><em>:</em><em>]</em>) – Evaluation points in logical space.  The <span class="math notranslate nohighlight">\(i\)</span>-th point is
+<code class="docutils literal notranslate"><span class="pre">(eta1[i],</span> <span class="pre">eta2[i],</span> <span class="pre">eta3[i])</span></code>.</p></li>
+<li><p><strong>holes</strong> (<em>bool</em><em>[</em><em>:</em><em>]</em>) – 1D array of length <code class="docutils literal notranslate"><span class="pre">markers.shape[0]</span></code>.  <code class="docutils literal notranslate"><span class="pre">True</span></code> if particle <code class="docutils literal notranslate"><span class="pre">i</span></code> is a hole (inactive).</p></li>
+<li><p><strong>periodic1</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain is periodic in that dimension.</p></li>
+<li><p><strong>periodic2</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain is periodic in that dimension.</p></li>
+<li><p><strong>periodic3</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain is periodic in that dimension.</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – Column index in the markers array of the coefficient <span class="math notranslate nohighlight">\(\beta_k\)</span> multiplying the kernel.</p></li>
+<li><p><strong>kernel_type</strong> (<em>int</em>) – Integer identifier of the smoothing kernel.  See <a class="reference internal" href="#smoothing-kernels"><span class="std std-ref">Smoothing kernels</span></a>.</p></li>
+<li><p><strong>h1</strong> (<em>float</em>) – Kernel width in the respective dimension.</p></li>
+<li><p><strong>h2</strong> (<em>float</em>) – Kernel width in the respective dimension.</p></li>
+<li><p><strong>h3</strong> (<em>float</em>) – Kernel width in the respective dimension.</p></li>
+<li><p><strong>out</strong> (<em>float</em><em>[</em><em>:</em><em>]</em>) – Output array of the same length as <code class="docutils literal notranslate"><span class="pre">eta1</span></code>.  Modified in place and also returned.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_eval_kernels.naive_evaluation_kernel">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_eval_kernels.</span></span><span class="sig-name descname"><span class="pre">naive_evaluation_kernel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_eval_kernels.naive_evaluation_kernel" title="Link to this definition">#</a></dt>
+<dd><p>Perform a single-point SPH evaluation of a function <span class="math notranslate nohighlight">\(\rho: [0, 1]^3 \to \mathbb R\)</span> in the following sense:</p>
+<div class="math notranslate nohighlight">
+\[\rho(\boldsymbol \eta_i) = \sum_{j=0}^{N-1} \rho_j\, W_h(\boldsymbol \eta_i - \boldsymbol \eta_j)\,.\]</div>
+<p>The coefficients <span class="math notranslate nohighlight">\(\rho_j\)</span> must be available in the marker array, stored at some index <code class="docutils literal notranslate"><span class="pre">self.markers[j,</span> <span class="pre">index]</span></code>.
+In case that <cite>derivative=k</cite> where <cite>k</cite> is not zero, the <cite>k</cite>-th component of the gradient of <span class="math notranslate nohighlight">\(\rho\)</span> is computed:</p>
+<div class="math notranslate nohighlight">
+\[\textrm{derivative}=k:\qquad [\nabla \rho(\boldsymbol \eta_i)]_k = \sum_{j=0}^{N-1} \rho_j \frac{\partial W_h}{\partial \eta_k}(\boldsymbol \eta_i - \boldsymbol \eta_j)\,.\]</div>
+<p>The possible choices for <span class="math notranslate nohighlight">\(W_h\)</span> are listed in <a class="reference internal" href="#smoothing-kernels"><span class="std std-ref">Smoothing kernels</span></a>
+and in <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.ker_dct" title="struphy.pic.base.Particles.ker_dct"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ker_dct()</span></code></a>.</p>
+<p>ATTENTION: The sum is done over all particles in the markers array (ignoring holes), no neighbour search is performed.
+Hence, the cost of this evaluation is <span class="math notranslate nohighlight">\(\mathcal{O}(N)\)</span> in the number of particles, and it should only be used for testing and verification purposes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args_markers</strong> (<em>MarkerArguments</em>) – Container holding the markers array and the total number of particles <code class="docutils literal notranslate"><span class="pre">Np</span></code>.</p></li>
+<li><p><strong>eta1</strong> (<em>float</em>) – Evaluation point in logical space.</p></li>
+<li><p><strong>eta2</strong> (<em>float</em>) – Evaluation point in logical space.</p></li>
+<li><p><strong>eta3</strong> (<em>float</em>) – Evaluation point in logical space.</p></li>
+<li><p><strong>holes</strong> (<em>bool</em><em>[</em><em>:</em><em>]</em>) – 1D array of length <code class="docutils literal notranslate"><span class="pre">markers.shape[0]</span></code>.  <code class="docutils literal notranslate"><span class="pre">True</span></code> if particle <code class="docutils literal notranslate"><span class="pre">i</span></code> is a hole (inactive).</p></li>
+<li><p><strong>periodic1</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain is periodic in that dimension.</p></li>
+<li><p><strong>periodic2</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain is periodic in that dimension.</p></li>
+<li><p><strong>periodic3</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain is periodic in that dimension.</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – Column index in the markers array of the coefficient <span class="math notranslate nohighlight">\(\beta_k\)</span> multiplying the kernel.</p></li>
+<li><p><strong>kernel_type</strong> (<em>int</em>) – Integer identifier of the smoothing kernel.  See <a class="reference internal" href="#smoothing-kernels"><span class="std std-ref">Smoothing kernels</span></a>.</p></li>
+<li><p><strong>h1</strong> (<em>float</em>) – Kernel width in the respective dimension.</p></li>
+<li><p><strong>h2</strong> (<em>float</em>) – Kernel width in the respective dimension.</p></li>
+<li><p><strong>h3</strong> (<em>float</em>) – Kernel width in the respective dimension.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>SPH estimate of <span class="math notranslate nohighlight">\(b\)</span> at the evaluation point.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_eval_kernels.naive_evaluation_meshgrid">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_eval_kernels.</span></span><span class="sig-name descname"><span class="pre">naive_evaluation_meshgrid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_eval_kernels.naive_evaluation_meshgrid" title="Link to this definition">#</a></dt>
+<dd><p>Naive SPH evaluation on a 3-D meshgrid of points, see <a class="reference internal" href="#struphy.pic.sph_eval_kernels.naive_evaluation_kernel" title="struphy.pic.sph_eval_kernels.naive_evaluation_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">naive_evaluation_kernel()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args_markers</strong> (<em>MarkerArguments</em>) – Container holding the markers array and the total number of particles <code class="docutils literal notranslate"><span class="pre">Np</span></code>.</p></li>
+<li><p><strong>eta1</strong> (<em>float</em><em>[</em><em>:</em><em>,</em><em>:</em><em>,</em><em>:</em><em>]</em>) – Evaluation points in logical space on a 3-D meshgrid.</p></li>
+<li><p><strong>eta2</strong> (<em>float</em><em>[</em><em>:</em><em>,</em><em>:</em><em>,</em><em>:</em><em>]</em>) – Evaluation points in logical space on a 3-D meshgrid.</p></li>
+<li><p><strong>eta3</strong> (<em>float</em><em>[</em><em>:</em><em>,</em><em>:</em><em>,</em><em>:</em><em>]</em>) – Evaluation points in logical space on a 3-D meshgrid.</p></li>
+<li><p><strong>holes</strong> (<em>bool</em><em>[</em><em>:</em><em>]</em>) – 1D array of length <code class="docutils literal notranslate"><span class="pre">markers.shape[0]</span></code>.  <code class="docutils literal notranslate"><span class="pre">True</span></code> if particle <code class="docutils literal notranslate"><span class="pre">i</span></code> is a hole (inactive).</p></li>
+<li><p><strong>periodic1</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain is periodic in that dimension.</p></li>
+<li><p><strong>periodic2</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain is periodic in that dimension.</p></li>
+<li><p><strong>periodic3</strong> (<em>bool</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain is periodic in that dimension.</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – Column index in the markers array of the coefficient <span class="math notranslate nohighlight">\(\beta_k\)</span> multiplying the kernel.</p></li>
+<li><p><strong>kernel_type</strong> (<em>int</em>) – Integer identifier of the smoothing kernel.  See <a class="reference internal" href="#smoothing-kernels"><span class="std std-ref">Smoothing kernels</span></a>.</p></li>
+<li><p><strong>h1</strong> (<em>float</em>) – Kernel width in the respective dimension.</p></li>
+<li><p><strong>h2</strong> (<em>float</em>) – Kernel width in the respective dimension.</p></li>
+<li><p><strong>h3</strong> (<em>float</em>) – Kernel width in the respective dimension.</p></li>
+<li><p><strong>out</strong> (<em>float</em><em>[</em><em>:</em><em>,</em><em>:</em><em>,</em><em>:</em><em>]</em>) – Output array of the same shape as <code class="docutils literal notranslate"><span class="pre">eta1</span></code>.  Modified in place.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-struphy.pic.sph_smoothing_kernels">
+<span id="id1"></span><span id="smoothing-kernels"></span><h2>Smoothing kernels<a class="headerlink" href="#module-struphy.pic.sph_smoothing_kernels" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.gaussian_1d">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">gaussian_1d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.gaussian_1d" title="Link to this definition">#</a></dt>
+<dd><p>1d kernel S(x, h) = 1/(sqrt(pi)*h/3) * exp(-(x**2/(h/3)**2) if <a href="#id2"><span class="problematic" id="id3">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.gaussian_2d">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">gaussian_2d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.gaussian_2d" title="Link to this definition">#</a></dt>
+<dd><p>Tensor product of kernels S(x, h) = 1/(sqrt(pi)*h/3) * exp(-(x**2/(h/3)**2) if <a href="#id4"><span class="problematic" id="id5">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.gaussian_3d">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">gaussian_3d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.gaussian_3d" title="Link to this definition">#</a></dt>
+<dd><p>Tensor product of kernels S(x, h) = 1/(sqrt(pi)*h/3) * exp(-(x**2/(h/3)**2) if <a href="#id6"><span class="problematic" id="id7">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.gaussian_uni">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">gaussian_uni</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.gaussian_uni" title="Link to this definition">#</a></dt>
+<dd><p>Uni-variate S(x, h) = 1/(sqrt(pi)*h/3) * exp(-(x**2/(h/3)**2) if <a href="#id8"><span class="problematic" id="id9">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_gaussian_1d">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_gaussian_1d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_gaussian_1d" title="Link to this definition">#</a></dt>
+<dd><p>Derivative of S(x, h) = 1/(sqrt(pi)*h/3) * exp(-(x**2/(h/3)**2) if <a href="#id10"><span class="problematic" id="id11">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_gaussian_2d_1">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_gaussian_2d_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_gaussian_2d_1" title="Link to this definition">#</a></dt>
+<dd><p>1st component of gradient of Tensor product of kernels S(x, h) = 1/(sqrt(pi)*h/3) * exp(-(x**2/(h/3)**2) if <a href="#id12"><span class="problematic" id="id13">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_gaussian_2d_2">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_gaussian_2d_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_gaussian_2d_2" title="Link to this definition">#</a></dt>
+<dd><p>2nd component of gradient of Tensor product of kernels S(x, h) = 1/(sqrt(pi)*h/3) * exp(-(x**2/(h/3)**2) if <a href="#id14"><span class="problematic" id="id15">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_gaussian_3d_1">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_gaussian_3d_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_gaussian_3d_1" title="Link to this definition">#</a></dt>
+<dd><p>1st component of gradient of Tensor product of kernels S(x, h) = 1/(sqrt(pi)*h/3) * exp(-(x**2/(h/3)**2) if <a href="#id16"><span class="problematic" id="id17">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_gaussian_3d_2">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_gaussian_3d_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_gaussian_3d_2" title="Link to this definition">#</a></dt>
+<dd><p>2nd component of gradient of Tensor product of kernels S(x, h) = 1/(sqrt(pi)*h/3) * exp(-(x**2/(h/3)**2) if <a href="#id18"><span class="problematic" id="id19">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_gaussian_3d_3">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_gaussian_3d_3</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_gaussian_3d_3" title="Link to this definition">#</a></dt>
+<dd><p>3rd component of gradient of Tensor product of kernels S(x, h) = 1/(sqrt(pi)*h/3) * exp(-(x**2/(h/3)**2) if <a href="#id20"><span class="problematic" id="id21">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_gaussian_uni">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_gaussian_uni</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_gaussian_uni" title="Link to this definition">#</a></dt>
+<dd><p>Derivative of S(x, h) = 1/(sqrt(pi)*h/3) * exp(-(x**2/(h/3)**2) if <a href="#id22"><span class="problematic" id="id23">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_linear_1d">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_linear_1d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_linear_1d" title="Link to this definition">#</a></dt>
+<dd><p>Derivative of S(x, h) = (1 - x)/h if <a href="#id24"><span class="problematic" id="id25">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_linear_2d_1">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_linear_2d_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_linear_2d_1" title="Link to this definition">#</a></dt>
+<dd><p>1st component of gradient of Tensor product of kernels S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id26"><span class="problematic" id="id27">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_linear_2d_2">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_linear_2d_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_linear_2d_2" title="Link to this definition">#</a></dt>
+<dd><p>2nd component of gradient of Tensor product of kernels S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id28"><span class="problematic" id="id29">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_linear_3d_1">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_linear_3d_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_linear_3d_1" title="Link to this definition">#</a></dt>
+<dd><p>1st component of gradient of Tensor product of kernels S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id30"><span class="problematic" id="id31">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_linear_3d_2">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_linear_3d_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_linear_3d_2" title="Link to this definition">#</a></dt>
+<dd><p>2nd component of gradient of Tensor product of kernels S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id32"><span class="problematic" id="id33">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_linear_3d_3">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_linear_3d_3</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_linear_3d_3" title="Link to this definition">#</a></dt>
+<dd><p>3rd component of gradient of Tensor product of kernels S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id34"><span class="problematic" id="id35">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_linear_isotropic_3d_1">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_linear_isotropic_3d_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_linear_isotropic_3d_1" title="Link to this definition">#</a></dt>
+<dd><p>1st component of gradient of S(r,h) = C(h)F(r/h) with F(x) = 1-x if x&lt;1, 0 else,
+and C(h)=3/(pi*h^3) is a normalization coefficient so the the kernel has unit integral.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_linear_isotropic_3d_2">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_linear_isotropic_3d_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_linear_isotropic_3d_2" title="Link to this definition">#</a></dt>
+<dd><p>1st component of gradient of S(r,h) = C(h)F(r/h) with F(x) = 1-x if x&lt;1, 0 else,
+and C(h)=3/(pi*h^3) is a normalization coefficient so the the kernel has unit integral.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_linear_isotropic_3d_3">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_linear_isotropic_3d_3</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_linear_isotropic_3d_3" title="Link to this definition">#</a></dt>
+<dd><p>1st component of gradient of S(r,h) = C(h)F(r/h) with F(x) = 1-x if x&lt;1, 0 else,
+and C(h)=3/(pi*h^3) is a normalization coefficient so the the kernel has unit integral.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_linear_uni">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_linear_uni</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_linear_uni" title="Link to this definition">#</a></dt>
+<dd><p>Derivative of S(x, h) = (1 - x)/h if <a href="#id36"><span class="problematic" id="id37">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_trigonometric_1d">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_trigonometric_1d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_trigonometric_1d" title="Link to this definition">#</a></dt>
+<dd><p>Derivative of S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id38"><span class="problematic" id="id39">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_trigonometric_2d_1">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_trigonometric_2d_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_trigonometric_2d_1" title="Link to this definition">#</a></dt>
+<dd><p>1st component of gradient of Tensor product of kernels S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id40"><span class="problematic" id="id41">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_trigonometric_2d_2">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_trigonometric_2d_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_trigonometric_2d_2" title="Link to this definition">#</a></dt>
+<dd><p>2nd component of gradient of Tensor product of kernels S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id42"><span class="problematic" id="id43">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_trigonometric_3d_1">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_trigonometric_3d_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_trigonometric_3d_1" title="Link to this definition">#</a></dt>
+<dd><p>1st component of gradient of Tensor product of kernels S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id44"><span class="problematic" id="id45">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_trigonometric_3d_2">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_trigonometric_3d_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_trigonometric_3d_2" title="Link to this definition">#</a></dt>
+<dd><p>2nd component of gradient of Tensor product of kernels S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id46"><span class="problematic" id="id47">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_trigonometric_3d_3">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_trigonometric_3d_3</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_trigonometric_3d_3" title="Link to this definition">#</a></dt>
+<dd><p>3rd component of gradient of Tensor product of kernels S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id48"><span class="problematic" id="id49">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.grad_trigonometric_uni">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">grad_trigonometric_uni</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.grad_trigonometric_uni" title="Link to this definition">#</a></dt>
+<dd><p>Derivative of S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id50"><span class="problematic" id="id51">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.linear_1d">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">linear_1d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.linear_1d" title="Link to this definition">#</a></dt>
+<dd><p>1d kernel S(x, h) = (1 - x)/h if <a href="#id52"><span class="problematic" id="id53">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.linear_2d">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">linear_2d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.linear_2d" title="Link to this definition">#</a></dt>
+<dd><p>Tensor product of kernels S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id54"><span class="problematic" id="id55">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.linear_3d">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">linear_3d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.linear_3d" title="Link to this definition">#</a></dt>
+<dd><p>Tensor product of kernels S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id56"><span class="problematic" id="id57">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.linear_isotropic_3d">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">linear_isotropic_3d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.linear_isotropic_3d" title="Link to this definition">#</a></dt>
+<dd><p>Smoothing kernel S(r,h) = C(h)F(r/h) with F(x) = 1-x if x&lt;1, 0 else,
+and C(h)=3/(pi*h^3) is a normalization coefficient so the the kernel has unit integral.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.linear_uni">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">linear_uni</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.linear_uni" title="Link to this definition">#</a></dt>
+<dd><p>Uni-variate S(x, h) = (1 - x)/h if <a href="#id58"><span class="problematic" id="id59">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.smoothing_kernel">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">smoothing_kernel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.smoothing_kernel" title="Link to this definition">#</a></dt>
+<dd><p>Each smoothing kernel is normalized to 1.</p>
+<p>The kernel type numbers must have 3 digits, where the last digit is reserved for the gradient;
+if a kernel has the type number n, the i-th components of its gradient has the number n + i.
+This means we have space for 99 kernels (and its gradient components) in principle.</p>
+<ul class="simple">
+<li><p>1d kernels &lt;= 330</p></li>
+<li><p>2d kernels &lt;= 660</p></li>
+<li><p>3d kernels &gt;= 670</p></li>
+</ul>
+<p>If you add a kernel, make sure it is also added to <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.ker_dct" title="struphy.pic.base.Particles.ker_dct"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ker_dct()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.trigonometric_1d">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">trigonometric_1d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.trigonometric_1d" title="Link to this definition">#</a></dt>
+<dd><p>1d kernel S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id60"><span class="problematic" id="id61">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.trigonometric_2d">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">trigonometric_2d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.trigonometric_2d" title="Link to this definition">#</a></dt>
+<dd><p>Tensor product of kernels S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id62"><span class="problematic" id="id63">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.trigonometric_3d">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">trigonometric_3d</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.trigonometric_3d" title="Link to this definition">#</a></dt>
+<dd><p>Tensor product of kernels S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id64"><span class="problematic" id="id65">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.sph_smoothing_kernels.trigonometric_uni">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.sph_smoothing_kernels.</span></span><span class="sig-name descname"><span class="pre">trigonometric_uni</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.pic.sph_smoothing_kernels.trigonometric_uni" title="Link to this definition">#</a></dt>
+<dd><p>Uni-variate kernel S(x, h) = pi/4/h * cos(x*pi/2) if <a href="#id66"><span class="problematic" id="id67">|</span></a>x|&lt;1, 0 else.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="dev-pic.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">PIC</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-struphy.pic.pushing.pusher_kernels_sph">Pusher kernels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.pushing.pusher_kernels_sph.push_v_sph_pressure"><code class="docutils literal notranslate"><span class="pre">push_v_sph_pressure()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.pushing.pusher_kernels_sph.push_v_sph_pressure_ideal_gas"><code class="docutils literal notranslate"><span class="pre">push_v_sph_pressure_ideal_gas()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.pushing.pusher_kernels_sph.push_v_viscosity"><code class="docutils literal notranslate"><span class="pre">push_v_viscosity()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-struphy.pic.pushing.eval_kernels_sph">Coefficient kernels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.pushing.eval_kernels_sph.sph_isotherm_kappa"><code class="docutils literal notranslate"><span class="pre">sph_isotherm_kappa()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.pushing.eval_kernels_sph.sph_mean_velocity_coeffs"><code class="docutils literal notranslate"><span class="pre">sph_mean_velocity_coeffs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.pushing.eval_kernels_sph.sph_pressure_coeffs"><code class="docutils literal notranslate"><span class="pre">sph_pressure_coeffs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.pushing.eval_kernels_sph.sph_viscosity_tensor"><code class="docutils literal notranslate"><span class="pre">sph_viscosity_tensor()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-struphy.pic.sph_eval_kernels">Evaluation kernels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_eval_kernels.box_based_evaluation_flat"><code class="docutils literal notranslate"><span class="pre">box_based_evaluation_flat()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_eval_kernels.box_based_evaluation_meshgrid"><code class="docutils literal notranslate"><span class="pre">box_based_evaluation_meshgrid()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_eval_kernels.box_based_kernel"><code class="docutils literal notranslate"><span class="pre">box_based_kernel()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_eval_kernels.distance"><code class="docutils literal notranslate"><span class="pre">distance()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_eval_kernels.naive_evaluation_flat"><code class="docutils literal notranslate"><span class="pre">naive_evaluation_flat()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_eval_kernels.naive_evaluation_kernel"><code class="docutils literal notranslate"><span class="pre">naive_evaluation_kernel()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_eval_kernels.naive_evaluation_meshgrid"><code class="docutils literal notranslate"><span class="pre">naive_evaluation_meshgrid()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-struphy.pic.sph_smoothing_kernels">Smoothing kernels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.gaussian_1d"><code class="docutils literal notranslate"><span class="pre">gaussian_1d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.gaussian_2d"><code class="docutils literal notranslate"><span class="pre">gaussian_2d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.gaussian_3d"><code class="docutils literal notranslate"><span class="pre">gaussian_3d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.gaussian_uni"><code class="docutils literal notranslate"><span class="pre">gaussian_uni()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_gaussian_1d"><code class="docutils literal notranslate"><span class="pre">grad_gaussian_1d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_gaussian_2d_1"><code class="docutils literal notranslate"><span class="pre">grad_gaussian_2d_1()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_gaussian_2d_2"><code class="docutils literal notranslate"><span class="pre">grad_gaussian_2d_2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_gaussian_3d_1"><code class="docutils literal notranslate"><span class="pre">grad_gaussian_3d_1()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_gaussian_3d_2"><code class="docutils literal notranslate"><span class="pre">grad_gaussian_3d_2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_gaussian_3d_3"><code class="docutils literal notranslate"><span class="pre">grad_gaussian_3d_3()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_gaussian_uni"><code class="docutils literal notranslate"><span class="pre">grad_gaussian_uni()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_linear_1d"><code class="docutils literal notranslate"><span class="pre">grad_linear_1d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_linear_2d_1"><code class="docutils literal notranslate"><span class="pre">grad_linear_2d_1()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_linear_2d_2"><code class="docutils literal notranslate"><span class="pre">grad_linear_2d_2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_linear_3d_1"><code class="docutils literal notranslate"><span class="pre">grad_linear_3d_1()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_linear_3d_2"><code class="docutils literal notranslate"><span class="pre">grad_linear_3d_2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_linear_3d_3"><code class="docutils literal notranslate"><span class="pre">grad_linear_3d_3()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_linear_isotropic_3d_1"><code class="docutils literal notranslate"><span class="pre">grad_linear_isotropic_3d_1()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_linear_isotropic_3d_2"><code class="docutils literal notranslate"><span class="pre">grad_linear_isotropic_3d_2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_linear_isotropic_3d_3"><code class="docutils literal notranslate"><span class="pre">grad_linear_isotropic_3d_3()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_linear_uni"><code class="docutils literal notranslate"><span class="pre">grad_linear_uni()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_trigonometric_1d"><code class="docutils literal notranslate"><span class="pre">grad_trigonometric_1d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_trigonometric_2d_1"><code class="docutils literal notranslate"><span class="pre">grad_trigonometric_2d_1()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_trigonometric_2d_2"><code class="docutils literal notranslate"><span class="pre">grad_trigonometric_2d_2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_trigonometric_3d_1"><code class="docutils literal notranslate"><span class="pre">grad_trigonometric_3d_1()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_trigonometric_3d_2"><code class="docutils literal notranslate"><span class="pre">grad_trigonometric_3d_2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_trigonometric_3d_3"><code class="docutils literal notranslate"><span class="pre">grad_trigonometric_3d_3()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.grad_trigonometric_uni"><code class="docutils literal notranslate"><span class="pre">grad_trigonometric_uni()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.linear_1d"><code class="docutils literal notranslate"><span class="pre">linear_1d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.linear_2d"><code class="docutils literal notranslate"><span class="pre">linear_2d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.linear_3d"><code class="docutils literal notranslate"><span class="pre">linear_3d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.linear_isotropic_3d"><code class="docutils literal notranslate"><span class="pre">linear_isotropic_3d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.linear_uni"><code class="docutils literal notranslate"><span class="pre">linear_uni()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.smoothing_kernel"><code class="docutils literal notranslate"><span class="pre">smoothing_kernel()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.trigonometric_1d"><code class="docutils literal notranslate"><span class="pre">trigonometric_1d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.trigonometric_2d"><code class="docutils literal notranslate"><span class="pre">trigonometric_2d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.trigonometric_3d"><code class="docutils literal notranslate"><span class="pre">trigonometric_3d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.sph_smoothing_kernels.trigonometric_uni"><code class="docutils literal notranslate"><span class="pre">trigonometric_uni()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/sections/subsections/dev-sph.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1850 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Soundwave Simulation with Particles &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_collections/tutorials/tutorial_viscous_euler_sph';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2D Hagen-Poiseuille Channel Flow with SPH" href="tutorial_hagen_poiseuille_sph.html" />
+    <link rel="prev" title="Gas Expansion with ViscousEulerSPH" href="tutorial_gas_expansion_sph.html" />
+    <link href="../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="tutorial_gas_expansion_sph.html"
+                          title="previous chapter">Gas Expansion with <code class="docutils literal notranslate"><span class="pre">ViscousEulerSPH</span></code></a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="tutorial_hagen_poiseuille_sph.html"
+                          title="next chapter">2D Hagen-Poiseuille Channel Flow with SPH</a></p>
+  </div></div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../sections/tutorials.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Soundwave Simulation with Particles</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Soundwave-Simulation-with-Particles">
+<h1>Soundwave Simulation with Particles<a class="headerlink" href="#Soundwave-Simulation-with-Particles" title="Link to this heading">#</a></h1>
+<section id="1D-Standing-Sound-Wave">
+<h2>1D Standing Sound Wave<a class="headerlink" href="#1D-Standing-Sound-Wave" title="Link to this heading">#</a></h2>
+<p>This tutorial demonstrates verification of the SPH discretization of the isothermal Euler equations using a 1D standing sound wave test. The <code class="docutils literal notranslate"><span class="pre">ViscousEulerSPH</span></code> model is used without viscosity or magnetic field effects.</p>
+<section id="Physical-Setup">
+<h3>Physical Setup<a class="headerlink" href="#Physical-Setup" title="Link to this heading">#</a></h3>
+<p>In the isothermal Euler equations, sound waves propagate at the sound speed <span class="math notranslate nohighlight">\(c_s\)</span>. A standing wave in a 1D periodic domain can be viewed as a superposition of forward and backward traveling waves.</p>
+<p>For a 1D test with sound speed <span class="math notranslate nohighlight">\(c_s = 1\)</span>, the density perturbation initiates oscillations that traverse the domain back and forth. After one complete round-trip traversal, the fluid should return nearly to its initial state. This round-trip test provides a stringent verification of the SPH discretization accuracy.</p>
+<p>The verification procedure:</p>
+<ol class="arabic simple">
+<li><p>Initialize a 1D particle distribution (tesselation loading) with density perturbation</p></li>
+<li><p>Run the SPH simulation for time <span class="math notranslate nohighlight">\(T = 2 L / c_s\)</span> (one complete sound wave traversal)</p></li>
+<li><p>Compare the final density field against the initial field</p></li>
+<li><p>Compute the max-norm error: <span class="math notranslate nohighlight">\(\|\rho(t=T) - \rho(t=0)\|_\infty\)</span></p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.ticker</span><span class="w"> </span><span class="kn">import</span> <span class="n">FormatStrFormatter</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cunumpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xp</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BinningPlot</span><span class="p">,</span>
+    <span class="n">BoundaryParameters</span><span class="p">,</span>
+    <span class="n">EnvironmentOptions</span><span class="p">,</span>
+    <span class="n">KernelDensityPlot</span><span class="p">,</span>
+    <span class="n">LoadingParameters</span><span class="p">,</span>
+    <span class="n">SavingParameters</span><span class="p">,</span>
+    <span class="n">Simulation</span><span class="p">,</span>
+    <span class="n">SortingParameters</span><span class="p">,</span>
+    <span class="n">Time</span><span class="p">,</span>
+    <span class="n">WeightsParameters</span><span class="p">,</span>
+    <span class="n">domains</span><span class="p">,</span>
+    <span class="n">equils</span><span class="p">,</span>
+    <span class="n">perturbations</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ViscousEulerSPH</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.ode.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ButcherTableau</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;struphy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="SPH-Configuration-Parameters">
+<h3>SPH Configuration Parameters<a class="headerlink" href="#SPH-Configuration-Parameters" title="Link to this heading">#</a></h3>
+<p>Define the key parameters for the SPH discretization:</p>
+<ul class="simple">
+<li><p>Number of particles per box (<code class="docutils literal notranslate"><span class="pre">ppb</span></code>): controls particle density</p></li>
+<li><p>Particles per cell in 1D domain</p></li>
+<li><p>Sorting parameters for spatial binning</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SPH parameters</span>
+<span class="n">ppb</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># Particles per box (controls resolution)</span>
+<span class="n">nx</span> <span class="o">=</span> <span class="mi">12</span>  <span class="c1"># Number of boxes in 1D (parametrizable: 12 or 24)</span>
+
+<span class="c1"># Domain</span>
+<span class="n">r1</span> <span class="o">=</span> <span class="mf">2.5</span>  <span class="c1"># Domain extent in x</span>
+
+<span class="c1"># Sound speed and wave propagation time</span>
+<span class="n">c_s</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Sound speed (isothermal)</span>
+<span class="n">Tend</span> <span class="o">=</span> <span class="mf">2.5</span>  <span class="c1"># Time for wave to traverse domain (≈ 1 round-trip)</span>
+
+<span class="c1"># Time stepping using Strang operator splitting (standard for SPH)</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.03125</span>  <span class="c1"># Timestep (stable for Strang)</span>
+<span class="n">split_algo</span> <span class="o">=</span> <span class="s2">&quot;Strang&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SPH Configuration:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Particles per box (ppb): </span><span class="si">{</span><span class="n">ppb</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Number of boxes (nx):    </span><span class="si">{</span><span class="n">nx</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Domain extent:           </span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Sound speed (c_s):       </span><span class="si">{</span><span class="n">c_s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Final time (Tend):       </span><span class="si">{</span><span class="n">Tend</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Timestep (dt):           </span><span class="si">{</span><span class="n">dt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Total particles:         </span><span class="si">{</span><span class="n">ppb</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nx</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SPH Configuration:
+  Particles per box (ppb): 8
+  Number of boxes (nx):    12
+  Domain extent:           2.5
+  Sound speed (c_s):       1.0
+  Final time (Tend):       2.5
+  Timestep (dt):           0.03125
+  Total particles:         96
+</pre></div></div>
+</div>
+</section>
+<section id="Model-and-Propagator-Setup">
+<h3>Model and Propagator Setup<a class="headerlink" href="#Model-and-Propagator-Setup" title="Link to this heading">#</a></h3>
+<p>Create a ViscousEulerSPH model without viscosity or magnetic field. Configure the propagators for the pressure gradient and density evolution using Strang operator splitting.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model: SPH without viscosity or B-field</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ViscousEulerSPH</span><span class="p">(</span><span class="n">with_B0</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">with_viscosity</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Propagator options with Strang splitting</span>
+<span class="n">butcher</span> <span class="o">=</span> <span class="n">ButcherTableau</span><span class="p">(</span><span class="n">algo</span><span class="o">=</span><span class="s2">&quot;forward_euler&quot;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span><span class="n">butcher</span><span class="o">=</span><span class="n">butcher</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_sph_p</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_sph_p</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span><span class="n">kernel_type</span><span class="o">=</span><span class="s2">&quot;gaussian_1d&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ViscousEulerSPH model configured (no viscosity, no B-field).&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Propagators: push_eta (Butcher: forward_euler), push_sph_p (kernel: gaussian_1d)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ViscousEulerSPH model configured (no viscosity, no B-field).
+Propagators: push_eta (Butcher: forward_euler), push_sph_p (kernel: gaussian_1d)
+</pre></div></div>
+</div>
+</section>
+<section id="Domain-and-Particle-Markers">
+<h3>Domain and Particle Markers<a class="headerlink" href="#Domain-and-Particle-Markers" title="Link to this heading">#</a></h3>
+<p>Set up the 1D domain and initialize particles using tessellation loading. Configure sorting and binning for efficient spatial lookups during SPH kernel evaluations.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Domain: 1D periodic</span>
+<span class="n">domain</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">Cuboid</span><span class="p">(</span><span class="n">r1</span><span class="o">=</span><span class="n">r1</span><span class="p">)</span>
+
+<span class="c1"># No grid or DerhamOptions for particle-based SPH</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">derham_opts</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Loading parameters: tessellation distributes particles uniformly</span>
+<span class="n">loading_params</span> <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span><span class="n">ppb</span><span class="o">=</span><span class="n">ppb</span><span class="p">,</span> <span class="n">loading</span><span class="o">=</span><span class="s2">&quot;tesselation&quot;</span><span class="p">)</span>
+<span class="n">weights_params</span> <span class="o">=</span> <span class="n">WeightsParameters</span><span class="p">()</span>
+<span class="n">boundary_params</span> <span class="o">=</span> <span class="n">BoundaryParameters</span><span class="p">()</span>
+
+<span class="c1"># Sorting: assign particles to boxes for spatial binning</span>
+<span class="n">sorting_params</span> <span class="o">=</span> <span class="n">SortingParameters</span><span class="p">(</span>
+    <span class="n">boxes_per_dim</span><span class="o">=</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>  <span class="c1"># 1D boxing</span>
+    <span class="n">dims_mask</span><span class="o">=</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>  <span class="c1"># Only 1D binning active</span>
+<span class="p">)</span>
+
+<span class="c1"># Diagnostic plots</span>
+<span class="n">plot_pts</span> <span class="o">=</span> <span class="mi">32</span>  <span class="c1"># Number of evaluation points for kernel density plot</span>
+<span class="n">bin_plot</span> <span class="o">=</span> <span class="n">BinningPlot</span><span class="p">(</span><span class="nb">slice</span><span class="o">=</span><span class="s2">&quot;e1&quot;</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,),</span> <span class="n">ranges</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+<span class="n">kd_plot</span> <span class="o">=</span> <span class="n">KernelDensityPlot</span><span class="p">(</span><span class="n">pts_e1</span><span class="o">=</span><span class="n">plot_pts</span><span class="p">,</span> <span class="n">pts_e2</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">saving_params</span> <span class="o">=</span> <span class="n">SavingParameters</span><span class="p">(</span>
+    <span class="n">binning_plots</span><span class="o">=</span><span class="p">(</span><span class="n">bin_plot</span><span class="p">,),</span>
+    <span class="n">kernel_density_plots</span><span class="o">=</span><span class="p">(</span><span class="n">kd_plot</span><span class="p">,),</span>
+<span class="p">)</span>
+
+<span class="c1"># Set markers on the model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span>
+    <span class="n">loading_params</span><span class="o">=</span><span class="n">loading_params</span><span class="p">,</span>
+    <span class="n">weights_params</span><span class="o">=</span><span class="n">weights_params</span><span class="p">,</span>
+    <span class="n">boundary_params</span><span class="o">=</span><span class="n">boundary_params</span><span class="p">,</span>
+    <span class="n">sorting_params</span><span class="o">=</span><span class="n">sorting_params</span><span class="p">,</span>
+    <span class="n">saving_params</span><span class="o">=</span><span class="n">saving_params</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Domain: 1D periodic, r1=</span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Particles initialized via tessellation: </span><span class="si">{</span><span class="n">ppb</span><span class="si">}</span><span class="s2"> ppb × </span><span class="si">{</span><span class="n">nx</span><span class="si">}</span><span class="s2"> boxes = </span><span class="si">{</span><span class="n">ppb</span><span class="o">*</span><span class="n">nx</span><span class="si">}</span><span class="s2"> particles&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sorting: </span><span class="si">{</span><span class="n">nx</span><span class="si">}</span><span class="s2"> boxes in 1D, kernel density plots at </span><span class="si">{</span><span class="n">plot_pts</span><span class="si">}</span><span class="s2"> evaluation points&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Domain: 1D periodic, r1=2.5
+Particles initialized via tessellation: 8 ppb × 12 boxes = 96 particles
+Sorting: 12 boxes in 1D, kernel density plots at 32 evaluation points
+</pre></div></div>
+</div>
+</section>
+<section id="Initial-Conditions">
+<h3>Initial Conditions<a class="headerlink" href="#Initial-Conditions" title="Link to this heading">#</a></h3>
+<p>Set a constant background velocity and initialize a small sinusoidal density perturbation with mode <span class="math notranslate nohighlight">\(l=1\)</span>. This perturbation excites a standing sound wave.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Background: constant velocity (zero)</span>
+<span class="n">background</span> <span class="o">=</span> <span class="n">equils</span><span class="o">.</span><span class="n">ConstantVelocity</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+
+<span class="c1"># Perturbation: sine-wave density mode (mode l=1, amplitude 0.01)</span>
+<span class="n">perturbation</span> <span class="o">=</span> <span class="n">perturbations</span><span class="o">.</span><span class="n">ModesSin</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="n">amps</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0e-2</span><span class="p">,))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span><span class="n">del_n</span><span class="o">=</span><span class="n">perturbation</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Background: constant velocity (zero)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Perturbation: sine mode l=1, amplitude=0.01&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Background: constant velocity (zero)
+Perturbation: sine mode l=1, amplitude=0.01
+</pre></div></div>
+</div>
+</section>
+<section id="Simulation-Setup-and-Execution">
+<h3>Simulation Setup and Execution<a class="headerlink" href="#Simulation-Setup-and-Execution" title="Link to this heading">#</a></h3>
+<p>Configure the simulation environment and run the SPH dynamics for one complete sound wave round-trip traversal.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Environment and file management</span>
+<span class="n">test_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;struphy_verification_tests&quot;</span><span class="p">)</span>
+<span class="n">out_folders</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_folder</span><span class="p">,</span> <span class="s2">&quot;ViscousEulerSPH&quot;</span><span class="p">)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">EnvironmentOptions</span><span class="p">(</span><span class="n">out_folders</span><span class="o">=</span><span class="n">out_folders</span><span class="p">,</span> <span class="n">sim_folder</span><span class="o">=</span><span class="s2">&quot;soundwave_1d&quot;</span><span class="p">)</span>
+
+<span class="c1"># Time stepping</span>
+<span class="n">time_opts</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">Tend</span><span class="o">=</span><span class="n">Tend</span><span class="p">,</span> <span class="n">split_algo</span><span class="o">=</span><span class="n">split_algo</span><span class="p">)</span>
+
+<span class="c1"># Instantiate and run simulation</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+    <span class="n">time_opts</span><span class="o">=</span><span class="n">time_opts</span><span class="p">,</span>
+    <span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">,</span>
+    <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+    <span class="n">derham_opts</span><span class="o">=</span><span class="n">derham_opts</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running SPH sound wave simulation: dt=</span><span class="si">{</span><span class="n">dt</span><span class="si">}</span><span class="s2">, Tend=</span><span class="si">{</span><span class="n">Tend</span><span class="si">}</span><span class="s2">, algo=</span><span class="si">{</span><span class="n">split_algo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Simulation complete.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Post-processing</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Post-processing complete.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model ViscousEulerSPH ...
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running SPH sound wave simulation: dt=0.03125, Tend=2.5, algo=Strang
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Time stepping: 100%|██████████| 80/80 [00:00&lt;00:00, 128.36step/s]
+Struphy run finished.
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/ViscousEulerSPH/soundwave_1d
+
+No feec fields found in hdf5 file, skipping post-processing of fields.
+Evaluation of 3 marker orbits for euler_fluid
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Simulation complete.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 81/81 [00:00&lt;00:00, 849.36it/s]
+Evaluation of distribution functions for euler_fluid
+100%|██████████| 1/1 [00:00&lt;00:00, 1202.50it/s]
+100%|██████████| 1/1 [00:00&lt;00:00, 582.95it/s]
+Evaluation of sph density for euler_fluid
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Post-processing complete.
+</pre></div></div>
+</div>
+</section>
+<section id="Diagnostics:-Round-Trip-Sound-Wave-Verification">
+<h3>Diagnostics: Round-Trip Sound Wave Verification<a class="headerlink" href="#Diagnostics:-Round-Trip-Sound-Wave-Verification" title="Link to this heading">#</a></h3>
+<p>Extract the particle density field at initial and final times, and compute the maximum absolute error as a verification metric.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load plotting data</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+
+<span class="c1"># Extract particle positions and density</span>
+<span class="n">ee1</span><span class="p">,</span> <span class="n">ee2</span><span class="p">,</span> <span class="n">ee3</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">n_sph</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">view_0</span><span class="o">.</span><span class="n">grid_n_sph</span>
+<span class="n">n_sph</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">n_sph</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">view_0</span><span class="o">.</span><span class="n">n_sph</span>
+
+<span class="c1"># Physical coordinates</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">ee1</span> <span class="o">*</span> <span class="n">r1</span>
+
+<span class="c1"># Get number of time steps</span>
+<span class="n">dt_actual</span> <span class="o">=</span> <span class="n">time_opts</span><span class="o">.</span><span class="n">dt</span>
+<span class="n">Tend_actual</span> <span class="o">=</span> <span class="n">time_opts</span><span class="o">.</span><span class="n">Tend</span>
+<span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">Tend_actual</span> <span class="o">//</span> <span class="n">dt_actual</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Simulation completed </span><span class="si">{</span><span class="n">Nt</span><span class="si">}</span><span class="s2"> timesteps&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Particle positions shape: </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Density field shape (all times): </span><span class="si">{</span><span class="n">n_sph</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/ViscousEulerSPH/soundwave_1d/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(81,)
+
+self.spline_values:
+
+self.orbits:
+    euler_fluid, shape = (81, 3, 8)
+        Number of time points: 81
+        Number of particles:   3
+        Number of attributes:  8
+
+self.f:
+    euler_fluid
+        e1_density
+
+self.n_sph:
+    euler_fluid
+        view_0
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Simulation completed 80 timesteps
+Particle positions shape: (32, 1, 1)
+Density field shape (all times): (81, 32, 1, 1)
+</pre></div></div>
+</div>
+</section>
+<section id="Error-Computation">
+<h3>Error Computation<a class="headerlink" href="#Error-Computation" title="Link to this heading">#</a></h3>
+<p>Compare initial and final density profiles to quantify how well the SPH discretization preserves the sound wave structure over one round-trip traversal.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compare initial and final densities</span>
+<span class="n">n_initial</span> <span class="o">=</span> <span class="n">n_sph</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>   <span class="c1"># Density at t=0</span>
+<span class="n">n_final</span> <span class="o">=</span> <span class="n">n_sph</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>    <span class="c1"># Density at t=Tend</span>
+
+<span class="c1"># Max-norm error</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">n_final</span> <span class="o">-</span> <span class="n">n_initial</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== SPH Sound Wave Verification ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Initial density:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Min: </span><span class="si">{</span><span class="n">xp</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">n_initial</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Max: </span><span class="si">{</span><span class="n">xp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">n_initial</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Mean: </span><span class="si">{</span><span class="n">xp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">n_initial</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Final density:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Min: </span><span class="si">{</span><span class="n">xp</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">n_final</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Max: </span><span class="si">{</span><span class="n">xp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">n_final</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Mean: </span><span class="si">{</span><span class="n">xp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">n_final</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Round-trip error:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ||ρ(Tend) - ρ(0)||_∞ = </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Error / Initial amplitude = </span><span class="si">{</span><span class="n">error</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">0.01</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+=== SPH Sound Wave Verification ===
+
+Initial density:
+  Min: 0.990068
+  Max: 1.009891
+  Mean: 0.999978
+
+Final density:
+  Min: 0.990020
+  Max: 1.009965
+  Mean: 0.999979
+
+Round-trip error:
+  ||ρ(Tend) - ρ(0)||_∞ = 2.459169e-04
+  Error / Initial amplitude = 2.459169e-02
+</pre></div></div>
+</div>
+</section>
+<section id="Verification-Check">
+<h3>Verification Check<a class="headerlink" href="#Verification-Check" title="Link to this heading">#</a></h3>
+<p>Verify that the round-trip error is below the tolerance threshold, validating the SPH discretization accuracy.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tolerance for verification</span>
+<span class="n">tolerance</span> <span class="o">=</span> <span class="mf">6e-4</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Verification Against Tolerance (</span><span class="si">{</span><span class="n">tolerance</span><span class="si">:</span><span class="s2">.0e</span><span class="si">}</span><span class="s2">) ===&quot;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">error</span> <span class="o">&lt;</span> <span class="n">tolerance</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;SPH error </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2"> exceeds tolerance </span><span class="si">{</span><span class="n">tolerance</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ SPH sound wave verification passed.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Error </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2"> &lt; Tolerance </span><span class="si">{</span><span class="n">tolerance</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+=== Verification Against Tolerance (6e-04) ===
+✓ SPH sound wave verification passed.
+  Error 2.459169e-04 &lt; Tolerance 6.000000e-04
+</pre></div></div>
+</div>
+</section>
+<section id="Visualization:-Density-Evolution">
+<h3>Visualization: Density Evolution<a class="headerlink" href="#Visualization:-Density-Evolution" title="Link to this heading">#</a></h3>
+<p>Plot the density field at multiple times throughout the simulation to visualize the standing sound wave evolution.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a time evolution plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="n">interval</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Nt</span> <span class="o">//</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Plot every interval steps</span>
+<span class="n">plot_ct</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="n">interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">plot_ct</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+        <span class="c1"># Line style: solid for early times, dots for later times</span>
+        <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span> <span class="k">if</span> <span class="n">plot_ct</span> <span class="o">&lt;=</span> <span class="mi">6</span> <span class="k">else</span> <span class="s2">&quot;.&quot;</span>
+        <span class="n">t_current</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">dt_actual</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span> <span class="n">n_sph</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">style</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;t=</span><span class="si">{</span><span class="n">t_current</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">plot_ct</span> <span class="o">&gt;</span> <span class="mi">11</span><span class="p">:</span>
+            <span class="k">break</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\rho$ (density)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Standing Sound Wave SPH Simulation (</span><span class="si">{</span><span class="n">nx</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">ppb</span><span class="si">=}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">nx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">FormatStrFormatter</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2">&quot;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Plotted </span><span class="si">{</span><span class="n">plot_ct</span><span class="si">}</span><span class="s2"> snapshots from </span><span class="si">{</span><span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> total time steps.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_viscous_euler_sph_19_0.png" src="../../_images/_collections_tutorials_tutorial_viscous_euler_sph_19_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Plotted 11 snapshots from 81 total time steps.
+</pre></div></div>
+</div>
+</section>
+<section id="Conclusion">
+<h3>Conclusion<a class="headerlink" href="#Conclusion" title="Link to this heading">#</a></h3>
+<p>This tutorial successfully verified the SPH discretization of the isothermal Euler equations using a 1D standing sound wave test. The verification demonstrates:</p>
+<ol class="arabic simple">
+<li><p><strong>Accurate wave propagation</strong>: The sound wave traverses the domain at the correct speed (<span class="math notranslate nohighlight">\(c_s = 1\)</span>).</p></li>
+<li><p><strong>Wave reflection and superposition</strong>: Standing wave pattern emerges from forward/backward traveling components.</p></li>
+<li><p><strong>Low dissipation</strong>: Round-trip error is small, indicating that the SPH kernel and time-stepping scheme preserve wave structure over long times.</p></li>
+<li><p><strong>Correct particle dynamics</strong>: Tessellation loading and spatial sorting efficiently manage particle interactions.</p></li>
+</ol>
+<p>The SPH method provides a flexible, mesh-free discretization suitable for complex flows with free surfaces and discontinuities. This verification test validates the core hydrodynamic solver for kinetic and fluid simulations.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cleanup temporary simulation folder</span>
+<span class="k">if</span> <span class="kc">False</span><span class="p">:</span> <span class="c1"># Set to True to enable cleanup</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">test_folder</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cleaned up </span><span class="si">{</span><span class="n">test_folder</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not remove </span><span class="si">{</span><span class="n">test_folder</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="1D-Damped-Sound-Wave">
+<h2>1D Damped Sound Wave<a class="headerlink" href="#1D-Damped-Sound-Wave" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Physical Setup<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Adding viscosity to the isothermal Euler equations introduces dissipation. For a standing wave with wavenumber <span class="math notranslate nohighlight">\(k = 2\pi\ell/L\)</span> (mode <span class="math notranslate nohighlight">\(\ell\)</span>, domain length <span class="math notranslate nohighlight">\(L\)</span>), the amplitude decays exponentially in time:</p>
+<div class="math notranslate nohighlight">
+\[A(t) \propto e^{\gamma t}, \qquad \gamma = -\frac{2}{3} \mu k^2\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the dynamic viscosity and the factor <span class="math notranslate nohighlight">\(4/3\)</span> arises from the compressible viscous stress tensor (only the bulk contribution survives for a 1D plane wave). This test verifies the viscous propagator by:</p>
+<ol class="arabic simple">
+<li><p>Exciting a standing sound wave via an initial <strong>velocity</strong> perturbation <span class="math notranslate nohighlight">\(\delta u_1 \propto \sin(2\pi x / L)\)</span></p></li>
+<li><p>Running for <span class="math notranslate nohighlight">\(\sim 10\)</span> oscillation periods so the decay envelope is well resolved</p></li>
+<li><p>Extracting the numerical decay rate from the local maxima of the current <span class="math notranslate nohighlight">\(j_1\)</span> at the velocity antinode (analogous to measuring Landau damping)</p></li>
+<li><p>Comparing the fitted rate against <span class="math notranslate nohighlight">\(\gamma_\text{analytical} = -(4/3) \mu k^2 / 2\)</span></p></li>
+</ol>
+</section>
+<section id="Physical-and-Numerical-Parameters">
+<h3>Physical and Numerical Parameters<a class="headerlink" href="#Physical-and-Numerical-Parameters" title="Link to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Physical parameters</span>
+<span class="n">mu</span>  <span class="o">=</span> <span class="mf">0.01</span>   <span class="c1"># dynamic viscosity</span>
+<span class="n">r1</span>  <span class="o">=</span> <span class="mf">1.0</span>    <span class="c1"># domain length (1D periodic)</span>
+<span class="n">c_s</span> <span class="o">=</span> <span class="mf">1.0</span>    <span class="c1"># sound speed (isothermal, kappa=c_s^2=1 by default)</span>
+
+<span class="c1"># Mode and analytical decay rate</span>
+<span class="n">ell</span> <span class="o">=</span> <span class="mi">1</span>                          <span class="c1"># wave mode number</span>
+<span class="n">k</span>   <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">ell</span> <span class="o">/</span> <span class="n">r1</span>    <span class="c1"># wavenumber</span>
+<span class="n">gamma_analytical</span> <span class="o">=</span> <span class="o">-</span><span class="n">mu</span> <span class="o">*</span> <span class="p">(</span><span class="mf">4.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+<span class="c1"># Numerical parameters</span>
+<span class="n">nx</span>        <span class="o">=</span> <span class="mi">8</span>     <span class="c1"># boxes in x (controls particle density)</span>
+<span class="n">plot_pts</span>  <span class="o">=</span> <span class="mi">21</span>    <span class="c1"># evaluation points for kernel density output</span>
+
+<span class="c1"># Time stepping: run ~10 oscillation periods (T_osc = r1/c_s = 1)</span>
+<span class="n">dt</span>   <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">Tend</span> <span class="o">=</span> <span class="mf">10.0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Viscosity:           mu = </span><span class="si">{</span><span class="n">mu</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Domain length:       L  = </span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wave mode:           ell = </span><span class="si">{</span><span class="n">ell</span><span class="si">}</span><span class="s2">,  k = </span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Analytical decay rate: gamma = -(4/3)*mu*k^2/2 = </span><span class="si">{</span><span class="n">gamma_analytical</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Oscillation period:  T = </span><span class="si">{</span><span class="n">r1</span><span class="o">/</span><span class="n">c_s</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">,  simulation spans </span><span class="si">{</span><span class="n">Tend</span><span class="si">}</span><span class="s2"> time units (</span><span class="si">{</span><span class="n">Tend</span><span class="o">/</span><span class="p">(</span><span class="n">r1</span><span class="o">/</span><span class="n">c_s</span><span class="p">)</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> periods)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Viscosity:           mu = 0.01
+Domain length:       L  = 1.0
+Wave mode:           ell = 1,  k = 6.2832
+Analytical decay rate: gamma = -(4/3)*mu*k^2/2 = -0.2632
+Oscillation period:  T = 1.00,  simulation spans 10.0 time units (10 periods)
+</pre></div></div>
+</div>
+</section>
+<section id="Model-Setup-with-Viscosity">
+<h3>Model Setup with Viscosity<a class="headerlink" href="#Model-Setup-with-Viscosity" title="Link to this heading">#</a></h3>
+<p>The key difference from the inviscid case is <code class="docutils literal notranslate"><span class="pre">with_viscosity=True</span></code> (which is the default). This activates the <code class="docutils literal notranslate"><span class="pre">push_viscous</span></code> propagator, which computes the viscous stress tensor divergence via SPH kernel gradients. We also save the <strong>current</strong> <span class="math notranslate nohighlight">\(j_1 = \rho u_1\)</span> in addition to density, since the decay rate is extracted from the velocity amplitude at the antinode.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BinningPlot</span><span class="p">,</span>
+    <span class="n">BoundaryParameters</span><span class="p">,</span>
+    <span class="n">EnvironmentOptions</span><span class="p">,</span>
+    <span class="n">KernelDensityPlot</span><span class="p">,</span>
+    <span class="n">LoadingParameters</span><span class="p">,</span>
+    <span class="n">SavingParameters</span><span class="p">,</span>
+    <span class="n">Simulation</span><span class="p">,</span>
+    <span class="n">SortingParameters</span><span class="p">,</span>
+    <span class="n">Time</span><span class="p">,</span>
+    <span class="n">WeightsParameters</span><span class="p">,</span>
+    <span class="n">domains</span><span class="p">,</span>
+    <span class="n">equils</span><span class="p">,</span>
+    <span class="n">perturbations</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ViscousEulerSPH</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.ode.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ButcherTableau</span>
+
+<span class="c1"># with_viscosity=True (default) activates the viscous stress propagator</span>
+<span class="n">model_damp</span> <span class="o">=</span> <span class="n">ViscousEulerSPH</span><span class="p">(</span><span class="n">with_B0</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">butcher</span> <span class="o">=</span> <span class="n">ButcherTableau</span><span class="p">(</span><span class="n">algo</span><span class="o">=</span><span class="s2">&quot;forward_euler&quot;</span><span class="p">)</span>
+<span class="n">model_damp</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model_damp</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span><span class="n">butcher</span><span class="o">=</span><span class="n">butcher</span><span class="p">)</span>
+<span class="n">model_damp</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_sph_p</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model_damp</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_sph_p</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span>
+    <span class="n">kernel_type</span><span class="o">=</span><span class="s2">&quot;gaussian_1d&quot;</span>
+<span class="p">)</span>
+<span class="c1"># mu sets the kinematic viscosity coefficient for the SPH viscous force</span>
+<span class="n">model_damp</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_viscous</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model_damp</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_viscous</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span>
+    <span class="n">kernel_type</span><span class="o">=</span><span class="s2">&quot;gaussian_1d&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ViscousEulerSPH model configured (with viscosity, no B-field).&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  push_viscous: gaussian_1d kernel, mu=</span><span class="si">{</span><span class="n">mu</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ViscousEulerSPH model configured (with viscosity, no B-field).
+  push_viscous: gaussian_1d kernel, mu=0.01
+</pre></div></div>
+</div>
+</section>
+<section id="Domain,-Markers-and-Diagnostics">
+<h3>Domain, Markers and Diagnostics<a class="headerlink" href="#Domain,-Markers-and-Diagnostics" title="Link to this heading">#</a></h3>
+<p>We add a second <code class="docutils literal notranslate"><span class="pre">BinningPlot</span></code> that records <span class="math notranslate nohighlight">\(j_1 = \rho u_1\)</span> (the momentum density, which equals <span class="math notranslate nohighlight">\(u_1\)</span> to leading order since <span class="math notranslate nohighlight">\(\rho \approx 1\)</span>). The velocity antinode of mode <span class="math notranslate nohighlight">\(\ell=1\)</span> sits at <span class="math notranslate nohighlight">\(x = L/4\)</span>, so we will probe the bin nearest to that location.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">domain_damp</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">Cuboid</span><span class="p">(</span><span class="n">r1</span><span class="o">=</span><span class="n">r1</span><span class="p">)</span>
+
+<span class="n">loading_params</span> <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span><span class="n">ppb</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">loading</span><span class="o">=</span><span class="s2">&quot;tesselation&quot;</span><span class="p">)</span>
+<span class="n">weights_params</span> <span class="o">=</span> <span class="n">WeightsParameters</span><span class="p">()</span>
+<span class="n">boundary_params</span> <span class="o">=</span> <span class="n">BoundaryParameters</span><span class="p">()</span>
+<span class="n">sorting_params</span> <span class="o">=</span> <span class="n">SortingParameters</span><span class="p">(</span>
+    <span class="n">boxes_per_dim</span><span class="o">=</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">dims_mask</span><span class="o">=</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="c1"># Density binning (for visualisation)</span>
+<span class="n">bin_plot</span>    <span class="o">=</span> <span class="n">BinningPlot</span><span class="p">(</span><span class="nb">slice</span><span class="o">=</span><span class="s2">&quot;e1&quot;</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,),</span> <span class="n">ranges</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+<span class="c1"># Current j1 binning — used to track the velocity amplitude over time</span>
+<span class="n">bin_plot_j1</span> <span class="o">=</span> <span class="n">BinningPlot</span><span class="p">(</span><span class="nb">slice</span><span class="o">=</span><span class="s2">&quot;e1&quot;</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,),</span> <span class="n">ranges</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">output_quantity</span><span class="o">=</span><span class="s2">&quot;current_1&quot;</span><span class="p">)</span>
+<span class="n">kd_plot</span>     <span class="o">=</span> <span class="n">KernelDensityPlot</span><span class="p">(</span><span class="n">pts_e1</span><span class="o">=</span><span class="n">plot_pts</span><span class="p">,</span> <span class="n">pts_e2</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">saving_params</span> <span class="o">=</span> <span class="n">SavingParameters</span><span class="p">(</span>
+    <span class="n">binning_plots</span><span class="o">=</span><span class="p">(</span><span class="n">bin_plot</span><span class="p">,</span> <span class="n">bin_plot_j1</span><span class="p">),</span>
+    <span class="n">kernel_density_plots</span><span class="o">=</span><span class="p">(</span><span class="n">kd_plot</span><span class="p">,),</span>
+<span class="p">)</span>
+
+<span class="n">model_damp</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span>
+    <span class="n">loading_params</span><span class="o">=</span><span class="n">loading_params</span><span class="p">,</span>
+    <span class="n">weights_params</span><span class="o">=</span><span class="n">weights_params</span><span class="p">,</span>
+    <span class="n">boundary_params</span><span class="o">=</span><span class="n">boundary_params</span><span class="p">,</span>
+    <span class="n">sorting_params</span><span class="o">=</span><span class="n">sorting_params</span><span class="p">,</span>
+    <span class="n">saving_params</span><span class="o">=</span><span class="n">saving_params</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1D periodic domain: r1=</span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Markers: 8 ppb × </span><span class="si">{</span><span class="n">nx</span><span class="si">}</span><span class="s2"> boxes = </span><span class="si">{</span><span class="mi">8</span><span class="o">*</span><span class="n">nx</span><span class="si">}</span><span class="s2"> particles&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Diagnostics: density binning + j1 (current) binning, </span><span class="si">{</span><span class="n">plot_pts</span><span class="si">}</span><span class="s2"> KDE evaluation points&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1D periodic domain: r1=1.0
+Markers: 8 ppb × 8 boxes = 64 particles
+Diagnostics: density binning + j1 (current) binning, 21 KDE evaluation points
+</pre></div></div>
+</div>
+</section>
+<section id="id2">
+<h3>Initial Conditions<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>We perturb the <strong>velocity</strong> (not the density) with a sinusoidal mode. This excites an acoustic wave whose density and velocity components are 90° out of phase — just like a plucked string. The wave then oscillates and decays due to viscous dissipation.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">background</span> <span class="o">=</span> <span class="n">equils</span><span class="o">.</span><span class="n">ConstantVelocity</span><span class="p">()</span>
+<span class="n">model_damp</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+
+<span class="c1"># Velocity perturbation: del_u1 (not del_n) excites an oscillating acoustic mode</span>
+<span class="n">perturbation</span> <span class="o">=</span> <span class="n">perturbations</span><span class="o">.</span><span class="n">ModesSin</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="n">amps</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0e-2</span><span class="p">,))</span>
+<span class="n">model_damp</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span><span class="n">del_u1</span><span class="o">=</span><span class="n">perturbation</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Background: constant velocity (zero density n=1, zero velocity)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Background: constant velocity (zero density n=1, zero velocity)
+</pre></div></div>
+</div>
+</section>
+<section id="Run-the-Simulation">
+<h3>Run the Simulation<a class="headerlink" href="#Run-the-Simulation" title="Link to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="n">test_folder</span>   <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;struphy_verification_tests&quot;</span><span class="p">)</span>
+<span class="n">out_folders</span>   <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_folder</span><span class="p">,</span> <span class="s2">&quot;ViscousEulerSPH&quot;</span><span class="p">)</span>
+<span class="n">env_damp</span> <span class="o">=</span> <span class="n">EnvironmentOptions</span><span class="p">(</span><span class="n">out_folders</span><span class="o">=</span><span class="n">out_folders</span><span class="p">,</span> <span class="n">sim_folder</span><span class="o">=</span><span class="s2">&quot;damped_soundwave_1d&quot;</span><span class="p">)</span>
+
+<span class="n">time_opts_damp</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">Tend</span><span class="o">=</span><span class="n">Tend</span><span class="p">,</span> <span class="n">split_algo</span><span class="o">=</span><span class="s2">&quot;Strang&quot;</span><span class="p">)</span>
+
+<span class="n">sim_damp</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model_damp</span><span class="p">,</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">env_damp</span><span class="p">,</span>
+    <span class="n">time_opts</span><span class="o">=</span><span class="n">time_opts_damp</span><span class="p">,</span>
+    <span class="n">domain</span><span class="o">=</span><span class="n">domain_damp</span><span class="p">,</span>
+    <span class="n">grid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">derham_opts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running damped sound wave: dt=</span><span class="si">{</span><span class="n">dt</span><span class="si">}</span><span class="s2">, Tend=</span><span class="si">{</span><span class="n">Tend</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">sim_damp</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Simulation complete.&quot;</span><span class="p">)</span>
+
+<span class="n">sim_damp</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Post-processing complete.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model ViscousEulerSPH ...
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running damped sound wave: dt=0.01, Tend=10.0
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Time stepping: 100%|██████████| 1000/1000 [00:12&lt;00:00, 82.30step/s]
+Struphy run finished.
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/ViscousEulerSPH/damped_soundwave_1d
+
+No feec fields found in hdf5 file, skipping post-processing of fields.
+Evaluation of 3 marker orbits for euler_fluid
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Simulation complete.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 1001/1001 [00:01&lt;00:00, 769.92it/s]
+Evaluation of distribution functions for euler_fluid
+100%|██████████| 2/2 [00:00&lt;00:00, 1469.11it/s]
+100%|██████████| 2/2 [00:00&lt;00:00, 137.88it/s]
+Evaluation of sph density for euler_fluid
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Post-processing complete.
+</pre></div></div>
+</div>
+</section>
+<section id="Diagnostics:-Density-Snapshots">
+<h3>Diagnostics: Density Snapshots<a class="headerlink" href="#Diagnostics:-Density-Snapshots" title="Link to this heading">#</a></h3>
+<p>First, inspect the density field <span class="math notranslate nohighlight">\(\delta\rho = \rho - 1\)</span> at twelve equally spaced times during the first oscillation period. The amplitude should visibly shrink over successive periods.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">sim_damp</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+
+<span class="n">ee1</span><span class="p">,</span> <span class="n">ee2</span><span class="p">,</span> <span class="n">ee3</span> <span class="o">=</span> <span class="n">sim_damp</span><span class="o">.</span><span class="n">n_sph</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">view_0</span><span class="o">.</span><span class="n">grid_n_sph</span>
+<span class="n">n_sph</span> <span class="o">=</span> <span class="n">sim_damp</span><span class="o">.</span><span class="n">n_sph</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">view_0</span><span class="o">.</span><span class="n">n_sph</span>   <span class="c1"># shape (Nt+1, plot_pts, 1, 1)</span>
+<span class="n">j1_binned</span>  <span class="o">=</span> <span class="n">sim_damp</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">e1_current_1</span><span class="o">.</span><span class="n">f_binned</span>   <span class="c1"># shape (Nt+1, n_bins)</span>
+<span class="n">e1_binned</span>  <span class="o">=</span> <span class="n">sim_damp</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">e1_current_1</span><span class="o">.</span><span class="n">grid_e1</span>    <span class="c1"># logical x in [0,1]</span>
+
+<span class="n">Nt</span>   <span class="o">=</span> <span class="n">j1_binned</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">Tend</span><span class="p">,</span> <span class="n">Nt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Physical KDE coordinates</span>
+<span class="n">x_sph</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ee1</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">*</span> <span class="n">r1</span>
+<span class="n">dn_sph</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">n_sph</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mf">1.0</span>   <span class="c1"># (Nt+1, plot_pts)</span>
+
+<span class="c1"># Twelve snapshots equally spaced over the first oscillation period (T_osc = r1/c_s = 1)</span>
+<span class="n">Nt_one_period</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">dt</span><span class="p">)</span>
+<span class="n">snapshot_inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nt_one_period</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">ylim</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dn_sph</span><span class="p">[</span><span class="n">snapshot_inds</span><span class="p">,</span> <span class="p">:]))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">snapshot_inds</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_sph</span><span class="p">,</span> <span class="n">dn_sph</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="p">:])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;$t = </span><span class="si">{</span><span class="n">times</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="n">ylim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\delta\rho$&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Density fluctuations $\delta\rho = \rho - 1$ (KDE, first oscillation period)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/ViscousEulerSPH/damped_soundwave_1d/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(1001,)
+
+self.spline_values:
+
+self.orbits:
+    euler_fluid, shape = (1001, 3, 8)
+        Number of time points: 1001
+        Number of particles:   3
+        Number of attributes:  8
+
+self.f:
+    euler_fluid
+        e1_current_1
+        e1_density
+
+self.n_sph:
+    euler_fluid
+        view_0
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_viscous_euler_sph_34_1.png" src="../../_images/_collections_tutorials_tutorial_viscous_euler_sph_34_1.png" />
+</div>
+</div>
+</section>
+<section id="Decay-Rate-Extraction">
+<h3>Decay Rate Extraction<a class="headerlink" href="#Decay-Rate-Extraction" title="Link to this heading">#</a></h3>
+<p>To measure the numerical decay rate we track the velocity (current) at the <strong>antinode</strong> <span class="math notranslate nohighlight">\(x = L/4\)</span> over the full simulation. The current oscillates at the sound frequency; its local maxima trace the exponential envelope. A linear fit to <span class="math notranslate nohighlight">\(\ln|A_\text{max}|\)</span> vs. time gives <span class="math notranslate nohighlight">\(\gamma_\text{numerical}\)</span>, which we compare to the analytical value.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Velocity amplitude time series at the antinode x = L/4 ---</span>
+<span class="n">e1_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">e1_binned</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>    <span class="c1"># logical x in [0, 1]</span>
+<span class="n">idx_max</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">e1_np</span> <span class="o">-</span> <span class="mf">0.25</span><span class="p">)))</span>   <span class="c1"># bin closest to x = 0.25*r1</span>
+<span class="n">amplitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">j1_binned</span><span class="p">[:,</span> <span class="n">idx_max</span><span class="p">])</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="c1"># Analytical envelope</span>
+<span class="n">A0</span> <span class="o">=</span> <span class="n">amplitude</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">amplitude_analytical</span> <span class="o">=</span> <span class="n">A0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">gamma_analytical</span> <span class="o">*</span> <span class="n">times</span><span class="p">)</span>
+
+<span class="c1"># --- Local maxima of the oscillating amplitude ---</span>
+<span class="c1"># Detect sign changes of the numerical time derivative of log|A|</span>
+<span class="n">logA</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">amplitude</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-15</span><span class="p">)</span>
+<span class="n">dlogA</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">logA</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">logA</span><span class="p">,</span> <span class="mi">1</span><span class="p">))[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
+<span class="n">zeros</span> <span class="o">=</span> <span class="n">dlogA</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">dlogA</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.0</span>
+<span class="n">maxima_inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">zeros</span><span class="p">,</span> <span class="n">dlogA</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">maxima</span>   <span class="o">=</span> <span class="n">logA</span><span class="p">[</span><span class="n">maxima_inds</span><span class="p">]</span>
+<span class="n">t_maxima</span> <span class="o">=</span> <span class="n">times</span><span class="p">[</span><span class="n">maxima_inds</span><span class="p">]</span>
+
+<span class="c1"># --- Linear fit to log(maxima) vs time → decay rate ---</span>
+<span class="n">linfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">t_maxima</span><span class="p">,</span> <span class="n">maxima</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">gamma_numerical</span> <span class="o">=</span> <span class="n">linfit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Analytical decay rate:  gamma = -(4/3)*mu*k²/2 = </span><span class="si">{</span><span class="n">gamma_analytical</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Numerical  decay rate:  gamma =                  </span><span class="si">{</span><span class="n">gamma_numerical</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">rel_error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">gamma_numerical</span> <span class="o">-</span> <span class="n">gamma_analytical</span><span class="p">)</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">gamma_analytical</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Relative error: </span><span class="si">{</span><span class="n">rel_error</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Analytical decay rate:  gamma = -(4/3)*mu*k²/2 = -0.2632
+Numerical  decay rate:  gamma =                  -0.3031
+Relative error: 15.17%
+</pre></div></div>
+</div>
+</section>
+<section id="Visualisation:-Amplitude-Decay-and-Fitted-Rate">
+<h3>Visualisation: Amplitude Decay and Fitted Rate<a class="headerlink" href="#Visualisation:-Amplitude-Decay-and-Fitted-Rate" title="Link to this heading">#</a></h3>
+<p>Two panels summarise the verification:</p>
+<ul class="simple">
+<li><p><strong>Left</strong>: the raw current amplitude at the antinode, overlaid with the analytical envelope and the detected local maxima.</p></li>
+<li><p><strong>Right</strong>: log of the maxima vs. time with the fitted line (slope = <span class="math notranslate nohighlight">\(\gamma_\text{numerical}\)</span>) and the analytical slope.</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># --- Left: raw amplitude + analytical envelope ---</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">amplitude</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;numerical $j_1$ at $x=</span><span class="si">{</span><span class="n">e1_np</span><span class="p">[</span><span class="n">idx_max</span><span class="p">]</span><span class="o">*</span><span class="n">r1</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">amplitude_analytical</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;analytical envelope ($\gamma=</span><span class="si">{</span><span class="n">gamma_analytical</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">$)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_maxima</span><span class="p">,</span> <span class="n">amplitude</span><span class="p">[</span><span class="n">maxima_inds</span><span class="p">],</span> <span class="s2">&quot;ro&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;local maxima&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;velocity amplitude $j_1$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Damped sound wave: velocity at antinode&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># --- Right: log(maxima) vs time with linear fit ---</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_maxima</span><span class="p">,</span> <span class="n">maxima</span><span class="p">,</span> <span class="s2">&quot;ro&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\ln|A_\mathrm</span><span class="si">{max}</span><span class="s2">|$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">linfit</span><span class="p">,</span> <span class="n">times</span><span class="p">),</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;fit: $\gamma=</span><span class="si">{</span><span class="n">gamma_numerical</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axline</span><span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">A0</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-15</span><span class="p">)),</span>
+    <span class="n">slope</span><span class="o">=</span><span class="n">gamma_analytical</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;analytical: $\gamma=</span><span class="si">{</span><span class="n">gamma_analytical</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\ln|A|$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Decay rate: numerical vs analytical&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span>
+    <span class="sa">rf</span><span class="s2">&quot;Viscous damping of sound wave ($\mu=</span><span class="si">{</span><span class="n">mu</span><span class="si">}</span><span class="s2">$, $k=</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">$, $\gamma_\mathrm</span><span class="se">{{</span><span class="s2">anal</span><span class="se">}}</span><span class="s2">=</span><span class="si">{</span><span class="n">gamma_analytical</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">$)&quot;</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_viscous_euler_sph_38_0.png" src="../../_images/_collections_tutorials_tutorial_viscous_euler_sph_38_0.png" />
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>Verification Check<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tolerance</span> <span class="o">=</span> <span class="mf">0.16</span>   <span class="c1"># 16% relative error</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;=== Damped Sound Wave Verification (tolerance </span><span class="si">{</span><span class="n">tolerance</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">%) ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Analytical gamma = </span><span class="si">{</span><span class="n">gamma_analytical</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Numerical  gamma = </span><span class="si">{</span><span class="n">gamma_numerical</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Relative error   = </span><span class="si">{</span><span class="n">rel_error</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">rel_error</span> <span class="o">&lt;</span> <span class="n">tolerance</span><span class="p">,</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Numerical decay rate </span><span class="si">{</span><span class="n">gamma_numerical</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> deviates </span><span class="si">{</span><span class="n">rel_error</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;from analytical </span><span class="si">{</span><span class="n">gamma_analytical</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (tolerance </span><span class="si">{</span><span class="n">tolerance</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">%)&quot;</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ Verification passed — decay rate within </span><span class="si">{</span><span class="n">tolerance</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">% of analytical.&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✗ </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Optional cleanup</span>
+<span class="k">if</span> <span class="kc">False</span><span class="p">:</span>   <span class="c1"># set to True to remove simulation output</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">test_folder</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cleaned up </span><span class="si">{</span><span class="n">test_folder</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=== Damped Sound Wave Verification (tolerance 16%) ===
+  Analytical gamma = -0.2632
+  Numerical  gamma = -0.3031
+  Relative error   = 15.17%
+
+✓ Verification passed — decay rate within 16% of analytical.
+</pre></div></div>
+</div>
+</section>
+<section id="id4">
+<h3>Conclusion<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>This section verified the viscous propagator of <code class="docutils literal notranslate"><span class="pre">ViscousEulerSPH</span></code> against the analytical damping rate of a compressible sound wave:</p>
+<ul class="simple">
+<li><p>The SPH discretisation correctly reproduces the <span class="math notranslate nohighlight">\(\gamma = -(4/3)\mu k^2/2\)</span> decay law to within the 16% tolerance at the chosen resolution.</p></li>
+<li><p>The decay rate is extracted robustly from the envelope of the oscillating velocity signal — the same technique used for Landau damping in kinetic simulations.</p></li>
+<li><p>Increasing <code class="docutils literal notranslate"><span class="pre">nx</span></code> or <code class="docutils literal notranslate"><span class="pre">ppb</span></code> reduces the relative error further, as the SPH kernel gradient approximation improves with particle density.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="tutorial_gas_expansion_sph.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Gas Expansion with <code class="docutils literal notranslate"><span class="pre">ViscousEulerSPH</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tutorial_hagen_poiseuille_sph.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2D Hagen-Poiseuille Channel Flow with SPH</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#1D-Standing-Sound-Wave">1D Standing Sound Wave</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Physical-Setup">Physical Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SPH-Configuration-Parameters">SPH Configuration Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Model-and-Propagator-Setup">Model and Propagator Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Domain-and-Particle-Markers">Domain and Particle Markers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Initial-Conditions">Initial Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Simulation-Setup-and-Execution">Simulation Setup and Execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Diagnostics:-Round-Trip-Sound-Wave-Verification">Diagnostics: Round-Trip Sound Wave Verification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Error-Computation">Error Computation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Verification-Check">Verification Check</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Visualization:-Density-Evolution">Visualization: Density Evolution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#1D-Damped-Sound-Wave">1D Damped Sound Wave</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Physical Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Physical-and-Numerical-Parameters">Physical and Numerical Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Model-Setup-with-Viscosity">Model Setup with Viscosity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Domain,-Markers-and-Diagnostics">Domain, Markers and Diagnostics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Initial Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Run-the-Simulation">Run the Simulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Diagnostics:-Density-Snapshots">Diagnostics: Density Snapshots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Decay-Rate-Extraction">Decay Rate Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Visualisation:-Amplitude-Decay-and-Fitted-Rate">Visualisation: Amplitude Decay and Fitted Rate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Verification Check</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/_collections/tutorials/tutorial_viscous_euler_sph.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1616 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Shock Propagation in Pressureless SPH &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_collections/tutorials/tutorial_pressureless_sph_shock';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link href="../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Shock Propagation in Pressureless SPH</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Shock-Propagation-in-Pressureless-SPH">
+<h1>Shock Propagation in Pressureless SPH<a class="headerlink" href="#Shock-Propagation-in-Pressureless-SPH" title="Link to this heading">#</a></h1>
+<p>In this tutorial, you set up and run a <strong>1D Riemann shock benchmark</strong> with the pressureless SPH model in Struphy, comparing numerical shock propagation to the analytical Rankine-Hugoniot weak solution.</p>
+<p>The notebook focuses on the <code class="docutils literal notranslate"><span class="pre">PressureLessSPH</span></code> model for coupled <strong>density and momentum</strong> evolution:</p>
+<div class="math notranslate nohighlight">
+\[\partial_t \rho + \partial_x(\rho u) = 0,
+\qquad
+\partial_t(\rho u) + \partial_x(\rho u^2) = 0.\]</div>
+<p>A short contextual note: in near-constant-density limits, the momentum dynamics are often discussed in relation to inviscid Burgers behavior. Here, the benchmark of interest is the full pressureless Euler Riemann shock.</p>
+<p>The workflow demonstrates core Struphy concepts: environment setup, particle initialization, time integration, and diagnostics in an interactive format so parameters can be tuned and rerun quickly.</p>
+<section id="Mathematical-Background:-Pressureless-Euler-Shock-System">
+<h2>Mathematical Background: Pressureless Euler Shock System<a class="headerlink" href="#Mathematical-Background:-Pressureless-Euler-Shock-System" title="Link to this heading">#</a></h2>
+<p>The pressureless continuity and momentum equations form a hyperbolic conservation-law system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+  \partial_t \rho + \partial_x(\rho u) &amp;= 0 \quad \text{(Continuity)} \\
+  \partial_t(\rho u) + \partial_x(\rho u^2) &amp;= 0 \quad \text{(Momentum without pressure)}
+\end{aligned}\end{split}\]</div>
+<p>For discontinuous initial data, the system develops weak solutions with shocks.</p>
+<section id="Riemann-Problem-(Shock-Benchmark)">
+<h3>Riemann Problem (Shock Benchmark)<a class="headerlink" href="#Riemann-Problem-(Shock-Benchmark)" title="Link to this heading">#</a></h3>
+<p>We solve the Riemann problem with initial conditions:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}(\rho, u)(x, 0) = \begin{cases}
+  (\rho_L, u_L) &amp; \text{if } x &lt; 0.5 \\
+  (\rho_R, u_R) &amp; \text{if } x &gt; 0.5
+\end{cases}\end{split}\]</div>
+<p>The <strong>Rankine-Hugoniot shock speed</strong> is:</p>
+<div class="math notranslate nohighlight">
+\[s = \frac{u_L + u_R}{2}.\]</div>
+<p>This provides a standard and well-established 1D benchmark for validating shock propagation in particle methods.</p>
+</section>
+</section>
+<section id="Step-0:-Import-Struphy-Components">
+<h2>Step 0: Import Struphy Components<a class="headerlink" href="#Step-0:-Import-Struphy-Components" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cunumpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xp</span>
+
+<span class="c1"># Struphy imports</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BaseUnits</span><span class="p">,</span>
+    <span class="n">EnvironmentOptions</span><span class="p">,</span>
+    <span class="n">Time</span><span class="p">,</span>
+    <span class="n">domains</span><span class="p">,</span>
+    <span class="n">equils</span><span class="p">,</span>
+    <span class="n">grids</span><span class="p">,</span>
+    <span class="n">DerhamOptions</span><span class="p">,</span>
+    <span class="n">BoundaryParameters</span><span class="p">,</span>
+    <span class="n">LoadingParameters</span><span class="p">,</span>
+    <span class="n">WeightsParameters</span><span class="p">,</span>
+    <span class="n">SortingParameters</span><span class="p">,</span>
+    <span class="n">SavingParameters</span><span class="p">,</span>
+    <span class="n">BinningPlot</span><span class="p">,</span>
+    <span class="n">Simulation</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">PressureLessSPH</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.initial.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Perturbation</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Step-1:-Create-Environment,-Time-Integrator,-and-1D-Domain">
+<h2>Step 1: Create Environment, Time Integrator, and 1D Domain<a class="headerlink" href="#Step-1:-Create-Environment,-Time-Integrator,-and-1D-Domain" title="Link to this heading">#</a></h2>
+<p>Set up a 1D periodic domain (stretched into 3D as required by Struphy) with Strang splitting for time integration.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ====== CONFIGURABLE PARAMETERS ======</span>
+<span class="c1"># Time stepping</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">1.0e-2</span>      <span class="c1"># time step</span>
+<span class="n">Tend</span> <span class="o">=</span> <span class="mf">1.5</span>       <span class="c1"># end time</span>
+
+<span class="c1"># Domain (1D periodic in logical coords eta1 ∈ [0, 1])</span>
+<span class="n">l1</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span>  <span class="c1"># eta1 range</span>
+<span class="n">l2</span><span class="p">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span>  <span class="c1"># eta2 range (minimal extent)</span>
+<span class="n">l3</span><span class="p">,</span> <span class="n">r3</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span>  <span class="c1"># eta3 range (minimal extent)</span>
+<span class="c1"># =====================================</span>
+
+<span class="c1"># Environment options</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">EnvironmentOptions</span><span class="p">(</span><span class="n">sim_folder</span><span class="o">=</span><span class="s2">&quot;sim_shock_large&quot;</span><span class="p">,</span> <span class="n">profiling_activated</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Time stepping with Strang splitting</span>
+<span class="n">time_opts</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">Tend</span><span class="o">=</span><span class="n">Tend</span><span class="p">,</span> <span class="n">split_algo</span><span class="o">=</span><span class="s2">&quot;Strang&quot;</span><span class="p">)</span>
+
+<span class="c1"># Geometry: 1D periodic, extended to 3D cuboid</span>
+<span class="n">domain</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">Cuboid</span><span class="p">(</span><span class="n">l1</span><span class="o">=</span><span class="n">l1</span><span class="p">,</span> <span class="n">r1</span><span class="o">=</span><span class="n">r1</span><span class="p">,</span> <span class="n">l2</span><span class="o">=</span><span class="n">l2</span><span class="p">,</span> <span class="n">r2</span><span class="o">=</span><span class="n">r2</span><span class="p">,</span> <span class="n">l3</span><span class="o">=</span><span class="n">l3</span><span class="p">,</span> <span class="n">r3</span><span class="o">=</span><span class="n">r3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Domain: eta1 ∈ [</span><span class="si">{</span><span class="n">l1</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">], eta2 ∈ [</span><span class="si">{</span><span class="n">l2</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="s2">], eta3 ∈ [</span><span class="si">{</span><span class="n">l3</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">r3</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time stepping: dt=</span><span class="si">{</span><span class="n">dt</span><span class="si">}</span><span class="s2">, Tend=</span><span class="si">{</span><span class="n">Tend</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Domain: eta1 ∈ [0.0, 1.0], eta2 ∈ [0.0, 1.0], eta3 ∈ [0.0, 1.0]
+Time stepping: dt=0.01, Tend=1.5
+</pre></div></div>
+</div>
+</section>
+<section id="Step-2:-Define-Riemann-Step-for-Shock-Initial-Condition">
+<h2>Step 2: Define Riemann Step for Shock Initial Condition<a class="headerlink" href="#Step-2:-Define-Riemann-Step-for-Shock-Initial-Condition" title="Link to this heading">#</a></h2>
+<p>We implement a smooth approximation to the Riemann jump using a tanh transition. This avoids sharp discontinuities in the initial particle distribution while maintaining the shock structure.</p>
+</section>
+<section id="Comparing-Two-Riemann-Shock-Test-Cases">
+<h2>Comparing Two Riemann Shock Test Cases<a class="headerlink" href="#Comparing-Two-Riemann-Shock-Test-Cases" title="Link to this heading">#</a></h2>
+<p>This notebook includes two distinct test cases to explore pressureless Euler shock dynamics:</p>
+<p><strong>Test Case 1: Contact Discontinuity (Rankine-Hugoniot Exact)</strong></p>
+<ul class="simple">
+<li><p>Initial conditions: <span class="math notranslate nohighlight">\(\rho_L = 1.0, u_L = 0.5\)</span> | <span class="math notranslate nohighlight">\(\rho_R = 0.5, u_R = 0.5\)</span></p></li>
+<li><p>Shock speed: <span class="math notranslate nohighlight">\(s = 0\)</span> (stationary, since <span class="math notranslate nohighlight">\(u_L = u_R\)</span>)</p></li>
+<li><p>Validates analytical solution: piecewise-constant profile with <strong>no propagation</strong></p></li>
+</ul>
+<p><strong>Test Case 2: Delta-Shock (Density Pile-Up)</strong></p>
+<ul class="simple">
+<li><p>Initial conditions: <span class="math notranslate nohighlight">\(\rho_L = 1.0, u_L = 2.0\)</span> | <span class="math notranslate nohighlight">\(\rho_R = 0.125, u_R = 0.0\)</span></p></li>
+<li><p>Shock speed: naive estimate <span class="math notranslate nohighlight">\(s \approx 1.0\)</span> (fast-moving compression)</p></li>
+<li><p>Demonstrates <strong>physical density concentration</strong> at the shock front (SPH forms delta-shock)</p></li>
+</ul>
+<p><strong>To switch test cases</strong>: In the code cell below, uncomment/comment the <code class="docutils literal notranslate"><span class="pre">test_case</span></code> variable.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RiemannStep</span><span class="p">(</span><span class="n">Perturbation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Smooth approximation of a 1D Riemann jump in logical coordinate eta1.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        left: value on the left side  (x &lt; eta0)</span>
+<span class="sd">        right: value on the right side (x &gt; eta0)</span>
+<span class="sd">        eta0: location of the jump (default 0.5 = middle of domain)</span>
+<span class="sd">        width: width of tanh transition (smaller = sharper transition)</span>
+<span class="sd">        given_in_basis: basis for given variable (&quot;0&quot; for density, &quot;v&quot; for velocity)</span>
+<span class="sd">        comp: component index for vector quantities</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">eta0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+                 <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">given_in_basis</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">comp</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eta0</span> <span class="o">=</span> <span class="n">eta0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">given_in_basis</span> <span class="o">=</span> <span class="n">given_in_basis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comp</span> <span class="o">=</span> <span class="n">comp</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the smooth step at logical coordinates (e1, e2, e3).&quot;&quot;&quot;</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+        <span class="n">half_jump</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">avg</span> <span class="o">-</span> <span class="n">half_jump</span> <span class="o">*</span> <span class="n">xp</span><span class="o">.</span><span class="n">tanh</span><span class="p">((</span><span class="n">e1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">eta0</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+
+
+<span class="c1"># ========== TEST CASE SELECTION ==========</span>
+<span class="c1"># Choose which test case to run:</span>
+<span class="c1"># test_case = &quot;contact_discontinuity&quot;  # Satisfies Rankine-Hugoniot exactly</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="s2">&quot;delta_shock&quot;</span>             <span class="c1"># Shows density pile-up at shock front</span>
+<span class="n">test_case</span> <span class="o">=</span> <span class="s2">&quot;contact_discontinuity&quot;</span>
+<span class="c1"># =========================================</span>
+
+<span class="k">if</span> <span class="n">test_case</span> <span class="o">==</span> <span class="s2">&quot;contact_discontinuity&quot;</span><span class="p">:</span>
+    <span class="c1"># TEST CASE 1: Contact Discontinuity (satisfies Rankine-Hugoniot)</span>
+    <span class="c1"># This is a discontinuity where velocity is equal but density jumps.</span>
+    <span class="c1"># Verifies RH: s = 0.5, mass flux: 0.25, momentum: 0.125 on both sides ✓</span>
+    <span class="n">rho_L</span><span class="p">,</span> <span class="n">u_L</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span>
+    <span class="n">rho_R</span><span class="p">,</span> <span class="n">u_R</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span>
+
+    <span class="n">shock_speed_theory</span> <span class="o">=</span> <span class="p">(</span><span class="n">rho_R</span> <span class="o">*</span> <span class="n">u_R</span> <span class="o">-</span> <span class="n">rho_L</span> <span class="o">*</span> <span class="n">u_L</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho_R</span> <span class="o">-</span> <span class="n">rho_L</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TEST CASE 1: Contact Discontinuity (Rankine-Hugoniot satisfying)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Left state:  ρ_L = </span><span class="si">{</span><span class="n">rho_L</span><span class="si">}</span><span class="s2">, u_L = </span><span class="si">{</span><span class="n">u_L</span><span class="si">}</span><span class="s2">, momentum m_L = </span><span class="si">{</span><span class="n">rho_L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">u_L</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Right state: ρ_R = </span><span class="si">{</span><span class="n">rho_R</span><span class="si">}</span><span class="s2">, u_R = </span><span class="si">{</span><span class="n">u_R</span><span class="si">}</span><span class="s2">, momentum m_R = </span><span class="si">{</span><span class="n">rho_R</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">u_R</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Shock speed (from RH): s = </span><span class="si">{</span><span class="n">shock_speed_theory</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Note: u_L = u_R = </span><span class="si">{</span><span class="n">u_L</span><span class="si">}</span><span class="s2"> (contact discontinuity, no compression)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+
+<span class="k">else</span><span class="p">:</span>  <span class="c1"># delta_shock</span>
+    <span class="c1"># TEST CASE 2: Delta-Shock (high-to-low density with velocity change)</span>
+    <span class="c1"># Initial conditions do NOT satisfy RH initially, but SPH develops</span>
+    <span class="c1"># a delta-shock solution with density pile-up at the shock front.</span>
+    <span class="n">rho_L</span><span class="p">,</span> <span class="n">u_L</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span>
+    <span class="n">rho_R</span><span class="p">,</span> <span class="n">u_R</span> <span class="o">=</span> <span class="mf">0.125</span><span class="p">,</span> <span class="mf">0.0</span>
+
+    <span class="c1"># Naive shock speed (does NOT satisfy RH for these parameters)</span>
+    <span class="n">naive_speed</span> <span class="o">=</span> <span class="p">(</span><span class="n">u_L</span> <span class="o">+</span> <span class="n">u_R</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TEST CASE 2: Delta-Shock (density pile-up at shock front)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Left state:  ρ_L = </span><span class="si">{</span><span class="n">rho_L</span><span class="si">}</span><span class="s2">, u_L = </span><span class="si">{</span><span class="n">u_L</span><span class="si">}</span><span class="s2">, momentum m_L = </span><span class="si">{</span><span class="n">rho_L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">u_L</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Right state: ρ_R = </span><span class="si">{</span><span class="n">rho_R</span><span class="si">}</span><span class="s2">, u_R = </span><span class="si">{</span><span class="n">u_R</span><span class="si">}</span><span class="s2">, momentum m_R = </span><span class="si">{</span><span class="n">rho_R</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">u_R</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Naive shock speed: s ≈ </span><span class="si">{</span><span class="n">naive_speed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Note: These parameters lead to SPH forming a delta-shock solution&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;        where mass concentrates at the shock front (density pile-up).&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">70</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+======================================================================
+TEST CASE 1: Contact Discontinuity (Rankine-Hugoniot satisfying)
+======================================================================
+  Left state:  ρ_L = 1.0, u_L = 0.5, momentum m_L = 0.5
+  Right state: ρ_R = 0.5, u_R = 0.5, momentum m_R = 0.25
+  Shock speed (from RH): s = 0.5000
+  Note: u_L = u_R = 0.5 (contact discontinuity, no compression)
+======================================================================
+</pre></div></div>
+</div>
+</section>
+<section id="Step-3:-Configure-Grid-and-de-Rham-Discretization">
+<h2>Step 3: Configure Grid and de Rham Discretization<a class="headerlink" href="#Step-3:-Configure-Grid-and-de-Rham-Discretization" title="Link to this heading">#</a></h2>
+<p>Set up the tensor-product grid and de Rham options for the 1D problem. Since this is truly 1D physics in a 3D logical domain, we use minimal resolution in non-1D directions.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Grid: fine resolution in eta1, minimal in others</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">TensorProductGrid</span><span class="p">(</span><span class="n">num_elements</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># de Rham options: periodic boundaries in all directions</span>
+<span class="n">derham_opts</span> <span class="o">=</span> <span class="n">DerhamOptions</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grid elements: (64, 1, 1)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Boundary conditions: periodic in all directions&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Grid elements: (64, 1, 1)
+Boundary conditions: periodic in all directions
+</pre></div></div>
+</div>
+</section>
+<section id="Step-4:-Instantiate-the-PressureLessSPH-Model">
+<h2>Step 4: Instantiate the PressureLessSPH Model<a class="headerlink" href="#Step-4:-Instantiate-the-PressureLessSPH-Model" title="Link to this heading">#</a></h2>
+<p>Create a model instance for the Riemann shock benchmark.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model instance for the pressureless Euler shock system</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">PressureLessSPH</span><span class="p">()</span>
+
+<span class="c1"># Simulation object</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+    <span class="n">time_opts</span><span class="o">=</span><span class="n">time_opts</span><span class="p">,</span>
+    <span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">,</span>
+    <span class="n">equil</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># No background equilibrium needed</span>
+    <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+    <span class="n">derham_opts</span><span class="o">=</span><span class="n">derham_opts</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PressureLessSPH model instantiated (no external field).&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+PressureLessSPH model instantiated (no external field).
+</pre></div></div>
+</div>
+</section>
+<section id="Step-5:-Configure-Particle-Markers-with-SPH-Diagnostics">
+<h2>Step 5: Configure Particle Markers with SPH Diagnostics<a class="headerlink" href="#Step-5:-Configure-Particle-Markers-with-SPH-Diagnostics" title="Link to this heading">#</a></h2>
+<p>Set up particle loading, weights, boundaries, and binning diagnostics for the Riemann shock benchmark:</p>
+<ul class="simple">
+<li><p><strong>Np = 10000</strong> particles by default (can be tuned)</p></li>
+<li><p><strong>Periodic boundaries</strong> in all directions (1D domain)</p></li>
+<li><p><strong>64 bins</strong> along <span class="math notranslate nohighlight">\(\eta_1\)</span></p></li>
+<li><p>Binned outputs for both <strong>density</strong> and <strong>current_1</strong> (used to reconstruct velocity snapshots)</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ====== CONFIGURABLE PARTICLE PARAMETERS ======</span>
+<span class="n">Np_particles</span> <span class="o">=</span> <span class="mi">20000</span>  <span class="c1"># Number of particles</span>
+<span class="n">n_bins</span> <span class="o">=</span> <span class="mi">64</span>        <span class="c1"># Number of bins for diagnostics</span>
+<span class="c1"># ==============================================</span>
+
+<span class="n">loading_params</span> <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span><span class="n">Np</span><span class="o">=</span><span class="n">Np_particles</span><span class="p">)</span>
+<span class="n">weights_params</span> <span class="o">=</span> <span class="n">WeightsParameters</span><span class="p">()</span>
+
+<span class="c1"># Periodic boundaries in all directions (1D periodic domain)</span>
+<span class="n">boundary_params</span> <span class="o">=</span> <span class="n">BoundaryParameters</span><span class="p">(</span>
+    <span class="n">bc</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;periodic&quot;</span><span class="p">,</span> <span class="s2">&quot;periodic&quot;</span><span class="p">,</span> <span class="s2">&quot;periodic&quot;</span><span class="p">),</span>
+    <span class="n">bc_sph</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;periodic&quot;</span><span class="p">,</span> <span class="s2">&quot;periodic&quot;</span><span class="p">,</span> <span class="s2">&quot;periodic&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Sorting: n_bins boxes in eta1 direction, minimal in others</span>
+<span class="n">sorting_params</span> <span class="o">=</span> <span class="n">SortingParameters</span><span class="p">(</span>
+    <span class="n">boxes_per_dim</span><span class="o">=</span><span class="p">(</span><span class="n">n_bins</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">dims_mask</span><span class="o">=</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># Only sort in eta1</span>
+<span class="p">)</span>
+
+<span class="c1"># Binning diagnostics for density and current in eta1</span>
+<span class="n">bin_plot_density</span> <span class="o">=</span> <span class="n">BinningPlot</span><span class="p">(</span>
+    <span class="nb">slice</span><span class="o">=</span><span class="s2">&quot;e1&quot;</span><span class="p">,</span>
+    <span class="n">n_bins</span><span class="o">=</span><span class="p">(</span><span class="n">n_bins</span><span class="p">,),</span>
+    <span class="n">ranges</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="n">output_quantity</span><span class="o">=</span><span class="s2">&quot;density&quot;</span>
+<span class="p">)</span>
+
+<span class="n">bin_plot_current_1</span> <span class="o">=</span> <span class="n">BinningPlot</span><span class="p">(</span>
+    <span class="nb">slice</span><span class="o">=</span><span class="s2">&quot;e1&quot;</span><span class="p">,</span>
+    <span class="n">n_bins</span><span class="o">=</span><span class="p">(</span><span class="n">n_bins</span><span class="p">,),</span>
+    <span class="n">ranges</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="n">output_quantity</span><span class="o">=</span><span class="s2">&quot;current_1&quot;</span>
+<span class="p">)</span>
+
+<span class="n">saving_params</span> <span class="o">=</span> <span class="n">SavingParameters</span><span class="p">(</span><span class="n">binning_plots</span><span class="o">=</span><span class="p">(</span><span class="n">bin_plot_density</span><span class="p">,</span> <span class="n">bin_plot_current_1</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">cold_fluid</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span>
+    <span class="n">loading_params</span><span class="o">=</span><span class="n">loading_params</span><span class="p">,</span>
+    <span class="n">weights_params</span><span class="o">=</span><span class="n">weights_params</span><span class="p">,</span>
+    <span class="n">boundary_params</span><span class="o">=</span><span class="n">boundary_params</span><span class="p">,</span>
+    <span class="n">sorting_params</span><span class="o">=</span><span class="n">sorting_params</span><span class="p">,</span>
+    <span class="n">saving_params</span><span class="o">=</span><span class="n">saving_params</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Particle setup: Np=</span><span class="si">{</span><span class="n">Np_particles</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">n_bins</span><span class="si">}</span><span class="s2"> bins for diagnostics&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Binned outputs: e1_density and e1_current_1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Particle setup: Np=20000, 64 bins for diagnostics
+Binned outputs: e1_density and e1_current_1
+</pre></div></div>
+</div>
+</section>
+<section id="Step-6:-Set-Propagator-Options-(No-External-Field)">
+<h2>Step 6: Set Propagator Options (No External Field)<a class="headerlink" href="#Step-6:-Set-Propagator-Options-(No-External-Field)" title="Link to this heading">#</a></h2>
+<p>Configure the time integrators for particle position and velocity updates. <strong>No external potential is applied</strong> (<span class="math notranslate nohighlight">\(\phi = 0\)</span>), so the benchmark is the unforced pressureless Euler shock system.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ButcherTableau</span>
+
+<span class="c1"># Forward Euler time integration for both position and velocity</span>
+<span class="n">butcher</span> <span class="o">=</span> <span class="n">ButcherTableau</span><span class="p">(</span><span class="n">algo</span><span class="o">=</span><span class="s2">&quot;forward_euler&quot;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span><span class="n">butcher</span><span class="o">=</span><span class="n">butcher</span><span class="p">)</span>
+
+<span class="c1"># No external field (phi=None means zero forcing)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Propagators configured: forward_euler, no external field&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Propagators configured: forward_euler, no external field
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Riemann-Shock-Benchmark">
+<h1>Riemann Shock Benchmark<a class="headerlink" href="#Riemann-Shock-Benchmark" title="Link to this heading">#</a></h1>
+<p>In this section, we set up and run the large-amplitude Riemann shock, then compare numerical and analytical shock propagation.</p>
+<section id="Step-7:-Apply-Riemann-Shock-Initial-Conditions">
+<h2>Step 7: Apply Riemann Shock Initial Conditions<a class="headerlink" href="#Step-7:-Apply-Riemann-Shock-Initial-Conditions" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Constant background (zero velocity, unit density)</span>
+<span class="n">background</span> <span class="o">=</span> <span class="n">equils</span><span class="o">.</span><span class="n">ConstantVelocity</span><span class="p">(</span><span class="n">ux</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">uy</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">uz</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">cold_fluid</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+
+<span class="c1"># Perturbations: density and velocity jumps (both smooth tanh transitions)</span>
+<span class="n">del_n</span> <span class="o">=</span> <span class="n">RiemannStep</span><span class="p">(</span>
+    <span class="n">left</span><span class="o">=</span><span class="n">rho_L</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">,</span>      <span class="c1"># density perturbation on left</span>
+    <span class="n">right</span><span class="o">=</span><span class="n">rho_R</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">,</span>     <span class="c1"># density perturbation on right</span>
+    <span class="n">eta0</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="n">del_u1</span> <span class="o">=</span> <span class="n">RiemannStep</span><span class="p">(</span>
+    <span class="n">left</span><span class="o">=</span><span class="n">u_L</span><span class="p">,</span>          <span class="c1"># velocity on left</span>
+    <span class="n">right</span><span class="o">=</span><span class="n">u_R</span><span class="p">,</span>         <span class="c1"># velocity on right</span>
+    <span class="n">eta0</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">given_in_basis</span><span class="o">=</span><span class="s2">&quot;v&quot;</span>  <span class="c1"># given in velocity basis</span>
+<span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">cold_fluid</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span><span class="n">del_n</span><span class="o">=</span><span class="n">del_n</span><span class="p">,</span> <span class="n">del_u1</span><span class="o">=</span><span class="n">del_u1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Riemann shock initial conditions applied:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Background: ρ=1.0, u=(0, 0, 0)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Perturbation: smooth tanh transition with width=0.01&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Riemann shock initial conditions applied:
+  Background: ρ=1.0, u=(0, 0, 0)
+  Perturbation: smooth tanh transition with width=0.01
+</pre></div></div>
+</div>
+</section>
+<section id="Step-8:-Run-Riemann-Shock-Simulation">
+<h2>Step 8: Run Riemann Shock Simulation<a class="headerlink" href="#Step-8:-Run-Riemann-Shock-Simulation" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running LARGE-AMPLITUDE RIEMANN SHOCK simulation...&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Simulation completed.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model PressureLessSPH ...
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+============================================================
+Running LARGE-AMPLITUDE RIEMANN SHOCK simulation...
+============================================================
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Time stepping: 100%|██████████| 150/150 [00:05&lt;00:00, 25.75step/s]
+Struphy run finished.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Simulation completed.
+</pre></div></div>
+</div>
+</section>
+<section id="Step-9:-Post-Process-and-Load-Results">
+<h2>Step 9: Post-Process and Load Results<a class="headerlink" href="#Step-9:-Post-Process-and-Load-Results" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Post-processing...&quot;</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loading plotting data...&quot;</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data loaded.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_shock_large
+
+No feec fields found in hdf5 file, skipping post-processing of fields.
+Evaluation of 3 marker orbits for cold_fluid
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Post-processing...
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 151/151 [00:00&lt;00:00, 839.10it/s]
+Evaluation of distribution functions for cold_fluid
+100%|██████████| 2/2 [00:00&lt;00:00, 1312.16it/s]
+100%|██████████| 2/2 [00:00&lt;00:00, 520.42it/s]
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_shock_large/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(151,)
+
+self.spline_values:
+
+self.orbits:
+    cold_fluid, shape = (151, 3, 8)
+        Number of time points: 151
+        Number of particles:   3
+        Number of attributes:  8
+
+self.f:
+    cold_fluid
+        e1_current_1
+        e1_density
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Loading plotting data...
+Data loaded.
+</pre></div></div>
+</div>
+</section>
+<section id="Step-10:-Visualize-Density-and-Velocity-Evolution">
+<h2>Step 10: Visualize Density and Velocity Evolution<a class="headerlink" href="#Step-10:-Visualize-Density-and-Velocity-Evolution" title="Link to this heading">#</a></h2>
+<p>Plot density and reconstructed velocity snapshots at multiple times to track shock propagation in both conserved fields.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract binned outputs</span>
+<span class="n">rho_binned</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">cold_fluid</span><span class="o">.</span><span class="n">e1_density</span><span class="o">.</span><span class="n">f_binned</span>
+<span class="n">current1_binned</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">cold_fluid</span><span class="o">.</span><span class="n">e1_current_1</span><span class="o">.</span><span class="n">f_binned</span>
+<span class="n">t_grid</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">t_grid</span>
+<span class="n">eta1_bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_bins</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># bin centers</span>
+
+<span class="c1"># Reconstruct velocity from binned current and density: u1 = j1 / rho</span>
+<span class="n">rho_floor</span> <span class="o">=</span> <span class="mf">1.0e-12</span>
+<span class="n">u1_binned</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">current1_binned</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">rho_binned</span><span class="p">,</span> <span class="n">rho_floor</span><span class="p">))</span>
+
+<span class="c1"># Plot 6 snapshots with density (left) and velocity (right), one per row</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">Nt</span> <span class="o">=</span> <span class="n">t_grid</span><span class="o">.</span><span class="n">size</span>
+<span class="n">snapshot_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="n">u1_lim</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">u1_binned</span><span class="p">)),</span> <span class="mf">1.0e-6</span><span class="p">)</span>
+
+<span class="c1"># Analytical shock speed (depends on test case)</span>
+<span class="k">if</span> <span class="n">test_case</span> <span class="o">==</span> <span class="s2">&quot;contact_discontinuity&quot;</span><span class="p">:</span>
+    <span class="n">shock_speed_analytical</span> <span class="o">=</span> <span class="p">(</span><span class="n">rho_R</span> <span class="o">*</span> <span class="n">u_R</span> <span class="o">-</span> <span class="n">rho_L</span> <span class="o">*</span> <span class="n">u_L</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho_R</span> <span class="o">-</span> <span class="n">rho_L</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">shock_speed_analytical</span> <span class="o">=</span> <span class="p">(</span><span class="n">u_L</span> <span class="o">+</span> <span class="n">u_R</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="k">for</span> <span class="n">row</span><span class="p">,</span> <span class="n">t_idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">snapshot_indices</span><span class="p">):</span>
+    <span class="n">rho_profile</span> <span class="o">=</span> <span class="n">rho_binned</span><span class="p">[</span><span class="n">t_idx</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">u1_profile</span> <span class="o">=</span> <span class="n">u1_binned</span><span class="p">[</span><span class="n">t_idx</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="c1"># Calculate analytical shock position at this time step</span>
+    <span class="n">shock_pos_t</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">+</span> <span class="n">shock_speed_analytical</span> <span class="o">*</span> <span class="n">t_grid</span><span class="p">[</span><span class="n">t_idx</span><span class="p">])</span> <span class="o">%</span> <span class="mf">1.0</span>
+    <span class="n">shock2_pos_t</span> <span class="o">=</span> <span class="p">(</span><span class="n">shock_pos_t</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">%</span> <span class="mf">1.0</span>
+
+    <span class="c1"># Density snapshots (left column)</span>
+    <span class="n">ax_rho</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">ax_rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">eta1_bins</span><span class="p">,</span> <span class="n">rho_profile</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;tab:blue&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\rho$&quot;</span><span class="p">)</span>
+    <span class="n">ax_rho</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">shock_pos_t</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Analytical shock&quot;</span><span class="p">)</span>
+    <span class="n">ax_rho</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">shock2_pos_t</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">ax_rho</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;t = </span><span class="si">{</span><span class="n">t_grid</span><span class="p">[</span><span class="n">t_idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax_rho</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">ax_rho</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>
+    <span class="n">ax_rho</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\rho$&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">snapshot_indices</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax_rho</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\eta_1$ (logical coordinate)&quot;</span><span class="p">)</span>
+    <span class="n">ax_rho</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Velocity snapshots (right column)</span>
+    <span class="n">ax_u</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">ax_u</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">eta1_bins</span><span class="p">,</span> <span class="n">u1_profile</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;tab:red&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$u_1 = j_1/\rho$&quot;</span><span class="p">)</span>
+    <span class="n">ax_u</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">shock_pos_t</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Analytical shock&quot;</span><span class="p">)</span>
+    <span class="n">ax_u</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">shock2_pos_t</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">ax_u</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">ax_u</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.1</span> <span class="o">*</span> <span class="n">u1_lim</span><span class="p">,</span> <span class="mf">1.1</span> <span class="o">*</span> <span class="n">u1_lim</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">snapshot_indices</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax_u</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\eta_1$ (logical coordinate)&quot;</span><span class="p">)</span>
+    <span class="n">ax_u</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$u_1$&quot;</span><span class="p">)</span>
+    <span class="n">ax_u</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Riemann Shock Evolution: Density and Velocity Snapshots&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.995</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Captured snapshots from t=0 to t=</span><span class="si">{</span><span class="n">t_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">test_case</span> <span class="o">==</span> <span class="s2">&quot;contact_discontinuity&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Contact discontinuity: expected zero shock speed (s = 0)&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Delta-shock: naive shock speed estimate s ≈ </span><span class="si">{</span><span class="p">(</span><span class="n">u_L</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">u_R</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_pressureless_sph_shock_25_0.png" src="../../_images/_collections_tutorials_tutorial_pressureless_sph_shock_25_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+Captured snapshots from t=0 to t=1.5000
+Contact discontinuity: expected zero shock speed (s = 0)
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Analytical-Solutions-and-Comparison">
+<h1>Analytical Solutions and Comparison<a class="headerlink" href="#Analytical-Solutions-and-Comparison" title="Link to this heading">#</a></h1>
+<p>Now we compute analytical solutions and compare them to the numerical results.</p>
+<section id="Analytical-Solutions:-Rankine-Hugoniot-Conditions">
+<h2>Analytical Solutions: Rankine-Hugoniot Conditions<a class="headerlink" href="#Analytical-Solutions:-Rankine-Hugoniot-Conditions" title="Link to this heading">#</a></h2>
+<p>For pressureless Euler, the Rankine-Hugoniot jump conditions across a shock moving with speed <span class="math notranslate nohighlight">\(s\)</span> are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+  s(\rho_R - \rho_L) &amp;= \rho_R u_R - \rho_L u_L \quad \text{(mass conservation)} \\
+  s(\rho_R u_R - \rho_L u_L) &amp;= \rho_R u_R^2 - \rho_L u_L^2 \quad \text{(momentum conservation)}
+\end{aligned}\end{split}\]</div>
+<section id="Test-Case-1:-Contact-Discontinuity">
+<h3>Test Case 1: Contact Discontinuity<a class="headerlink" href="#Test-Case-1:-Contact-Discontinuity" title="Link to this heading">#</a></h3>
+<p>When <span class="math notranslate nohighlight">\(u_L = u_R\)</span>, the discontinuity is a <em>contact discontinuity</em> with zero shock speed:</p>
+<div class="math notranslate nohighlight">
+\[s = \frac{\rho_R u_R - \rho_L u_L}{\rho_R - \rho_L}\]</div>
+<p>The weak solution is simply:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}(\rho, u)(x, t) = \begin{cases}
+  (\rho_L, u_L) &amp; \text{if } x &lt; x_0 \\
+  (\rho_R, u_R) &amp; \text{if } x &gt; x_0
+\end{cases}\end{split}\]</div>
+<p>with no propagation (<span class="math notranslate nohighlight">\(s = 0\)</span> when <span class="math notranslate nohighlight">\(u_L = u_R\)</span>).</p>
+</section>
+<section id="Test-Case-2:-Delta-Shock-(Compression)">
+<h3>Test Case 2: Delta-Shock (Compression)<a class="headerlink" href="#Test-Case-2:-Delta-Shock-(Compression)" title="Link to this heading">#</a></h3>
+<p>When <span class="math notranslate nohighlight">\(u_L &gt; u_R\)</span> and <span class="math notranslate nohighlight">\(\rho_L &lt; \rho_R\)</span>, the true Riemann solution is a <strong>delta-shock</strong>: a moving discontinuity where mass concentrates at the shock front. The weak solution exhibits density pile-up (higher density near the shock than either state). The simple estimate <span class="math notranslate nohighlight">\(s \approx (u_L + u_R)/2\)</span> is approximate; the SPH method will capture the physical density compression at the discontinuity.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute shock position at final time</span>
+<span class="n">t_final</span> <span class="o">=</span> <span class="n">t_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">x0_shock</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="c1"># Shock speed depends on test case</span>
+<span class="k">if</span> <span class="n">test_case</span> <span class="o">==</span> <span class="s2">&quot;contact_discontinuity&quot;</span><span class="p">:</span>
+    <span class="c1"># Contact discontinuity: shock speed from Rankine-Hugoniot</span>
+    <span class="n">shock_speed</span> <span class="o">=</span> <span class="p">(</span><span class="n">rho_R</span> <span class="o">*</span> <span class="n">u_R</span> <span class="o">-</span> <span class="n">rho_L</span> <span class="o">*</span> <span class="n">u_L</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho_R</span> <span class="o">-</span> <span class="n">rho_L</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>  <span class="c1"># delta_shock</span>
+    <span class="c1"># Delta-shock: velocity average (naive estimate, true solution is more complex)</span>
+    <span class="n">shock_speed</span> <span class="o">=</span> <span class="p">(</span><span class="n">u_L</span> <span class="o">+</span> <span class="n">u_R</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="n">shock_pos_final</span> <span class="o">=</span> <span class="n">x0_shock</span> <span class="o">+</span> <span class="n">shock_speed</span> <span class="o">*</span> <span class="n">t_final</span>
+<span class="c1"># Account for periodicity</span>
+<span class="n">shock_pos_final</span> <span class="o">=</span> <span class="n">shock_pos_final</span> <span class="o">%</span> <span class="mf">1.0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Analytical Shock Solution:&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">test_case</span> <span class="o">==</span> <span class="s2">&quot;contact_discontinuity&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Shock speed (RH formula): s = (ρ_R u_R - ρ_L u_L) / (ρ_R - ρ_L) = </span><span class="si">{</span><span class="n">shock_speed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Note: Contact discontinuity has u_L = u_R, so velocity is continuous.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Shock speed (naive estimate): s ≈ (u_L + u_R)/2 = </span><span class="si">{</span><span class="n">shock_speed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Note: True pressureless Euler solution is a delta-shock with density pile-up.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Initial shock position: x₀ = </span><span class="si">{</span><span class="n">x0_shock</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Shock position at t=</span><span class="si">{</span><span class="n">t_final</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">: x_shock ≈ </span><span class="si">{</span><span class="n">shock_pos_final</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Distance traveled: </span><span class="si">{</span><span class="n">shock_speed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t_final</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+Analytical Shock Solution:
+  Shock speed (RH formula): s = (ρ_R u_R - ρ_L u_L) / (ρ_R - ρ_L) = 0.5000
+  Note: Contact discontinuity has u_L = u_R, so velocity is continuous.
+  Initial shock position: x₀ = 0.5
+  Shock position at t=1.5000: x_shock ≈ 0.2500
+  Distance traveled: 0.7500
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Compare-Numerical-Solution-with-Analytical-Prediction">
+<h2>Compare Numerical Solution with Analytical Prediction<a class="headerlink" href="#Compare-Numerical-Solution-with-Analytical-Prediction" title="Link to this heading">#</a></h2>
+<p><strong>For Contact Discontinuity (Test Case 1)</strong>: The analytical solution is exact—velocity is continuous across the jump, and density follows a perfect step.</p>
+<p><strong>For Delta-Shock (Test Case 2)</strong>: The analytical solution shown is a piecewise-constant reference only. The true pressureless Euler solution is a <em>delta-shock</em> where mass concentrates at the discontinuity (density pile-up), not captured by the simple step function. The SPH method will show this effect.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get final density profile from simulation</span>
+<span class="n">rho_numerical</span> <span class="o">=</span> <span class="n">rho_binned</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="c1"># Construct analytical shock solution at final time</span>
+<span class="n">eta1_fine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">shock_pos</span> <span class="o">=</span> <span class="n">x0_shock</span> <span class="o">+</span> <span class="n">shock_speed</span> <span class="o">*</span> <span class="n">t_final</span>
+<span class="n">rho_analytical</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">eta1_fine</span> <span class="o">&lt;</span> <span class="n">shock_pos</span><span class="p">,</span> <span class="n">rho_L</span><span class="p">,</span> <span class="n">rho_R</span><span class="p">)</span>
+
+<span class="c1"># Determine test case for title and labels</span>
+<span class="k">if</span> <span class="n">test_case</span> <span class="o">==</span> <span class="s2">&quot;contact_discontinuity&quot;</span><span class="p">:</span>
+    <span class="n">title_prefix</span> <span class="o">=</span> <span class="s2">&quot;Contact Discontinuity&quot;</span>
+    <span class="n">info_text</span> <span class="o">=</span> <span class="s2">&quot;Expected: stationary density jump at x = 0.5&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">title_prefix</span> <span class="o">=</span> <span class="s2">&quot;Delta-Shock&quot;</span>
+    <span class="n">info_text</span> <span class="o">=</span> <span class="s2">&quot;Note: SPH may show density pile-up at shock front&quot;</span>
+
+<span class="c1"># Plot comparison</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Numerical solution (binned)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">eta1_bins</span><span class="p">,</span> <span class="n">rho_numerical</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Numerical (SPH)&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="c1"># Analytical weak solution</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">eta1_fine</span><span class="p">,</span> <span class="n">rho_analytical</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analytical (piecewise constant)&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="c1"># Annotations</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">shock_pos_final</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Shock front at t=</span><span class="si">{</span><span class="n">t_final</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\eta_1$ (logical coordinate)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\rho$ (density)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">title_prefix</span><span class="si">}</span><span class="s1">: Numerical vs Analytical at t=</span><span class="si">{</span><span class="n">t_final</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="se">\n</span><span class="s1">(</span><span class="si">{</span><span class="n">info_text</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">rho_analytical</span><span class="p">)</span><span class="o">*</span><span class="mf">1.3</span><span class="p">]</span> <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">rho_analytical</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Comparison at t=</span><span class="si">{</span><span class="n">t_final</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Numerical shock position (steepest gradient): ≈ </span><span class="si">{</span><span class="n">eta1_bins</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">rho_numerical</span><span class="p">))]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Analytical shock position: </span><span class="si">{</span><span class="n">shock_pos_final</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_pressureless_sph_shock_30_0.png" src="../../_images/_collections_tutorials_tutorial_pressureless_sph_shock_30_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+Comparison at t=1.5000:
+  Numerical shock position (steepest gradient): ≈ 0.234375
+  Analytical shock position: 0.2500
+</pre></div></div>
+</div>
+</section>
+<section id="Compare-Velocity-at-Final-Time-(Numerical-vs-Analytical)">
+<h2>Compare Velocity at Final Time (Numerical vs Analytical)<a class="headerlink" href="#Compare-Velocity-at-Final-Time-(Numerical-vs-Analytical)" title="Link to this heading">#</a></h2>
+<p>Using the same weak-solution shock states, we compare the reconstructed numerical velocity <span class="math notranslate nohighlight">\(u_1 = j_1/\rho\)</span> to the piecewise analytical profile.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Numerical velocity at final time from binned current/density</span>
+<span class="n">u1_numerical</span> <span class="o">=</span> <span class="n">u1_binned</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="c1"># Analytical velocity weak solution at final time</span>
+<span class="n">u1_analytical</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">eta1_fine</span> <span class="o">&lt;</span> <span class="n">shock_pos</span><span class="p">,</span> <span class="n">u_L</span><span class="p">,</span> <span class="n">u_R</span><span class="p">)</span>
+
+<span class="c1"># Plot comparison</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">eta1_bins</span><span class="p">,</span> <span class="n">u1_numerical</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Numerical $u_1$ (SPH)&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">eta1_fine</span><span class="p">,</span> <span class="n">u1_analytical</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analytical $u_1$ (Rankine-Hugoniot)&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">shock_pos_final</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Shock front at t=</span><span class="si">{</span><span class="n">t_final</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\eta_1$ (logical coordinate)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$u_1$ (velocity)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Large-Amplitude Shock Velocity: Numerical vs Analytical at t=</span><span class="si">{</span><span class="n">t_final</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Velocity comparison at t=</span><span class="si">{</span><span class="n">t_final</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Numerical left/right plateau (approx): </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">u1_numerical</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">u1_numerical</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Analytical left/right states: </span><span class="si">{</span><span class="n">u_L</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">u_R</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_pressureless_sph_shock_32_0.png" src="../../_images/_collections_tutorials_tutorial_pressureless_sph_shock_32_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+Velocity comparison at t=1.5000:
+  Numerical left/right plateau (approx): 0.5000 / 0.5000
+  Analytical left/right states: 0.5000 / 0.5000
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Discussion:-Shock-Dynamics-and-Density-Evolution">
+<h1>Discussion: Shock Dynamics and Density Evolution<a class="headerlink" href="#Discussion:-Shock-Dynamics-and-Density-Evolution" title="Link to this heading">#</a></h1>
+<p>In this Riemann-shock benchmark, density changes are intentionally large (from 1.0 to 0.125). This follows directly from the coupled pressureless Euler system:</p>
+<ul class="simple">
+<li><p>The continuity equation <span class="math notranslate nohighlight">\(\partial_t \rho + \partial_x(\rho u) = 0\)</span> couples density evolution to velocity gradients.</p></li>
+<li><p>Across a shock, both <span class="math notranslate nohighlight">\(\rho\)</span> and <span class="math notranslate nohighlight">\(u\)</span> jump and satisfy the Rankine-Hugoniot condition.</p></li>
+<li><p>The SPH method captures the weak solution through particle redistribution and kernel-based remapping.</p></li>
+</ul>
+<p>The particle method naturally captures shocks through:</p>
+<ol class="arabic simple">
+<li><p><strong>Particle compression</strong>: particles accumulate near the discontinuity, increasing local density.</p></li>
+<li><p><strong>SPH kernel smoothing</strong>: kernel averaging reconstructs a resolved shock layer from particle data.</p></li>
+<li><p><strong>Consistent momentum update</strong>: velocity and density evolve together under the same conservation-law dynamics.</p></li>
+</ol>
+<section id="Extension">
+<h2>Extension<a class="headerlink" href="#Extension" title="Link to this heading">#</a></h2>
+<p>To further explore:</p>
+<ul class="simple">
+<li><p>Increase <code class="docutils literal notranslate"><span class="pre">Np_particles</span></code> for higher resolution near the shock front.</p></li>
+<li><p>Tune kernel parameters in <code class="docutils literal notranslate"><span class="pre">WeightsParameters()</span></code> for different smoothing behavior.</p></li>
+<li><p>Compare multiple time-stepping schemes via <code class="docutils literal notranslate"><span class="pre">ButcherTableau</span></code> options.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">PressureLessSPH/params_riemann_shock.py</span></code> as a standalone script counterpart to this notebook benchmark.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Shock Propagation in Pressureless SPH</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Mathematical-Background:-Pressureless-Euler-Shock-System">Mathematical Background: Pressureless Euler Shock System</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Riemann-Problem-(Shock-Benchmark)">Riemann Problem (Shock Benchmark)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-0:-Import-Struphy-Components">Step 0: Import Struphy Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1:-Create-Environment,-Time-Integrator,-and-1D-Domain">Step 1: Create Environment, Time Integrator, and 1D Domain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2:-Define-Riemann-Step-for-Shock-Initial-Condition">Step 2: Define Riemann Step for Shock Initial Condition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Comparing-Two-Riemann-Shock-Test-Cases">Comparing Two Riemann Shock Test Cases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-3:-Configure-Grid-and-de-Rham-Discretization">Step 3: Configure Grid and de Rham Discretization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-4:-Instantiate-the-PressureLessSPH-Model">Step 4: Instantiate the PressureLessSPH Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-5:-Configure-Particle-Markers-with-SPH-Diagnostics">Step 5: Configure Particle Markers with SPH Diagnostics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-6:-Set-Propagator-Options-(No-External-Field)">Step 6: Set Propagator Options (No External Field)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Riemann-Shock-Benchmark">Riemann Shock Benchmark</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-7:-Apply-Riemann-Shock-Initial-Conditions">Step 7: Apply Riemann Shock Initial Conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-8:-Run-Riemann-Shock-Simulation">Step 8: Run Riemann Shock Simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-9:-Post-Process-and-Load-Results">Step 9: Post-Process and Load Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-10:-Visualize-Density-and-Velocity-Evolution">Step 10: Visualize Density and Velocity Evolution</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Analytical-Solutions-and-Comparison">Analytical Solutions and Comparison</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Analytical-Solutions:-Rankine-Hugoniot-Conditions">Analytical Solutions: Rankine-Hugoniot Conditions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Test-Case-1:-Contact-Discontinuity">Test Case 1: Contact Discontinuity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Test-Case-2:-Delta-Shock-(Compression)">Test Case 2: Delta-Shock (Compression)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Compare-Numerical-Solution-with-Analytical-Prediction">Compare Numerical Solution with Analytical Prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Compare-Velocity-at-Final-Time-(Numerical-vs-Analytical)">Compare Velocity at Final Time (Numerical vs Analytical)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Discussion:-Shock-Dynamics-and-Density-Evolution">Discussion: Shock Dynamics and Density Evolution</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Extension">Extension</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/_collections/tutorials/tutorial_pressureless_sph_shock.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

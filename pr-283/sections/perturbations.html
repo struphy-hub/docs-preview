@@ -1,0 +1,1508 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Perturbation Functions &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sections/perturbations';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Developer’s guide" href="dev_guide.html" />
+    <link rel="prev" title="Base classes" href="subsections/kinetic-bckgr-base.html" />
+    <link href="../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="subsections/kinetic-bckgr-base.html"
+                          title="previous chapter">Base classes</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="dev_guide.html"
+                          title="next chapter">Developer’s guide</a></p>
+  </div></div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Perturbation Functions</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-struphy.initial.perturbations">
+<span id="perturbation-functions"></span><span id="perturbations"></span><h1>Perturbation Functions<a class="headerlink" href="#module-struphy.initial.perturbations" title="Link to this heading">#</a></h1>
+<p>Analytical perturbations.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.Noise">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">Noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'e1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'e2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'e3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'e1e2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'e1e3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'e2e3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'e1e2e3'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'e3'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">given_in_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'0'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical_at_eta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'norm'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#Noise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.Noise" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>White noise for FEEC coefficients.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>direction</strong> (<em>str</em>) – The direction(s) of variation of the noise: ‘e1’, ‘e2’, ‘e3’, ‘e1e2’, etc.</p></li>
+<li><p><strong>amp</strong> (<em>float</em>) – Noise amplitude.</p></li>
+<li><p><strong>seed</strong> (<em>int</em>) – Seed for the random number generator.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.Noise.given_in_basis">
+<span class="sig-name descname"><span class="pre">given_in_basis</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'0'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical_at_eta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'norm'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#struphy.initial.perturbations.Noise.given_in_basis" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.ModesSin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">ModesSin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.0001,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfuns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('Id',)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfuns_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ly</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">given_in_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'0'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical_at_eta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'norm'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#ModesSin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.ModesSin" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Sinusoidal function in 3D.</p>
+<div class="math notranslate nohighlight">
+\[u(x, y, z) =  \sum_{s} \chi_s(z) A_s \sin \left(l_s \frac{2\pi}{L_x} x + m_s \frac{2\pi}{L_y} y + n_s \frac{2\pi}{L_z} z + \theta_s \right) \,.\]</div>
+<p>where <span class="math notranslate nohighlight">\(\chi_s(z)\)</span> is one of</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\chi_s(z) = \left\{
+\begin{aligned}
+1\,,
+\\[2mm]
+ \tanh((z - 0.5)/\delta)/\cosh((z - 0.5)/\delta)\,,
+\end{aligned}
+\right.\end{split}\]</div>
+<p>Can be used in logical space (use ‘given_in_basis’), where <span class="math notranslate nohighlight">\(x \to \eta_1,\, y\to \eta_2,\, z \to \eta_3\)</span>
+and <span class="math notranslate nohighlight">\(L_x=L_y=L_z=1.0\)</span> (default).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ls</strong> (<em>tuple</em><em>[</em><em>int</em><em>]</em>) – Mode numbers in x-direction (kx = l*2*pi/Lx).</p></li>
+<li><p><strong>ms</strong> (<em>tuple</em><em>[</em><em>int</em><em>]</em>) – Mode numbers in y-direction (ky = m*2*pi/Ly).</p></li>
+<li><p><strong>ns</strong> (<em>tuple</em><em>[</em><em>int</em><em>]</em>) – Mode numbers in z-direction (kz = n*2*pi/Lz).</p></li>
+<li><p><strong>amps</strong> (<em>tuple</em><em>[</em><em>float</em><em>]</em>) – Amplitude of each mode.</p></li>
+<li><p><strong>theta</strong> (<em>tuple</em><em> | </em><em>list</em>) – Phase of each mode.</p></li>
+<li><p><strong>pfuns</strong> (<em>tuple</em><em> | </em><em>list</em><em>[</em><em>str</em><em>]</em>) – “Id” or “localize” define the profile functions.
+localize multiply the sinus by :math: <cite>tanh((eta_3 - 0.5)/delta)/cosh((eta_3 - 0.5)/delta)</cite>
+to localize it around 0.5. :math: <cite>delta</cite> is given by the input parameter pfuns_params</p></li>
+<li><p><strong>pfuns_params</strong> (<em>tuple</em><em> | </em><em>list</em>) – The parameter needed by the profile function</p></li>
+<li><p><strong>Lx</strong> (<em>float</em>) – Domain lengths.</p></li>
+<li><p><strong>Ly</strong> (<em>float</em>) – Domain lengths.</p></li>
+<li><p><strong>Lz</strong> (<em>float</em>) – Domain lengths.</p></li>
+<li><p><strong>given_in_basis</strong> (<em>str</em>) – In which basis the perturbation is represented (see base class).</p></li>
+<li><p><strong>comp</strong> (<em>int</em>) – Which component (0, 1 or 2) of vector is perturbed (=0 for scalar-valued functions)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.ModesCos">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">ModesCos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.0001,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ly</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">given_in_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'0'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical_at_eta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'norm'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perb_domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(None,</span> <span class="pre">None,</span> <span class="pre">None)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#ModesCos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.ModesCos" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Cosinusoidal function in 3D.</p>
+<div class="math notranslate nohighlight">
+\[u(x, y, z) = \sum_{s} A_s \cos \left(l_s \frac{2\pi}{L_x} x + m_s \frac{2\pi}{L_y} y + n_s \frac{2\pi}{L_z} z \right) \,.\]</div>
+<p>Can be used in logical space (use ‘given_in_basis’), where <span class="math notranslate nohighlight">\(x \to \eta_1,\, y\to \eta_2,\, z \to \eta_3\)</span>
+and <span class="math notranslate nohighlight">\(L_x=L_y=L_z=1.0\)</span> (default).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ls</strong> (<em>tuple</em><em>[</em><em>int</em><em>]</em>) – Mode numbers in x-direction (kx = l*2*pi/Lx).</p></li>
+<li><p><strong>ms</strong> (<em>tuple</em><em>[</em><em>int</em><em>]</em>) – Mode numbers in y-direction (ky = m*2*pi/Ly).</p></li>
+<li><p><strong>ns</strong> (<em>tuple</em><em>[</em><em>int</em><em>]</em>) – Mode numbers in z-direction (kz = n*2*pi/Lz).</p></li>
+<li><p><strong>amps</strong> (<em>tuple</em><em>[</em><em>float</em><em>]</em>) – Amplitude of each mode.</p></li>
+<li><p><strong>Lx</strong> (<em>float</em>) – Domain lengths.</p></li>
+<li><p><strong>Ly</strong> (<em>float</em>) – Domain lengths.</p></li>
+<li><p><strong>Lz</strong> (<em>float</em>) – Domain lengths.</p></li>
+<li><p><strong>given_in_basis</strong> (<em>str</em>) – In which basis the perturbation is represented (see base class).</p></li>
+<li><p><strong>comp</strong> (<em>int</em>) – Which component (0, 1 or 2) of vector is perturbed (=0 for scalar-valued functions)</p></li>
+<li><p><strong>perb_domain</strong> (<em>tuple</em><em>[</em><em>tuple</em><em>[</em><em>float</em><em>]</em><em>]</em>) – Subdomain in which the pertrubation is applied to: ((x_min, x_max), (y_min, y_max), (z_min, z_max)).
+None means apply perturbation to all domain in that direction</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.CoaxialWaveguideElectric_r">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">CoaxialWaveguideElectric_r</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-0.28</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#CoaxialWaveguideElectric_r"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.CoaxialWaveguideElectric_r" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Initializes function for Coaxial Waveguide electric field in radial direction.</p>
+<p>Solutions taken from TUM master thesis of Alicia Robles Pérez:
+“Development of a Geometric Particle-in-Cell Method for Cylindrical Coordinate Systems”, 2024</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>m</strong> (<em>int</em>) – Number of Modes</p></li>
+<li><p><strong>a1</strong> (<em>float</em>) – inner and outer radius of Hollow Cylinder</p></li>
+<li><p><strong>a2</strong> (<em>float</em>) – inner and outer radius of Hollow Cylinder</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – Parameters of Electric field</p></li>
+<li><p><strong>b</strong> (<em>float</em>) – Parameters of Electric field</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.CoaxialWaveguideElectric_theta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">CoaxialWaveguideElectric_theta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-0.28</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#CoaxialWaveguideElectric_theta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.CoaxialWaveguideElectric_theta" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Initializes funtion for Coaxial Waveguide electric field in the azimuthal direction.</p>
+<p>Solutions taken from TUM master thesis of Alicia Robles Pérez:
+“Development of a Geometric Particle-in-Cell Method for Cylindrical Coordinate Systems”, 2024</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>m</strong> (<em>int</em>) – Number of Modes</p></li>
+<li><p><strong>a1</strong> (<em>float</em>) – inner and outer radius of Hollow Cylinder</p></li>
+<li><p><strong>a2</strong> (<em>float</em>) – inner and outer radius of Hollow Cylinder</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – Parameters of Electric field</p></li>
+<li><p><strong>b</strong> (<em>float</em>) – Parameters of Electric field</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.CoaxialWaveguideMagnetic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">CoaxialWaveguideMagnetic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-0.28</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#CoaxialWaveguideMagnetic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.CoaxialWaveguideMagnetic" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Initializes funtion for Coaxial Waveguide magnetic field in $z$-direction.</p>
+<p>Solutions taken from TUM master thesis of Alicia Robles Pérez:
+“Development of a Geometric Particle-in-Cell Method for Cylindrical Coordinate Systems”, 2024</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>m</strong> (<em>int</em>) – Number of Modes</p></li>
+<li><p><strong>a1</strong> (<em>float</em>) – inner and outer radius of Hollow Cylinder</p></li>
+<li><p><strong>a2</strong> (<em>float</em>) – inner and outer radius of Hollow Cylinder</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – Parameters of Electric field</p></li>
+<li><p><strong>b</strong> (<em>float</em>) – Parameters of Electric field</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.ModesCosCos">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">ModesCosCos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0001,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfuns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('Id',)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfuns_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ly</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">given_in_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'0'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical_at_eta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'norm'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#ModesCosCos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.ModesCosCos" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<div class="math notranslate nohighlight">
+\[u(x, y, z) = \sum_s A_s \, \chi_s(z)
+\cos \!\left(l_s \tfrac{2\pi}{L_x} x + \theta_{x,s}\right)
+\cos \!\left(m_s \tfrac{2\pi}{L_y} y + \theta_{y,s}\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\chi_s(z)\)</span> can be either 1 or localized in z.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.ModesSinSin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">ModesSinSin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0001,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfuns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('Id',)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfuns_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ly</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">given_in_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'0'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical_at_eta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'norm'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#ModesSinSin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.ModesSinSin" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<div class="math notranslate nohighlight">
+\[u(x, y, z) = \sum_s A_s \, \chi_s(z)
+\sin \!\left(l_s \tfrac{2\pi}{L_x} x + \theta_{x,s}\right)
+\sin \!\left(m_s \tfrac{2\pi}{L_y} y + \theta_{y,s}\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\chi_s(z)\)</span> can be either 1 or localized in z.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.ModesSinCos">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">ModesSinCos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0001,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfuns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('Id',)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfuns_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ly</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">given_in_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'0'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical_at_eta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'norm'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#ModesSinCos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.ModesSinCos" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<div class="math notranslate nohighlight">
+\[u(x, y, z) = \sum_s A_s \, \chi_s(z)
+\sin \!\left(l_s \tfrac{2\pi}{L_x} x + \theta_{x,s}\right)
+\cos \!\left(m_s \tfrac{2\pi}{L_y} y + \theta_{y,s}\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\chi_s(z)\)</span> can be either 1 or localized in z.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.ModesCosSin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">ModesCosSin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0001,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfuns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('Id',)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfuns_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ly</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">given_in_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'0'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical_at_eta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'norm'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#ModesCosSin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.ModesCosSin" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<div class="math notranslate nohighlight">
+\[u(x, y, z) = \sum_s A_s \, \chi_s(z)
+\cos \!\left(l_s \tfrac{2\pi}{L_x} x + \theta_{x,s}\right)
+\sin \!\left(m_s \tfrac{2\pi}{L_y} y + \theta_{y,s}\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\chi_s(z)\)</span> can be either 1 or localized in z.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.TorusModesSin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">TorusModesSin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.0001,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfuns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('sin',)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfun_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">given_in_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'0'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical_at_eta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'norm'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#TorusModesSin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.TorusModesSin" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Sinusoidal function in the periodic coordinates of a Torus.</p>
+<div class="math notranslate nohighlight">
+\[u(\eta_1, \eta_2, \eta_3) = \sum_{s} \chi_s(\eta_1) A_s \sin(m_s\,2\pi \eta_2 + n_s\,2\pi \eta_3) \,,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\chi_s(\eta_1)\)</span> is one of</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\chi_s(\eta_1) = \left\{
+\begin{aligned}
+&amp;\sin(l_s\pi\eta_1)\,,
+\\[2mm]
+&amp;\exp \left(- \frac{(\eta_1 - r_0)^2}{2 \sigma^2} \right) \,,
+\\[2mm]
+&amp; - \frac{\eta_1 - r_0}{\sigma} \exp \left(- \frac{(\eta_1 - r_0)^2}{2 \sigma^2} \right) \,.
+\end{aligned}
+\right.\end{split}\]</div>
+<p>Can ony be used in logical space (use ‘given_in_basis’).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ms</strong> (<em>tuple</em><em> | </em><em>list</em><em>[</em><em>int</em><em>]</em>) – Poloidal mode numbers.</p></li>
+<li><p><strong>ns</strong> (<em>tuple</em><em> | </em><em>list</em><em>[</em><em>int</em><em>]</em>) – Toroidal mode numbers.</p></li>
+<li><p><strong>pfuns</strong> (<em>tuple</em><em> | </em><em>list</em><em>[</em><em>str</em><em>]</em>) – “sin” or “cos” or “exp” to define the profile functions.</p></li>
+<li><p><strong>amps</strong> (<em>tuple</em><em> | </em><em>list</em><em>[</em><em>float</em><em>]</em>) – Amplitudes of each mode (m_i, n_i).</p></li>
+<li><p><strong>pfun_params</strong> (<em>tuple</em><em> | </em><em>list</em>) – Provides <span class="math notranslate nohighlight">\([r_0, \sigma]\)</span> parameters for each “exp” profile fucntion, and l_s for “sin” and “cos”.</p></li>
+<li><p><strong>given_in_basis</strong> (<em>str</em>) – In which basis the perturbation is represented (see base class).</p></li>
+<li><p><strong>comp</strong> (<em>int</em>) – Which component (0, 1 or 2) of vector is perturbed (=0 for scalar-valued functions)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.TorusModesCos">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">TorusModesCos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(2,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.1,)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfuns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">('sin',)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pfun_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">given_in_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'0'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical_at_eta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'norm'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#TorusModesCos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.TorusModesCos" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Cosinusoidal function in the periodic coordinates of a Torus.</p>
+<div class="math notranslate nohighlight">
+\[u(\eta_1, \eta_2, \eta_3) = \sum_{s} \chi_s(\eta_1) A_s \cos(m_s\,2\pi \eta_2 + n_s\,2\pi \eta_3) \,,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\chi_s(\eta_1)\)</span> is one of</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\chi_s(\eta_1) = \left\{
+\begin{aligned}
+&amp;\sin(\pi\eta_1)\,,
+\\[2mm]
+&amp;\exp \left(- \frac{(\eta_1 - r_0)^2}{2 \sigma^2} \right) \,,
+\\[2mm]
+&amp; - \frac{\eta_1 - r_0}{\sigma} \exp \left(- \frac{(\eta_1 - r_0)^2}{2 \sigma^2} \right) \,.
+\end{aligned}
+\right.\end{split}\]</div>
+<p>Can only be used in logical space (use ‘given_in_basis’).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ms</strong> (<em>tuple</em><em>[</em><em>int</em><em>]</em>) – Poloidal mode numbers.</p></li>
+<li><p><strong>ns</strong> (<em>tuple</em><em>[</em><em>int</em><em>]</em>) – Toroidal mode numbers.</p></li>
+<li><p><strong>pfuns</strong> (<em>tuple</em><em>[</em><em>str</em><em>]</em>) – “sin” or “cos” or “exp” to define the profile functions.</p></li>
+<li><p><strong>amps</strong> (<em>tuple</em><em>[</em><em>float</em><em>]</em>) – Amplitudes of each mode (m_i, n_i).</p></li>
+<li><p><strong>pfun_params</strong> (<em>tuple</em><em> | </em><em>list</em>) – Provides <span class="math notranslate nohighlight">\([r_0, \sigma]\)</span> parameters for each “exp” profile fucntion, and l_s for “sin” and “cos”.</p></li>
+<li><p><strong>given_in_basis</strong> (<em>str</em>) – In which basis the perturbation is represented (see base class).</p></li>
+<li><p><strong>comp</strong> (<em>int</em>) – Which component (0, 1 or 2) of vector is perturbed (=0 for scalar-valued functions)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.Shear_x">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">Shear_x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.06666666666666667</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">given_in_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'0'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical_at_eta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'norm'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#Shear_x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.Shear_x" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Double shear layer in eta1 (-1 in outer regions, 1 in inner regions).</p>
+<div class="math notranslate nohighlight">
+\[u(\eta_1, \eta_2, \eta_3) = A(-\tanh((\eta_1 - 0.25)/\delta)+\tanh((\eta_1 - 0.75)/\delta) - 1) \,.\]</div>
+<p>Can only be used in logical space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>amps</strong> (<em>float</em>) – Amplitude of the velocity on each side.</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – Characteristic size of the shear layer</p></li>
+<li><p><strong>given_in_basis</strong> (<em>str</em>) – In which basis the perturbation is represented (see base class).</p></li>
+<li><p><strong>comp</strong> (<em>int</em>) – Which component (0, 1 or 2) of vector is perturbed (=0 for scalar-valued functions)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.Shear_y">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">Shear_y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.06666666666666667</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">given_in_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'0'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical_at_eta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'norm'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#Shear_y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.Shear_y" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Double shear layer in eta2 (-1 in outer regions, 1 in inner regions).</p>
+<div class="math notranslate nohighlight">
+\[u(\eta_1, \eta_2, \eta_3) = A(-\tanh((\eta_2 - 0.25)/\delta) + \tanh((\eta_2 - 0.75)/\delta) - 1) \,.\]</div>
+<p>Can only be used in logical space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>amps</strong> (<em>float</em>) – Amplitude of the velocity on each side.</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – Characteristic size of the shear layer</p></li>
+<li><p><strong>given_in_basis</strong> (<em>str</em>) – In which basis the perturbation is represented (see base class).</p></li>
+<li><p><strong>comp</strong> (<em>int</em>) – Which component (0, 1 or 2) of vector is perturbed (=0 for scalar-valued functions)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.Shear_z">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">Shear_z</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.06666666666666667</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">given_in_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'0'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical_at_eta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'norm'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#Shear_z"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.Shear_z" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Double shear layer in eta3 (-1 in outer regions, 1 in inner regions).</p>
+<div class="math notranslate nohighlight">
+\[u(\eta_1, \eta_2, \eta_3) = A(-\tanh((\eta_3 - 0.25)/\delta) + \tanh((\eta_3 - 0.75)/\delta) - 1) \,.\]</div>
+<p>Can only be used in logical space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>amps</strong> (<em>float</em>) – Amplitude of the velocity on each side.</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – Characteristic size of the shear layer</p></li>
+<li><p><strong>given_in_basis</strong> (<em>str</em>) – In which basis the perturbation is represented (see base class).</p></li>
+<li><p><strong>comp</strong> (<em>int</em>) – Which component (0, 1 or 2) of vector is perturbed (=0 for scalar-valued functions)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.Erf_z">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">Erf_z</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.06666666666666667</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">given_in_basis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'0'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'v'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'physical_at_eta'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'norm'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#Erf_z"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.Erf_z" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Shear layer in eta3 (-1 in lower regions, 1 in upper regions).</p>
+<div class="math notranslate nohighlight">
+\[u(\eta_1, \eta_2, \eta_3) = A \, erf((\eta_3 - 0.5)/\delta) \,.\]</div>
+<p>Can only be used in logical space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>amp</strong> (<em>float</em>) – Amplitude of the velocity on each side.</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – Characteristic size of the shear layer</p></li>
+<li><p><strong>given_in_basis</strong> (<em>str</em>) – In which basis the perturbation is represented (see base class).</p></li>
+<li><p><strong>comp</strong> (<em>int</em>) – Which component (0, 1 or 2) of vector is perturbed (=0 for scalar-valued functions)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.RestelliAnalyticSolutionVelocity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">RestelliAnalyticSolutionVelocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Bp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#RestelliAnalyticSolutionVelocity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.RestelliAnalyticSolutionVelocity" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Analytic solution <span class="math notranslate nohighlight">\(u=u_e\)</span> of the system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\partial_t u = - \nabla \phi + u \times B + \nu \Delta u + f \,,\\
+0 = \nabla \phi- u_e \times B + \nu_e \Delta u_e + f_e \,, \\
+\nabla \cdot (u-u_e) = 0 \,.\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f\)</span> is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f = \nu \omega \,,
+\\[2mm]
+\omega = \left[0, \alpha \frac{R_0 - 4R}{a R_0 R} - \beta \frac{B_p}{B_0}\frac{R_0^2}{a R^3}, 0 \right] \,,
+\\[2mm]
+R = \sqrt{x^2 + y^2} \,.\end{split}\]</div>
+<p>Can only be defined in Cartesian coordinates.
+The solution is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\alpha \frac{R}{a R_0} \left[\begin{array}{c} -z \\ R-R_0 \\ 0 \end{array} \right] + \beta \frac{B_p}{B_0} \frac{R_0}{aR} \left[\begin{array}{c} z \\ -(R-R_0) \\ \frac{B_0}{B_p} a \end{array} \right] \,,
+\\[2mm]
+R = \sqrt{x^2 + y^2} \,.\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>float</em>) – Minor radius of torus (default: 1.).</p></li>
+<li><p><strong>R0</strong> (<em>float</em>) – Major radius of torus (default: 2.).</p></li>
+<li><p><strong>B0</strong> (<em>float</em>) – On-axis (r=0) toroidal magnetic field (default: 10.).</p></li>
+<li><p><strong>Bp</strong> (<em>float</em>) – Poloidal magnetic field (default: 12.5).</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – (default: 0.1)</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – (default: 1.0)</p></li>
+<li><p><strong>comp</strong> (<em>int</em>) – Which component (0, 1 or 2) of vector is perturbed (=0 for scalar-valued functions)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition-references admonition">
+<p class="admonition-title">References</p>
+<p>[1] Juan Vicente Gutiérrez-Santacreu, Omar Maj, Marco Restelli: Finite element discretization of a Stokes-like model arising
+in plasma physics, Journal of Computational Physics 2018.</p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.RestelliAnalyticSolutionVelocity_2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">RestelliAnalyticSolutionVelocity_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Bp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#RestelliAnalyticSolutionVelocity_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.RestelliAnalyticSolutionVelocity_2" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Analytic solution <span class="math notranslate nohighlight">\(u=u_e\)</span> of the system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\partial_t u = - \nabla \phi + u \times B + \nu \Delta u + f \,,\\
+0 = \nabla \phi- u_e \times B + \nu_e \Delta u_e + f_e \,, \\
+\nabla \cdot (u-u_e) = 0 \,.\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f\)</span> is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f = \nu \omega \,,
+\\[2mm]
+\omega = \left[0, \alpha \frac{R_0 - 4R}{a R_0 R} - \beta \frac{B_p}{B_0}\frac{R_0^2}{a R^3}, 0 \right] \,,
+\\[2mm]
+R = \sqrt{x^2 + y^2} \,.\end{split}\]</div>
+<p>Can only be defined in Cartesian coordinates.
+The solution is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\alpha \frac{R}{a R_0} \left[\begin{array}{c} -z \\ R-R_0 \\ 0 \end{array} \right] + \beta \frac{B_p}{B_0} \frac{R_0}{aR} \left[\begin{array}{c} z \\ -(R-R_0) \\ \frac{B_0}{B_p} a \end{array} \right] \,,
+\\[2mm]
+R = \sqrt{x^2 + y^2} \,.\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>float</em>) – Minor radius of torus (default: 1.).</p></li>
+<li><p><strong>R0</strong> (<em>float</em>) – Major radius of torus (default: 2.).</p></li>
+<li><p><strong>B0</strong> (<em>float</em>) – On-axis (r=0) toroidal magnetic field (default: 10.).</p></li>
+<li><p><strong>Bp</strong> (<em>float</em>) – Poloidal magnetic field (default: 12.5).</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – (default: 0.1)</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – (default: 1.0)</p></li>
+<li><p><strong>comp</strong> (<em>int</em>) – Which component (0, 1 or 2) of vector is perturbed (=0 for scalar-valued functions)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition-references admonition">
+<p class="admonition-title">References</p>
+<p>[1] Juan Vicente Gutiérrez-Santacreu, Omar Maj, Marco Restelli: Finite element discretization of a Stokes-like model arising
+in plasma physics, Journal of Computational Physics 2018.</p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.RestelliAnalyticSolutionVelocity_3">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">RestelliAnalyticSolutionVelocity_3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Bp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#RestelliAnalyticSolutionVelocity_3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.RestelliAnalyticSolutionVelocity_3" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Analytic solution <span class="math notranslate nohighlight">\(u=u_e\)</span> of the system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\partial_t u = - \nabla \phi + u \times B + \nu \Delta u + f \,,\\
+0 = \nabla \phi- u_e \times B + \nu_e \Delta u_e + f_e \,, \\
+\nabla \cdot (u-u_e) = 0 \,.\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f\)</span> is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f = \nu \omega \,,
+\\[2mm]
+\omega = \left[0, \alpha \frac{R_0 - 4R}{a R_0 R} - \beta \frac{B_p}{B_0}\frac{R_0^2}{a R^3}, 0 \right] \,,
+\\[2mm]
+R = \sqrt{x^2 + y^2} \,.\end{split}\]</div>
+<p>Can only be defined in Cartesian coordinates.
+The solution is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\alpha \frac{R}{a R_0} \left[\begin{array}{c} -z \\ R-R_0 \\ 0 \end{array} \right] + \beta \frac{B_p}{B_0} \frac{R_0}{aR} \left[\begin{array}{c} z \\ -(R-R_0) \\ \frac{B_0}{B_p} a \end{array} \right] \,,
+\\[2mm]
+R = \sqrt{x^2 + y^2} \,.\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>float</em>) – Minor radius of torus (default: 1.).</p></li>
+<li><p><strong>R0</strong> (<em>float</em>) – Major radius of torus (default: 2.).</p></li>
+<li><p><strong>B0</strong> (<em>float</em>) – On-axis (r=0) toroidal magnetic field (default: 10.).</p></li>
+<li><p><strong>Bp</strong> (<em>float</em>) – Poloidal magnetic field (default: 12.5).</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – (default: 0.1)</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – (default: 1.0)</p></li>
+<li><p><strong>comp</strong> (<em>int</em>) – Which component (0, 1 or 2) of vector is perturbed (=0 for scalar-valued functions)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition-references admonition">
+<p class="admonition-title">References</p>
+<p>[1] Juan Vicente Gutiérrez-Santacreu, Omar Maj, Marco Restelli: Finite element discretization of a Stokes-like model arising
+in plasma physics, Journal of Computational Physics 2018.</p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.RestelliAnalyticSolutionPotential">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">RestelliAnalyticSolutionPotential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Bp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#RestelliAnalyticSolutionPotential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.RestelliAnalyticSolutionPotential" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Analytic solution <span class="math notranslate nohighlight">\(\phi\)</span> of the system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\partial_t u = - \nabla \phi + u \times B + \nu \Delta u + f \,,\\
+0 = \nabla \phi- u_e \times B + \nu_e \Delta u_e + f_e \,, \\
+\nabla \cdot (u-u_e) = 0 \,.\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f\)</span> is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f = \nu \omega \,,
+\\[2mm]
+\omega = \left[0, \alpha \frac{R_0 - 4R}{a R_0 R} - \beta \frac{B_p}{B_0}\frac{R_0^2}{a R^3}, 0 \right] \,,
+\\[2mm]
+R = \sqrt{x^2 + y^2} \,.\end{split}\]</div>
+<p>Can only be defined in Cartesian coordinates.
+The solution is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\phi = \frac{1}{2} a B_0 \alpha \left( \frac{(R-R_0)^2+z^2}{a^2} - \frac{2}{3} \right)
+\\[2mm]
+R = \sqrt{x^2 + y^2} \,.\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>float</em>) – Minor radius of torus (default: 1.).</p></li>
+<li><p><strong>R0</strong> (<em>float</em>) – Major radius of torus (default: 2.).</p></li>
+<li><p><strong>B0</strong> (<em>float</em>) – On-axis (r=0) toroidal magnetic field (default: 10.).</p></li>
+<li><p><strong>Bp</strong> (<em>float</em>) – Poloidal magnetic field (default: 12.5).</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – (default: 0.1)</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – (default: 1.0)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition-references admonition">
+<p class="admonition-title">References</p>
+<p>[1] Juan Vicente Gutiérrez-Santacreu, Omar Maj, Marco Restelli: Finite element discretization of a Stokes-like model arising
+in plasma physics, Journal of Computational Physics 2018.</p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.ManufacturedSolutionVelocity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">ManufacturedSolutionVelocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Ions'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1D'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#ManufacturedSolutionVelocity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.ManufacturedSolutionVelocity" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Analytic solutions <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(u_e\)</span> of the system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\partial_t u = - \nabla \phi + u \times B + \nu \Delta u + f \,,\\
+0 = \nabla \phi- u_e \times B + \nu_e \Delta u_e + f_e \,, \\
+\nabla \cdot (u-u_e) = 0 \,.\end{split}\]</div>
+<p>Can only be defined in Cartesian coordinates.
+The solution in 1D is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}u =  \left[\begin{array}{c} sin(2 \pi x) + 1.0 \\ 0 \\ 0 \end{array} \right] \,,
+u_e =  \left[\begin{array}{c} sin(2 \pi x) \\ 0 \\ 0 \end{array} \right] \,.\end{split}\]</div>
+<p>The solution in 2D is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}u =  \left[\begin{array}{c} -sin(2 \pi x) sin(2 \pi y) \\ -cos(2 \pi y) cos(2 \pi y) \\ 0 \end{array} \right] \,,
+u_e =  \left[\begin{array}{c} -sin(4 \pi x) sin(4 \pi y) \\ -cos(4 \pi y) cos(4 \pi y) \\ 0 \end{array} \right] \,.\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>species</strong> (<em>string</em>) – ‘Ions’ or ‘Electrons’.</p></li>
+<li><p><strong>comp</strong> (<em>int</em>) – Which component of the solution (‘0’, ‘1’ or ‘2’).</p></li>
+<li><p><strong>dimension</strong> (<em>string</em>) – Defines the manufactured solution to be selected (‘1D’ or ‘2D’).</p></li>
+<li><p><strong>b0</strong> (<em>float</em>) – Magnetic field (default: 1.0).</p></li>
+<li><p><strong>comp</strong> – Which component (0, 1 or 2) of vector is perturbed (=0 for scalar-valued functions)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.ManufacturedSolutionPotential">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">ManufacturedSolutionPotential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1D'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#ManufacturedSolutionPotential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.ManufacturedSolutionPotential" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Analytic solution <span class="math notranslate nohighlight">\(\phi\)</span> of the system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\partial_t u = - \nabla \phi + u \times B + \nu \Delta u + f \,,\\
+0 = \nabla \phi- u_e \times B + \nu_e \Delta u_e + f_e \,, \\
+\nabla \cdot (u-u_e) = 0 \,.\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f\)</span> is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f = \left[1 - b_0 cos(x) - \nu sin(y), 1 - b_0 sin(y) + \nu cos(x) , 0 \right] \,,
+\\[2mm]
+f_e = \left[-1 + 0.5 b_0 cos(x) - \nu_e 0.5 sin(y), -1 + 0.5 b_0 sin(y) + \nu_e cos(x) , 0 \right] \,.\end{split}\]</div>
+<p>Can only be defined in Cartesian coordinates.
+The solution in 1D is given by:</p>
+<div class="math notranslate nohighlight">
+\[\phi =  sin(2\pi x) \,.\]</div>
+<p>The solution in 2D is given by:</p>
+<div class="math notranslate nohighlight">
+\[\phi =  cos(2\pi x) + sin(2\pi y) \,.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>string</em>) – Defines the manufactured solution to be selected (‘1D’ or ‘2D’).</p></li>
+<li><p><strong>b0</strong> (<em>float</em>) – Magnetic field (default: 1.0).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.ManufacturedSolutionVelocity_2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">ManufacturedSolutionVelocity_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Ions'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1D'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#ManufacturedSolutionVelocity_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.ManufacturedSolutionVelocity_2" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Analytic solutions <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(u_e\)</span> of the system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\partial_t u = - \nabla \phi + u \times B + \nu \Delta u + f \,,\\
+0 = \nabla \phi- u_e \times B + \nu_e \Delta u_e + f_e \,, \\
+\nabla \cdot (u-u_e) = 0 \,.\end{split}\]</div>
+<p>Can only be defined in Cartesian coordinates.
+The solution in 1D is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}u =  \left[\begin{array}{c} sin(2 \pi x) + 1.0 \\ 0 \\ 0 \end{array} \right] \,,
+u_e =  \left[\begin{array}{c} sin(2 \pi x) \\ 0 \\ 0 \end{array} \right] \,.\end{split}\]</div>
+<p>The solution in 2D is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}u =  \left[\begin{array}{c} -sin(2 \pi x) sin(2 \pi y) \\ -cos(2 \pi y) cos(2 \pi y) \\ 0 \end{array} \right] \,,
+u_e =  \left[\begin{array}{c} -sin(4 \pi x) sin(4 \pi y) \\ -cos(4 \pi y) cos(4 \pi y) \\ 0 \end{array} \right] \,.\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>species</strong> (<em>string</em>) – ‘Ions’ or ‘Electrons’.</p></li>
+<li><p><strong>dimension</strong> (<em>string</em>) – Defines the manufactured solution to be selected (‘1D’ or ‘2D’).</p></li>
+<li><p><strong>b0</strong> (<em>float</em>) – Magnetic field (default: 1.0).</p></li>
+<li><p><strong>comp</strong> (<em>int</em>) – Which component (0, 1 or 2) of vector is perturbed (=0 for scalar-valued functions)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.ITPA_density">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">ITPA_density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.00720655</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.49123,</span> <span class="pre">0.298228,</span> <span class="pre">0.198739,</span> <span class="pre">0.521298)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#ITPA_density"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.ITPA_density" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>ITPA radial density profile in <a class="reference external" href="https://iopscience.iop.org/article/10.1088/1741-4326/aae4e6">A. Könies et al. 2018</a></p>
+<div class="math notranslate nohighlight">
+\[n(\eta_1) = n_0*c_3\exp\left[-\frac{c_2}{c_1}\tanh\left(\frac{\eta_1 - c_0}{c_2}\right)\right]\,.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n0</strong> (<em>float</em>) – ITPA profile density</p></li>
+<li><p><strong>c</strong> (<em>tuple</em><em> | </em><em>list</em>) – 4 ITPA profile coefficients</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.TokamakManufacturedSolutionVelocity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">TokamakManufacturedSolutionVelocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Bp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#TokamakManufacturedSolutionVelocity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.TokamakManufacturedSolutionVelocity" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Analytic solution <span class="math notranslate nohighlight">\(u=u_e\)</span> of the system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\partial_t u = - \nabla \phi + u \times B + \nu \Delta u + f \,,\\
+0 = \nabla \phi- u_e \times B + \nu_e \Delta u_e + f_e \,, \\
+\nabla \cdot (u-u_e) = 0 \,.\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f\)</span> is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f = \left[\begin{array}{c} \alpha \frac{B_0}{a}(R-R_0) - \alpha \frac{1}{a R_0} \frac{R_0 B_0 Z}{R} + \nu \alpha \frac{1}{a R_0} \frac{R_0}{R^2}   \\
+         \alpha \frac{1}{a R_0} (R-R_0) \frac{R_0 B_0}{R} + \alpha \frac{B_0Z}{a} \\
+        \alpha \frac{1}{a R_0} \frac{R_0 B_p}{a R^2} \left( (R-R_0)^2 + Z^2\right)  \end{array} \right] \,,
+\\[2mm]
+f = \left[\begin{array}{c} -\alpha \frac{B_0}{a}(R-R_0) + \alpha \frac{1}{a R_0} \frac{R_0 B_0 Z}{R} + \nu_e \alpha \frac{1}{a R_0} \frac{R_0}{R^2}   \\
+         -\alpha \frac{1}{a R_0} (R-R_0) \frac{R_0 B_0}{R} - \alpha \frac{B_0 Z}{a} \\
+        -\alpha \frac{1}{a R_0} \frac{ R_0 B_p}{a R^2} \left( (R-R_0)^2 + Z^2\right)  \end{array} \right] \,,
+\\[2mm]
+R = \sqrt{x^2 + y^2} \,.\end{split}\]</div>
+<p>Can only be defined in Cartesian coordinates.
+The solution is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{u} = \alpha \frac{1}{a R_0} \left[\begin{array}{c} R-R_0 \\ z \\ 0 \end{array} \right]  \,,
+\\[2mm]
+R = \sqrt{x^2 + y^2} \,.\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comp</strong> (<em>string</em>) – Which component of the solution (‘0’, ‘1’ or ‘2’).</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – Minor radius of torus (default: 1.).</p></li>
+<li><p><strong>R0</strong> (<em>float</em>) – Major radius of torus (default: 2.).</p></li>
+<li><p><strong>B0</strong> (<em>float</em>) – On-axis (r=0) toroidal magnetic field (default: 10.).</p></li>
+<li><p><strong>Bp</strong> (<em>float</em>) – Poloidal magnetic field (default: 12.5).</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – (default: 0.1)</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – (default: 1.0)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition-references admonition">
+<p class="admonition-title">References</p>
+<p>[1] Juan Vicente Gutiérrez-Santacreu, Omar Maj, Marco Restelli: Finite element discretization of a Stokes-like model arising
+in plasma physics, Journal of Computational Physics 2018.</p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.TokamakManufacturedSolutionVelocity_1">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">TokamakManufacturedSolutionVelocity_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Bp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#TokamakManufacturedSolutionVelocity_1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.TokamakManufacturedSolutionVelocity_1" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Analytic solution <span class="math notranslate nohighlight">\(u=u_e\)</span> of the system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\partial_t u = - \nabla \phi + u \times B + \nu \Delta u + f \,,\\
+0 = \nabla \phi- u_e \times B + \nu_e \Delta u_e + f_e \,, \\
+\nabla \cdot (u-u_e) = 0 \,.\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f\)</span> is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f = \left[\begin{array}{c} \alpha \frac{B_0}{a}(R-R_0) - \alpha \frac{1}{a R_0} \frac{R_0 B_0 Z}{R} + \nu \alpha \frac{1}{a R_0} \frac{R_0}{R^2}   \\
+         \alpha \frac{1}{a R_0} (R-R_0) \frac{R_0 B_0}{R} + \alpha \frac{B_0Z}{a} \\
+        \alpha \frac{1}{a R_0} \frac{R_0 B_p}{a R^2} \left( (R-R_0)^2 + Z^2\right)  \end{array} \right] \,,
+\\[2mm]
+f = \left[\begin{array}{c} -\alpha \frac{B_0}{a}(R-R_0) + \alpha \frac{1}{a R_0} \frac{R_0 B_0 Z}{R} + \nu_e \alpha \frac{1}{a R_0} \frac{R_0}{R^2}   \\
+         -\alpha \frac{1}{a R_0} (R-R_0) \frac{R_0 B_0}{R} - \alpha \frac{B_0 Z}{a} \\
+        -\alpha \frac{1}{a R_0} \frac{ R_0 B_p}{a R^2} \left( (R-R_0)^2 + Z^2\right)  \end{array} \right] \,,
+\\[2mm]
+R = \sqrt{x^2 + y^2} \,.\end{split}\]</div>
+<p>Can only be defined in Cartesian coordinates.
+The solution is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{u} = \alpha \frac{1}{a R_0} \left[\begin{array}{c} R-R_0 \\ z \\ 0 \end{array} \right]  \,,
+\\[2mm]
+R = \sqrt{x^2 + y^2} \,.\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comp</strong> (<em>string</em>) – Which component of the solution (‘0’, ‘1’ or ‘2’).</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – Minor radius of torus (default: 1.).</p></li>
+<li><p><strong>R0</strong> (<em>float</em>) – Major radius of torus (default: 2.).</p></li>
+<li><p><strong>B0</strong> (<em>float</em>) – On-axis (r=0) toroidal magnetic field (default: 10.).</p></li>
+<li><p><strong>Bp</strong> (<em>float</em>) – Poloidal magnetic field (default: 12.5).</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – (default: 0.1)</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – (default: 1.0)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition-references admonition">
+<p class="admonition-title">References</p>
+<p>[1] Juan Vicente Gutiérrez-Santacreu, Omar Maj, Marco Restelli: Finite element discretization of a Stokes-like model arising
+in plasma physics, Journal of Computational Physics 2018.</p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.perturbations.TokamakManufacturedSolutionVelocity_2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.perturbations.</span></span><span class="sig-name descname"><span class="pre">TokamakManufacturedSolutionVelocity_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Bp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/initial/perturbations.html#TokamakManufacturedSolutionVelocity_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.perturbations.TokamakManufacturedSolutionVelocity_2" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a></p>
+<p>Analytic solution <span class="math notranslate nohighlight">\(u=u_e\)</span> of the system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\partial_t u = - \nabla \phi + u \times B + \nu \Delta u + f \,,\\
+0 = \nabla \phi- u_e \times B + \nu_e \Delta u_e + f_e \,, \\
+\nabla \cdot (u-u_e) = 0 \,.\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f\)</span> is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f = \left[\begin{array}{c} \alpha \frac{B_0}{a}(R-R_0) - \alpha \frac{1}{a R_0} \frac{R_0 B_0 Z}{R} + \nu \alpha \frac{1}{a R_0} \frac{R_0}{R^2}   \\
+         \alpha \frac{1}{a R_0} (R-R_0) \frac{R_0 B_0}{R} + \alpha \frac{B_0Z}{a} \\
+        \alpha \frac{1}{a R_0} \frac{R_0 B_p}{a R^2} \left( (R-R_0)^2 + Z^2\right)  \end{array} \right] \,,
+\\[2mm]
+f = \left[\begin{array}{c} -\alpha \frac{B_0}{a}(R-R_0) + \alpha \frac{1}{a R_0} \frac{R_0 B_0 Z}{R} + \nu_e \alpha \frac{1}{a R_0} \frac{R_0}{R^2}   \\
+         -\alpha \frac{1}{a R_0} (R-R_0) \frac{R_0 B_0}{R} - \alpha \frac{B_0 Z}{a} \\
+        -\alpha \frac{1}{a R_0} \frac{ R_0 B_p}{a R^2} \left( (R-R_0)^2 + Z^2\right)  \end{array} \right] \,,
+\\[2mm]
+R = \sqrt{x^2 + y^2} \,.\end{split}\]</div>
+<p>Can only be defined in Cartesian coordinates.
+The solution is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{u} = \alpha \frac{1}{a R_0} \left[\begin{array}{c} R-R_0 \\ z \\ 0 \end{array} \right]  \,,
+\\[2mm]
+R = \sqrt{x^2 + y^2} \,.\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comp</strong> (<em>string</em>) – Which component of the solution (‘0’, ‘1’ or ‘2’).</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – Minor radius of torus (default: 1.).</p></li>
+<li><p><strong>R0</strong> (<em>float</em>) – Major radius of torus (default: 2.).</p></li>
+<li><p><strong>B0</strong> (<em>float</em>) – On-axis (r=0) toroidal magnetic field (default: 10.).</p></li>
+<li><p><strong>Bp</strong> (<em>float</em>) – Poloidal magnetic field (default: 12.5).</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – (default: 0.1)</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – (default: 1.0)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition-references admonition">
+<p class="admonition-title">References</p>
+<p>[1] Juan Vicente Gutiérrez-Santacreu, Omar Maj, Marco Restelli: Finite element discretization of a Stokes-like model arising
+in plasma physics, Journal of Computational Physics 2018.</p>
+</div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="subsections/kinetic-bckgr-base.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Base classes</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="dev_guide.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Developer’s guide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.Noise"><code class="docutils literal notranslate"><span class="pre">Noise</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.Noise.given_in_basis"><code class="docutils literal notranslate"><span class="pre">Noise.given_in_basis</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.ModesSin"><code class="docutils literal notranslate"><span class="pre">ModesSin</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.ModesCos"><code class="docutils literal notranslate"><span class="pre">ModesCos</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.CoaxialWaveguideElectric_r"><code class="docutils literal notranslate"><span class="pre">CoaxialWaveguideElectric_r</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.CoaxialWaveguideElectric_theta"><code class="docutils literal notranslate"><span class="pre">CoaxialWaveguideElectric_theta</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.CoaxialWaveguideMagnetic"><code class="docutils literal notranslate"><span class="pre">CoaxialWaveguideMagnetic</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.ModesCosCos"><code class="docutils literal notranslate"><span class="pre">ModesCosCos</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.ModesSinSin"><code class="docutils literal notranslate"><span class="pre">ModesSinSin</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.ModesSinCos"><code class="docutils literal notranslate"><span class="pre">ModesSinCos</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.ModesCosSin"><code class="docutils literal notranslate"><span class="pre">ModesCosSin</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.TorusModesSin"><code class="docutils literal notranslate"><span class="pre">TorusModesSin</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.TorusModesCos"><code class="docutils literal notranslate"><span class="pre">TorusModesCos</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.Shear_x"><code class="docutils literal notranslate"><span class="pre">Shear_x</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.Shear_y"><code class="docutils literal notranslate"><span class="pre">Shear_y</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.Shear_z"><code class="docutils literal notranslate"><span class="pre">Shear_z</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.Erf_z"><code class="docutils literal notranslate"><span class="pre">Erf_z</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.RestelliAnalyticSolutionVelocity"><code class="docutils literal notranslate"><span class="pre">RestelliAnalyticSolutionVelocity</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.RestelliAnalyticSolutionVelocity_2"><code class="docutils literal notranslate"><span class="pre">RestelliAnalyticSolutionVelocity_2</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.RestelliAnalyticSolutionVelocity_3"><code class="docutils literal notranslate"><span class="pre">RestelliAnalyticSolutionVelocity_3</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.RestelliAnalyticSolutionPotential"><code class="docutils literal notranslate"><span class="pre">RestelliAnalyticSolutionPotential</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.ManufacturedSolutionVelocity"><code class="docutils literal notranslate"><span class="pre">ManufacturedSolutionVelocity</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.ManufacturedSolutionPotential"><code class="docutils literal notranslate"><span class="pre">ManufacturedSolutionPotential</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.ManufacturedSolutionVelocity_2"><code class="docutils literal notranslate"><span class="pre">ManufacturedSolutionVelocity_2</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.ITPA_density"><code class="docutils literal notranslate"><span class="pre">ITPA_density</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.TokamakManufacturedSolutionVelocity"><code class="docutils literal notranslate"><span class="pre">TokamakManufacturedSolutionVelocity</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.TokamakManufacturedSolutionVelocity_1"><code class="docutils literal notranslate"><span class="pre">TokamakManufacturedSolutionVelocity_1</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.perturbations.TokamakManufacturedSolutionVelocity_2"><code class="docutils literal notranslate"><span class="pre">TokamakManufacturedSolutionVelocity_2</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/sections/perturbations.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
