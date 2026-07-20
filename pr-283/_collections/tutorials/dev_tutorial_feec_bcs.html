@@ -894,7 +894,7 @@
 Starting run for model Poisson ...
 WARNING: Class &#34;BasisProjectionOperators&#34; called with degree=(1, 1, 1) (interpolation of piece-wise constants should be avoided).
 Stabilizing Poisson solve with self.options.sigma_1 =1e-14
-Time stepping: 100%|██████████| 1/1 [00:00&lt;00:00, 127.00step/s]
+Time stepping: 100%|██████████| 1/1 [00:00&lt;00:00, 123.00step/s]
 Struphy run finished.
 </pre></div></div>
 </div>
@@ -921,14 +921,14 @@ em_fields:
   phi: &lt;HDF5 dataset &#34;phi&#34;: shape (2, 19, 3, 3), type &#34;&lt;f8&#34;&gt;
   source: &lt;HDF5 dataset &#34;source&#34;: shape (2, 19, 3, 3), type &#34;&lt;f8&#34;&gt;
 
-100%|██████████| 2/2 [00:00&lt;00:00, 1036.40it/s]
+100%|██████████| 2/2 [00:00&lt;00:00, 897.95it/s]
 Creation of Struphy Fields done.
 
 Evaluating fields ...
-100%|██████████| 2/2 [00:00&lt;00:00, 1964.55it/s]
+100%|██████████| 2/2 [00:00&lt;00:00, 1824.80it/s]
 
 Creating vtk in /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1/post_processing/fields_data ...
-100%|██████████| 2/2 [00:00&lt;00:00, 2075.87it/s]
+100%|██████████| 2/2 [00:00&lt;00:00, 2064.13it/s]
 
 No kinetic data found in hdf5 file, skipping post-processing of kinetic data.
 
@@ -1017,7 +1017,7 @@ key = np.float64(0.01)   shape = [(17, 2, 2)]
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.legend.Legend at 0x7f7768dd5de0&gt;
+&lt;matplotlib.legend.Legend at 0x7fd1c2eb1990&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1165,9 +1165,9 @@ Stabilizing Poisson solve with self.options.sigma_1 =1e-14
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;feectools.linalg.stencil.StencilVectorSpace object at 0x7f7768cac190&gt;
+&lt;feectools.linalg.stencil.StencilVectorSpace object at 0x7fd1c1d56ad0&gt;
 ((&#39;free&#39;, &#39;dirichlet&#39;), None, None)
-&lt;feectools.linalg.stencil.StencilVectorSpace object at 0x7f7767a7a110&gt;
+&lt;feectools.linalg.stencil.StencilVectorSpace object at 0x7fd1c1b520b0&gt;
 ((&#39;free&#39;, &#39;free&#39;), None, None)
 </pre></div></div>
 </div>
