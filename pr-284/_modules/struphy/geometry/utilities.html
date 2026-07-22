@@ -1,0 +1,1165 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>struphy.geometry.utilities &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/struphy/geometry/utilities';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href="../../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">struphy.geometry.utilities</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for struphy.geometry.utilities</h1><div class="highlight"><pre>
+<span></span># from __future__ import annotations
+&quot;Domain-related utility functions.&quot;
+
+import logging
+from typing import Callable
+
+import cunumpy as xp
+import numpy as np
+
+# from typing import TYPE_CHECKING
+from scipy.optimize import newton, root, root_scalar
+from scipy.sparse import csc_matrix
+from scipy.sparse.linalg import splu
+
+from struphy.bsplines import bsplines as bsp
+
+# if TYPE_CHECKING:
+from struphy.geometry.base import Domain, PoloidalSplineTorus
+from struphy.geometry.utilities_kernels import weighted_arc_lengths_flux_surface
+from struphy.io.options import LiteralOptions
+from struphy.linear_algebra.linalg_kron import kron_lusolve_2d
+
+logger = logging.getLogger(&quot;struphy&quot;)
+
+
+def get_domain_by_name(domain_name: str) -&gt; type[&quot;Domain&quot;]:
+    from struphy.geometry import domains
+
+    try:
+        domain_class: type[&quot;Domain&quot;] = getattr(domains, domain_name)
+        if not issubclass(domain_class, Domain):
+            raise TypeError(f&quot;{domain_name} is not a Domain subclass.&quot;)
+        else:
+            return domain_class
+    except AttributeError:
+        raise ModuleNotFoundError(f&quot;{domain_name} not found in domains.&quot;)
+
+
+<div class="viewcode-block" id="field_line_tracing">
+<a class="viewcode-back" href="../../../sections/subsections/domains-utils.html#struphy.geometry.utilities.field_line_tracing">[docs]</a>
+def field_line_tracing(
+    psi,
+    psi_axis_R,
+    psi_axis_Z,
+    psi0,
+    psi1,
+    num_elements,
+    degree,
+    psi_power=1,
+    xi_param=&quot;equal_angle&quot;,
+    num_elements_pre=(64, 256),
+    p_pre=(3, 3),
+    r0=0.3,
+):
+    r&quot;&quot;&quot;
+    Given a poloidal flux function :math:`\psi(R, Z)`, constructs a flux-aligned spline mapping :math:`(R, Z) = F(s(\psi), \xi)`.
+
+    The radial coordinate :math:`s \in [0, 1]` is parametrized in terms of powers of :math:`\psi`:
+
+    .. math::
+
+        s(\psi) = [ (\psi - \psi_0)/(\psi_1 - \psi_0) ]^p,
+
+    where :math:`\psi_0` is the value of the innermost flux surface of the mapping,
+    :math:`\psi_1` the value of the outermost flux surface, and :math:`p \in \mathbb Q` is some power.
+
+    The angular coordinate :math:`\xi \in (0, 2\pi)` can be parametrized in five different ways:
+
+        1. ``equal_angle``
+        2. ``equal_arc_length``
+        3. ``sfl`` (straight field line angle)
+        4. ``equal_area``
+        5. ``equal_volume``
+
+    All :math:`\xi`-parametrizations other than ``equal_angle`` involve a two step procedure:
+
+        1. First, a flux-aligned mapping with parameters ``num_elements_pre``, ``p_pre`` is constructed with ``xi=equal angle``.
+        2. Second, a mapping with lower resolution is constructed with the desired :math:`\xi`-parametrization.
+
+    The field-line tracing algorithm for the ``equal_angle``-parametrization is as follows:
+    given a callable mapping :math:`s(R, Z) = [ (\psi(R, Z) - \psi_0)/(\psi_1 - \psi_0) ]^p \in [0, 1]`,
+    we want to find the spline mapping
+
+    .. math::
+
+        R(s, \xi) &amp;= \sum_{i=1}^{N_1}\sum_{j=1}^{N_2}c^R_{ij}N_1(s)N_2(\xi)\,,
+
+        Z(s, \xi) &amp;= \sum_{i=1}^{N_1}\sum_{j=1}^{N_2}c^Z_{ij}N_1(s)N_2(\xi).
+
+    This will be achieved by interpolation, which means we need a set of function values :math:`(R_{ij}, Z_{ij})`
+    at the interpolation point sets :math:`(s_i, \xi_j)_{i=1,j=1}^{N_1, N_2}`. At first, we need to obtain these function values.
+    For this we draw lines for :math:`\xi_j=j\Delta\xi` for :math:`j\in\{0,1,\cdots,N_2-1\}`:
+
+    .. math::
+
+        R_j(r) &amp;= R_\text{axis} + r\cos(\xi_j)\,,
+
+        Z_j(r) &amp;= Z_\text{axis} + r\sin(\xi_j)\,.
+
+    For each :math:`j`, we calculate the intersections with certain :math:`s_i`-values by computing the root of the function
+
+    .. math::
+
+        f(r) = s(R_j(r),Z_j(r)) - s_i\,.
+
+    This yields a :math:`r_{i}` which leads to :math:`R_{ij}=R_j(r_i)` and :math:`Z_{ij}=Z_j(r_i)`.
+    Finally, after having found the :math:`(R_{ij}, Z_{ij})`,
+    we solve a spline interpolation problem to find the :math:`(c^R_{ij}, c^Z_{ij})`.
+
+    Parameters
+    ----------
+    psi : callable
+        The poloidal flux function psi(R, Z).
+
+    psi_axis_R : float
+        R coordinate of the minimum of psi.
+
+    psi_axis_Z : float
+        Z coordinate of the minimum of psi.
+
+    psi0 : float
+        Value of the innermost flux surface of the mapping.
+
+    psi1 : float
+        Value of the outermost flux surface of the mapping.
+
+    num_elements : list[int]
+        Number of elements to be used for spline inerpolation.
+
+    degree : list[int]
+        Spline degrees for spline interpolation.
+
+    psi_power : int, optional
+        Power of normalized poloidal flux used in s parametrization.
+
+    xi_param : str
+        Which angular (xi) parametrization.
+
+    num_elements_pre : tuple | list, optional
+        Number of elements to be used for the pre-mapping.
+
+    p_pre : tuple | list, optional
+        Spline degrees to be used for the pre-mapping.
+
+    r0 : float, optional
+        Initial guess for radial distance from (psi_axis_R, psi_axis_Z) used in Newton root-finding method for flux surfaces.
+
+    Returns
+    -------
+    cR : xp.ndarray
+        Control points (2d) of flux aligned spline mapping (R-component).
+
+    cZ : xp.ndarray
+        Control points (2d) of flux aligned spline mapping (Z-component).
+    &quot;&quot;&quot;
+
+    # for equal_angle one mapping is enough
+    if xi_param == &quot;equal_angle&quot;:
+        ns, nx = num_elements
+        ps, px = degree
+    else:
+        ns, nx = num_elements_pre
+        ps, px = p_pre
+
+    # spline knots
+    Ts = bsp.make_knots(xp.linspace(0.0, 1.0, ns + 1), ps, False)
+    Tx = bsp.make_knots(xp.linspace(0.0, 1.0, nx + 1), px, True)
+
+    # interpolation (Greville) points
+    s_gr = bsp.greville(Ts, ps, False)
+    x_gr = bsp.greville(Tx, px, True)
+
+    if px % 2 == 1:
+        assert x_gr[0] == 0.0
+
+    # collocation matrices
+    Is = bsp.collocation_matrix(Ts, ps, s_gr, False)
+    Ix = bsp.collocation_matrix(Tx, px, x_gr, True)
+
+    ILUs = [
+        splu(csc_matrix(Is)),
+        splu(csc_matrix(Ix)),
+    ]
+
+    # check if pole is included
+    if xp.abs(psi(psi_axis_R, psi_axis_Z) - psi0) &lt; 1e-14:
+        pole = True
+    else:
+        pole = False
+
+    R = xp.zeros((s_gr.size, x_gr.size), dtype=float)
+    Z = xp.zeros((s_gr.size, x_gr.size), dtype=float)
+
+    r_flux_surface = None
+
+    # function whose root must be found
+    for j, x in enumerate(x_gr):
+        for i, s in enumerate(s_gr):
+            if pole and i == 0:
+                R[i, j] = psi_axis_R
+                Z[i, j] = psi_axis_Z
+                continue
+
+            if i &lt; s_gr.size // 2:
+                r_guess = 1 * r0
+            else:
+                r_guess = 1 * r_flux_surface
+
+            # function whose root must be found
+            def f(r):
+                _R = psi_axis_R + r * xp.cos(2 * xp.pi * x)
+                _Z = psi_axis_Z + r * xp.sin(2 * xp.pi * x)
+
+                psi_norm = (psi(_R, _Z) - psi0) / (psi1 - psi0)
+
+                if psi_norm &lt; 0.0:
+                    return -((-psi_norm) ** psi_power) - s
+                else:
+                    return psi_norm**psi_power - s
+
+            r_flux_surface = newton(f, x0=r_guess)
+
+            R[i, j] = psi_axis_R + r_flux_surface * xp.cos(2 * xp.pi * x)
+            Z[i, j] = psi_axis_Z + r_flux_surface * xp.sin(2 * xp.pi * x)
+
+    # get control points
+    cR_equal_angle = kron_lusolve_2d(ILUs, R)
+    cZ_equal_angle = kron_lusolve_2d(ILUs, Z)
+
+    if pole:
+        cR_equal_angle[0, :] = psi_axis_R
+        cZ_equal_angle[0, :] = psi_axis_Z
+
+    # for equal angle parametrization stop here and return the control points
+    if xi_param == &quot;equal_angle&quot;:
+        return cR_equal_angle, cZ_equal_angle
+
+    # for all other parametrizations continue
+    else:
+        logger.info(&quot;Calculation of pre-mapping successful! Start angle parametrization &quot; + xi_param + &quot;.&quot;)
+
+        # create temporary domain
+        domain_eq_angle = PoloidalSplineTorus(
+            num_elements=num_elements_pre, degree=p_pre, cx=cR_equal_angle, cy=cZ_equal_angle
+        )
+
+        # create new interpolation data
+        ns, nx = num_elements
+        ps, px = degree
+
+        # spline knots
+        Ts = bsp.make_knots(xp.linspace(0.0, 1.0, ns + 1), ps, False)
+        Tx = bsp.make_knots(xp.linspace(0.0, 1.0, nx + 1), px, True)
+
+        # interpolation (Greville) points
+        s_gr = bsp.greville(Ts, ps, False)
+        x_gr = bsp.greville(Tx, px, True)
+
+        if px % 2 == 1:
+            assert x_gr[0] == 0.0
+
+        # collocation matrices
+        Is = bsp.collocation_matrix(Ts, ps, s_gr, False)
+        Ix = bsp.collocation_matrix(Tx, px, x_gr, True)
+
+        ILUs = [
+            splu(csc_matrix(Is)),
+            splu(csc_matrix(Ix)),
+        ]
+
+        xi_param_dict = {
+            &quot;equal_arc_length&quot;: 1,
+            &quot;sfl&quot;: 2,
+            &quot;equal_area&quot;: 3,
+            &quot;equal_volume&quot;: 4,
+        }
+
+        # target function for xi parametrization
+        def f_angles(xis, s_val):
+            assert xp.all(xp.logical_and(xis &gt; 0.0, xis &lt; 1.0))
+
+            # add 0 and 1 to angles array
+            xis_extended = xp.array([0.0] + list(xis) + [1.0])
+
+            # compute (R, Z) coordinates for given xis on fixed flux surface corresponding to s_val
+            _RZ = domain_eq_angle(s_val, xis_extended, 0.0, squeeze_out=True)
+
+            _R = _RZ[0]
+            _Z = _RZ[2]
+
+            # |grad(psi)| at xis
+            gp = xp.sqrt(psi(_R, _Z, dR=1) ** 2 + psi(_R, _Z, dZ=1) ** 2)
+
+            # compute weighted arc_lengths between two successive points in xis_extended array
+            dl = xp.zeros(xis_extended.size - 1, dtype=float)
+            weighted_arc_lengths_flux_surface(_R, _Z, gp, dl, xi_param_dict[xi_param])
+
+            # total length of the flux surface
+            l = xp.sum(dl)
+
+            # cumulative sum of arc lengths, start with 0!
+            l_cum = xp.cumsum(dl)
+
+            # odd spline degree
+            if px % 2 == 1:
+                xi_diff = l_cum[:-1] / l - x_gr[1:]
+            # even spline degree
+            else:
+                xi_diff = l_cum[:-1] / l - x_gr
+
+            return xi_diff
+
+        # loop over flux surfaces and find xi parametrization
+        R = xp.zeros((s_gr.size, x_gr.size), dtype=float)
+        Z = xp.zeros((s_gr.size, x_gr.size), dtype=float)
+
+        if px % 2 == 1:
+            xis0 = x_gr[1:].copy()
+        else:
+            xis0 = x_gr.copy()
+
+        # loop over flux surfaces and finds roots of F_single
+        for i in range(s_gr.size):
+            s_flux = s_gr[i]
+
+            if i == 0 and pole:
+                R[i, :] = psi_axis_R
+                Z[i, :] = psi_axis_Z
+                continue
+
+            # find root of target function and check for convergence
+            tracing = root(f_angles, x0=xis0, args=(s_flux,), method=&quot;hybr&quot;)
+            assert tracing[&quot;success&quot;]
+
+            # set new initial guess
+            xis0 = tracing[&quot;x&quot;]
+
+            # add zero angle for odd degree
+            if px % 2 == 1:
+                R[i, 1:] = domain_eq_angle(s_flux, tracing[&quot;x&quot;], 0.0, squeeze_out=True)[0]
+                Z[i, 1:] = domain_eq_angle(s_flux, tracing[&quot;x&quot;], 0.0, squeeze_out=True)[2]
+
+                R[i, 0] = domain_eq_angle(s_flux, 0.0, 0.0, squeeze_out=True)[0]
+                Z[i, 0] = domain_eq_angle(s_flux, 0.0, 0.0, squeeze_out=True)[2]
+
+            else:
+                R[i, :] = domain_eq_angle(s_flux, tracing[&quot;x&quot;], 0.0, squeeze_out=True)[0]
+                Z[i, :] = domain_eq_angle(s_flux, tracing[&quot;x&quot;], 0.0, squeeze_out=True)[2]
+
+        # get control points
+        cR = kron_lusolve_2d(ILUs, R)
+        cZ = kron_lusolve_2d(ILUs, Z)
+
+        if pole:
+            cR[0, :] = psi_axis_R
+            cZ[0, :] = psi_axis_Z
+
+        return cR, cZ</div>
+
+
+
+<div class="viewcode-block" id="TransformedPformComponent">
+<a class="viewcode-back" href="../../../sections/subsections/domains-utils.html#struphy.geometry.utilities.TransformedPformComponent">[docs]</a>
+class TransformedPformComponent:
+    r&quot;&quot;&quot;
+    Construct callable component of p-form on logical domain (unit cube).
+
+    Parameters
+    ----------
+    fun : Callable | list
+        Callable function (components). Has to be length three for vector-valued funnctions,.
+
+    given_in_basis : LiteralOptions.GivenInBasis
+        In which basis fun is represented: either a p-form,
+        then &#39;0&#39; or &#39;3&#39; for scalar
+        and &#39;v&#39;, &#39;1&#39; or &#39;2&#39; for vector-valued,
+        &#39;physical&#39; when defined on the physical (mapped) domain,
+        &#39;physical_at_eta&#39; when given the Cartesian components defined on the logical domain,
+        and &#39;norm&#39; when given in the normalized contra-variant basis (:math:`\delta_i / |\delta_i|`).
+
+    out_form : str
+        The p-form representation of the output: &#39;0&#39;, &#39;1&#39;, &#39;2&#39; &#39;3&#39; or &#39;v&#39;.
+
+    comp : int
+        Which component of the vector-valued function to return (=0 for scalars).
+
+    domain: struphy.geometry.domains
+        All things mapping. If None, the input fun is just evaluated and not transformed at __call__.
+    &quot;&quot;&quot;
+
+    def __init__(
+        self,
+        fun: Callable | list,
+        given_in_basis: LiteralOptions.GivenInBasis,
+        out_form: str,
+        comp: int = 0,
+        domain: Domain = None,
+    ):
+        if isinstance(fun, list):
+            assert len(fun) == 1 or len(fun) == 3
+        else:
+            fun = [fun]
+
+        self._fun = []
+        for f in fun:
+            if f is None:
+
+                def f_zero(x, y, z):
+                    return 0 * x
+
+                self._fun += [f_zero]
+            else:
+                assert callable(f)
+                self._fun += [f]
+
+        self._given_in_basis = given_in_basis
+        self._out_form = out_form
+        self._comp = comp
+        self._domain = domain
+
+        self._is_scalar = len(fun) == 1
+
+        # define which component of the field is evaluated (=0 for scalar fields)
+        if self._is_scalar:
+            self._fun = self._fun[0]
+            assert callable(self._fun)
+        else:
+            assert len(self._fun) == 3
+            assert all([callable(f) for f in self._fun])
+
+    def __call__(self, eta1, eta2, eta3):
+        &quot;&quot;&quot;
+        Evaluate the component of the transformed p-form specified &#39;comp&#39;.
+
+        Depending on the dimension of eta1 either point-wise, tensor-product,
+        slice plane or general (see :ref:`struphy.geometry.base.prepare_arg`).
+        &quot;&quot;&quot;
+
+        if self._given_in_basis == self._out_form or self._domain is None:
+            if self._is_scalar:
+                out = self._fun(eta1, eta2, eta3)
+            else:
+                out = self._fun[self._comp](eta1, eta2, eta3)
+
+        elif self._given_in_basis == &quot;physical&quot;:
+            if self._is_scalar:
+                out = self._domain.pull(
+                    self._fun,
+                    eta1,
+                    eta2,
+                    eta3,
+                    kind=self._out_form,
+                )
+            else:
+                out = self._domain.pull(
+                    self._fun,
+                    eta1,
+                    eta2,
+                    eta3,
+                    kind=self._out_form,
+                )[self._comp]
+
+        elif self._given_in_basis == &quot;physical_at_eta&quot;:
+            if self._is_scalar:
+                out = self._domain.pull(
+                    self._fun,
+                    eta1,
+                    eta2,
+                    eta3,
+                    kind=self._out_form,
+                    coordinates=&quot;logical&quot;,
+                )
+            else:
+                out = self._domain.pull(
+                    self._fun,
+                    eta1,
+                    eta2,
+                    eta3,
+                    kind=self._out_form,
+                    coordinates=&quot;logical&quot;,
+                )[self._comp]
+
+        else:
+            dict_tran = self._given_in_basis + &quot;_to_&quot; + self._out_form
+
+            if self._is_scalar:
+                out = self._domain.transform(
+                    self._fun,
+                    eta1,
+                    eta2,
+                    eta3,
+                    kind=dict_tran,
+                )
+            else:
+                out = self._domain.transform(
+                    self._fun,
+                    eta1,
+                    eta2,
+                    eta3,
+                    kind=dict_tran,
+                )[self._comp]
+
+        return out</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1499 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>struphy.propagators.current_coupling_5d_gradb &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/struphy/propagators/current_coupling_5d_gradb';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href="../../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">struphy.propagators.current_coupling_5d_gradb</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for struphy.propagators.current_coupling_5d_gradb</h1><div class="highlight"><pre>
+<span></span>&quot;Particle and FEEC variables are updated.&quot;
+
+import logging
+from dataclasses import dataclass
+from typing import Literal
+
+import cunumpy as xp
+from feectools.ddm.mpi import mpi as MPI
+from feectools.linalg.solvers import inverse
+from line_profiler import profile
+
+from struphy.feec import preconditioner
+from struphy.io.options import LiteralOptions, OptionsBase
+from struphy.linear_algebra.solver import DiscreteGradientSolverParameters, SolverParameters
+from struphy.models.variables import FEECVariable, PICVariable
+from struphy.ode.utils import ButcherTableau
+from struphy.pic import utilities_kernels
+from struphy.pic.accumulation import accum_kernels_gc
+from struphy.pic.accumulation.filter import FilterParameters
+from struphy.pic.accumulation.particles_to_grid import Accumulator, AccumulatorVector
+from struphy.pic.pushing import pusher_kernels_gc
+from struphy.propagators.base import Propagator
+from struphy.utils.pyccel import Pyccelkernel
+from struphy.utils.utils import check_option
+
+logger = logging.getLogger(&quot;struphy&quot;)
+
+
+<div class="viewcode-block" id="CurrentCoupling5DGradB">
+<a class="viewcode-back" href="../../../sections/subsections/propagators-avail.html#struphy.propagators.current_coupling_5d_gradb.CurrentCoupling5DGradB">[docs]</a>
+class CurrentCoupling5DGradB(Propagator):
+    r&quot;&quot;&quot;:ref:`FEEC &lt;gempic&gt;` discretization of the following equations: 
+    find :math:`\mathbf U \in \{H(\textnormal{curl}), H(\textnormal{div}), (H^1)^3\}` and  :math:`\mathbf B \in H(\textnormal{div})` such that
+
+    .. math::
+
+        \left\{ 
+            \begin{aligned} 
+                \int \rho_0 &amp;\frac{\partial \tilde{\mathbf U}}{\partial t} \cdot \mathbf V \, \textnormal{d} \mathbf x = - \frac{A_\textnormal{h}}{A_b} \iint \mu \frac{f^\text{vol}}{B^*_\parallel} (\mathbf b_0 \times \nabla B_\parallel) \times \mathbf B \cdot \mathbf V \,\textnormal{d} \mathbf x \textnormal{d} v_\parallel \textnormal{d} \mu \quad \forall \,\mathbf V \in \{H(\textnormal{curl}), H(\textnormal{div}), (H^1)^3\}\,,
+                \\
+                &amp;\frac{\partial f}{\partial t} = \frac{1}{B^*_\parallel} \left[ \mathbf b_0 \times (\tilde{\mathbf U} \times \mathbf B) \right] \cdot \nabla f\,.
+            \end{aligned}
+        \right.
+
+    :ref:`time_discret`: Explicit (&#39;rk4&#39;, &#39;forward_euler&#39;, &#39;heun2&#39;, &#39;rk2&#39;, &#39;heun3&#39;).
+
+    .. math::
+
+        \begin{bmatrix} 
+            \dot{\mathbf u}\\ \dot{\mathbf H}
+        \end{bmatrix} 
+        =
+        \begin{bmatrix} 
+            0 &amp; (\mathbb{M}^{2,n})^{-1} \mathbb{L}² \frac{1}{\bar{\sqrt{g}}} \frac{1}{\bar B^{*0}_\parallel}\bar{B}^\times_f \bar{G}^{-1} \bar{b}^\times_0 \bar{G}^{-1} 
+            \\  
+            -\bar{G}^{-1} \bar{b}^\times_0 \bar{G}^{-1}  \bar{B}^\times_f \frac{1}{\bar B^{*0}_\parallel} \frac{1}{\bar{\sqrt{g}}} (\mathbb{L}²)^\top (\mathbb{M}^{2,n})^{-1} &amp; 0 
+        \end{bmatrix} 
+        \begin{bmatrix}
+            \mathbb M^{2,n} \mathbf u
+            \\
+            \frac{A_\textnormal{h}}{A_b} \bar M \bar W \overline{\nabla B}_\parallel 
+        \end{bmatrix} \,.
+
+    For the detail explanation of the notations, see `2022_DriftKineticCurrentCoupling &lt;https://gitlab.mpcdf.mpg.de/struphy/struphy-projects/-/blob/main/running-projects/2022_DriftKineticCurrentCoupling.md?ref_type=heads&gt;`_.
+    &quot;&quot;&quot;
+
+<div class="viewcode-block" id="CurrentCoupling5DGradB.Variables">
+<a class="viewcode-back" href="../../../sections/subsections/propagators-avail.html#struphy.propagators.current_coupling_5d_gradb.CurrentCoupling5DGradB.Variables">[docs]</a>
+    class Variables:
+        &quot;&quot;&quot;Container for variables advanced by :class:`CurrentCoupling5DGradB`.
+
+        Attributes
+        ----------
+        u : FEECVariable
+            Fluid-like FEEC variable in one of ``&quot;Hcurl&quot;``, ``&quot;Hdiv&quot;``, or
+            ``&quot;H1vec&quot;``.
+        energetic_ions : PICVariable
+            Energetic-ion particle variable in ``&quot;Particles5D&quot;`` space.
+        &quot;&quot;&quot;
+
+        def __init__(self):
+            self._u: FEECVariable = None
+            self._energetic_ions: PICVariable = None
+
+        @property
+        def u(self) -&gt; FEECVariable:
+            return self._u
+
+        @u.setter
+        def u(self, new):
+            assert isinstance(new, FEECVariable)
+            assert new.space in (&quot;Hcurl&quot;, &quot;Hdiv&quot;, &quot;H1vec&quot;)
+            self._u = new
+
+        @property
+        def energetic_ions(self) -&gt; PICVariable:
+            return self._energetic_ions
+
+        @energetic_ions.setter
+        def energetic_ions(self, new):
+            assert isinstance(new, PICVariable)
+            assert new.space == &quot;Particles5D&quot;
+            self._energetic_ions = new</div>
+
+
+    def __init__(self, b_tilde: FEECVariable = None):
+        &quot;&quot;&quot;
+        Parameters
+        ----------
+        b_tilde : FEECVariable, default=None
+            Magnetic perturbation 1-form (``&quot;Hcurl&quot;`` space) entering the grad-B
+            coupling term. If ``None``, only the equilibrium field is used.
+        &quot;&quot;&quot;
+        self.variables = self.Variables()
+        self.b_tilde = b_tilde
+
+<div class="viewcode-block" id="CurrentCoupling5DGradB.Options">
+<a class="viewcode-back" href="../../../sections/subsections/propagators-avail.html#struphy.propagators.current_coupling_5d_gradb.CurrentCoupling5DGradB.Options">[docs]</a>
+    @dataclass(repr=False)
+    class Options(OptionsBase):
+        &quot;&quot;&quot;Configuration options for :class:`CurrentCoupling5DGradB`.
+
+        Parameters
+        ----------
+        ep_scale : float, default=1.0
+            Scaling factor applied in particle accumulation.
+
+        algo : {&quot;discrete_gradient&quot;, &quot;explicit&quot;}, default=&quot;explicit&quot;
+            Time integration algorithm.
+
+            - ``&quot;explicit&quot;``: explicit Runge-Kutta update with ``butcher``.
+            - ``&quot;discrete_gradient&quot;``: nonlinear discrete-gradient update.
+
+        butcher : ButcherTableau, default=None
+            Butcher tableau used in explicit mode. If ``None`` and
+            ``algo=&quot;explicit&quot;``, defaults to ``ButcherTableau()``.
+
+        u_space : LiteralOptions.OptsVecSpace, default=&quot;Hdiv&quot;
+            FEEC space used for the unknown ``u`` variable.
+
+        solver : LiteralOptions.OptsSymmSolver, default=&quot;pcg&quot;
+            Symmetric iterative solver used for mass-matrix inversions.
+
+        precond : LiteralOptions.OptsMassPrecond, default=&quot;MassMatrixPreconditioner&quot;
+            Preconditioner used with the mass matrix.
+
+        solver_params : SolverParameters, default=None
+            Iterative-solver controls. If ``None``, defaults to
+            ``SolverParameters()``.
+
+        filter_params : FilterParameters, default=None
+            Particle-to-grid filtering parameters used by the accumulator.
+            If ``None``, defaults to ``FilterParameters()``.
+
+        dg_solver_params : DiscreteGradientSolverParameters, default=None
+            Nonlinear solver controls for discrete-gradient mode. If ``None``
+            and ``algo=&quot;discrete_gradient&quot;``, defaults to
+            ``DiscreteGradientSolverParameters()``.
+        &quot;&quot;&quot;
+
+        # specific literals
+        OptsAlgo = Literal[
+            &quot;discrete_gradient&quot;,
+            &quot;explicit&quot;,
+        ]
+        # propagator options
+        ep_scale: float = 1.0
+        algo: OptsAlgo = &quot;explicit&quot;
+        butcher: ButcherTableau = None
+        u_space: LiteralOptions.OptsVecSpace = &quot;Hdiv&quot;
+        solver: LiteralOptions.OptsSymmSolver = &quot;pcg&quot;
+        precond: LiteralOptions.OptsMassPrecond = &quot;MassMatrixPreconditioner&quot;
+        solver_params: SolverParameters = None
+        filter_params: FilterParameters = None
+        dg_solver_params: DiscreteGradientSolverParameters = None
+
+        def __post_init__(self):
+            # checks
+            check_option(self.algo, self.OptsAlgo)
+            check_option(self.u_space, LiteralOptions.OptsVecSpace)
+            check_option(self.solver, LiteralOptions.OptsSymmSolver)
+            check_option(self.precond, LiteralOptions.OptsMassPrecond)
+            assert isinstance(self.ep_scale, float)
+
+            # defaults
+            if self.algo == &quot;explicit&quot; and self.butcher is None:
+                self.butcher = ButcherTableau()
+
+            if self.algo == &quot;discrete_gradient&quot; and self.dg_solver_params is None:
+                self.dg_solver_params = DiscreteGradientSolverParameters()
+
+            if self.solver_params is None:
+                self.solver_params = SolverParameters()
+
+            if self.filter_params is None:
+                self.filter_params = FilterParameters()</div>
+
+
+    @property
+    def options(self) -&gt; Options:
+        if not hasattr(self, &quot;_options&quot;):
+            self._options = self.Options()
+        return self._options
+
+    @options.setter
+    def options(self, new):
+        assert isinstance(new, self.Options)
+        self._options = new
+        logger.info(f&quot;\nNew options for propagator &#39;{self.__class__.__name__}&#39;:\n{self._options}&quot;)
+
+    @profile
+    def allocate(self):
+        if self.options.u_space == &quot;H1vec&quot;:
+            self._u_form_int = 0
+        else:
+            self._u_form_int = int(self.derham.space_to_form[self.options.u_space])
+
+        # call operatros
+        id_M = &quot;M&quot; + self.derham.space_to_form[self.options.u_space] + &quot;n&quot;
+        self._A = getattr(self.mass_ops, id_M)
+        self._PB = getattr(self.basis_ops, &quot;PB&quot;)
+
+        # Preconditioner
+        if self.options.precond is None:
+            pc = None
+        else:
+            pc_class = getattr(preconditioner, self.options.precond)
+            pc = pc_class(getattr(self.mass_ops, id_M))
+
+        # linear solver
+        self._A_inv = inverse(
+            self._A,
+            self.options.solver,
+            pc=pc,
+            tol=self.options.solver_params.tol,
+            maxiter=self.options.solver_params.maxiter,
+            verbose=self.options.solver_params.verbose,
+        )
+        # magnetic equilibrium field
+        unit_b1 = self.projected_equil.unit_b1
+        curl_unit_b1 = self.projected_equil.curl_unit_b1
+        self._b2 = self.projected_equil.b2
+        gradB1 = self.projected_equil.gradB1
+        absB0 = self.projected_equil.absB0
+
+        # scaling factor
+        epsilon = self.variables.energetic_ions.species.equation_params.epsilon
+
+        if self.options.algo == &quot;explicit&quot;:
+            # temporary vectors to avoid memory allocation
+            self._b_full = self._b2.space.zeros()
+            self._u_new = self.variables.u.spline.vector.space.zeros()
+            self._u_temp = self.variables.u.spline.vector.space.zeros()
+            self._ku = self.variables.u.spline.vector.space.zeros()
+            self._PB_b = self._PB.codomain.zeros()
+            self._grad_PB_b = self.derham.grad.codomain.zeros()
+
+            # define Accumulator and arguments
+            self._ACC = Accumulator(
+                self.variables.energetic_ions.particles,
+                self.options.u_space,
+                Pyccelkernel(accum_kernels_gc.cc_lin_mhd_5d_gradB),
+                self.mass_ops,
+                self.domain.args_domain,
+                add_vector=True,
+                symmetry=&quot;symm&quot;,
+                filter_params=self.options.filter_params,
+            )
+
+            self._args_accum_kernel = (
+                epsilon,
+                self.options.ep_scale,
+                self._b_full[0]._data,
+                self._b_full[1]._data,
+                self._b_full[2]._data,
+                unit_b1[0]._data,
+                unit_b1[1]._data,
+                unit_b1[2]._data,
+                curl_unit_b1[0]._data,
+                curl_unit_b1[1]._data,
+                curl_unit_b1[2]._data,
+                self._grad_PB_b[0]._data,
+                self._grad_PB_b[1]._data,
+                self._grad_PB_b[2]._data,
+                self._u_form_int,
+            )
+
+            # define Pusher
+            if self.options.u_space == &quot;Hdiv&quot;:
+                self._pusher_kernel = pusher_kernels_gc.push_gc_cc_J2_stage_Hdiv
+            elif self.options.u_space == &quot;H1vec&quot;:
+                self._pusher_kernel = pusher_kernels_gc.push_gc_cc_J2_stage_H1vec
+            else:
+                raise ValueError(
+                    f&#39;{self.options.u_space  =} not valid, choose from &quot;Hdiv&quot; or &quot;H1vec.&#39;,
+                )
+
+            # temp fix due to refactoring of ButcherTableau:
+
+            self._args_pusher_kernel = (
+                self.domain.args_domain,
+                self.derham.args_derham,
+                epsilon,
+                self._b_full[0]._data,
+                self._b_full[1]._data,
+                self._b_full[2]._data,
+                unit_b1[0]._data,
+                unit_b1[1]._data,
+                unit_b1[2]._data,
+                curl_unit_b1[0]._data,
+                curl_unit_b1[1]._data,
+                curl_unit_b1[2]._data,
+                self._u_temp[0]._data,
+                self._u_temp[1]._data,
+                self._u_temp[2]._data,
+                self.options.butcher.a_stage,
+                self.options.butcher.b,
+                self.options.butcher.c,
+            )
+
+        else:
+            # temporary vectors to avoid memory allocation
+            self._b_full = self._b2.space.zeros()
+            self._PB_b = self._PB.codomain.zeros()
+            self._grad_PB_b = self.derham.grad.codomain.zeros()
+            self._u_old = self.variables.u.spline.vector.space.zeros()
+            self._u_new = self.variables.u.spline.vector.space.zeros()
+            self._u_diff = self.variables.u.spline.vector.space.zeros()
+            self._u_mid = self.variables.u.spline.vector.space.zeros()
+            self._M2n_dot_u = self.variables.u.spline.vector.space.zeros()
+            self._ku = self.variables.u.spline.vector.space.zeros()
+            self._u_temp = self.variables.u.spline.vector.space.zeros()
+
+            # Call the accumulation and Pusher class
+            accum_kernel_init = accum_kernels_gc.cc_lin_mhd_5d_gradB_dg_init
+            accum_kernel = accum_kernels_gc.cc_lin_mhd_5d_gradB_dg
+            self._accum_kernel_en_fB_mid = utilities_kernels.eval_gradB_ediff
+
+            self._args_accum_kernel = (
+                epsilon,
+                self.options.ep_scale,
+                self.b_tilde.spline.vector[0]._data,
+                self.b_tilde.spline.vector[1]._data,
+                self.b_tilde.spline.vector[2]._data,
+                self._b2[0]._data,
+                self._b2[1]._data,
+                self._b2[2]._data,
+                unit_b1[0]._data,
+                unit_b1[1]._data,
+                unit_b1[2]._data,
+                curl_unit_b1[0]._data,
+                curl_unit_b1[1]._data,
+                curl_unit_b1[2]._data,
+                self._grad_PB_b[0]._data,
+                self._grad_PB_b[1]._data,
+                self._grad_PB_b[2]._data,
+                gradB1[0]._data,
+                gradB1[1]._data,
+                gradB1[2]._data,
+                self._u_form_int,
+            )
+
+            self._args_accum_kernel_en_fB_mid = (
+                self.domain.args_domain,
+                self.derham.args_derham,
+                gradB1[0]._data,
+                gradB1[1]._data,
+                gradB1[2]._data,
+                self._grad_PB_b[0]._data,
+                self._grad_PB_b[1]._data,
+                self._grad_PB_b[2]._data,
+            )
+
+            self._ACC_init = AccumulatorVector(
+                self.variables.energetic_ions.particles,
+                self.options.u_space,
+                accum_kernel_init,
+                self.mass_ops,
+                self.domain.args_domain,
+                filter_params=self.options.filter_params,
+            )
+
+            self._ACC = AccumulatorVector(
+                self.variables.energetic_ions.particles,
+                self.options.u_space,
+                accum_kernel,
+                self.mass_ops,
+                self.domain.args_domain,
+                filter_params=self.options.filter_params,
+            )
+
+            self._args_pusher_kernel_init = (
+                self.domain.args_domain,
+                self.derham.args_derham,
+                epsilon,
+                self._b_full[0]._data,
+                self._b_full[1]._data,
+                self._b_full[2]._data,
+                unit_b1[0]._data,
+                unit_b1[1]._data,
+                unit_b1[2]._data,
+                curl_unit_b1[0]._data,
+                curl_unit_b1[1]._data,
+                curl_unit_b1[2]._data,
+                self.variables.u.spline.vector[0]._data,
+                self.variables.u.spline.vector[1]._data,
+                self.variables.u.spline.vector[2]._data,
+            )
+
+            self._args_pusher_kernel = (
+                self.domain.args_domain,
+                self.derham.args_derham,
+                epsilon,
+                self._b_full[0]._data,
+                self._b_full[1]._data,
+                self._b_full[2]._data,
+                unit_b1[0]._data,
+                unit_b1[1]._data,
+                unit_b1[2]._data,
+                curl_unit_b1[0]._data,
+                curl_unit_b1[1]._data,
+                curl_unit_b1[2]._data,
+                self._u_mid[0]._data,
+                self._u_mid[1]._data,
+                self._u_mid[2]._data,
+                self._u_temp[0]._data,
+                self._u_temp[1]._data,
+                self._u_temp[2]._data,
+            )
+
+            self._pusher_kernel_init = pusher_kernels_gc.push_gc_cc_J2_dg_init_Hdiv
+            self._pusher_kernel = pusher_kernels_gc.push_gc_cc_J2_dg_Hdiv
+
+    def __call__(self, dt):
+        # current FE coeffs
+        un = self.variables.u.spline.vector
+
+        # particle markers and idx
+        particles = self.variables.energetic_ions.particles
+        holes = particles.holes
+        args_markers = particles.args_markers
+        markers = args_markers.markers
+        first_init_idx = args_markers.first_init_idx
+        first_free_idx = args_markers.first_free_idx
+
+        # clear buffer
+        markers[:, first_init_idx:-2] = 0.0
+
+        # save old marker positions
+        markers[:, first_init_idx : first_init_idx + 3] = markers[:, :3]
+
+        # sum up total magnetic field b_full1 = b_eq + b_tilde (in-place)
+        b_full = self._b2.copy(out=self._b_full)
+
+        b_full += self.b_tilde.spline.vector
+        b_full.update_ghost_regions()
+
+        if self.options.algo == &quot;explicit&quot;:
+            PB_b = self._PB.dot(b_full, out=self._PB_b)
+            grad_PB_b = self.derham.grad.dot(PB_b, out=self._grad_PB_b)
+            grad_PB_b.update_ghost_regions()
+
+            # save old u
+            u_new = un.copy(out=self._u_new)
+
+            for stage in range(self.options.butcher.n_stages):
+                # accumulate
+                self._ACC(
+                    *self._args_accum_kernel,
+                )
+
+                # push particles
+                self._pusher_kernel(
+                    dt,
+                    stage,
+                    args_markers,
+                    *self._args_pusher_kernel,
+                )
+
+                if particles.mpi_comm is not None:
+                    particles.mpi_sort_markers()
+                else:
+                    particles.apply_kinetic_bc()
+
+                # solve linear system for updating u coefficients
+                ku = self._A_inv.dot(self._ACC.vectors[0], out=self._ku)
+                info = self._A_inv._info
+
+                # calculate u^{n+1}_k
+                u_temp = un.copy(out=self._u_temp)
+                u_temp += ku * dt * self.options.butcher.a_stage[stage]
+
+                u_temp.update_ghost_regions()
+
+                # calculate u^{n+1}
+                u_new += ku * dt * self.options.butcher.b[stage]
+
+                if self.options.solver_params.info and MPI.COMM_WORLD.Get_rank() == 0:
+                    logger.info(f&quot;Stage: {stage}&quot;)
+                    logger.info(f&quot;Status     for CurrentCoupling5DGradB: {info[&#39;success&#39;]}&quot;)
+                    logger.info(f&quot;Iterations for CurrentCoupling5DGradB: {info[&#39;niter&#39;]}&quot;)
+                    logger.info(&quot;&quot;)
+
+            # update u coefficients
+            diffs = self.update_feec_variables(u=u_new)
+
+            # clear the buffer
+            markers[:, first_init_idx:-2] = 0.0
+
+            # update_weights
+            if self.variables.energetic_ions.species.weights_params.control_variate:
+                particles.update_weights()
+
+            if self.options.solver_params.info and MPI.COMM_WORLD.Get_rank() == 0:
+                logger.info(f&quot;Maxdiff up for CurrentCoupling5DGradB: {diffs[&#39;u&#39;]}&quot;)
+                logger.info(&quot;&quot;)
+
+        else:
+            # total number of markers
+            n_mks_tot = particles.Np
+
+            # relaxation factor
+            alpha = self.options.dg_solver_params.relaxation_factor
+
+            # eval parallel tilde b and its gradient
+            PB_b = self._PB.dot(self.b_tilde.spline.vector, out=self._PB_b)
+            PB_b.update_ghost_regions()
+            grad_PB_b = self.derham.grad.dot(PB_b, out=self._grad_PB_b)
+            grad_PB_b.update_ghost_regions()
+
+            # save old u
+            u_old = un.copy(out=self._u_old)
+            u_new = un.copy(out=self._u_new)
+
+            # save en_U_old
+            self._A.dot(un, out=self._M2n_dot_u)
+            en_U_old = un.inner(self._M2n_dot_u) / 2.0
+
+            # save en_fB_old
+            particles.save_magnetic_energy(PB_b)
+            en_fB_old = xp.sum(markers[~holes, 8].dot(markers[~holes, 5])) * self.options.ep_scale
+            en_fB_old /= n_mks_tot
+
+            buffer_array = xp.array([en_fB_old])
+
+            if particles.mpi_comm is not None:
+                particles.mpi_comm.Allreduce(
+                    MPI.IN_PLACE,
+                    buffer_array,
+                    op=MPI.SUM,
+                )
+
+            if particles.clone_config is not None:
+                particles.clone_config.inter_comm.Allreduce(
+                    MPI.IN_PLACE,
+                    buffer_array,
+                    op=MPI.SUM,
+                )
+
+            en_fB_old = buffer_array[0]
+            en_tot_old = en_U_old + en_fB_old
+
+            # initial guess
+            self._ACC_init(*self._args_accum_kernel)
+
+            ku = self._A_inv.dot(self._ACC_init.vectors[0], out=self._ku)
+            u_new += ku * dt
+
+            u_new.update_ghost_regions()
+
+            # save en_U_new
+            self._A.dot(u_new, out=self._M2n_dot_u)
+            en_U_new = u_new.inner(self._M2n_dot_u) / 2.0
+
+            # push eta
+            self._pusher_kernel_init(
+                dt,
+                args_markers,
+                *self._args_pusher_kernel_init,
+            )
+
+            if particles.mpi_comm is not None:
+                particles.mpi_sort_markers(apply_bc=False)
+
+            # save en_fB_new
+            particles.save_magnetic_energy(PB_b)
+            en_fB_new = xp.sum(markers[~holes, 8].dot(markers[~holes, 5])) * self.options.ep_scale
+            en_fB_new /= n_mks_tot
+
+            buffer_array = xp.array([en_fB_new])
+
+            if particles.mpi_comm is not None:
+                particles.mpi_comm.Allreduce(
+                    MPI.IN_PLACE,
+                    buffer_array,
+                    op=MPI.SUM,
+                )
+
+            if particles.clone_config is not None:
+                particles.clone_config.inter_comm.Allreduce(
+                    MPI.IN_PLACE,
+                    buffer_array,
+                    op=MPI.SUM,
+                )
+
+            en_fB_new = buffer_array[0]
+
+            # fixed-point iterations
+            iter_num = 0
+
+            while True:
+                iter_num += 1
+
+                if self.options.dg_solver_params.verbose and MPI.COMM_WORLD.Get_rank() == 0:
+                    logger.info(f&quot;# of iteration: {iter_num}&quot;)
+
+                # calculate discrete gradient
+                # save u^{n+1, k}
+                u_old = u_new.copy(out=self._u_old)
+
+                u_diff = u_old.copy(out=self._u_diff)
+                u_diff -= un
+                u_diff.update_ghost_regions()
+
+                u_mid = u_old.copy(out=self._u_mid)
+                u_mid += un
+                u_mid /= 2.0
+                u_mid.update_ghost_regions()
+
+                # save H^{n+1, k}
+                markers[~holes, first_free_idx : first_free_idx + 3] = markers[~holes, 0:3]
+
+                # calculate denominator ||z^{n+1, k} - z^n||^2
+                sum_u_diff_loc = xp.sum((u_diff.toarray() ** 2))
+
+                sum_H_diff_loc = xp.sum(
+                    (markers[~holes, :3] - markers[~holes, first_init_idx : first_init_idx + 3]) ** 2,
+                )
+
+                buffer_array = xp.array([sum_u_diff_loc])
+
+                if particles.mpi_comm is not None:
+                    particles.mpi_comm.Allreduce(
+                        MPI.IN_PLACE,
+                        buffer_array,
+                        op=MPI.SUM,
+                    )
+
+                denominator = buffer_array[0]
+
+                buffer_array = xp.array([sum_H_diff_loc])
+
+                if particles.mpi_comm is not None:
+                    particles.mpi_comm.Allreduce(
+                        MPI.IN_PLACE,
+                        buffer_array,
+                        op=MPI.SUM,
+                    )
+
+                if particles.clone_config is not None:
+                    particles.clone_config.inter_comm.Allreduce(
+                        MPI.IN_PLACE,
+                        buffer_array,
+                        op=MPI.SUM,
+                    )
+
+                denominator += buffer_array[0]
+
+                # sorting markers at mid-point
+                if particles.mpi_comm is not None:
+                    particles.mpi_sort_markers(apply_bc=False, alpha=0.5)
+
+                self._accum_kernel_en_fB_mid(
+                    args_markers,
+                    *self._args_accum_kernel_en_fB_mid,
+                    first_free_idx + 3,
+                )
+                en_fB_mid = xp.sum(markers[~holes, first_free_idx + 3].dot(markers[~holes, 5])) * self.options.ep_scale
+
+                en_fB_mid /= n_mks_tot
+
+                buffer_array = xp.array([en_fB_mid])
+
+                if particles.mpi_comm is not None:
+                    particles.mpi_comm.Allreduce(
+                        MPI.IN_PLACE,
+                        buffer_array,
+                        op=MPI.SUM,
+                    )
+
+                if particles.clone_config is not None:
+                    particles.clone_config.inter_comm.Allreduce(
+                        MPI.IN_PLACE,
+                        buffer_array,
+                        op=MPI.SUM,
+                    )
+
+                en_fB_mid = buffer_array[0]
+
+                if denominator == 0.0:
+                    const = 0.0
+                else:
+                    const = (en_fB_new - en_fB_old - en_fB_mid) / denominator
+
+                # update u^{n+1, k}
+                self._ACC(*self._args_accum_kernel, const)
+
+                ku = self._A_inv.dot(self._ACC.vectors[0], out=self._ku)
+
+                u_new = un.copy(out=self._u_new)
+                u_new += ku * dt
+                u_new *= alpha
+                u_new += u_old * (1.0 - alpha)
+
+                u_new.update_ghost_regions()
+
+                # update en_U_new
+                self._A.dot(u_new, out=self._M2n_dot_u)
+                en_U_new = u_new.inner(self._M2n_dot_u) / 2.0
+
+                # update H^{n+1, k}
+                self._pusher_kernel(
+                    dt,
+                    args_markers,
+                    *self._args_pusher_kernel,
+                    const,
+                    alpha,
+                )
+
+                sum_H_diff_loc = xp.sum(
+                    xp.abs(markers[~holes, 0:3] - markers[~holes, first_free_idx : first_free_idx + 3]),
+                )
+
+                if particles.mpi_comm is not None:
+                    particles.mpi_sort_markers(apply_bc=False)
+
+                # update en_fB_new
+                particles.save_magnetic_energy(PB_b)
+                en_fB_new = xp.sum(markers[~holes, 8].dot(markers[~holes, 5])) * self.options.ep_scale
+                en_fB_new /= n_mks_tot
+
+                buffer_array = xp.array([en_fB_new])
+
+                if particles.mpi_comm is not None:
+                    particles.mpi_comm.Allreduce(
+                        MPI.IN_PLACE,
+                        buffer_array,
+                        op=MPI.SUM,
+                    )
+
+                if particles.clone_config is not None:
+                    particles.clone_config.inter_comm.Allreduce(
+                        MPI.IN_PLACE,
+                        buffer_array,
+                        op=MPI.SUM,
+                    )
+
+                en_fB_new = buffer_array[0]
+
+                # calculate total energy difference
+                e_diff = xp.abs(en_U_new + en_fB_new - en_tot_old)
+
+                # calculate ||z^{n+1, k} - z^{n+1, k-1||
+                sum_u_diff_loc = xp.sum(xp.abs(u_new.toarray() - u_old.toarray()))
+
+                buffer_array = xp.array([sum_u_diff_loc])
+
+                if particles.mpi_comm is not None:
+                    particles.mpi_comm.Allreduce(
+                        MPI.IN_PLACE,
+                        buffer_array,
+                        op=MPI.SUM,
+                    )
+
+                diff = buffer_array[0]
+
+                buffer_array = xp.array([sum_H_diff_loc])
+
+                if particles.mpi_comm is not None:
+                    particles.mpi_comm.Allreduce(
+                        MPI.IN_PLACE,
+                        buffer_array,
+                        op=MPI.SUM,
+                    )
+
+                if particles.clone_config is not None:
+                    particles.clone_config.inter_comm.Allreduce(
+                        MPI.IN_PLACE,
+                        buffer_array,
+                        op=MPI.SUM,
+                    )
+
+                diff += buffer_array[0]
+
+                # check convergence
+                if diff &lt; self.options.dg_solver_params.tol:
+                    if self.options.dg_solver_params.verbose and MPI.COMM_WORLD.Get_rank() == 0:
+                        logger.info(f&quot;converged diff: {diff}&quot;)
+                        logger.info(f&quot;converged e_diff: {e_diff}&quot;)
+
+                    if particles.mpi_comm is not None:
+                        particles.mpi_comm.Barrier()
+                    break
+
+                else:
+                    if self.options.dg_solver_params.verbose and MPI.COMM_WORLD.Get_rank() == 0:
+                        logger.info(f&quot;not converged diff: {diff}&quot;)
+                        logger.info(f&quot;not converged e_diff: {e_diff}&quot;)
+
+                if iter_num == self.options.dg_solver_params.maxiter:
+                    if self.options.dg_solver_params.info and MPI.COMM_WORLD.Get_rank() == 0:
+                        logger.info(
+                            f&quot;{iter_num =}, maxiter={self.options.dg_solver_params.maxiter} reached! diff: {diff}, e_diff: {e_diff}&quot;,
+                        )
+                    if particles.mpi_comm is not None:
+                        particles.mpi_comm.Barrier()
+                    break
+
+            # sorting markers
+            if particles.mpi_comm is not None:
+                particles.mpi_sort_markers()
+            else:
+                particles.apply_kinetic_bc()
+
+            # update u coefficients
+            diffs = self.update_feec_variables(u=u_new)
+
+            # clear the buffer
+            markers[:, first_init_idx:-2] = 0.0
+
+            # update_weights
+            if self.variables.energetic_ions.species.weights_params.control_variate:
+                particles.update_weights()
+
+            if self.options.dg_solver_params.info and MPI.COMM_WORLD.Get_rank() == 0:
+                logger.info(f&quot;Maxdiff up for CurrentCoupling5DGradB: {diffs[&#39;u&#39;]}&quot;)
+                logger.info(&quot;&quot;)</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1840 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Maxwell’s equations: Light Wave and Coaxial Waveguide &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_collections/tutorials/tutorial_maxwell';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Verification of MHD Wave Dispersion Relations" href="tutorial_linear_mhd_slab_waves_1d.html" />
+    <link rel="prev" title="Solving the Poisson equation" href="tutorial_poisson.html" />
+    <link href="../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="tutorial_poisson.html"
+                          title="previous chapter">Solving the Poisson equation</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="tutorial_linear_mhd_slab_waves_1d.html"
+                          title="next chapter">Verification of MHD Wave Dispersion Relations</a></p>
+  </div></div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../sections/tutorials.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Maxwell’s equations: Light Wave and Coaxial Waveguide</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Maxwell's-equations:-Light-Wave-and-Coaxial-Waveguide">
+<h1>Maxwell’s equations: Light Wave and Coaxial Waveguide<a class="headerlink" href="#Maxwell's-equations:-Light-Wave-and-Coaxial-Waveguide" title="Link to this heading">#</a></h1>
+<p>This combined tutorial covers two complementary verification scenarios for the <code class="docutils literal notranslate"><span class="pre">Maxwell</span></code> model in Struphy:</p>
+<ol class="arabic simple">
+<li><p><strong>1D Light wave in vacuum</strong>: verifies free-space propagation and the linear dispersion relation <span class="math notranslate nohighlight">\(\omega = c k\)</span>.</p></li>
+<li><p><strong>2D Coaxial waveguide mode</strong>: verifies structured electromagnetic eigenmodes in hollow-cylinder geometry.</p></li>
+</ol>
+<p>Before running either test, we print the PDE system in Struphy units to connect the numerical setup to the governing physics.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Maxwell</span>
+
+<span class="c1"># Display Maxwell equations in Struphy normalization.</span>
+<span class="n">Maxwell</span><span class="o">.</span><span class="n">pde</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<h5>PDEs solved by model:</h5>
+
+<p>        Ampère's law (no current):</p>
+
+<p><span style="display:block;text-align:center;font-size:1.18em;line-height:1.6;margin:0.35em 0;"><span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1;margin:0 0.08em;"><span style="display:block;padding:0 0.18em;border-bottom:1px solid currentColor;">∂𝐄</span><span style="display:block;padding:0 0.18em;">∂t</span></span> - ∇ × 𝐁 = 0</span></p>
+
+<p>        Faraday's law:</p>
+
+<p><span style="display:block;text-align:center;font-size:1.18em;line-height:1.6;margin:0.35em 0;"><span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1;margin:0 0.08em;"><span style="display:block;padding:0 0.18em;border-bottom:1px solid currentColor;">∂𝐁</span><span style="display:block;padding:0 0.18em;">∂t</span></span> + ∇ × 𝐄 = 0</span></p></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Display normalization</span>
+<span class="n">Maxwell</span><span class="o">.</span><span class="n">normalization</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<h5>Normalization:</h5>
+<p>Velocity and fields are normalized as:</p>
+
+<p><span style="display:block;text-align:center;font-size:1.18em;line-height:1.6;margin:0.35em 0;">v̂ = c ,   Ê = c B̂</span></p>
+
+<p>        where <code>c</code> is the speed of light.</p></div>
+</div>
+<section id="How-The-Two-Tests-Relate-To-The-PDEs">
+<h2>How The Two Tests Relate To The PDEs<a class="headerlink" href="#How-The-Two-Tests-Relate-To-The-PDEs" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In the light-wave test, the PDEs reduce to wave propagation in a homogeneous medium, so the dominant verification target is the dispersion relation.</p></li>
+<li><p>In the coaxial test, the same PDEs are solved with conducting-boundary geometry constraints, so the dominant verification target is mode structure and boundary-consistent field patterns.</p></li>
+</ul>
+</section>
+<section id="Verification-of-Electromagnetic-Wave-Propagation">
+<h2>Verification of Electromagnetic Wave Propagation<a class="headerlink" href="#Verification-of-Electromagnetic-Wave-Propagation" title="Link to this heading">#</a></h2>
+<section id="1D-Light-Wave-in-Vacuum">
+<h3>1D Light Wave in Vacuum<a class="headerlink" href="#1D-Light-Wave-in-Vacuum" title="Link to this heading">#</a></h3>
+<p>This tutorial demonstrates verification of the dispersion relation for electromagnetic waves in vacuum using the <code class="docutils literal notranslate"><span class="pre">Maxwell</span></code> model. We initialize a broadband spectrum of electric field perturbations and extract the dominant wave frequencies using FFT power spectrum analysis.</p>
+</section>
+<section id="Physical-Setup">
+<h3>Physical Setup<a class="headerlink" href="#Physical-Setup" title="Link to this heading">#</a></h3>
+<p>In vacuum (or non-magnetic plasma), Maxwell’s equations yield the free-space wave equation:</p>
+<div class="math notranslate nohighlight">
+\[\nabla^2 \mathbf{E} - \frac{1}{c^2} \frac{\partial^2 \mathbf{E}}{\partial t^2} = 0,\]</div>
+<p>where <span class="math notranslate nohighlight">\(c\)</span> is the speed of light (normalized to unity in Struphy units). Plane wave solutions have the dispersion relation</p>
+<div class="math notranslate nohighlight">
+\[\omega = c \, k,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\omega\)</span> is the angular frequency and <span class="math notranslate nohighlight">\(k\)</span> is the wavenumber.</p>
+<p>We verify this linear dispersion by:</p>
+<ol class="arabic simple">
+<li><p>Initializing small random perturbations to the electric field</p></li>
+<li><p>Running a transient simulation</p></li>
+<li><p>Extracting the dominant frequency via FFT</p></li>
+<li><p>Fitting the dispersion relation to extract phase velocity</p></li>
+<li><p>Comparing against the theoretical speed <span class="math notranslate nohighlight">\(c = 1\)</span></p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cunumpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xp</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DerhamOptions</span><span class="p">,</span>
+    <span class="n">EnvironmentOptions</span><span class="p">,</span>
+    <span class="n">Simulation</span><span class="p">,</span>
+    <span class="n">Time</span><span class="p">,</span>
+    <span class="n">domains</span><span class="p">,</span>
+    <span class="n">grids</span><span class="p">,</span>
+    <span class="n">perturbations</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.diagnostics.diagn_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">power_spectrum_2d</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Maxwell</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;struphy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Model-and-Time-Stepping-Configuration">
+<h3>Model and Time-Stepping Configuration<a class="headerlink" href="#Model-and-Time-Stepping-Configuration" title="Link to this heading">#</a></h3>
+<p>Create a Maxwell model instance and configure the time-stepping propagator. We use implicit time-stepping for stability over the long simulation window required to collect many wave cycles.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model instance</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Maxwell</span><span class="p">()</span>
+
+<span class="c1"># Choose time-stepping algorithm</span>
+<span class="n">algo</span> <span class="o">=</span> <span class="s2">&quot;implicit&quot;</span>  <span class="c1"># Alternative: &quot;explicit&quot;</span>
+
+<span class="c1"># Propagator options</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">maxwell</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">maxwell</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span><span class="n">algo</span><span class="o">=</span><span class="n">algo</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time-stepping algorithm: </span><span class="si">{</span><span class="n">algo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Time-stepping algorithm: implicit
+</pre></div></div>
+</div>
+</section>
+<section id="Domain-and-Numerical-Discretization">
+<h3>Domain and Numerical Discretization<a class="headerlink" href="#Domain-and-Numerical-Discretization" title="Link to this heading">#</a></h3>
+<p>Set up a 1D periodic domain in the <span class="math notranslate nohighlight">\(z\)</span>-direction with a high-resolution grid. Electromagnetic waves require fine spatial resolution to represent the wave profile accurately.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1D domain (extended in z for long-wavelength waves)</span>
+<span class="n">domain</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">Cuboid</span><span class="p">(</span><span class="n">r3</span><span class="o">=</span><span class="mf">20.0</span><span class="p">)</span>  <span class="c1"># z ∈ [0, 20)</span>
+
+<span class="c1"># High-resolution grid in z (128 elements for wave smoothness)</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">TensorProductGrid</span><span class="p">(</span><span class="n">num_elements</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">))</span>
+
+<span class="c1"># Derham options: cubic edges in z for accurate wave representation</span>
+<span class="n">derham_opts</span> <span class="o">=</span> <span class="n">DerhamOptions</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Domain: z ∈ [0, </span><span class="si">{</span><span class="n">domain</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;r3&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grid elements: </span><span class="si">{</span><span class="n">grid</span><span class="o">.</span><span class="n">num_elements</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Derham degree: </span><span class="si">{</span><span class="n">derham_opts</span><span class="o">.</span><span class="n">degree</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Domain: z ∈ [0, 20.0)
+Grid elements: (1, 1, 128)
+Derham degree: (1, 1, 3)
+</pre></div></div>
+</div>
+</section>
+<section id="Initial-Conditions">
+<h3>Initial Conditions<a class="headerlink" href="#Initial-Conditions" title="Link to this heading">#</a></h3>
+<p>Add small random noise perturbations to the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> components of the electric field. These broadband perturbations excite a spectrum of electromagnetic waves that we will analyze via FFT.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Electric field perturbations (small noise to excite waves)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">e_field</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span><span class="n">perturbations</span><span class="o">.</span><span class="n">Noise</span><span class="p">(</span><span class="n">amp</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">comp</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">e_field</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span><span class="n">perturbations</span><span class="o">.</span><span class="n">Noise</span><span class="p">(</span><span class="n">amp</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">comp</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Simulation-Setup-and-Execution">
+<h3>Simulation Setup and Execution<a class="headerlink" href="#Simulation-Setup-and-Execution" title="Link to this heading">#</a></h3>
+<p>Configure the simulation environment and run the transient dynamics. We evolve for a long time to collect sufficient wave cycles (Tend=50) for accurate FFT-based dispersion analysis.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Environment and file management</span>
+<span class="n">test_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;struphy_verification_tests&quot;</span><span class="p">)</span>
+<span class="n">out_folders</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_folder</span><span class="p">,</span> <span class="s2">&quot;Maxwell&quot;</span><span class="p">)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">EnvironmentOptions</span><span class="p">(</span><span class="n">out_folders</span><span class="o">=</span><span class="n">out_folders</span><span class="p">,</span> <span class="n">sim_folder</span><span class="o">=</span><span class="s2">&quot;light_wave_1d&quot;</span><span class="p">)</span>
+
+<span class="c1"># Time-stepping: small dt for stability and accuracy</span>
+<span class="n">time_opts</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">Tend</span><span class="o">=</span><span class="mf">50.0</span><span class="p">)</span>
+
+<span class="c1"># Instantiate and run simulation</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+    <span class="n">time_opts</span><span class="o">=</span><span class="n">time_opts</span><span class="p">,</span>
+    <span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">,</span>
+    <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+    <span class="n">derham_opts</span><span class="o">=</span><span class="n">derham_opts</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running simulation: dt=</span><span class="si">{</span><span class="n">time_opts</span><span class="o">.</span><span class="n">dt</span><span class="si">}</span><span class="s2">, Tend=</span><span class="si">{</span><span class="n">time_opts</span><span class="o">.</span><span class="n">Tend</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Simulation complete.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Post-processing</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Post-processing complete.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model Maxwell ...
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running simulation: dt=0.05, Tend=50.0
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Time stepping: 1001step [00:22, 44.11step/s]
+Struphy run finished.
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/Maxwell/light_wave_1d
+
+Reading hdf5 data of following species:
+em_fields:
+  b_field: &lt;HDF5 group &#34;/feec/em_fields/b_field&#34; (3 members)&gt;
+  e_field: &lt;HDF5 group &#34;/feec/em_fields/e_field&#34; (3 members)&gt;
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Simulation complete.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Creation of Struphy Fields done.
+
+Evaluating fields ...
+100%|██████████| 1002/1002 [00:01&lt;00:00, 585.79it/s]
+
+Creating vtk in /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/Maxwell/light_wave_1d/post_processing/fields_data ...
+100%|██████████| 1002/1002 [00:00&lt;00:00, 1053.39it/s]
+
+No kinetic data found in hdf5 file, skipping post-processing of kinetic data.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Post-processing complete.
+</pre></div></div>
+</div>
+</section>
+<section id="Diagnostics:-Dispersion-Relation-Verification">
+<h3>Diagnostics: Dispersion Relation Verification<a class="headerlink" href="#Diagnostics:-Dispersion-Relation-Verification" title="Link to this heading">#</a></h3>
+<p>Extract the electric field time evolution, compute the power spectrum via FFT, and fit the dominant frequency peaks. From the fitted frequency and spatial wavenumber, we extract the phase velocity and compare against the theoretical speed <span class="math notranslate nohighlight">\(c = 1\)</span>.</p>
+<p><strong>Expected result</strong>: The fitted wave speed should be approximately 1.0 (the speed of light in normalized units).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load plotting data</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+
+<span class="c1"># Extract electric field time-series</span>
+<span class="n">E_of_t</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">spline_values</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">e_field_log</span><span class="o">.</span><span class="n">data</span>
+
+<span class="c1"># Compute power spectrum and fit dispersion relation</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Light Wave Dispersion Analysis ===&quot;</span><span class="p">)</span>
+<span class="n">_1</span><span class="p">,</span> <span class="n">_2</span><span class="p">,</span> <span class="n">_3</span><span class="p">,</span> <span class="n">coeffs</span> <span class="o">=</span> <span class="n">power_spectrum_2d</span><span class="p">(</span>
+    <span class="n">E_of_t</span><span class="p">,</span>
+    <span class="s2">&quot;e_field_log&quot;</span><span class="p">,</span>
+    <span class="n">grids</span><span class="o">=</span><span class="n">sim</span><span class="o">.</span><span class="n">grids_log</span><span class="p">,</span>
+    <span class="n">grids_mapped</span><span class="o">=</span><span class="n">sim</span><span class="o">.</span><span class="n">grids_phy</span><span class="p">,</span>
+    <span class="n">component</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">slice_at</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+    <span class="n">do_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">disp_name</span><span class="o">=</span><span class="s2">&quot;Maxwell1D&quot;</span><span class="p">,</span>
+    <span class="n">fit_branches</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">noise_level</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">extr_order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">fit_degree</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,),</span>
+<span class="p">)</span>
+
+<span class="c1"># Extract fitted wave speed</span>
+<span class="n">c_light_speed</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Theoretical</span>
+<span class="n">c_fit</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">coeffs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Theoretical wave speed (c):  </span><span class="si">{</span><span class="n">c_light_speed</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fitted wave speed:           </span><span class="si">{</span><span class="n">c_fit</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Absolute error:              </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">c_fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c_light_speed</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Relative error:              </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">c_fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c_light_speed</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">c_light_speed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="c1"># Verify against tolerance</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">coeffs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">c_light_speed</span><span class="p">)</span>
+<span class="n">tolerance</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="k">assert</span> <span class="n">error</span> <span class="o">&lt;</span> <span class="n">tolerance</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Wave speed error </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> exceeds tolerance </span><span class="si">{</span><span class="n">tolerance</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ Light wave verification passed (error &lt; </span><span class="si">{</span><span class="n">tolerance</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/Maxwell/light_wave_1d/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(1002,)
+self.grids_log[0].shape =(2,)
+self.grids_log[1].shape =(2,)
+self.grids_log[2].shape =(129,)
+self.grids_phy[0].shape =(2, 2, 129)
+self.grids_phy[1].shape =(2, 2, 129)
+self.grids_phy[2].shape =(2, 2, 129)
+
+self.spline_values:
+    em_fields
+        b_field_log
+        e_field_log
+
+self.orbits:
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+=== Light Wave Dispersion Analysis ===
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_maxwell_15_2.png" src="../../_images/_collections_tutorials_tutorial_maxwell_15_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+Theoretical wave speed (c):  1.000000
+Fitted wave speed:           0.983236
+Absolute error:              0.016764
+Relative error:              1.676%
+
+✓ Light wave verification passed (error &lt; 0.02).
+</pre></div></div>
+</div>
+</section>
+<section id="Conclusion">
+<h3>Conclusion<a class="headerlink" href="#Conclusion" title="Link to this heading">#</a></h3>
+<p>This tutorial successfully verified the electromagnetic wave dispersion relation in vacuum:</p>
+<div class="math notranslate nohighlight">
+\[\omega = c \, k \quad \Rightarrow \quad v_\text{phase} = c,\]</div>
+<p>where the wave propagation speed is exactly the speed of light (normalized to 1.0). The FFT-based spectral analysis method provides a robust and quantitative test of the model’s ability to correctly implement Maxwell’s equations and represent wave dynamics at the grid scale.</p>
+<p>This verification validates:</p>
+<ul class="simple">
+<li><p>Correct implementation of electromagnetic propagators</p></li>
+<li><p>Numerical accuracy of the finite-element spatial discretization</p></li>
+<li><p>Stability and fidelity of the time-integration algorithm</p></li>
+</ul>
+<p>Small deviations from perfect <span class="math notranslate nohighlight">\(c = 1\)</span> arise from numerical dispersion in the finite-element representation, which decreases with increasing spatial resolution.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cleanup temporary simulation folder</span>
+<span class="k">if</span> <span class="kc">False</span><span class="p">:</span>  <span class="c1"># Set to True to enable cleanup</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">test_folder</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cleaned up </span><span class="si">{</span><span class="n">test_folder</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not remove </span><span class="si">{</span><span class="n">test_folder</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="Verification-of-Electromagnetic-Modes-in-a-Coaxial-Waveguide">
+<h2>Verification of Electromagnetic Modes in a Coaxial Waveguide<a class="headerlink" href="#Verification-of-Electromagnetic-Modes-in-a-Coaxial-Waveguide" title="Link to this heading">#</a></h2>
+<section id="2D-Hollow-Cylinder-Geometry">
+<h3>2D Hollow Cylinder Geometry<a class="headerlink" href="#2D-Hollow-Cylinder-Geometry" title="Link to this heading">#</a></h3>
+<p>This tutorial demonstrates verification of electromagnetic wave modes in a coaxial waveguide (hollow cylinder) by comparing numerical solutions against analytical expressions involving Bessel functions. We use the <code class="docutils literal notranslate"><span class="pre">Maxwell</span></code> model with a 2D hollow-cylinder domain.</p>
+</section>
+<section id="id1">
+<h3>Physical Setup<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>A coaxial waveguide consists of two concentric conducting cylinders with inner radius <span class="math notranslate nohighlight">\(a_1\)</span> and outer radius <span class="math notranslate nohighlight">\(a_2\)</span>. Electromagnetic modes propagate in the axial (<span class="math notranslate nohighlight">\(z\)</span>) direction with spatial structure in the radial (<span class="math notranslate nohighlight">\(r\)</span>) and azimuthal (<span class="math notranslate nohighlight">\(\theta\)</span>) directions.</p>
+<p>For a TE-like mode with azimuthal wavenumber <span class="math notranslate nohighlight">\(m\)</span>, the magnetic field in the <span class="math notranslate nohighlight">\(z\)</span>-direction has the form</p>
+<div class="math notranslate nohighlight">
+\[B_z(r, \theta, t) = [J_m(r) - c_1\, Y_m(r)]\cos(m\theta - t),\]</div>
+<p>while the electric field components transform via cylindrical coordinate relations:</p>
+<div class="math notranslate nohighlight">
+\[E_r(r, \theta, t) = -\frac{m}{r}[J_m(r) - c_1\, Y_m(r)]\cos(m\theta - t),\]</div>
+<div class="math notranslate nohighlight">
+\[E_\theta(r, \theta, t) = [J_m'(r) - c_1\, Y_m'(r)]\sin(m\theta - t),\]</div>
+<p>where <span class="math notranslate nohighlight">\(J_m\)</span> and <span class="math notranslate nohighlight">\(Y_m\)</span> are Bessel functions of the first and second kinds, respectively.</p>
+<p>We verify these modes by comparing numerical simulation against the analytical expressions.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">cunumpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">jv</span><span class="p">,</span> <span class="n">yn</span>  <span class="c1"># Bessel functions</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DerhamOptions</span><span class="p">,</span>
+    <span class="n">EnvironmentOptions</span><span class="p">,</span>
+    <span class="n">Simulation</span><span class="p">,</span>
+    <span class="n">Time</span><span class="p">,</span>
+    <span class="n">domains</span><span class="p">,</span>
+    <span class="n">equils</span><span class="p">,</span>
+    <span class="n">grids</span><span class="p">,</span>
+    <span class="n">perturbations</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Maxwell</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;struphy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Coaxial-Waveguide-Geometry">
+<h3>Coaxial Waveguide Geometry<a class="headerlink" href="#Coaxial-Waveguide-Geometry" title="Link to this heading">#</a></h3>
+<p>Define the inner and outer cylinder radii and the waveguide length. We choose radii that match the zero-crossing of Bessel function combinations used in the mode matching.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coaxial geometry</span>
+<span class="n">a1</span> <span class="o">=</span> <span class="mf">2.326744</span>  <span class="c1"># Inner cylinder radius</span>
+<span class="n">a2</span> <span class="o">=</span> <span class="mf">3.686839</span>  <span class="c1"># Outer cylinder radius</span>
+<span class="n">Lz</span> <span class="o">=</span> <span class="mf">2.0</span>       <span class="c1"># Waveguide length (axial direction)</span>
+
+<span class="c1"># Azimuthal mode number</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># Bessel function coefficient (matching inner boundary condition)</span>
+<span class="c1"># This coefficient is precomputed based on the mode matching</span>
+<span class="n">c1_coeff</span> <span class="o">=</span> <span class="mf">0.28</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coaxial waveguide geometry:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Inner radius (a1):    </span><span class="si">{</span><span class="n">a1</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Outer radius (a2):    </span><span class="si">{</span><span class="n">a2</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Axial length (Lz):    </span><span class="si">{</span><span class="n">Lz</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Azimuthal mode (m):   </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Bessel coeff (c1):    </span><span class="si">{</span><span class="n">c1_coeff</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Coaxial waveguide geometry:
+  Inner radius (a1):    2.326744
+  Outer radius (a2):    3.686839
+  Axial length (Lz):    2.000000
+  Azimuthal mode (m):   3
+  Bessel coeff (c1):    0.28
+</pre></div></div>
+</div>
+</section>
+<section id="Model-and-Propagator-Configuration">
+<h3>Model and Propagator Configuration<a class="headerlink" href="#Model-and-Propagator-Configuration" title="Link to this heading">#</a></h3>
+<p>Create a Maxwell model and configure the implicit time-stepping propagator. Implicit stepping is preferred for stability in 2D domains.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model instance</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Maxwell</span><span class="p">()</span>
+
+<span class="c1"># Propagator options (implicit for stability)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">maxwell</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">maxwell</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span><span class="n">algo</span><span class="o">=</span><span class="s2">&quot;implicit&quot;</span><span class="p">)</span>
+
+<span class="c1"># Equilibrium (homogeneous slab, used for initialization)</span>
+<span class="n">equil</span> <span class="o">=</span> <span class="n">equils</span><span class="o">.</span><span class="n">HomogenSlab</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Domain-and-Discretization">
+<h3>Domain and Discretization<a class="headerlink" href="#Domain-and-Discretization" title="Link to this heading">#</a></h3>
+<p>Set up a 2D hollow-cylinder domain using curvilinear coordinates. The grid is fine in both radial (<span class="math notranslate nohighlight">\(r\)</span>) and azimuthal (<span class="math notranslate nohighlight">\(\theta\)</span>) directions to resolve the mode structure.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Domain: hollow cylinder with inner radius a1, outer radius a2</span>
+<span class="n">domain</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">HollowCylinder</span><span class="p">(</span><span class="n">a1</span><span class="o">=</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="o">=</span><span class="n">a2</span><span class="p">,</span> <span class="n">Lz</span><span class="o">=</span><span class="n">Lz</span><span class="p">)</span>
+
+<span class="c1"># Grid: 2D in (r, θ) with finer azimuthal resolution</span>
+<span class="c1"># 32 radial × 64 azimuthal elements for mode representation</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">TensorProductGrid</span><span class="p">(</span><span class="n">num_elements</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Derham options for 2D:</span>
+<span class="c1"># - degree=(3, 3, 1): cubic in radial and azimuthal</span>
+<span class="c1"># - bcs: Dirichlet on both radial boundaries (conducting cylinders)</span>
+<span class="n">derham_opts</span> <span class="o">=</span> <span class="n">DerhamOptions</span><span class="p">(</span>
+    <span class="n">degree</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">bcs</span><span class="o">=</span><span class="p">((</span><span class="s2">&quot;dirichlet&quot;</span><span class="p">,</span> <span class="s2">&quot;dirichlet&quot;</span><span class="p">),</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Domain: HollowCylinder(a1=</span><span class="si">{</span><span class="n">a1</span><span class="si">}</span><span class="s2">, a2=</span><span class="si">{</span><span class="n">a2</span><span class="si">}</span><span class="s2">, Lz=</span><span class="si">{</span><span class="n">Lz</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grid elements: </span><span class="si">{</span><span class="n">grid</span><span class="o">.</span><span class="n">num_elements</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Derham degree: </span><span class="si">{</span><span class="n">derham_opts</span><span class="o">.</span><span class="n">degree</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Boundary conditions: Dirichlet at r=a1 and r=a2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Domain: HollowCylinder(a1=2.326744, a2=3.686839, Lz=2.0)
+Grid elements: (32, 64, 1)
+Derham degree: (3, 3, 1)
+Boundary conditions: Dirichlet at r=a1 and r=a2
+</pre></div></div>
+</div>
+</section>
+<section id="Initial-Conditions:-Coaxial-Mode-Initialization">
+<h3>Initial Conditions: Coaxial Mode Initialization<a class="headerlink" href="#Initial-Conditions:-Coaxial-Mode-Initialization" title="Link to this heading">#</a></h3>
+<p>Initialize the electric and magnetic fields with the spatial structure of a TE-like coaxial mode. The <code class="docutils literal notranslate"><span class="pre">CoaxialWaveguide*</span></code> perturbation classes provide the analytic mode shapes.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Electric field components of the coaxial mode</span>
+<span class="n">model</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">e_field</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span>
+    <span class="n">perturbations</span><span class="o">.</span><span class="n">CoaxialWaveguideElectric_r</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">a1</span><span class="o">=</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="o">=</span><span class="n">a2</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">e_field</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span>
+    <span class="n">perturbations</span><span class="o">.</span><span class="n">CoaxialWaveguideElectric_theta</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">a1</span><span class="o">=</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="o">=</span><span class="n">a2</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Magnetic field component of the coaxial mode</span>
+<span class="n">model</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">b_field</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span>
+    <span class="n">perturbations</span><span class="o">.</span><span class="n">CoaxialWaveguideMagnetic</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">a1</span><span class="o">=</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="o">=</span><span class="n">a2</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Coaxial mode (m=</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">) initialized with analytic perturbations.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Coaxial mode (m=3) initialized with analytic perturbations.
+</pre></div></div>
+</div>
+</section>
+<section id="id2">
+<h3>Simulation Setup and Execution<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Configure the simulation environment and run the transient dynamics. We run for a finite time (Tend=10) to allow the mode dynamics to develop.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Environment and file management</span>
+<span class="n">test_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;struphy_verification_tests&quot;</span><span class="p">)</span>
+<span class="n">out_folders</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_folder</span><span class="p">,</span> <span class="s2">&quot;Maxwell&quot;</span><span class="p">)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">EnvironmentOptions</span><span class="p">(</span><span class="n">out_folders</span><span class="o">=</span><span class="n">out_folders</span><span class="p">,</span> <span class="n">sim_folder</span><span class="o">=</span><span class="s2">&quot;coaxial&quot;</span><span class="p">)</span>
+
+<span class="c1"># Time-stepping</span>
+<span class="n">time_opts</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">Tend</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+
+<span class="c1"># Instantiate and run simulation</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+    <span class="n">time_opts</span><span class="o">=</span><span class="n">time_opts</span><span class="p">,</span>
+    <span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">,</span>
+    <span class="n">equil</span><span class="o">=</span><span class="n">equil</span><span class="p">,</span>
+    <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+    <span class="n">derham_opts</span><span class="o">=</span><span class="n">derham_opts</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running coaxial mode simulation: dt=</span><span class="si">{</span><span class="n">time_opts</span><span class="o">.</span><span class="n">dt</span><span class="si">}</span><span class="s2">, Tend=</span><span class="si">{</span><span class="n">time_opts</span><span class="o">.</span><span class="n">Tend</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Simulation complete.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Post-processing (with physical=True to extract physical fields)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">pproc</span><span class="p">(</span><span class="n">physical</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Post-processing complete.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model Maxwell ...
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running coaxial mode simulation: dt=0.05, Tend=10.0
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Time stepping: 100%|██████████| 200/200 [00:11&lt;00:00, 16.96step/s]
+Struphy run finished.
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/Maxwell/coaxial
+
+Reading hdf5 data of following species:
+em_fields:
+  b_field: &lt;HDF5 group &#34;/feec/em_fields/b_field&#34; (3 members)&gt;
+  e_field: &lt;HDF5 group &#34;/feec/em_fields/e_field&#34; (3 members)&gt;
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Simulation complete.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 2/2 [00:00&lt;00:00,  6.17it/s]
+Creation of Struphy Fields done.
+
+Evaluating fields ...
+100%|██████████| 201/201 [00:02&lt;00:00, 96.03it/s]
+
+Evaluating fields ...
+100%|██████████| 201/201 [00:02&lt;00:00, 71.34it/s]
+
+Creating vtk in /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/Maxwell/coaxial/post_processing/fields_data ...
+100%|██████████| 201/201 [00:01&lt;00:00, 182.44it/s]
+
+Creating vtk in /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/Maxwell/coaxial/post_processing/fields_data ...
+100%|██████████| 201/201 [00:01&lt;00:00, 183.21it/s]
+
+No kinetic data found in hdf5 file, skipping post-processing of kinetic data.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Post-processing complete.
+</pre></div></div>
+</div>
+</section>
+<section id="Diagnostics:-Mode-Field-Verification">
+<h3>Diagnostics: Mode Field Verification<a class="headerlink" href="#Diagnostics:-Mode-Field-Verification" title="Link to this heading">#</a></h3>
+<p>Extract the numerical electric and magnetic fields at the final time step and compare against the analytical Bessel function expressions. We compute relative errors for <span class="math notranslate nohighlight">\(E_r\)</span>, <span class="math notranslate nohighlight">\(E_\theta\)</span>, and <span class="math notranslate nohighlight">\(B_z\)</span> components.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load plotting data</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+
+<span class="c1"># Extract time and field data</span>
+<span class="n">t_grid</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">t_grid</span>
+<span class="n">grids_phy</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">grids_phy</span>
+<span class="n">e_field_phy</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">spline_values</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">e_field_phy</span><span class="o">.</span><span class="n">data</span>
+<span class="n">b_field_phy</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">spline_values</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">b_field_phy</span><span class="o">.</span><span class="n">data</span>
+
+<span class="c1"># Extract coordinate arrays in the first (r-θ) plane</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">grids_phy</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># Radial coordinate (Cartesian x for plotting)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">grids_phy</span><span class="p">[</span><span class="mi">1</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># Azimuthal coordinate (Cartesian y for plotting)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grid shape: </span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time grid length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">t_grid</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final time: t = </span><span class="si">{</span><span class="n">t_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/Maxwell/coaxial/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(201,)
+self.grids_log[0].shape =(33,)
+self.grids_log[1].shape =(65,)
+self.grids_log[2].shape =(2,)
+self.grids_phy[0].shape =(33, 65, 2)
+self.grids_phy[1].shape =(33, 65, 2)
+self.grids_phy[2].shape =(33, 65, 2)
+
+self.spline_values:
+    em_fields
+        b_field_phy
+        b_field_log
+        e_field_phy
+        e_field_log
+
+self.orbits:
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Grid shape: (33, 65)
+Time grid length: 201
+Final time: t = 10.000
+</pre></div></div>
+</div>
+</section>
+<section id="Analytical-Bessel-Function-Solutions">
+<h3>Analytical Bessel Function Solutions<a class="headerlink" href="#Analytical-Bessel-Function-Solutions" title="Link to this heading">#</a></h3>
+<p>Define the analytical field components in terms of Bessel functions of the first and second kinds. These are the reference solutions against which we compare the numerical results.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analytical solution using Bessel functions</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">B_z_analytic</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Magnetic field B_z in coaxial cable.&quot;&quot;&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">jv</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">-</span> <span class="n">c1_coeff</span> <span class="o">*</span> <span class="n">yn</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span> <span class="o">*</span> <span class="n">xp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">theta</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">E_r_analytic</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Electric field E_r in coaxial cable (radial).&quot;&quot;&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">m</span> <span class="o">/</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="n">jv</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">-</span> <span class="n">c1_coeff</span> <span class="o">*</span> <span class="n">yn</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span> <span class="o">*</span> <span class="n">xp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">theta</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">E_theta_analytic</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Electric field E_θ in coaxial cable (azimuthal).&quot;&quot;&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+    <span class="n">dJ</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="o">/</span> <span class="n">r</span> <span class="o">*</span> <span class="n">jv</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">-</span> <span class="n">jv</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
+    <span class="n">dY</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="o">/</span> <span class="n">r</span> <span class="o">*</span> <span class="n">yn</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">-</span> <span class="n">yn</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">dJ</span> <span class="o">-</span> <span class="n">c1_coeff</span> <span class="o">*</span> <span class="n">dY</span><span class="p">)</span> <span class="o">*</span> <span class="n">xp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">theta</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">to_E_r_cartesian</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">E_x</span><span class="p">,</span> <span class="n">E_y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert Cartesian E_x, E_y to cylindrical E_r.&quot;&quot;&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">xp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">E_x</span> <span class="o">+</span> <span class="n">xp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">E_y</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">to_E_theta_cartesian</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">E_x</span><span class="p">,</span> <span class="n">E_y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert Cartesian E_x, E_y to cylindrical E_θ.&quot;&quot;&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">xp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">E_x</span> <span class="o">+</span> <span class="n">xp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">E_y</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Analytical solution functions defined.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Analytical solution functions defined.
+</pre></div></div>
+</div>
+</section>
+<section id="Field-Component-Comparison">
+<h3>Field Component Comparison<a class="headerlink" href="#Field-Component-Comparison" title="Link to this heading">#</a></h3>
+<p>Extract fields at the final time, convert Cartesian components to cylindrical coordinates, and compute relative errors for each field component.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get fields at the final time step</span>
+<span class="n">t_end</span> <span class="o">=</span> <span class="n">t_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Numerical fields (Cartesian components)</span>
+<span class="n">Ex_num</span> <span class="o">=</span> <span class="n">e_field_phy</span><span class="p">[</span><span class="n">t_end</span><span class="p">][</span><span class="mi">0</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">Ey_num</span> <span class="o">=</span> <span class="n">e_field_phy</span><span class="p">[</span><span class="n">t_end</span><span class="p">][</span><span class="mi">1</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">Bz_num</span> <span class="o">=</span> <span class="n">b_field_phy</span><span class="p">[</span><span class="n">t_end</span><span class="p">][</span><span class="mi">2</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Analytical fields</span>
+<span class="n">Er_analytic</span> <span class="o">=</span> <span class="n">E_r_analytic</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">grids_phy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m</span><span class="p">,</span> <span class="n">t_end</span><span class="p">)</span>
+<span class="n">Etheta_analytic</span> <span class="o">=</span> <span class="n">E_theta_analytic</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">grids_phy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m</span><span class="p">,</span> <span class="n">t_end</span><span class="p">)</span>
+<span class="n">Bz_analytic</span> <span class="o">=</span> <span class="n">B_z_analytic</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">grids_phy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m</span><span class="p">,</span> <span class="n">t_end</span><span class="p">)</span>
+
+<span class="c1"># Convert numerical Cartesian E-field to cylindrical</span>
+<span class="n">Er_num</span> <span class="o">=</span> <span class="n">to_E_r_cartesian</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Ex_num</span><span class="p">,</span> <span class="n">Ey_num</span><span class="p">)</span>
+<span class="n">Etheta_num</span> <span class="o">=</span> <span class="n">to_E_theta_cartesian</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Ex_num</span><span class="p">,</span> <span class="n">Ey_num</span><span class="p">)</span>
+
+<span class="c1"># Compute errors</span>
+<span class="n">error_Er</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Er_num</span> <span class="o">-</span> <span class="n">Er_analytic</span><span class="p">))</span>
+<span class="n">error_Etheta</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Etheta_num</span> <span class="o">-</span> <span class="n">Etheta_analytic</span><span class="p">))</span>
+<span class="n">error_Bz</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Bz_num</span> <span class="o">-</span> <span class="n">Bz_analytic</span><span class="p">))</span>
+
+<span class="c1"># Relative errors</span>
+<span class="n">rel_err_Er</span> <span class="o">=</span> <span class="n">error_Er</span> <span class="o">/</span> <span class="n">xp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Er_analytic</span><span class="p">))</span>
+<span class="n">rel_err_Etheta</span> <span class="o">=</span> <span class="n">error_Etheta</span> <span class="o">/</span> <span class="n">xp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Etheta_analytic</span><span class="p">))</span>
+<span class="n">rel_err_Bz</span> <span class="o">=</span> <span class="n">error_Bz</span> <span class="o">/</span> <span class="n">xp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Bz_analytic</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Coaxial Mode Error Analysis ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Radial Electric Field (E_r):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Absolute error:  </span><span class="si">{</span><span class="n">error_Er</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Relative error:  </span><span class="si">{</span><span class="n">rel_err_Er</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">rel_err_Er</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Azimuthal Electric Field (E_θ):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Absolute error:  </span><span class="si">{</span><span class="n">error_Etheta</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Relative error:  </span><span class="si">{</span><span class="n">rel_err_Etheta</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">rel_err_Etheta</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Axial Magnetic Field (B_z):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Absolute error:  </span><span class="si">{</span><span class="n">error_Bz</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Relative error:  </span><span class="si">{</span><span class="n">rel_err_Bz</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">rel_err_Bz</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+=== Coaxial Mode Error Analysis ===
+
+Radial Electric Field (E_r):
+  Absolute error:  0.001140
+  Relative error:  0.002082 (0.2082%)
+
+Azimuthal Electric Field (E_θ):
+  Absolute error:  0.000150
+  Relative error:  0.002081 (0.2081%)
+
+Axial Magnetic Field (B_z):
+  Absolute error:  0.001019
+  Relative error:  0.002081 (0.2081%)
+</pre></div></div>
+</div>
+</section>
+<section id="2D-Slice-Visualization-of-the-Final-Fields">
+<h3>2D Slice Visualization of the Final Fields<a class="headerlink" href="#2D-Slice-Visualization-of-the-Final-Fields" title="Link to this heading">#</a></h3>
+<p>Plot 2D cross-sections of the numerical field components at the final time and compare them against the analytical Bessel-function reference. The third column shows the pointwise difference, which makes localized structure and residual discrepancies easy to inspect.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot final-time 2D slices of the coaxial mode fields</span>
+<span class="n">field_slices</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">Er_num</span><span class="p">,</span> <span class="n">Er_analytic</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$E_r$&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">Etheta_num</span><span class="p">,</span> <span class="n">Etheta_analytic</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$E_\theta$&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">Bz_num</span><span class="p">,</span> <span class="n">Bz_analytic</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$B_z$&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">row</span><span class="p">,</span> <span class="p">(</span><span class="n">numerical_field</span><span class="p">,</span> <span class="n">analytic_field</span><span class="p">,</span> <span class="n">field_label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">field_slices</span><span class="p">):</span>
+    <span class="n">numerical_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">numerical_field</span><span class="p">)</span>
+    <span class="n">analytic_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">analytic_field</span><span class="p">)</span>
+    <span class="n">difference_np</span> <span class="o">=</span> <span class="n">numerical_np</span> <span class="o">-</span> <span class="n">analytic_np</span>
+
+    <span class="n">amplitude_scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">numerical_np</span><span class="p">,</span> <span class="n">analytic_np</span><span class="p">])))</span>
+    <span class="k">if</span> <span class="n">amplitude_scale</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">amplitude_scale</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="n">difference_scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">difference_np</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">difference_scale</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">difference_scale</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="n">numerical_plot</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">numerical_np</span><span class="p">,</span> <span class="n">shading</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span>
+        <span class="n">vmin</span><span class="o">=-</span><span class="n">amplitude_scale</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">amplitude_scale</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">analytic_plot</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">analytic_np</span><span class="p">,</span> <span class="n">shading</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span>
+        <span class="n">vmin</span><span class="o">=-</span><span class="n">amplitude_scale</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">amplitude_scale</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">difference_plot</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">difference_np</span><span class="p">,</span> <span class="n">shading</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span>
+        <span class="n">vmin</span><span class="o">=-</span><span class="n">difference_scale</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">difference_scale</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Numerical </span><span class="si">{</span><span class="n">field_label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Analytical </span><span class="si">{</span><span class="n">field_label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Difference in </span><span class="si">{</span><span class="n">field_label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">numerical_plot</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">field_label</span><span class="si">}</span><span class="s2"> amplitude&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">difference_plot</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">field_label</span><span class="si">}</span><span class="s2"> error&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Coaxial mode field slices at t = </span><span class="si">{</span><span class="n">t_end</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_11953/1530070665.py:23: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  numerical_plot = axes[row, 0].pcolormesh(
+/tmp/ipykernel_11953/1530070665.py:27: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  analytic_plot = axes[row, 1].pcolormesh(
+/tmp/ipykernel_11953/1530070665.py:31: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  difference_plot = axes[row, 2].pcolormesh(
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_maxwell_37_1.png" src="../../_images/_collections_tutorials_tutorial_maxwell_37_1.png" />
+</div>
+</div>
+</section>
+<section id="Verification:-Error-Tolerance-Check">
+<h3>Verification: Error Tolerance Check<a class="headerlink" href="#Verification:-Error-Tolerance-Check" title="Link to this heading">#</a></h3>
+<p>Verify that the relative errors for all field components fall below the acceptable tolerance of 0.0021 (0.21%).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tolerance for verification</span>
+<span class="n">tolerance</span> <span class="o">=</span> <span class="mf">0.0021</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Verification Against Tolerance (&lt; </span><span class="si">{</span><span class="n">tolerance</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%) ===&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check each component</span>
+<span class="n">assertions_passed</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">rel_err_Bz</span> <span class="o">&lt;</span> <span class="n">tolerance</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;B_z error </span><span class="si">{</span><span class="n">rel_err_Bz</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> exceeds tolerance&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ B_z verification passed (</span><span class="si">{</span><span class="n">rel_err_Bz</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">% &lt; </span><span class="si">{</span><span class="n">tolerance</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+    <span class="n">assertions_passed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">assertions_passed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">rel_err_Etheta</span> <span class="o">&lt;</span> <span class="n">tolerance</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;E_θ error </span><span class="si">{</span><span class="n">rel_err_Etheta</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> exceeds tolerance&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ E_θ verification passed (</span><span class="si">{</span><span class="n">rel_err_Etheta</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">% &lt; </span><span class="si">{</span><span class="n">tolerance</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+    <span class="n">assertions_passed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">assertions_passed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">rel_err_Er</span> <span class="o">&lt;</span> <span class="n">tolerance</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;E_r error </span><span class="si">{</span><span class="n">rel_err_Er</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> exceeds tolerance&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ E_r verification passed (</span><span class="si">{</span><span class="n">rel_err_Er</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">% &lt; </span><span class="si">{</span><span class="n">tolerance</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+    <span class="n">assertions_passed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">assertions_passed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">assertions_passed</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ All coaxial mode components verified successfully.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✗ Some components failed verification.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+=== Verification Against Tolerance (&lt; 0.21%) ===
+✓ B_z verification passed (0.2081% &lt; 0.21%)
+✓ E_θ verification passed (0.2081% &lt; 0.21%)
+✓ E_r verification passed (0.2082% &lt; 0.21%)
+
+✓ All coaxial mode components verified successfully.
+</pre></div></div>
+</div>
+</section>
+<section id="id3">
+<h3>Conclusion<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>This tutorial successfully verified electromagnetic wave modes in a coaxial waveguide by comparing numerical solutions against analytical Bessel function expressions. The verification demonstrates:</p>
+<ol class="arabic simple">
+<li><p><strong>Correct implementation</strong> of the 2D hollow-cylinder domain and curvilinear coordinate transformations</p></li>
+<li><p><strong>Accurate field representation</strong> of azimuthally-dependent modes in finite-element space</p></li>
+<li><p><strong>Proper boundary conditions</strong> at the inner and outer conducting cylinders</p></li>
+<li><p><strong>Stable time-integration</strong> of Maxwell’s equations in 2D</p></li>
+</ol>
+<p>The TE-like coaxial mode (<span class="math notranslate nohighlight">\(m=3\)</span>) exhibits excellent agreement between numerical and analytical field components, validating the model’s ability to represent complex 3D electromagnetic phenomena in reduced geometries.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cleanup temporary simulation folder</span>
+<span class="k">if</span> <span class="kc">False</span><span class="p">:</span>  <span class="c1"># Set to True to enable cleanup</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">test_folder</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cleaned up </span><span class="si">{</span><span class="n">test_folder</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not remove </span><span class="si">{</span><span class="n">test_folder</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="tutorial_poisson.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Solving the Poisson equation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tutorial_linear_mhd_slab_waves_1d.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Verification of MHD Wave Dispersion Relations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#How-The-Two-Tests-Relate-To-The-PDEs">How The Two Tests Relate To The PDEs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Verification-of-Electromagnetic-Wave-Propagation">Verification of Electromagnetic Wave Propagation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#1D-Light-Wave-in-Vacuum">1D Light Wave in Vacuum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Physical-Setup">Physical Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Model-and-Time-Stepping-Configuration">Model and Time-Stepping Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Domain-and-Numerical-Discretization">Domain and Numerical Discretization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Initial-Conditions">Initial Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Simulation-Setup-and-Execution">Simulation Setup and Execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Diagnostics:-Dispersion-Relation-Verification">Diagnostics: Dispersion Relation Verification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Verification-of-Electromagnetic-Modes-in-a-Coaxial-Waveguide">Verification of Electromagnetic Modes in a Coaxial Waveguide</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#2D-Hollow-Cylinder-Geometry">2D Hollow Cylinder Geometry</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Physical Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Coaxial-Waveguide-Geometry">Coaxial Waveguide Geometry</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Model-and-Propagator-Configuration">Model and Propagator Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Domain-and-Discretization">Domain and Discretization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Initial-Conditions:-Coaxial-Mode-Initialization">Initial Conditions: Coaxial Mode Initialization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Simulation Setup and Execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Diagnostics:-Mode-Field-Verification">Diagnostics: Mode Field Verification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Analytical-Bessel-Function-Solutions">Analytical Bessel Function Solutions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Field-Component-Comparison">Field Component Comparison</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#2D-Slice-Visualization-of-the-Final-Fields">2D Slice Visualization of the Final Fields</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Verification:-Error-Tolerance-Check">Verification: Error Tolerance Check</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/_collections/tutorials/tutorial_maxwell.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

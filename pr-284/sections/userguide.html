@@ -1,0 +1,1453 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Userguide &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sections/userguide';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API Guide" href="api_guide.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" />
+    <link href="../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="quickstart.html"
+                          title="previous chapter">Quickstart</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="api_guide.html"
+                          title="next chapter">API Guide</a></p>
+  </div></div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Userguide</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="userguide">
+<span id="id1"></span><h1>Userguide<a class="headerlink" href="#userguide" title="Link to this heading">#</a></h1>
+<p>This guide is a practical, detailed companion to <a class="reference internal" href="quickstart.html#quickstart"><span class="std std-ref">Quickstart</span></a>.
+It focuses on common workflows in Struphy with copy-paste Python snippets
+that you can adapt to your own cases.</p>
+<p>For interactive notebooks and longer tutorial stories, see the <a class="reference internal" href="tutorials.html#tutorials"><span class="std std-ref">tutorial collection</span></a>.</p>
+<section id="overview">
+<h2>1. Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Struphy workflows are built around three concepts:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="api_guide.html#struphy.Simulation" title="struphy.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a>:
+The top-level runtime object. It owns global run setup (time stepping,
+geometry, grids, output folders, logging, MPI setup) and executes
+<code class="docutils literal notranslate"><span class="pre">run()</span></code>.</p></li>
+<li><p><a class="reference internal" href="subsections/models-base.html#struphy.models.base.StruphyModel" title="struphy.models.base.StruphyModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">StruphyModel</span></code></a>:
+The PDE model definition. A model contains species, variables, and
+a collection of propagators used to evolve the unknowns.</p></li>
+<li><p><a class="reference internal" href="subsections/propagators-base.html#struphy.propagators.base.Propagator" title="struphy.propagators.base.Propagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Propagator</span></code></a>:
+The elementary time-advancement operators. A model typically combines
+several propagators through a splitting scheme.</p></li>
+</ol>
+<p>In practice, your script usually follows this pattern:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Simulation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">VlasovMaxwellOneSpecies</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">VlasovMaxwellOneSpecies</span><span class="p">()</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>For full API details, see <a class="reference internal" href="api_guide.html#api-guide"><span class="std std-ref">API Guide</span></a>.</p>
+</section>
+<section id="launching-a-simulation">
+<h2>2. Launching a simulation<a class="headerlink" href="#launching-a-simulation" title="Link to this heading">#</a></h2>
+<p>The central entry point is <a class="reference internal" href="api_guide.html#struphy.Simulation" title="struphy.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a>.
+For a minimal run with
+<a class="reference internal" href="subsections/models-all.html#struphy.models.VlasovMaxwellOneSpecies" title="struphy.models.vlasov_maxwell_one_species.VlasovMaxwellOneSpecies"><code class="xref py py-class docutils literal notranslate"><span class="pre">VlasovMaxwellOneSpecies</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Simulation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">VlasovMaxwellOneSpecies</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">VlasovMaxwellOneSpecies</span><span class="p">()</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">params_path</span><span class="o">=</span><span class="vm">__file__</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To print more runtime information, either set global logging level:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_logging_level</span>
+
+<span class="n">set_logging_level</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or pass it directly when creating the simulation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Simulation</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">logging_level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Environment configuration is done with <a class="reference internal" href="api_guide.html#struphy.EnvironmentOptions" title="struphy.EnvironmentOptions"><code class="xref py py-class docutils literal notranslate"><span class="pre">EnvironmentOptions</span></code></a>.
+This affects runtime behavior and output organization, not the physics:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvironmentOptions</span><span class="p">,</span> <span class="n">Simulation</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">EnvironmentOptions</span><span class="p">(</span>
+    <span class="n">out_folders</span><span class="o">=</span><span class="s2">&quot;./runs&quot;</span><span class="p">,</span>
+    <span class="n">sim_folder</span><span class="o">=</span><span class="s2">&quot;vm1s_scan_A&quot;</span><span class="p">,</span>
+    <span class="n">restart</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">save_step</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">sort_step</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">max_runtime</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span>
+    <span class="n">profiling_activated</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Tip: keep one <code class="docutils literal notranslate"><span class="pre">sim_folder</span></code> per parameter set to make post-processing and
+comparisons reproducible.</p>
+</section>
+<section id="choosing-a-model">
+<h2>3. Choosing a model<a class="headerlink" href="#choosing-a-model" title="Link to this heading">#</a></h2>
+<p>A model defines which PDE system is solved and which species/variables exist.
+Each concrete model is a subclass of
+<a class="reference internal" href="subsections/models-base.html#struphy.models.base.StruphyModel" title="struphy.models.base.StruphyModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">StruphyModel</span></code></a>.</p>
+<p>Example with optional model arguments:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">VlasovAmpereOneSpecies</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">VlasovAmpereOneSpecies</span><span class="p">(</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">epsilon</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">with_B0</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Example with explicit normalization units:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseUnits</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">VlasovMaxwellOneSpecies</span>
+
+<span class="n">units</span> <span class="o">=</span> <span class="n">BaseUnits</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">VlasovMaxwellOneSpecies</span><span class="p">(</span><span class="n">base_units</span><span class="o">=</span><span class="n">units</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Models are collections of species. Species hold the unknowns (variables)
+of your PDE system. You can inspect them directly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">species</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">field_species</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">particle_species</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="api_guide.html#species"><span class="std std-ref">Species types</span></a> in the API guide for
+<a class="reference internal" href="api_guide.html#struphy.models.species.FieldSpecies" title="struphy.models.species.FieldSpecies"><code class="xref py py-class docutils literal notranslate"><span class="pre">FieldSpecies</span></code></a>,
+<a class="reference internal" href="api_guide.html#struphy.models.species.FluidSpecies" title="struphy.models.species.FluidSpecies"><code class="xref py py-class docutils literal notranslate"><span class="pre">FluidSpecies</span></code></a>, and
+<a class="reference internal" href="api_guide.html#struphy.models.species.ParticleSpecies" title="struphy.models.species.ParticleSpecies"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParticleSpecies</span></code></a>.</p>
+</section>
+<section id="choosing-the-geometry">
+<h2>4. Choosing the geometry<a class="headerlink" href="#choosing-the-geometry" title="Link to this heading">#</a></h2>
+<p>Geometry is set through the <code class="docutils literal notranslate"><span class="pre">domain=...</span></code> argument of
+<a class="reference internal" href="api_guide.html#struphy.Simulation" title="struphy.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a>.
+The domain defines the map from logical coordinates <span class="math notranslate nohighlight">\(\eta\)</span> to physical
+coordinates <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Simple Cartesian box:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">domains</span>
+
+<span class="n">domain</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">Cuboid</span><span class="p">(</span>
+    <span class="n">l1</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">r1</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+    <span class="n">l2</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">r2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">l3</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">r3</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Curvilinear example (hollow cylinder):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">domains</span>
+
+<span class="n">domain</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">HollowCylinder</span><span class="p">(</span>
+    <span class="n">a1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">a2</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">Lz</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Use the <a class="reference internal" href="domains.html#avail-mappings"><span class="std std-ref">Geometry</span></a> page to see all available domain classes and
+their parameters.</p>
+</section>
+<section id="space-and-time-grids">
+<h2>5. Space and time grids<a class="headerlink" href="#space-and-time-grids" title="Link to this heading">#</a></h2>
+<p>Two objects control temporal and spatial resolution:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="api_guide.html#struphy.Time" title="struphy.Time"><code class="xref py py-class docutils literal notranslate"><span class="pre">Time</span></code></a> for time stepping.</p></li>
+<li><p><a class="reference internal" href="api_guide.html#struphy.grids.TensorProductGrid" title="struphy.grids.TensorProductGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">TensorProductGrid</span></code></a> for spatial mesh resolution.</p></li>
+</ol>
+<p>Small “smoke test” run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Time</span><span class="p">,</span> <span class="n">grids</span>
+
+<span class="n">time_opts</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">Tend</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">split_algo</span><span class="o">=</span><span class="s2">&quot;LieTrotter&quot;</span><span class="p">)</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">TensorProductGrid</span><span class="p">(</span><span class="n">num_elements</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Larger production-style setup:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Time</span><span class="p">,</span> <span class="n">grids</span>
+
+<span class="n">time_opts</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.002</span><span class="p">,</span> <span class="n">Tend</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">split_algo</span><span class="o">=</span><span class="s2">&quot;Strang&quot;</span><span class="p">)</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">TensorProductGrid</span><span class="p">(</span>
+    <span class="n">num_elements</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+    <span class="n">mpi_dims_mask</span><span class="o">=</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>In general:</p>
+<ol class="arabic simple">
+<li><p>decrease <code class="docutils literal notranslate"><span class="pre">dt</span></code> until your diagnostics are stable,</p></li>
+<li><p>increase <code class="docutils literal notranslate"><span class="pre">num_elements</span></code> until spatial convergence is acceptable,</p></li>
+<li><p>activate decomposition only in directions with enough elements per rank.</p></li>
+</ol>
+</section>
+<section id="de-rham-sequence">
+<h2>6. de Rham sequence<a class="headerlink" href="#de-rham-sequence" title="Link to this heading">#</a></h2>
+<p>Discrete FEEC spaces are configured with <a class="reference internal" href="api_guide.html#struphy.DerhamOptions" title="struphy.DerhamOptions"><code class="xref py py-class docutils literal notranslate"><span class="pre">DerhamOptions</span></code></a>.
+Important arguments:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">degree=(p1,</span> <span class="pre">p2,</span> <span class="pre">p3)</span></code>: spline degree in each logical direction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bcs=(...,</span> <span class="pre">...,</span> <span class="pre">...)</span></code>: boundary conditions per direction.
+Use <code class="docutils literal notranslate"><span class="pre">None</span></code> for periodic directions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nquads</span></code> and <code class="docutils literal notranslate"><span class="pre">nquads_proj</span></code>: quadrature rules.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">polar_splines</span></code>: special smoothness treatment near polar singularities.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">local_projectors</span></code>: local commuting projectors.</p></li>
+</ol>
+<p>Periodic setup:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DerhamOptions</span>
+
+<span class="n">derham_opts</span> <span class="o">=</span> <span class="n">DerhamOptions</span><span class="p">(</span>
+    <span class="n">degree</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">bcs</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Mixed periodic/non-periodic setup:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DerhamOptions</span>
+
+<span class="n">derham_opts</span> <span class="o">=</span> <span class="n">DerhamOptions</span><span class="p">(</span>
+    <span class="n">degree</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="n">bcs</span><span class="o">=</span><span class="p">(</span>
+        <span class="p">(</span><span class="s2">&quot;dirichlet&quot;</span><span class="p">,</span> <span class="s2">&quot;free&quot;</span><span class="p">),</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="p">(</span><span class="s2">&quot;free&quot;</span><span class="p">,</span> <span class="s2">&quot;free&quot;</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">nquads</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">nquads_proj</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="n">polar_splines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">local_projectors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="api_guide.html#api-guide"><span class="std std-ref">API Guide</span></a> for the class reference and <a class="reference internal" href="subsections/numerics-geomFE.html#geomfe"><span class="std std-ref">Geometric finite elements (FEEC)</span></a> for the FEEC
+background and geometric interpretation.</p>
+</section>
+<section id="mhd-equilibrium">
+<h2>7. MHD equilibrium<a class="headerlink" href="#mhd-equilibrium" title="Link to this heading">#</a></h2>
+<p>For MHD-type setups, choose an equilibrium object and pass it via
+<code class="docutils literal notranslate"><span class="pre">equil=...</span></code> into <a class="reference internal" href="api_guide.html#struphy.Simulation" title="struphy.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a>.</p>
+<p>Homogeneous slab equilibrium:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Simulation</span><span class="p">,</span> <span class="n">equils</span>
+
+<span class="n">equil</span> <span class="o">=</span> <span class="n">equils</span><span class="o">.</span><span class="n">HomogenSlab</span><span class="p">(</span><span class="n">B0z</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">n0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span> <span class="n">equil</span><span class="o">=</span><span class="n">equil</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Sheared slab equilibrium:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">equils</span>
+
+<span class="n">equil</span> <span class="o">=</span> <span class="n">equils</span><span class="o">.</span><span class="n">ShearedSlab</span><span class="p">(</span>
+    <span class="n">a</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">R0</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span>
+    <span class="n">B0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">q0</span><span class="o">=</span><span class="mf">1.05</span><span class="p">,</span>
+    <span class="n">q1</span><span class="o">=</span><span class="mf">1.80</span><span class="p">,</span>
+    <span class="n">beta</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also use axisymmetric/toroidal equilibria such as
+<code class="docutils literal notranslate"><span class="pre">EQDSKequilibrium</span></code>, <code class="docutils literal notranslate"><span class="pre">GVECequilibrium</span></code>, and <code class="docutils literal notranslate"><span class="pre">DESCequilibrium</span></code> when
+appropriate for your domain and model.</p>
+<p>For the complete list and options, see <a class="reference internal" href="subsections/equils-avail.html#equils-avail"><span class="std std-ref">Available fluid equilibria</span></a>.</p>
+</section>
+<section id="choosing-particle-parameters">
+<h2>8. Choosing particle parameters<a class="headerlink" href="#choosing-particle-parameters" title="Link to this heading">#</a></h2>
+<p>Particle species are configured through
+<a class="reference internal" href="api_guide.html#id0" title="struphy.models.species.ParticleSpecies.set_markers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_markers()</span></code></a>.
+This method collects all marker-related setup in one place:</p>
+<ol class="arabic simple">
+<li><p>marker loading,</p></li>
+<li><p>weight handling,</p></li>
+<li><p>boundary behavior,</p></li>
+<li><p>sorting,</p></li>
+<li><p>particle diagnostics output,</p></li>
+<li><p>marker-array buffer size.</p></li>
+</ol>
+<p>Detailed setup example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BinningPlot</span><span class="p">,</span>
+    <span class="n">BoundaryParameters</span><span class="p">,</span>
+    <span class="n">KernelDensityPlot</span><span class="p">,</span>
+    <span class="n">LoadingParameters</span><span class="p">,</span>
+    <span class="n">SavingParameters</span><span class="p">,</span>
+    <span class="n">SortingParameters</span><span class="p">,</span>
+    <span class="n">WeightsParameters</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">loading_params</span> <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span>
+    <span class="n">Np</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span>
+    <span class="n">loading</span><span class="o">=</span><span class="s2">&quot;sobol_standard&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">weights_params</span> <span class="o">=</span> <span class="n">WeightsParameters</span><span class="p">(</span>
+    <span class="n">control_variate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">boundary_params</span> <span class="o">=</span> <span class="n">BoundaryParameters</span><span class="p">()</span>
+
+<span class="n">sorting_params</span> <span class="o">=</span> <span class="n">SortingParameters</span><span class="p">(</span>
+    <span class="n">do_sort</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">sorting_frequency</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">boxes_per_dim</span><span class="o">=</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">phase_plot</span> <span class="o">=</span> <span class="n">BinningPlot</span><span class="p">(</span>
+    <span class="nb">slice</span><span class="o">=</span><span class="s2">&quot;e1_v1&quot;</span><span class="p">,</span>
+    <span class="n">n_bins</span><span class="o">=</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
+    <span class="n">ranges</span><span class="o">=</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">)),</span>
+<span class="p">)</span>
+
+<span class="n">kde_plot</span> <span class="o">=</span> <span class="n">KernelDensityPlot</span><span class="p">(</span>
+    <span class="n">pts_e1</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+    <span class="n">pts_e2</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+    <span class="n">pts_e3</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">saving_params</span> <span class="o">=</span> <span class="n">SavingParameters</span><span class="p">(</span>
+    <span class="n">n_markers</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">binning_plots</span><span class="o">=</span><span class="p">(</span><span class="n">phase_plot</span><span class="p">,),</span>
+    <span class="n">kernel_density_plots</span><span class="o">=</span><span class="p">(</span><span class="n">kde_plot</span><span class="p">,),</span>
+<span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span>
+    <span class="n">loading_params</span><span class="o">=</span><span class="n">loading_params</span><span class="p">,</span>
+    <span class="n">weights_params</span><span class="o">=</span><span class="n">weights_params</span><span class="p">,</span>
+    <span class="n">boundary_params</span><span class="o">=</span><span class="n">boundary_params</span><span class="p">,</span>
+    <span class="n">sorting_params</span><span class="o">=</span><span class="n">sorting_params</span><span class="p">,</span>
+    <span class="n">saving_params</span><span class="o">=</span><span class="n">saving_params</span><span class="p">,</span>
+    <span class="n">bufsize</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Practical notes:</p>
+<ol class="arabic simple">
+<li><p>start with moderate <code class="docutils literal notranslate"><span class="pre">Np</span></code> and increase only after diagnostics look right,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">do_sort=True</span></code> is often beneficial for large runs,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bufsize</span></code> trades memory for safer marker-array headroom.</p></li>
+</ol>
+<p>See <a class="reference internal" href="api_guide.html#api-guide"><span class="std std-ref">API Guide</span></a> for all marker parameter classes.</p>
+</section>
+<section id="setting-propagator-options">
+<h2>9. Setting propagator options<a class="headerlink" href="#setting-propagator-options" title="Link to this heading">#</a></h2>
+<p>Each model provides a model-specific propagator collection under
+<code class="docutils literal notranslate"><span class="pre">model.propagators</span></code>.
+You configure each propagator through its own <code class="docutils literal notranslate"><span class="pre">Options</span></code> dataclass.</p>
+<p>Default options:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">maxwell</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">maxwell</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Options with explicit variable binding:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span>
+    <span class="n">b2_var</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">b_field</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Coupling/initial operators (if present in your model):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">coupling_va</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">coupling_va</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">initial_poisson</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">initial_poisson</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To discover available propagators for a model, inspect:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">prop_list</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Always use options from the same propagator object, i.e.
+<code class="docutils literal notranslate"><span class="pre">model.propagators.NAME.Options(...)</span></code>.</p>
+</section>
+<section id="setting-initial-conditions">
+<h2>10. Setting initial conditions<a class="headerlink" href="#setting-initial-conditions" title="Link to this heading">#</a></h2>
+<p>Initial-condition setup depends on variable type. In the API guide, see
+<a class="reference internal" href="api_guide.html#struphy.models.variables.FEECVariable" title="struphy.models.variables.FEECVariable"><code class="xref py py-class docutils literal notranslate"><span class="pre">FEECVariable</span></code></a> and
+<a class="reference internal" href="api_guide.html#struphy.models.variables.PICVariable" title="struphy.models.variables.PICVariable"><code class="xref py py-class docutils literal notranslate"><span class="pre">PICVariable</span></code></a>.</p>
+<section id="feec-variables-grid-based-fields">
+<h3>FEEC variables (grid-based fields)<a class="headerlink" href="#feec-variables-grid-based-fields" title="Link to this heading">#</a></h3>
+<p>For FEEC variables, a common workflow is:</p>
+<ol class="arabic simple">
+<li><p>optional background via <code class="xref py py-class docutils literal notranslate"><span class="pre">FieldsBackground</span></code>,</p></li>
+<li><p>optional perturbation via <a class="reference internal" href="api_guide.html#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Perturbation</span></code></a>.</p></li>
+</ol>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">FieldsBackground</span><span class="p">,</span> <span class="n">perturbations</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">phi</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span>
+    <span class="n">FieldsBackground</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;LogicalConst&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,),</span> <span class="n">variable</span><span class="o">=</span><span class="s2">&quot;phi0&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">phi</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span>
+    <span class="n">perturbations</span><span class="o">.</span><span class="n">ModesCos</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="n">amps</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,)),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="pic-variables-particle-distributions">
+<h3>PIC variables (particle distributions)<a class="headerlink" href="#pic-variables-particle-distributions" title="Link to this heading">#</a></h3>
+<p>For particle variables, a background distribution is mandatory.
+Without a particle background, allocation fails.</p>
+<p>Example background and perturbed initial condition:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">maxwellians</span><span class="p">,</span> <span class="n">perturbations</span>
+
+<span class="c1"># Mandatory background</span>
+<span class="n">f0_a</span> <span class="o">=</span> <span class="n">maxwellians</span><span class="o">.</span><span class="n">Maxwellian3D</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">u1</span><span class="o">=</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="n">f0_b</span> <span class="o">=</span> <span class="n">maxwellians</span><span class="o">.</span><span class="n">Maxwellian3D</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">u1</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="n">background</span> <span class="o">=</span> <span class="n">f0_a</span> <span class="o">+</span> <span class="n">f0_b</span>
+<span class="n">model</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+
+<span class="c1"># Optional explicit initial condition: if omitted, initial condition = background</span>
+<span class="n">pert</span> <span class="o">=</span> <span class="n">perturbations</span><span class="o">.</span><span class="n">ModesCos</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="n">amps</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,))</span>
+<span class="n">f1_a</span> <span class="o">=</span> <span class="n">maxwellians</span><span class="o">.</span><span class="n">Maxwellian3D</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">pert</span><span class="p">),</span> <span class="n">u1</span><span class="o">=</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="n">f1_b</span> <span class="o">=</span> <span class="n">maxwellians</span><span class="o">.</span><span class="n">Maxwellian3D</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">pert</span><span class="p">),</span> <span class="n">u1</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="n">init</span> <span class="o">=</span> <span class="n">f1_a</span> <span class="o">+</span> <span class="n">f1_b</span>
+<span class="n">model</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_initial_condition</span><span class="p">(</span><span class="n">init</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="common-pitfalls">
+<h3>Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Missing PIC background:
+<code class="docutils literal notranslate"><span class="pre">model.kinetic_ions.var.add_background(...)</span></code> must be called.</p></li>
+<li><p>Inconsistent setup:
+choose <code class="docutils literal notranslate"><span class="pre">domain</span></code>, <code class="docutils literal notranslate"><span class="pre">grid</span></code>, and <code class="docutils literal notranslate"><span class="pre">DerhamOptions</span></code> jointly.</p></li>
+<li><p>No output saved:
+set <code class="docutils literal notranslate"><span class="pre">save_data=True</span></code> on variables you want in diagnostics.</p></li>
+</ol>
+<p>After initial conditions are set, launch the run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="post-processing-and-visualization">
+<h2>11. Post-processing and visualization<a class="headerlink" href="#post-processing-and-visualization" title="Link to this heading">#</a></h2>
+<p>After <code class="docutils literal notranslate"><span class="pre">sim.run()</span></code> finishes, two methods give access to simulation results:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sim.pproc()</span></code> — reads raw HDF5 data written during the run, evaluates
+spline fields on a grid, and writes processed arrays to disk into a
+<code class="docutils literal notranslate"><span class="pre">post_processing/</span></code> sub-folder inside the output directory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sim.load_plotting_data()</span></code> — reads those processed files back into
+memory and attaches the data as attributes on <code class="docutils literal notranslate"><span class="pre">sim</span></code>.</p></li>
+</ol>
+<p>The typical post-processing workflow is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+</pre></div>
+</div>
+<section id="sim-pproc">
+<h3><code class="docutils literal notranslate"><span class="pre">sim.pproc()</span></code><a class="headerlink" href="#sim-pproc" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">pproc</span></code> accepts several keyword arguments that control what is evaluated
+and how:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">pproc</span><span class="p">(</span>
+    <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>              <span class="c1"># evaluate every N-th saved time step</span>
+    <span class="n">celldivide</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>        <span class="c1"># sub-divide each grid cell for smoother output</span>
+    <span class="n">physical</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>      <span class="c1"># also evaluate fields in physical coordinates</span>
+    <span class="n">guiding_center</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># compute guiding-center coordinates for markers</span>
+    <span class="n">classify</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>      <span class="c1"># classify particles by trapping/passing etc.</span>
+    <span class="n">create_vtk</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>     <span class="c1"># write VTK files for 3D visualization</span>
+    <span class="n">time_trace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>    <span class="c1"># plot scalar diagnostics time traces</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>All arguments are optional and default to the values shown above.
+Use <code class="docutils literal notranslate"><span class="pre">step</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> to skip snapshots and speed up post-processing on large runs.
+Use <code class="docutils literal notranslate"><span class="pre">physical=True</span></code> to get field components in physical Cartesian coordinates
+in addition to the default logical-coordinate evaluation.</p>
+</section>
+<section id="sim-load-plotting-data">
+<h3><code class="docutils literal notranslate"><span class="pre">sim.load_plotting_data()</span></code><a class="headerlink" href="#sim-load-plotting-data" title="Link to this heading">#</a></h3>
+<p>After calling <code class="docutils literal notranslate"><span class="pre">pproc</span></code>, <code class="docutils literal notranslate"><span class="pre">load_plotting_data</span></code> populates the following
+attributes on the <code class="docutils literal notranslate"><span class="pre">sim</span></code> object:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sim.t_grid</span></code> — 1D array of saved simulation times.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sim.grids_log</span></code> — list of 3D arrays with logical-coordinate grid points,
+one per direction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sim.grids_phy</span></code> — list of 3D arrays with physical-coordinate grid points,
+one per direction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sim.spline_values</span></code> — evaluated FEEC field data, organized by species
+and variable name.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sim.orbits</span></code> — particle-orbit arrays, shape <code class="docutils literal notranslate"><span class="pre">(time,</span> <span class="pre">particles,</span> <span class="pre">attributes)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sim.f</span></code> — binned distribution-function snapshots, organized by species and
+phase-space slice.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sim.n_sph</span></code> — SPH-reconstructed density fields (for SPH-type runs).</p></li>
+</ol>
+</section>
+<section id="plotting-field-data">
+<h3>Plotting field data<a class="headerlink" href="#plotting-field-data" title="Link to this heading">#</a></h3>
+<p>FEEC field data is stored under <code class="docutils literal notranslate"><span class="pre">sim.spline_values</span></code> indexed by species and
+variable name. The inner container for each variable is a dict-like object
+mapping a simulation time (float key) to the evaluated array:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Access the electric field log for the em_fields species</span>
+<span class="n">e_log</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">spline_values</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">e_field_log</span>
+
+<span class="c1"># Plot the first component along the first direction at the last saved time</span>
+<span class="n">t_last</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">e_log</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">e1_snapshot</span> <span class="o">=</span> <span class="n">e_log</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">t_last</span><span class="p">][</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># component 0, slice along eta1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">grids_phy</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>                 <span class="c1"># physical x-coordinates</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">e1_snapshot</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;E_1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Electric field at t = </span><span class="si">{</span><span class="n">t_last</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>For a field saved with <code class="docutils literal notranslate"><span class="pre">save_data</span> <span class="pre">=</span> <span class="pre">True</span></code>, the variable name in
+<code class="docutils literal notranslate"><span class="pre">spline_values</span></code> follows the pattern <code class="docutils literal notranslate"><span class="pre">&lt;variable_name&gt;_log</span></code>.</p>
+</section>
+<section id="plotting-distribution-function-slices">
+<h3>Plotting distribution function slices<a class="headerlink" href="#plotting-distribution-function-slices" title="Link to this heading">#</a></h3>
+<p>Binned particle data is stored under <code class="docutils literal notranslate"><span class="pre">sim.f</span></code> after <code class="docutils literal notranslate"><span class="pre">load_plotting_data()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Retrieve the phase-space slice defined in BinningPlot(slice=&#39;e1_v1&#39;, ...)</span>
+<span class="n">slice_data</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">e1_v1</span>
+
+<span class="c1"># f_binned contains the full-f distribution for each saved time step</span>
+<span class="c1"># delta_f_binned is the perturbation w.r.t. the background</span>
+<span class="n">t_last</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">slice_data</span><span class="o">.</span><span class="n">f_binned</span><span class="p">)</span>
+<span class="n">f2d</span> <span class="o">=</span> <span class="n">slice_data</span><span class="o">.</span><span class="n">f_binned</span><span class="p">[</span><span class="n">t_last</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">f2d</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;eta1 bin&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;v1 bin&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;f&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Phase-space distribution at t = </span><span class="si">{</span><span class="n">t_last</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="plotting-particle-orbits">
+<h3>Plotting particle orbits<a class="headerlink" href="#plotting-particle-orbits" title="Link to this heading">#</a></h3>
+<p>If <code class="docutils literal notranslate"><span class="pre">n_markers</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> was set in
+<a class="reference internal" href="api_guide.html#struphy.particles.parameters.SavingParameters" title="struphy.particles.parameters.SavingParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">SavingParameters</span></code></a>, individual marker
+trajectories are available under <code class="docutils literal notranslate"><span class="pre">sim.orbits</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Shape: (n_timesteps, n_saved_markers, n_attributes)</span>
+<span class="c1"># Column layout: [id, eta1, eta2, eta3, v1, v2, v3, weight]</span>
+<span class="n">orb</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">orbits</span><span class="o">.</span><span class="n">kinetic_ions</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">orb</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">orb</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>  <span class="c1"># eta1 vs eta3 for marker 0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;eta1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;eta3&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Marker orbit (particle 0)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="loading-data-without-a-sim-object">
+<h3>Loading data without a <code class="docutils literal notranslate"><span class="pre">sim</span></code> object<a class="headerlink" href="#loading-data-without-a-sim-object" title="Link to this heading">#</a></h3>
+<p>Post-processed data can also be loaded directly from an output folder path,
+without needing to reconstruct the <code class="docutils literal notranslate"><span class="pre">Simulation</span></code> object:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy.post_processing.post_processing_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">PlottingData</span>
+
+<span class="n">pdata</span> <span class="o">=</span> <span class="n">PlottingData</span><span class="p">(</span><span class="n">path_out</span><span class="o">=</span><span class="s2">&quot;./runs/vm1s_scan_A/sim_1&quot;</span><span class="p">)</span>
+<span class="n">pdata</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="c1"># All the same attributes are available directly on pdata:</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">pdata</span><span class="o">.</span><span class="n">grids_phy</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">e_log</span> <span class="o">=</span> <span class="n">pdata</span><span class="o">.</span><span class="n">spline_values</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">e_field_log</span>
+</pre></div>
+</div>
+</section>
+<section id="vtk-output-for-paraview-and-pyvista">
+<h3>VTK output for ParaView and PyVista<a class="headerlink" href="#vtk-output-for-paraview-and-pyvista" title="Link to this heading">#</a></h3>
+<p>If you call <code class="docutils literal notranslate"><span class="pre">sim.pproc(create_vtk=True)</span></code>, Struphy writes structured-grid VTK
+files (<code class="docutils literal notranslate"><span class="pre">.vts</span></code>) inside the post-processing folder, grouped by species.
+Typical locations are:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;path_out&gt;/post_processing/fields_data/&lt;species&gt;/vtk/*.vts</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;path_out&gt;/post_processing/fields_data/&lt;species&gt;/vtk_phy/*.vts</span></code>
+(if <code class="docutils literal notranslate"><span class="pre">physical=True</span></code> was requested in <code class="docutils literal notranslate"><span class="pre">pproc</span></code>)</p></li>
+</ol>
+<p>You can discover all generated VTK files with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">path_out</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">path_out</span><span class="p">)</span>
+<span class="n">vtk_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">path_out</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;post_processing/fields_data/*/vtk/*.vts&quot;</span><span class="p">))</span>
+<span class="n">vtk_phy_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">path_out</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;post_processing/fields_data/*/vtk_phy/*.vts&quot;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">vtk_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> logical VTK files&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">vtk_phy_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> physical VTK files&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">vtk_files</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example:&quot;</span><span class="p">,</span> <span class="n">vtk_files</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Open in ParaView (GUI workflow):</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">-&gt;</span> <span class="pre">Open</span></code> and select one or more <code class="docutils literal notranslate"><span class="pre">.vts</span></code> files.</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Apply</span></code>.</p></li>
+<li><p>Use filters like <code class="docutils literal notranslate"><span class="pre">Slice</span></code>, <code class="docutils literal notranslate"><span class="pre">Contour</span></code>, and <code class="docutils literal notranslate"><span class="pre">Glyph</span></code> for field analysis.</p></li>
+</ol>
+<p>Open in PyVista (Python workflow):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
+
+<span class="c1"># Pick one VTK snapshot</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">vtk_files</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Available point-data arrays:&quot;</span><span class="p">,</span> <span class="n">mesh</span><span class="o">.</span><span class="n">point_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+<span class="c1"># Replace &#39;array_name&#39; with one key from mesh.point_data.keys()</span>
+<span class="n">array_name</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">point_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">scalars</span><span class="o">=</span><span class="n">array_name</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">add_axes</span><span class="p">()</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This VTK path is usually the fastest way to inspect full 3D structure in large
+runs, while <code class="docutils literal notranslate"><span class="pre">sim.load_plotting_data()</span></code> is often more convenient for custom
+Matplotlib analysis scripts.</p>
+</section>
+</section>
+<section id="code-profiling">
+<span id="id2"></span><h2>12. Code Profiling<a class="headerlink" href="#code-profiling" title="Link to this heading">#</a></h2>
+<p>Struphy offers two complementary profiling paths:</p>
+<ol class="arabic simple">
+<li><p>Python <code class="xref py py-mod docutils literal notranslate"><span class="pre">line_profiler</span></code> for line-by-line timing of selected functions.
+This is the right tool when you want to locate hotspots inside a small
+number of functions and inspect the cost of individual statements.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ProfileManager</span></code> for simulation-level profiling.
+This is the built-in instrumentation used by <a class="reference internal" href="api_guide.html#struphy.Simulation" title="struphy.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a>
+to record coarse profiling regions such as <code class="docutils literal notranslate"><span class="pre">model.integrate</span></code> and to
+collect time traces over a full run.</p></li>
+</ol>
+<p>The two tools are usually used together: <code class="docutils literal notranslate"><span class="pre">line_profiler</span></code> helps with local
+optimization, while <code class="docutils literal notranslate"><span class="pre">ProfileManager</span></code> shows where time is spent across the
+whole simulation workflow.</p>
+<section id="line-profiler">
+<h3>line_profiler<a class="headerlink" href="#line-profiler" title="Link to this heading">#</a></h3>
+<p>The Python package <a class="reference external" href="https://kernprof.readthedocs.io/en/latest/">line_profiler</a>
+profiles individual lines inside decorated functions. Struphy already imports
+<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">line_profiler</span> <span class="pre">import</span> <span class="pre">profile</span></code> in the relevant modules, so the functions
+you want to inspect are marked with <code class="docutils literal notranslate"><span class="pre">&#64;profile</span></code> in the source code.</p>
+<p>To enable line profiling, run the script with the environment variable
+<code class="docutils literal notranslate"><span class="pre">LINE_PROFILE=1</span></code> set. The repository CI uses the same activation pattern:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">LINE_PROFILE</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>python<span class="w"> </span>test.py
+</pre></div>
+</div>
+<p>When profiling is enabled, the decorated functions are recorded and the run
+prints a line-by-line summary at the end. The output shows the standard
+<code class="docutils literal notranslate"><span class="pre">line_profiler</span></code> columns:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Line</span> <span class="pre">#</span></code>: source line number.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Hits</span></code>: number of executions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Time</span></code>: total time spent on the line.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Per</span> <span class="pre">Hit</span></code>: average time per execution.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">Time</span></code>: fraction of the profiled function time.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Line</span> <span class="pre">Contents</span></code>: the source line itself.</p></li>
+</ol>
+<p>For detailed inspection of a saved result, use the formatter provided by
+<code class="docutils literal notranslate"><span class="pre">line_profiler</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>line_profiler<span class="w"> </span>profile_output.lprof
+</pre></div>
+</div>
+<p>This prints the same tabular timing information in a readable form. If you use
+the repository defaults, the profiling output is written alongside the run and
+can be inspected again later from the generated <code class="docutils literal notranslate"><span class="pre">.lprof</span></code> and text output
+files.</p>
+</section>
+<section id="profilemanager">
+<h3>ProfileManager<a class="headerlink" href="#profilemanager" title="Link to this heading">#</a></h3>
+<p>Struphy’s simulation-wide profiler is configured in
+<a class="reference internal" href="api_guide.html#struphy.Simulation" title="struphy.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a> through <code class="xref py py-class docutils literal notranslate"><span class="pre">ProfileManager</span></code>.
+The relevant switches live in <a class="reference internal" href="api_guide.html#struphy.EnvironmentOptions" title="struphy.EnvironmentOptions"><code class="xref py py-class docutils literal notranslate"><span class="pre">EnvironmentOptions</span></code></a>:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">profiling_activated=True</span></code> enables profiling data collection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">profiling_trace=True</span></code> additionally records a time trace of profiling
+regions.</p></li>
+</ol>
+<p>The profiler is set up automatically in <code class="docutils literal notranslate"><span class="pre">Simulation.__init__()</span></code> and finalized
+when <code class="docutils literal notranslate"><span class="pre">Simulation.run()</span></code> finishes. The simulation code already wraps key work
+inside regions such as <code class="docutils literal notranslate"><span class="pre">model.integrate</span></code> via
+<code class="docutils literal notranslate"><span class="pre">ProfileManager.profile_region(...)</span></code>.</p>
+<p>Example configuration:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvironmentOptions</span><span class="p">,</span> <span class="n">Simulation</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">EnvironmentOptions</span><span class="p">(</span>
+    <span class="n">out_folders</span><span class="o">=</span><span class="s2">&quot;./runs&quot;</span><span class="p">,</span>
+    <span class="n">sim_folder</span><span class="o">=</span><span class="s2">&quot;vm1s_profile&quot;</span><span class="p">,</span>
+    <span class="n">profiling_activated</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">profiling_trace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>When profiling is enabled, Struphy writes the main profiling data to
+<code class="docutils literal notranslate"><span class="pre">profiling_data.h5</span></code> in the simulation output folder. If <code class="docutils literal notranslate"><span class="pre">profiling_trace</span></code>
+is enabled, the run also stores <code class="docutils literal notranslate"><span class="pre">profiling_time_trace.pkl</span></code>.</p>
+<p>To read the time-trace output, call post-processing with <code class="docutils literal notranslate"><span class="pre">time_trace=True</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">pproc</span><span class="p">(</span><span class="n">time_trace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This generates profiling plots in the post-processing directory, including a
+time-versus-duration view and an interactive Gantt chart. Those plots are the
+easiest way to identify which profiling regions dominate runtime. The data
+reader behind them consumes <code class="docutils literal notranslate"><span class="pre">profiling_data.h5</span></code> and groups timings by region
+and MPI rank, so the output is suitable for both serial and parallel runs.</p>
+<p>If you need a quick sanity check, look for the total runtime of the dominant
+regions and compare them across ranks. A large imbalance between ranks usually
+means the expensive section is load-dependent rather than purely algorithmic.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="quickstart.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Quickstart</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="api_guide.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">API Guide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-a-simulation">2. Launching a simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-a-model">3. Choosing a model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-geometry">4. Choosing the geometry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#space-and-time-grids">5. Space and time grids</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#de-rham-sequence">6. de Rham sequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mhd-equilibrium">7. MHD equilibrium</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-particle-parameters">8. Choosing particle parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-propagator-options">9. Setting propagator options</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-initial-conditions">10. Setting initial conditions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feec-variables-grid-based-fields">FEEC variables (grid-based fields)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pic-variables-particle-distributions">PIC variables (particle distributions)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls">Common pitfalls</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing-and-visualization">11. Post-processing and visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sim-pproc"><code class="docutils literal notranslate"><span class="pre">sim.pproc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sim-load-plotting-data"><code class="docutils literal notranslate"><span class="pre">sim.load_plotting_data()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-field-data">Plotting field data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-distribution-function-slices">Plotting distribution function slices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-particle-orbits">Plotting particle orbits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-data-without-a-sim-object">Loading data without a <code class="docutils literal notranslate"><span class="pre">sim</span></code> object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vtk-output-for-paraview-and-pyvista">VTK output for ParaView and PyVista</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-profiling">12. Code Profiling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#line-profiler">line_profiler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#profilemanager">ProfileManager</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/sections/userguide.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

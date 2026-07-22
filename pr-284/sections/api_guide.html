@@ -1,0 +1,1427 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>API Guide &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sections/api_guide';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Models" href="models.html" />
+    <link rel="prev" title="Userguide" href="userguide.html" />
+    <link href="../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userguide.html">Userguide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="userguide.html"
+                          title="previous chapter">Userguide</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="models.html"
+                          title="next chapter">Models</a></p>
+  </div></div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">API Guide</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="api-guide">
+<span id="id1"></span><h1>API Guide<a class="headerlink" href="#api-guide" title="Link to this heading">#</a></h1>
+<p>This guide takes you through the classes used in Struphy launch files generated by:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struphy params MODEL
+</pre></div>
+</div>
+<p>for a valid <code class="docutils literal notranslate"><span class="pre">MODEL</span></code> from the list of <a class="reference internal" href="models.html#models"><span class="std std-ref">Models</span></a>.
+All information for running simulations are contained and can be altered in such launch (parameter) files.
+It is recommended to generate such a file and inspect it with an editor like VScode (using Pylance).</p>
+<section id="simulation-class">
+<h2>Simulation class<a class="headerlink" href="#simulation-class" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.Simulation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.</span></span><span class="sig-name descname"><span class="pre">Simulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="subsections/models-base.html#struphy.models.base.StruphyModel" title="struphy.models.base.StruphyModel"><span class="pre">StruphyModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#struphy.EnvironmentOptions" title="struphy.io.options.EnvironmentOptions"><span class="pre">EnvironmentOptions</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">EnvironmentOptions(out_folders='/home/runner/work/struphy/struphy/doc',</span> <span class="pre">sim_folder='sim_1',</span> <span class="pre">restart=False,</span> <span class="pre">max_runtime=300,</span> <span class="pre">save_step=1,</span> <span class="pre">sort_step=0,</span> <span class="pre">num_clones=1,</span> <span class="pre">profiling_activated=False,</span> <span class="pre">profiling_trace=False)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_opts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#struphy.Time" title="struphy.io.options.Time"><span class="pre">Time</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Time(dt=0.01,</span> <span class="pre">Tend=0.03,</span> <span class="pre">split_algo='LieTrotter')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="subsections/domains-base.html#struphy.geometry.base.Domain" title="struphy.geometry.base.Domain"><span class="pre">Domain</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Cuboid(l1=0.0,</span> <span class="pre">r1=1.0,</span> <span class="pre">l2=0.0,</span> <span class="pre">r2=1.0,</span> <span class="pre">l3=0.0,</span> <span class="pre">r3=1.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equil</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium" title="struphy.fields_background.base.FluidEquilibrium"><span class="pre">FluidEquilibrium</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="subsections/dev-feec.html#struphy.topology.grids.TensorProductGrid" title="struphy.topology.grids.TensorProductGrid"><span class="pre">TensorProductGrid</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">TensorProductGrid(num_elements=(24,</span> <span class="pre">10,</span> <span class="pre">1),</span> <span class="pre">mpi_dims_mask=(True,</span> <span class="pre">True,</span> <span class="pre">True))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">derham_opts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#struphy.DerhamOptions" title="struphy.io.options.DerhamOptions"><span class="pre">DerhamOptions</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">DerhamOptions(degree=(1,</span> <span class="pre">1,</span> <span class="pre">1),</span> <span class="pre">bcs=(None,</span> <span class="pre">None,</span> <span class="pre">None),</span> <span class="pre">nquads=None,</span> <span class="pre">nquads_proj=None,</span> <span class="pre">polar_splines=False,</span> <span class="pre">local_projectors=False)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/simulation/sim.html#Simulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.Simulation" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SimulationBase</span></code></p>
+<p>Top-level class to configure and run a Struphy simulation.</p>
+<p>The <cite>Simulation</cite> class wraps model setup, MPI configuration, output
+management, normalization (units), memory allocation and time stepping.
+It initializes the model’s variables and propagators, prepares runtime
+metadata and output folders, and provides the main <cite>run()</cite> entry point
+to execute the simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<a class="reference internal" href="subsections/models-base.html#struphy.models.base.StruphyModel" title="struphy.models.base.StruphyModel"><em>StruphyModel</em></a>) – Physics model that provides species, propagators and variables.</p></li>
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the simulation.</p></li>
+<li><p><strong>description</strong> (<em>str</em><em>, </em><em>optional</em>) – Description of the simulation.</p></li>
+<li><p><strong>params_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to a Python parameter file to save alongside outputs.</p></li>
+<li><p><strong>env</strong> (<a class="reference internal" href="#struphy.EnvironmentOptions" title="struphy.EnvironmentOptions"><em>EnvironmentOptions</em></a>) – Runtime and output environment options.</p></li>
+<li><p><strong>time_opts</strong> (<a class="reference internal" href="#struphy.Time" title="struphy.Time"><em>Time</em></a>) – Time-stepping options (dt, Tend, split algorithm, …).</p></li>
+<li><p><strong>domain</strong> (<a class="reference internal" href="subsections/domains-base.html#struphy.geometry.base.Domain" title="struphy.geometry.base.Domain"><em>Domain</em></a>) – Computational domain description.</p></li>
+<li><p><strong>equil</strong> (<a class="reference internal" href="subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium" title="struphy.fields_background.base.FluidEquilibrium"><em>FluidEquilibrium</em></a><em>, </em><em>optional</em>) – Initial fluid equilibrium (may be None).</p></li>
+<li><p><strong>grid</strong> (<a class="reference internal" href="#struphy.grids.TensorProductGrid" title="struphy.grids.TensorProductGrid"><em>TensorProductGrid</em></a>) – Spatial grid used for FEEC variables.</p></li>
+<li><p><strong>derham_opts</strong> (<a class="reference internal" href="#struphy.DerhamOptions" title="struphy.DerhamOptions"><em>DerhamOptions</em></a>) – Options for discrete differential operators.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="simulation-parameters">
+<h2>Simulation parameters<a class="headerlink" href="#simulation-parameters" title="Link to this heading">#</a></h2>
+<p>For available models see <a class="reference internal" href="models.html#models"><span class="std std-ref">Models</span></a>.</p>
+<p>For domains see <a class="reference internal" href="domains.html#avail-mappings"><span class="std std-ref">Geometry</span></a>.</p>
+<p>For fluid backgrounds see <a class="reference internal" href="subsections/equils-avail.html#equils-avail"><span class="std std-ref">Available fluid equilibria</span></a>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.EnvironmentOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.</span></span><span class="sig-name descname"><span class="pre">EnvironmentOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_folders</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'/home/runner/work/struphy/struphy/doc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sim_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'sim_1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restart</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_runtime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_clones</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">profiling_activated</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">profiling_trace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/io/options.html#EnvironmentOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.EnvironmentOptions" title="Link to this definition">#</a></dt>
+<dd><p>Set environment options for launching run on current architecture
+(these options do not influence the simulation result).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_folders</strong> (<em>str</em>) – Absolute path to directory for <code class="docutils literal notranslate"><span class="pre">sim_folder</span></code>.</p></li>
+<li><p><strong>sim_folder</strong> (<em>str</em>) – Folder in <code class="docutils literal notranslate"><span class="pre">out_folders/</span></code> for the current simulation (default= <code class="docutils literal notranslate"><span class="pre">sim_1/</span></code> ).
+Will create the folder if it does not exist OR cleans the folder for new runs.</p></li>
+<li><p><strong>restart</strong> (<em>bool</em>) – Whether to restart a run (default=False).</p></li>
+<li><p><strong>max_runtime</strong> (<em>int</em>) – Maximum run time of simulation in minutes. Will finish the time integration once this limit is reached (default=300).</p></li>
+<li><p><strong>save_step</strong> (<em>int</em>) – When to save data output: every time step (save_step=1), every second time step (save_step=2), etc (default=1).</p></li>
+<li><p><strong>sort_step</strong> (<em>int</em><em>, </em><em>optional</em>) – Sort markers in memory every N time steps (default=0, which means markers are sorted only at the start of simulation)</p></li>
+<li><p><strong>num_clones</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of domain clones (default=1)</p></li>
+<li><p><strong>profiling_activated</strong> (<em>bool</em><em>, </em><em>optional</em>) – Activate profiling with scope-profiler (default=False)</p></li>
+<li><p><strong>profiling_trace</strong> (<em>bool</em><em>, </em><em>optional</em>) – Save time-trace of each profiling region (default=False)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>For profiling-related runtime options and output inspection, see <a class="reference internal" href="userguide.html#code-profiling"><span class="std std-ref">12. Code Profiling</span></a>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.BaseUnits">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.</span></span><span class="sig-name descname"><span class="pre">BaseUnits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kBT</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/io/options.html#BaseUnits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.BaseUnits" title="Link to this definition">#</a></dt>
+<dd><p>Set base units in parameter/launch files from which other units are derived. See <a class="reference internal" href="subsections/models-normalization.html#normalization"><span class="std std-ref">Normalization</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – Unit of length in meters.</p></li>
+<li><p><strong>B</strong> (<em>float</em>) – Unit of magnetic field in Tesla.</p></li>
+<li><p><strong>n</strong> (<em>float</em>) – Unit of particle number density in 1e20/m^3.</p></li>
+<li><p><strong>kBT</strong> (<em>float</em><em>, </em><em>optional</em>) – Unit of internal energy in keV.
+Only in effect if the velocity scale is set to ‘thermal’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.Time">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.</span></span><span class="sig-name descname"><span class="pre">Time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.03</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_algo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'LieTrotter'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Strang'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'LieTrotter'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/io/options.html#Time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.Time" title="Link to this definition">#</a></dt>
+<dd><p>Set options for time stepping in parameter/launch files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dt</strong> (<em>float</em>) – Time step.</p></li>
+<li><p><strong>Tend</strong> (<em>float</em>) – End time.</p></li>
+<li><p><strong>split_algo</strong> (<em>LiteralOptions.SplitAlgos</em>) – Splitting algorithm (the order of the propagators is defined in the model).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.grids.TensorProductGrid">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.grids.</span></span><span class="sig-name descname"><span class="pre">TensorProductGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_elements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(24,</span> <span class="pre">10,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mpi_dims_mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(True,</span> <span class="pre">True,</span> <span class="pre">True)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#struphy.grids.TensorProductGrid" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">OptionsBase</span></code></p>
+<p>Grid as a tensor product of 1d grids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_elements</strong> (<em>Tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>]</em>) – Number of elements in each direction.</p></li>
+<li><p><strong>mpi_dims_mask</strong> (<em>Tuple</em><em>[</em><em>bool</em><em>, </em><em>bool</em><em>, </em><em>bool</em><em>]</em>) – True if the dimension is to be used in the domain decomposition (=default for each dimension).
+If mpi_dims_mask[i]=False, the i-th dimension will not be decomposed.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.DerhamOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.</span></span><span class="sig-name descname"><span class="pre">DerhamOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1,</span> <span class="pre">1,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bcs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'free'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'dirichlet'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'free'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'dirichlet'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'free'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'dirichlet'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'free'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'dirichlet'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'free'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'dirichlet'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'free'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'dirichlet'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(None,</span> <span class="pre">None,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nquads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nquads_proj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polar_splines</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_projectors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/io/options.html#DerhamOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.DerhamOptions" title="Link to this definition">#</a></dt>
+<dd><p>Set options for the 3D discrete de Rham spaces in parameter/launch files.</p>
+<p>This dataclass controls spline degrees, boundary conditions and quadrature
+settings used to build the FEEC de Rham sequence. See <a class="reference internal" href="subsections/numerics-geomFE.html#geomfe"><span class="std std-ref">Geometric finite elements (FEEC)</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>degree</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>]</em>) – Spline degree in each logical direction <code class="docutils literal notranslate"><span class="pre">(eta_1,</span> <span class="pre">eta_2,</span> <span class="pre">eta_3)</span></code>.</p></li>
+<li><p><strong>bcs</strong> (<em>tuple</em><em>[</em><em>None</em><em> | </em><em>tuple</em><em>[</em><em>NonTrivialBC</em><em>, </em><em>NonTrivialBC</em><em>]</em><em>, </em><em>None</em><em> | </em><em>tuple</em><em>[</em><em>NonTrivialBC</em><em>, </em><em>NonTrivialBC</em><em>]</em><em>, </em><em>None</em><em> | </em><em>tuple</em><em>[</em><em>NonTrivialBC</em><em>, </em><em>NonTrivialBC</em><em>]</em><em>]</em>) – Boundary condition selector for each direction.
+Use <code class="docutils literal notranslate"><span class="pre">None</span></code> in a direction for periodic boundaries, or a tuple
+<code class="docutils literal notranslate"><span class="pre">(left,</span> <span class="pre">right)</span></code> with entries in <code class="docutils literal notranslate"><span class="pre">{&quot;free&quot;,</span> <span class="pre">&quot;dirichlet&quot;}</span></code> for non-periodic boundaries.</p></li>
+<li><p><strong>nquads</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>] </em><em>| </em><em>None</em>) – Number of Gauss-Legendre quadrature points per direction for cell
+integrals. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, backend defaults are used.</p></li>
+<li><p><strong>nquads_proj</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>] </em><em>| </em><em>None</em>) – Number of Gauss-Legendre quadrature points per direction for geometric
+projector/histopolation integrals. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, backend defaults are
+used.</p></li>
+<li><p><strong>polar_splines</strong> (<em>bool</em>) – Smoothness at a possible polar singularity at <code class="docutils literal notranslate"><span class="pre">eta_1</span> <span class="pre">=</span> <span class="pre">0</span></code>.
+<code class="docutils literal notranslate"><span class="pre">False</span></code> gives standard tensor-product splines, <code class="docutils literal notranslate"><span class="pre">True</span></code> gives C1 polar
+splines.</p></li>
+<li><p><strong>local_projectors</strong> (<em>bool</em>) – Whether to build local commuting projectors based on
+quasi-inter-/histopolation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="species-types">
+<span id="species"></span><h2>Species types<a class="headerlink" href="#species-types" title="Link to this heading">#</a></h2>
+<p>Each Struphy model is a collection of species of one of the following types:</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.models.species.FieldSpecies">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.models.species.</span></span><span class="sig-name descname"><span class="pre">FieldSpecies</span></span><a class="reference internal" href="../_modules/struphy/models/species.html#FieldSpecies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.species.FieldSpecies" title="Link to this definition">#</a></dt>
+<dd><p>Represents a field species with zero mass and charge.</p>
+<p>Field species are used to represent electromagnetic or other non-particle fields in a plasma
+model. They have no direct physical mass or charge properties (charge_number = 0, mass_number = 0),
+but may have associated equation parameters for scaled formulations.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.models.species.FluidSpecies">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.models.species.</span></span><span class="sig-name descname"><span class="pre">FluidSpecies</span></span><a class="reference internal" href="../_modules/struphy/models/species.html#FluidSpecies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.species.FluidSpecies" title="Link to this definition">#</a></dt>
+<dd><p>Represents a single fluid species evolving in 3D configuration space.</p>
+<p>FluidSpecies describes macroscopic plasma dynamics using fluid or moment-based equations
+(e.g., Euler equations, MHD equations). Each fluid species has a specific charge and mass number
+and evolves according to fluid propagators.</p>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">electrons</span> <span class="o">=</span> <span class="n">MyFluidSpecies</span><span class="p">(</span><span class="n">charge_number</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">mass_number</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">1836</span><span class="p">)</span>  <span class="c1"># for electrons</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.models.species.ParticleSpecies">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.models.species.</span></span><span class="sig-name descname"><span class="pre">ParticleSpecies</span></span><a class="reference internal" href="../_modules/struphy/models/species.html#ParticleSpecies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.species.ParticleSpecies" title="Link to this definition">#</a></dt>
+<dd><p>Represents a single kinetic species in 3D configuration space plus velocity space.</p>
+<p>ParticleSpecies describes plasma dynamics using kinetic theory via particles or markers
+in 3D + vdim (where vdim is 2 or 3) phase space. This class manages particle initialization,
+sorting, and diagnostic output.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.models.species.ParticleSpecies.set_markers">
+<span class="sig-name descname"><span class="pre">set_markers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loading_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sorting_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saving_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bufsize</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/models/species.html#ParticleSpecies.set_markers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.species.ParticleSpecies.set_markers" title="Link to this definition">#</a></dt>
+<dd><p>Configure marker initialization and parameters.</p>
+</dd></dl>
+
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">electrons</span> <span class="o">=</span> <span class="n">MyParticleSpecies</span><span class="p">(</span><span class="n">charge_number</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">mass_number</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">1836</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">load_params</span> <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span><span class="n">Np</span><span class="o">=</span><span class="mi">100000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">electrons</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span><span class="n">loading_params</span><span class="o">=</span><span class="n">load_params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</section>
+<section id="variable-types">
+<h2>Variable types<a class="headerlink" href="#variable-types" title="Link to this heading">#</a></h2>
+<p>Each species can contain multiple variables.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.models.variables.PICVariable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.models.variables.</span></span><span class="sig-name descname"><span class="pre">PICVariable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Particles6D'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'DeltaFParticles6D'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Particles5D'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Particles3D'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Particles6D'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/models/variables.html#PICVariable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.variables.PICVariable" title="Link to this definition">#</a></dt>
+<dd><p>Kinetic variable using Particle-In-Cell (PIC) discretization in phase space.</p>
+<p>PICVariable represents kinetic distribution functions discretized via marker/particle methods
+in 3D configuration space plus velocity space (3D+2D or 3D+3D). Supports various phase-space
+decompositions for efficient kinetic simulations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>space</strong> (<em>str</em>) – Phase space decomposition. Options include, among others:
+- ‘Particles6D’: Full 3D config + 3D velocity space
+- ‘Particles5D’: 3D config + 2D gyro-velocity space (for strong magnetic fields)</p></li>
+<li><p><strong>particles</strong> (<a class="reference internal" href="subsections/dev-pic.html#struphy.pic.base.Particles" title="struphy.pic.base.Particles"><em>Particles</em></a>) – The marker/particle object managing kinetic data. Only available after <cite>allocate()</cite>.</p></li>
+<li><p><strong>particles_class</strong> (<em>type</em>) – Reference to the Particles class corresponding to the space.</p></li>
+<li><p><strong>species</strong> (<a class="reference internal" href="#struphy.models.species.ParticleSpecies" title="struphy.models.species.ParticleSpecies"><em>ParticleSpecies</em></a>) – Parent kinetic species containing this variable.</p></li>
+<li><p><strong>backgrounds</strong> (<a class="reference internal" href="subsections/kinetic-bckgr-base.html#struphy.kinetic_background.base.KineticBackground" title="struphy.kinetic_background.base.KineticBackground"><em>KineticBackground</em></a>) – Mandatory equilibrium distribution function (e.g., Maxwellian).</p></li>
+<li><p><strong>initial_condition</strong> (<a class="reference internal" href="subsections/kinetic-bckgr-base.html#struphy.kinetic_background.base.KineticBackground" title="struphy.kinetic_background.base.KineticBackground"><em>KineticBackground</em></a>) – The initial kinetic distribution. If not explicitly set, uses the background.</p></li>
+<li><p><strong>perturbations</strong> (<a class="reference internal" href="#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><em>Perturbation</em></a><em> | </em><em>list</em><em>[</em><a class="reference internal" href="#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><em>Perturbation</em></a><em>] </em><em>| </em><em>None</em>) – Perturbations to moments of the distribution function.</p></li>
+<li><p><strong>n_as_volume_form</strong> (<em>bool</em>) – Whether number density is represented as a differential form (volume-weighted) or scalar.</p></li>
+<li><p><strong>n_to_save</strong> (<em>int</em>) – Number of markers for which trajectories are saved.</p></li>
+<li><p><strong>saved_markers</strong> (<em>ndarray</em>) – Array storing saved marker data.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.models.variables.PICVariable.add_background">
+<span class="sig-name descname"><span class="pre">add_background</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">background</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_as_volume_form</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/models/variables.html#PICVariable.add_background"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.variables.PICVariable.add_background" title="Link to this definition">#</a></dt>
+<dd><p>Set mandatory equilibrium distribution (e.g., Maxwellian).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.models.variables.PICVariable.add_initial_condition">
+<span class="sig-name descname"><span class="pre">add_initial_condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/models/variables.html#PICVariable.add_initial_condition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.variables.PICVariable.add_initial_condition" title="Link to this definition">#</a></dt>
+<dd><p>Set initial kinetic distribution (must be consistent with background).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.models.variables.PICVariable.show_initial_condition">
+<span class="sig-name descname"><span class="pre">show_initial_condition</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/models/variables.html#PICVariable.show_initial_condition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.variables.PICVariable.show_initial_condition" title="Link to this definition">#</a></dt>
+<dd><p>Display current initial condition information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.models.variables.PICVariable.allocate">
+<span class="sig-name descname"><span class="pre">allocate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clone_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">derham</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equil</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_equil</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/models/variables.html#PICVariable.allocate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.variables.PICVariable.allocate" title="Link to this definition">#</a></dt>
+<dd><p>Initialize particles and allocate marker arrays.</p>
+</dd></dl>
+
+<div class="admonition-notes admonition">
+<p class="admonition-title">Notes</p>
+<p>The background is mandatory and often used for noise reduction. The initial condition should be
+consistent with the background to avoid numerical artifacts.</p>
+<p>If no initial condition is specified, the background is used as the initial condition.
+If both are specified, they should be the same base distribution with perturbations on top.</p>
+</div>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">electrons</span> <span class="o">=</span> <span class="n">PICVariable</span><span class="p">(</span><span class="n">space</span><span class="o">=</span><span class="s1">&#39;Particles6D&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxwellian</span> <span class="o">=</span> <span class="n">Maxwellian3D</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">vth2</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">electrons</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">maxwellian</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pert</span> <span class="o">=</span> <span class="n">TorusModesCos</span><span class="p">(</span><span class="n">amps</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">electrons</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span><span class="n">pert</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.models.variables.FEECVariable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.models.variables.</span></span><span class="sig-name descname"><span class="pre">FEECVariable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'H1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Hcurl'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Hdiv'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'L2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'H1vec'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'H1'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/models/variables.html#FEECVariable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.variables.FEECVariable" title="Link to this definition">#</a></dt>
+<dd><p>Grid-based finite element variable using FEEC (Finite Element Exterior Calculus) discretization.</p>
+<p>FEECVariable represents field quantities discretized on a computational grid using finite element
+methods. It supports arbitrary FEEC spaces (H1, Hdiv, Hcurl, L2) and is used for electromagnetic
+fields, fluid moments, or other spatially distributed quantities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>space</strong> (<em>str</em>) – The FEEC function space. Options: ‘H1’, ‘HDiv’, ‘HCurl’, ‘L2’.
+Determines the continuity and smoothness properties of the discretization.</p>
+</dd>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>space</strong> (<em>str</em>) – The FEEC function space. Options: ‘H1’, ‘HDiv’, ‘HCurl’, ‘L2’.
+Determines the continuity and smoothness properties of the discretization.</p></li>
+<li><p><strong>spline</strong> (<a class="reference internal" href="subsections/dev-feec.html#struphy.feec.psydac_derham.SplineFunction" title="struphy.feec.psydac_derham.SplineFunction"><em>SplineFunction</em></a>) – The underlying spline-based representation of the field on the computational mesh.
+Only available after calling <cite>allocate()</cite>.</p></li>
+<li><p><strong>species</strong> (<a class="reference internal" href="#struphy.models.species.FieldSpecies" title="struphy.models.species.FieldSpecies"><em>FieldSpecies</em></a><em> | </em><a class="reference internal" href="#struphy.models.species.FluidSpecies" title="struphy.models.species.FluidSpecies"><em>FluidSpecies</em></a>) – Parent species containing this variable.</p></li>
+<li><p><strong>backgrounds</strong> (<a class="reference internal" href="#struphy.io.options.FieldsBackground" title="struphy.io.options.FieldsBackground"><em>FieldsBackground</em></a><em> | </em><em>None</em>) – Equilibrium fields added to initial conditions.</p></li>
+<li><p><strong>perturbations</strong> (<a class="reference internal" href="#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><em>Perturbation</em></a><em> | </em><em>list</em><em>[</em><a class="reference internal" href="#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><em>Perturbation</em></a><em>] </em><em>| </em><em>None</em>) – Initial perturbations added to backgrounds.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.models.variables.FEECVariable.add_background">
+<span class="sig-name descname"><span class="pre">add_background</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">background</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/models/variables.html#FEECVariable.add_background"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.variables.FEECVariable.add_background" title="Link to this definition">#</a></dt>
+<dd><p>Add an equilibrium field background.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.models.variables.FEECVariable.add_perturbation">
+<span class="sig-name descname"><span class="pre">add_perturbation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perturbation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/models/variables.html#FEECVariable.add_perturbation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.variables.FEECVariable.add_perturbation" title="Link to this definition">#</a></dt>
+<dd><p>Add initial perturbations to the field.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.models.variables.FEECVariable.allocate">
+<span class="sig-name descname"><span class="pre">allocate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">derham</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equil</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/models/variables.html#FEECVariable.allocate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.variables.FEECVariable.allocate" title="Link to this definition">#</a></dt>
+<dd><p>Allocate spline function and initialize on the mesh.</p>
+</dd></dl>
+
+<div class="admonition-notes admonition">
+<p class="admonition-title">Notes</p>
+<p>Initial conditions are constructed by combining backgrounds and perturbations:
+initial_field = background(s) + perturbation(s)</p>
+<p>If neither background nor perturbation is specified, the variable initializes to zero.</p>
+</div>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">E_field</span> <span class="o">=</span> <span class="n">FEECVariable</span><span class="p">(</span><span class="n">space</span><span class="o">=</span><span class="s1">&#39;Hdiv&#39;</span><span class="p">)</span>  <span class="c1"># For electric field</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E_field</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">FieldsBackground</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="n">magnitude</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.models.variables.SPHVariable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.models.variables.</span></span><span class="sig-name descname"><span class="pre">SPHVariable</span></span><a class="reference internal" href="../_modules/struphy/models/variables.html#SPHVariable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.variables.SPHVariable" title="Link to this definition">#</a></dt>
+<dd><p>Fluid variable using Smoothed Particle Hydrodynamics (SPH) discretization.</p>
+<p>SPHVariable represents macroscopic fluid quantities (density, velocity, temperature) using
+SPH methods, where fields are reconstructed from marker positions and properties. This is a
+particle-based Lagrangian approach to fluid dynamics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>space</strong> (<em>str</em>) – Always ‘ParticlesSPH’ for SPH method.</p></li>
+<li><p><strong>particles</strong> (<em>ParticlesSPH</em>) – The SPH marker/particle object. Only available after <cite>allocate()</cite>.</p></li>
+<li><p><strong>particles_class</strong> (<em>type</em>) – Reference to the ParticlesSPH class.</p></li>
+<li><p><strong>particle_data</strong> (<em>dict</em>) – Dictionary storing particle-associated data fields.</p></li>
+<li><p><strong>species</strong> (<a class="reference internal" href="#struphy.models.species.ParticleSpecies" title="struphy.models.species.ParticleSpecies"><em>ParticleSpecies</em></a>) – Parent SPH species containing this variable.</p></li>
+<li><p><strong>backgrounds</strong> (<a class="reference internal" href="subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium" title="struphy.fields_background.base.FluidEquilibrium"><em>FluidEquilibrium</em></a>) – Background fluid state (density, velocity, pressure profiles).</p></li>
+<li><p><strong>perturbations</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="#struphy.initial.base.Perturbation" title="struphy.initial.base.Perturbation"><em>Perturbation</em></a><em>]</em>) – Perturbations to density (‘n’) and velocity components (‘u1’, ‘u2’, ‘u3’).
+Each component can have independent perturbations or None.</p></li>
+<li><p><strong>n_as_volume_form</strong> (<em>bool</em>) – Always True for SPH; number density represented as volume-weighted quantity.</p></li>
+<li><p><strong>n_to_save</strong> (<em>int</em>) – Number of SPH particles for which data is saved.</p></li>
+<li><p><strong>saved_markers</strong> (<em>ndarray</em>) – Array storing saved particle data.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.models.variables.SPHVariable.add_background">
+<span class="sig-name descname"><span class="pre">add_background</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">background</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/models/variables.html#SPHVariable.add_background"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.variables.SPHVariable.add_background" title="Link to this definition">#</a></dt>
+<dd><p>Set the background fluid equilibrium state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.models.variables.SPHVariable.add_perturbation">
+<span class="sig-name descname"><span class="pre">add_perturbation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">del_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_u1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_u2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_u3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/models/variables.html#SPHVariable.add_perturbation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.variables.SPHVariable.add_perturbation" title="Link to this definition">#</a></dt>
+<dd><p>Add perturbations to density and/or velocity components.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.models.variables.SPHVariable.show_perturbations">
+<span class="sig-name descname"><span class="pre">show_perturbations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/models/variables.html#SPHVariable.show_perturbations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.variables.SPHVariable.show_perturbations" title="Link to this definition">#</a></dt>
+<dd><p>Display detailed information about density and velocity perturbations.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.models.variables.SPHVariable.allocate">
+<span class="sig-name descname"><span class="pre">allocate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">derham</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equil</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projected_equil</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/models/variables.html#SPHVariable.allocate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.variables.SPHVariable.allocate" title="Link to this definition">#</a></dt>
+<dd><p>Initialize SPH particles and allocate marker arrays.</p>
+</dd></dl>
+
+<div class="admonition-notes admonition">
+<p class="admonition-title">Notes</p>
+<p>Initial conditions combine background and perturbations:
+- density: background + del_n
+- velocity: background + (del_u1, del_u2, del_u3)</p>
+<p>If neither background nor perturbations are specified, fields initialize to zero.</p>
+</div>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fluid</span> <span class="o">=</span> <span class="n">SPHVariable</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">equil</span> <span class="o">=</span> <span class="n">HomogenSlab</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fluid</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">equil</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pert</span> <span class="o">=</span> <span class="n">TorusModesCos</span><span class="p">(</span><span class="n">amps</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fluid</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span><span class="n">del_n</span><span class="o">=</span><span class="n">pert</span><span class="p">,</span> <span class="n">del_u1</span><span class="o">=</span><span class="n">pert</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</section>
+<section id="particle-parameters">
+<h2>Particle parameters<a class="headerlink" href="#particle-parameters" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-prename descclassname"><span class="pre">ParticleSpecies.</span></span><span class="sig-name descname"><span class="pre">set_markers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loading_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#struphy.particles.parameters.LoadingParameters" title="struphy.particles.parameters.LoadingParameters"><span class="pre">LoadingParameters</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#struphy.particles.parameters.WeightsParameters" title="struphy.particles.parameters.WeightsParameters"><span class="pre">WeightsParameters</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#struphy.particles.parameters.BoundaryParameters" title="struphy.particles.parameters.BoundaryParameters"><span class="pre">BoundaryParameters</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sorting_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#struphy.particles.parameters.SortingParameters" title="struphy.particles.parameters.SortingParameters"><span class="pre">SortingParameters</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saving_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#struphy.particles.parameters.SavingParameters" title="struphy.particles.parameters.SavingParameters"><span class="pre">SavingParameters</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bufsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/models/species.html#ParticleSpecies.set_markers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition">#</a></dt>
+<dd><p>Set marker parameters for loading, weight calculation, kernel density reconstruction
+and boundary conditions in parameter/launch files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>loading_params</strong> (<a class="reference internal" href="#struphy.particles.parameters.LoadingParameters" title="struphy.particles.parameters.LoadingParameters"><em>LoadingParameters</em></a>)</p></li>
+<li><p><strong>weights_params</strong> (<a class="reference internal" href="#struphy.particles.parameters.WeightsParameters" title="struphy.particles.parameters.WeightsParameters"><em>WeightsParameters</em></a>)</p></li>
+<li><p><strong>boundary_params</strong> (<a class="reference internal" href="#struphy.particles.parameters.BoundaryParameters" title="struphy.particles.parameters.BoundaryParameters"><em>BoundaryParameters</em></a>)</p></li>
+<li><p><strong>sorting_params</strong> (<a class="reference internal" href="#struphy.particles.parameters.SortingParameters" title="struphy.particles.parameters.SortingParameters"><em>SortingParameters</em></a>)</p></li>
+<li><p><strong>saving_params</strong> (<a class="reference internal" href="#struphy.particles.parameters.SavingParameters" title="struphy.particles.parameters.SavingParameters"><em>SavingParameters</em></a>)</p></li>
+<li><p><strong>bufsize</strong> (<em>float</em>) – Size of buffer (as multiple of total size, default=.25) in markers array.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.particles.parameters.LoadingParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.particles.parameters.</span></span><span class="sig-name descname"><span class="pre">LoadingParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Np</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ppc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ppb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loading</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'pseudo_random'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'sobol_standard'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'sobol_antithetic'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'external'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'restart'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'tesselation'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pseudo_random'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'uniform'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'disc'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'uniform'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specific_markers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_zero_velocity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(False,</span> <span class="pre">False,</span> <span class="pre">False)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_quad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_exrernal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_particles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_particles_abs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restart_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/particles/parameters.html#LoadingParameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.particles.parameters.LoadingParameters" title="Link to this definition">#</a></dt>
+<dd><p>Configuration for particle (marker) loading strategies and data sources.</p>
+<p>This class encapsulates all parameters needed to initialize particles in simulations,
+including population size, spatial and velocity distributions, loading algorithms, and
+restart/external data sources. Supports multiple loading strategies: Monte-Carlo based
+distributions with customizable moments, regular grid tesselation, specific manually-defined
+markers, and loading from restart or external HDF5 files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Np</strong> (<em>int</em><em>, </em><em>default=5000</em>) – Total number of particles to load into the simulation.</p></li>
+<li><p><strong>ppc</strong> (<em>int</em><em>, </em><em>optional</em>) – Particles per cell to load if a grid is defined. Cell divisions follow <code class="docutils literal notranslate"><span class="pre">domain_array</span></code>.</p></li>
+<li><p><strong>ppb</strong> (<em>int</em><em>, </em><em>optional</em>) – Particles per sorting box. Sorting boxes are defined by <code class="docutils literal notranslate"><span class="pre">boxes_per_dim</span></code>.</p></li>
+<li><p><strong>loading</strong> (<em>LiteralOptions.OptsLoading</em><em>, </em><em>default=&quot;pseudo_random&quot;</em>) – Loading algorithm strategy. Options include various Monte-Carlo methods or
+‘tesselation’ for regular grid positioning.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – Seed for the random number generator for reproducible results.
+If None, no seed is applied.</p></li>
+<li><p><strong>moments</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Mean velocities and temperatures defining the Gaussian velocity distribution.
+If None, automatically computed from the background distribution.</p></li>
+<li><p><strong>spatial</strong> (<em>LiteralOptions.OptsSpatialLoading</em><em>, </em><em>default=&quot;uniform&quot;</em>) – Spatial sampling method: ‘uniform’ samples uniformly in (eta1, eta2) coordinates,
+while ‘disc’ samples uniformly on the disc image of the coordinate space.</p></li>
+<li><p><strong>specific_markers</strong> (<em>tuple</em><em>[</em><em>tuple</em><em>]</em><em>, </em><em>optional</em>) – Manually-defined markers as tuples of phase space coordinates (floats).
+Each tuple represents a single particle’s initial state.</p></li>
+<li><p><strong>n_quad</strong> (<em>int</em><em>, </em><em>default=1</em>) – Number of quadrature points used for tesselation-based particle loading.</p></li>
+<li><p><strong>set_zero_velocity</strong> (<em>tuple</em>) – Initialize velocity of Maxwellain along selected axis to be zero.</p></li>
+<li><p><strong>dir_external</strong> (<em>str</em><em>, </em><em>optional</em>) – Absolute path to HDF5 file from which to load external marker data.</p></li>
+<li><p><strong>dir_particles_abs</strong> (<em>str</em><em>, </em><em>optional</em>) – Absolute path to HDF5 file from which to load restart marker data.</p></li>
+<li><p><strong>dir_particles</strong> (<em>str</em><em>, </em><em>optional</em>) – Relative path (relative to output folder) to HDF5 restart file for loading markers.</p></li>
+<li><p><strong>restart_key</strong> (<em>str</em><em>, </em><em>optional</em>) – HDF5 dataset key within the ‘restart/’ folder containing marker array data.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.particles.parameters.WeightsParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.particles.parameters.</span></span><span class="sig-name descname"><span class="pre">WeightsParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control_variate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reject_weights</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/particles/parameters.html#WeightsParameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.particles.parameters.WeightsParameters" title="Link to this definition">#</a></dt>
+<dd><p>Configuration for particle weight handling and variance reduction.</p>
+<p>Manages particle weighting strategies used in Monte-Carlo type simulations,
+including control variate techniques for variance reduction and weight thresholding
+to eliminate negligibly-weighted particles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>control_variate</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Whether to apply control variate variance reduction technique to particle weights.</p></li>
+<li><p><strong>reject_weights</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Whether to filter out particles with weights below the specified threshold.</p></li>
+<li><p><strong>threshold</strong> (<em>float</em><em>, </em><em>default=0.0</em>) – Minimum weight threshold. Particles with weights below this value are rejected
+when <code class="docutils literal notranslate"><span class="pre">reject_weights</span></code> is True.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.particles.parameters.BoundaryParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.particles.parameters.</span></span><span class="sig-name descname"><span class="pre">BoundaryParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'periodic'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'reflect'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'remove'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'refill'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">('periodic',</span> <span class="pre">'periodic',</span> <span class="pre">'periodic')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bc_sph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'periodic'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'mirror'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'fixed'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'noslip'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">('periodic',</span> <span class="pre">'periodic',</span> <span class="pre">'periodic')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_velocity_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/particles/parameters.html#BoundaryParameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.particles.parameters.BoundaryParameters" title="Link to this definition">#</a></dt>
+<dd><p>Configuration for boundary conditions applied to particles and kernel reconstructions.</p>
+<p>Defines how particles behave at domain boundaries (particle boundary conditions) and
+how smoothed particle hydrodynamics (SPH) kernel reconstructions are handled at domain
+edges. Supports independent boundary conditions per spatial dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bc</strong> (<em>tuple</em><em>[</em><em>LiteralOptions.OptsMarkerBC</em><em>]</em><em>, </em><em>default=</em><em>(</em><em>&quot;periodic&quot;</em><em>, </em><em>&quot;periodic&quot;</em><em>, </em><em>&quot;periodic&quot;</em><em>)</em>) – Particle boundary conditions for each spatial direction (3D). Options per direction:
+‘remove’ (delete particles), ‘reflect’ (specular reflection), ‘periodic’ (wrap around),
+or ‘refill’ (reload particles).</p></li>
+<li><p><strong>bc_refill</strong> (<em>list</em><em>, </em><em>optional</em>) – Refill strategy when ‘refill’ boundary condition is active. Either ‘inner’ or ‘outer’.</p></li>
+<li><p><strong>bc_sph</strong> (<em>tuple</em><em>[</em><em>LiteralOptions.OptsRecontructBC</em><em>]</em><em>, </em><em>default=</em><em>(</em><em>&quot;periodic&quot;</em><em>, </em><em>&quot;periodic&quot;</em><em>, </em><em>&quot;periodic&quot;</em><em>)</em>) – Boundary conditions for SPH kernel reconstruction in each spatial direction.
+Typically matches or differs from <code class="docutils literal notranslate"><span class="pre">bc</span></code> depending on reconstruction needs.</p></li>
+<li><p><strong>mean_velocity_index</strong> (<em>int</em><em>, </em><em>optional</em>) – If any boundary condition is ‘noslip’, this index specifies the position in the marker array
+where the mean velocity for the noslip condition is stored.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.particles.parameters.SortingParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.particles.parameters.</span></span><span class="sig-name descname"><span class="pre">SortingParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">do_sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sorting_frequency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boxes_per_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_bufsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dims_mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(True,</span> <span class="pre">True,</span> <span class="pre">True)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/particles/parameters.html#SortingParameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.particles.parameters.SortingParameters" title="Link to this definition">#</a></dt>
+<dd><p>Configuration for particle sorting strategies and parameters.</p>
+<p>Manages the organization of particles into spatial bins (sorting boxes) to optimize
+neighbor searches and interactions. Supports independent control over the number of
+boxes per dimension and whether to apply MPI domain decomposition along each dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>do_sort</strong> (<em>bool</em>) – Whether to sort particles in memory.</p></li>
+<li><p><strong>sorting_frequency</strong> (<em>int</em>) – The number of time steps between two sortings (=0 means no sorting is performed).</p></li>
+<li><p><strong>boxes_per_dim</strong> (<em>tuple</em><em>[</em><em>int</em><em>] </em><em>| </em><em>None</em>) – Number of sorting boxes in each direction of logical space, (n_eta1, n_eta2, n_eta3).
+If None, no sorting boxes are specified.</p></li>
+<li><p><strong>box_bufsize</strong> (<em>float</em>) – Relative buffer size for box array (default = 0.25).
+A number of 1.0 means that the box array is double the size needed to hold N/n_boxes particles,
+where N is the total number of particles.</p></li>
+<li><p><strong>dims_mask</strong> (<em>tuple</em><em>[</em><em>bool</em><em>]</em>) – True if the dimension is to be used in the domain decomposition (=default for each dimension).
+If dims_mask[i]=False, the i-th dimension will not be decomposed.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.particles.parameters.SavingParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.particles.parameters.</span></span><span class="sig-name descname"><span class="pre">SavingParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_markers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binning_plots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#struphy.particles.parameters.BinningPlot" title="struphy.particles.parameters.BinningPlot"><span class="pre">BinningPlot</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_density_plots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#struphy.particles.parameters.KernelDensityPlot" title="struphy.particles.parameters.KernelDensityPlot"><span class="pre">KernelDensityPlot</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/particles/parameters.html#SavingParameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.particles.parameters.SavingParameters" title="Link to this definition">#</a></dt>
+<dd><p>Configuration for particle data saving strategies and parameters.</p>
+<p>Manages how particle data is saved during simulations, including the frequency of saves,
+the types of data to save (single markers, full distribution vs. delta-f or kernel evaluations),
+and the output formats. Supports flexible control over what particle information is stored and when.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_markers</strong> (<em>int</em><em> | </em><em>float</em>) – Number of particles/markers for which to save trajectories.
+If float and &lt;1.0, then understood as the fraction of the total number of markers.</p></li>
+<li><p><strong>binned_data</strong> (<em>tuple</em><em>[</em><a class="reference internal" href="#struphy.particles.parameters.BinningPlot" title="struphy.particles.parameters.BinningPlot"><em>BinningPlot</em></a><em>]</em>) – A tuple of BinningPlot objects.</p></li>
+<li><p><strong>kernel_density_plots</strong> (<em>tuple</em><em>[</em><a class="reference internal" href="#struphy.particles.parameters.KernelDensityPlot" title="struphy.particles.parameters.KernelDensityPlot"><em>KernelDensityPlot</em></a><em>]</em>) – A tuple of KernelDensityPlot objects.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.particles.parameters.BinningPlot">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.particles.parameters.</span></span><span class="sig-name descname"><span class="pre">BinningPlot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slice</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'e1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ranges</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">1.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">divide_by_jac</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'density'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'current_1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'current_2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'current_3'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'energy_tensor_11'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'energy_tensor_22'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'energy_tensor_33'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'energy_tensor_12'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'energy_tensor_13'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'energy_tensor_23'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'heat_flux_1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'heat_flux_2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'heat_flux_3'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'density'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/particles/parameters.html#BinningPlot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.particles.parameters.BinningPlot" title="Link to this definition">#</a></dt>
+<dd><p>Configuration for particle phase-space binning and histogram generation.</p>
+<p>Produces binned distributions from particle data across specified phase-space coordinates.
+Supports arbitrary combinations of spatial (eta) and velocity (v) coordinates with flexible
+binning resolution and coordinate ranges. Automatically computes bin edges and allocates
+storage for full and delta-f distributions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>slice</strong> (<em>str</em><em>, </em><em>default=&quot;e1&quot;</em>) – Phase-space coordinates to bin, specified as underscore-separated coordinate names
+(e.g., ‘e1’, ‘e1_e2’, ‘e1_v1’). Valid coordinates: ‘e1’, ‘e2’, ‘e3’ (spatial),
+‘v1’, ‘v2’, ‘v3’ (velocity). Example: ‘e1’ produces 1D binning over eta1;
+‘e1_v1’ produces 2D binning over eta1 and v1.</p></li>
+<li><p><strong>n_bins</strong> (<em>int</em><em> | </em><em>tuple</em><em>[</em><em>int</em><em>]</em><em>, </em><em>default=128</em>) – Number of bins per coordinate. If int, applies to all coordinates; if tuple,
+specifies bins for each coordinate separately.</p></li>
+<li><p><strong>ranges</strong> (<em>tuple</em><em>[</em><em>float</em><em>] </em><em>| </em><em>tuple</em><em>[</em><em>tuple</em><em>[</em><em>float</em><em>]</em><em>]</em><em>, </em><em>default=</em><em>(</em><em>0.0</em><em>, </em><em>1.0</em><em>)</em>) – Binning ranges as intervals [min, max] for each coordinate. If a single tuple,
+applies to all coordinates; if nested tuples, specifies range for each coordinate.</p></li>
+<li><p><strong>divide_by_jac</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to normalize distributions by the Jacobian determinant (volume-to-0-form
+conversion). Set False to use unnormalized bin counts.</p></li>
+<li><p><strong>output_quantity</strong> (<em>LiteralOptions.BinningQuantity</em><em>, </em><em>default=&quot;density&quot;</em>) – Quantity to compute in binning: determines weighting scheme and output format.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.particles.parameters.KernelDensityPlot">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.particles.parameters.</span></span><span class="sig-name descname"><span class="pre">KernelDensityPlot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pts_e1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pts_e2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pts_e3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/particles/parameters.html#KernelDensityPlot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.particles.parameters.KernelDensityPlot" title="Link to this definition">#</a></dt>
+<dd><p>Configuration for smoothed particle hydrodynamics (SPH) density reconstructions.</p>
+<p>Evaluates particle density fields at structured grid points using SPH kernel
+interpolation. Supports 1D, 2D, and 3D evaluations with independent resolution
+control per dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pts_e1</strong> (<em>int</em><em>, </em><em>default=16</em>) – Number of evaluation grid points in the first spatial direction (eta1).</p></li>
+<li><p><strong>pts_e2</strong> (<em>int</em><em>, </em><em>default=16</em>) – Number of evaluation grid points in the second spatial direction (eta2).</p></li>
+<li><p><strong>pts_e3</strong> (<em>int</em><em>, </em><em>default=1</em>) – Number of evaluation grid points in the third spatial direction (eta3).
+Set to 1 for 2D density plots.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="fields-background">
+<h2>Fields background<a class="headerlink" href="#fields-background" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.io.options.FieldsBackground">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.io.options.</span></span><span class="sig-name descname"><span class="pre">FieldsBackground</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'LogicalConst'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'FluidEquilibrium'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'LogicalConst'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1.5,</span> <span class="pre">0.7,</span> <span class="pre">2.4)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/struphy/io/options.html#FieldsBackground"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.io.options.FieldsBackground" title="Link to this definition">#</a></dt>
+<dd><p>Set options for static fluid backgrounds/equilibria in parameter/launch files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> (<em>BackgroundTypes</em>) – Type of background.</p></li>
+<li><p><strong>values</strong> (<em>tuple</em><em>[</em><em>float</em><em>]</em>) – Values for LogicalConst on the unit cube.
+Can be length 1 for scalar functions; must be length 3 for vector-valued functions.</p></li>
+<li><p><strong>variable</strong> (<em>str</em>) – Name of the method in <a class="reference internal" href="subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium" title="struphy.fields_background.base.FluidEquilibrium"><code class="xref py py-class docutils literal notranslate"><span class="pre">FluidEquilibrium</span></code></a> that should be the background.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="perturbation-functions">
+<h2>Perturbation functions<a class="headerlink" href="#perturbation-functions" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="struphy.initial.base.Perturbation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.initial.base.</span></span><span class="sig-name descname"><span class="pre">Perturbation</span></span><a class="reference internal" href="../_modules/struphy/initial/base.html#Perturbation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.initial.base.Perturbation" title="Link to this definition">#</a></dt>
+<dd><p>Abstract base class for perturbation functions used as initial conditions in simulations.</p>
+<p>This class provides the interface and common functionality for defining perturbation fields
+in logical (eta) or physical coordinate spaces. Subclasses must implement the <code class="docutils literal notranslate"><span class="pre">__call__</span></code>
+method to define the perturbation as a callable function of spatial coordinates.</p>
+<p>The class supports flexible representation bases (p-forms, vector fields, physical coordinates)
+and allows specification of which component is perturbed for vector-valued quantities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>given_in_basis</strong> (<em>str</em>) – <p>Specifies the basis representation of the perturbation. Options:</p>
+<ul>
+<li><p>’0’, ‘1’, ‘2’, ‘3’ : Differential form basis (0-form=scalar, 1-form, etc.)</p></li>
+<li><p>’v’ : Vector field basis</p></li>
+<li><p>’physical’ : Physical (mapped) domain coordinates</p></li>
+<li><p>’physical_at_eta’ : Physical components evaluated in logical (eta) domain, u(F(eta))</p></li>
+<li><p>’norm’ : Normalized co-variant basis (<span class="math notranslate nohighlight">\(delta_i / |delta_i|\)</span>)</p></li>
+</ul>
+</p></li>
+<li><p><strong>comp</strong> (<em>int</em>) – Component index for vector-valued perturbations (0-2 for vector components,
+0 for scalar-valued functions). Default is 0.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<p>Subclasses should override <code class="docutils literal notranslate"><span class="pre">__call__</span></code> to implement specific perturbation fields:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">CustomPerturbation</span><span class="p">(</span><span class="n">Perturbation</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">given_in_basis</span> <span class="o">=</span> <span class="s1">&#39;physical&#39;</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eta1</span><span class="p">,</span> <span class="n">eta2</span><span class="p">,</span> <span class="n">eta3</span><span class="p">,</span> <span class="n">flat_eval</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">eta1</span> <span class="o">*</span> <span class="n">eta2</span>  <span class="c1"># Example perturbation field</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<p>See available <a class="reference internal" href="perturbations.html#perturbations"><span class="std std-ref">Perturbation Functions</span></a>.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="userguide.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Userguide</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="models.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Models</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-class">Simulation class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.Simulation"><code class="docutils literal notranslate"><span class="pre">Simulation</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-parameters">Simulation parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.EnvironmentOptions"><code class="docutils literal notranslate"><span class="pre">EnvironmentOptions</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.BaseUnits"><code class="docutils literal notranslate"><span class="pre">BaseUnits</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.Time"><code class="docutils literal notranslate"><span class="pre">Time</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.grids.TensorProductGrid"><code class="docutils literal notranslate"><span class="pre">TensorProductGrid</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.DerhamOptions"><code class="docutils literal notranslate"><span class="pre">DerhamOptions</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#species-types">Species types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.species.FieldSpecies"><code class="docutils literal notranslate"><span class="pre">FieldSpecies</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.species.FluidSpecies"><code class="docutils literal notranslate"><span class="pre">FluidSpecies</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.species.ParticleSpecies"><code class="docutils literal notranslate"><span class="pre">ParticleSpecies</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.species.ParticleSpecies.set_markers"><code class="docutils literal notranslate"><span class="pre">ParticleSpecies.set_markers()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-types">Variable types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.variables.PICVariable"><code class="docutils literal notranslate"><span class="pre">PICVariable</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.variables.PICVariable.add_background"><code class="docutils literal notranslate"><span class="pre">PICVariable.add_background()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.variables.PICVariable.add_initial_condition"><code class="docutils literal notranslate"><span class="pre">PICVariable.add_initial_condition()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.variables.PICVariable.show_initial_condition"><code class="docutils literal notranslate"><span class="pre">PICVariable.show_initial_condition()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.variables.PICVariable.allocate"><code class="docutils literal notranslate"><span class="pre">PICVariable.allocate()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.variables.FEECVariable"><code class="docutils literal notranslate"><span class="pre">FEECVariable</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.variables.FEECVariable.add_background"><code class="docutils literal notranslate"><span class="pre">FEECVariable.add_background()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.variables.FEECVariable.add_perturbation"><code class="docutils literal notranslate"><span class="pre">FEECVariable.add_perturbation()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.variables.FEECVariable.allocate"><code class="docutils literal notranslate"><span class="pre">FEECVariable.allocate()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.variables.SPHVariable"><code class="docutils literal notranslate"><span class="pre">SPHVariable</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.variables.SPHVariable.add_background"><code class="docutils literal notranslate"><span class="pre">SPHVariable.add_background()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.variables.SPHVariable.add_perturbation"><code class="docutils literal notranslate"><span class="pre">SPHVariable.add_perturbation()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.variables.SPHVariable.show_perturbations"><code class="docutils literal notranslate"><span class="pre">SPHVariable.show_perturbations()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.variables.SPHVariable.allocate"><code class="docutils literal notranslate"><span class="pre">SPHVariable.allocate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particle-parameters">Particle parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">ParticleSpecies.set_markers()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.particles.parameters.LoadingParameters"><code class="docutils literal notranslate"><span class="pre">LoadingParameters</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.particles.parameters.WeightsParameters"><code class="docutils literal notranslate"><span class="pre">WeightsParameters</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.particles.parameters.BoundaryParameters"><code class="docutils literal notranslate"><span class="pre">BoundaryParameters</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.particles.parameters.SortingParameters"><code class="docutils literal notranslate"><span class="pre">SortingParameters</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.particles.parameters.SavingParameters"><code class="docutils literal notranslate"><span class="pre">SavingParameters</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.particles.parameters.BinningPlot"><code class="docutils literal notranslate"><span class="pre">BinningPlot</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.particles.parameters.KernelDensityPlot"><code class="docutils literal notranslate"><span class="pre">KernelDensityPlot</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fields-background">Fields background</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.io.options.FieldsBackground"><code class="docutils literal notranslate"><span class="pre">FieldsBackground</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perturbation-functions">Perturbation functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.initial.base.Perturbation"><code class="docutils literal notranslate"><span class="pre">Perturbation</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/sections/api_guide.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

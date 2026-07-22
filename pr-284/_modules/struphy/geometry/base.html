@@ -1,0 +1,3173 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>struphy.geometry.base &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/struphy/geometry/base';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href="../../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">struphy.geometry.base</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for struphy.geometry.base</h1><div class="highlight"><pre>
+<span></span># coding: utf-8
+&quot;Base classes for mapped domains (single patch).&quot;
+
+import copy
+import inspect
+import logging
+from abc import ABCMeta, abstractmethod
+
+import cunumpy as xp
+import h5py
+from pyvista import Plotter, StructuredGrid
+from scipy.sparse import csc_matrix, kron
+from scipy.sparse.linalg import splu, spsolve
+
+import struphy.bsplines.bsplines as bsp
+from struphy.geometry import evaluation_kernels, transform_kernels
+from struphy.kernel_arguments.pusher_args_kernels import DomainArguments
+from struphy.linear_algebra import linalg_kron
+from struphy.utils.utils import __class_with_params_repr_no_defaults__, all_class_params_are_default, all_subclasses
+
+logger = logging.getLogger(&quot;struphy&quot;)
+
+
+<div class="viewcode-block" id="DomainMeta">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.DomainMeta">[docs]</a>
+class DomainMeta(ABCMeta):
+    def __iter__(cls):
+        return iter(all_subclasses(cls))</div>
+
+
+
+<div class="viewcode-block" id="Domain">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain">[docs]</a>
+class Domain(metaclass=DomainMeta):
+    r&quot;&quot;&quot;
+    Abstract base class for parametric domains in plasma simulations (single patch).
+
+    The Domain class represents a computational domain through a parametric mapping from a logical unit cube
+    to a physical region. This supports both analytical mappings (cylindrical, toroidal, Shafranov) and
+    spline-based isogeometric analysis (IGA) mappings.
+
+    Mathematical Background
+    -----------------------
+    The (physical) domain :math:`\Omega \subset \mathbb R^3` is an open subset of :math:`\mathbb R^3`,
+    defined by a diffeomorphism
+
+    .. math::
+
+        F:(0, 1)^3 \to \Omega\,,\qquad \boldsymbol{\eta} \mapsto F(\boldsymbol \eta) = \mathbf x\,,
+
+    mapping points :math:`\boldsymbol{\eta} \in (0, 1)^3 = \hat\Omega` of the (logical)
+    unit cube to physical points :math:`\mathbf x \in \Omega`.
+
+    The corresponding Jacobian matrix :math:`DF:\hat\Omega \to \mathbb R^{3\times 3}`,
+    volume element :math:`\sqrt g: \hat\Omega \to \mathbb R`, and metric tensor
+    :math:`G:\hat\Omega \to \mathbb R^{3\times 3}` are defined by
+
+    .. math::
+
+        DF_{i,j} = \frac{\partial F_i}{\partial \eta_j}\,,\qquad \sqrt g = |\textnormal{det}(DF)|\,,\qquad G = DF^\top DF\,.
+
+    Only right-handed mappings (:math:`\textnormal{det}(DF) &gt; 0`) are admitted.
+
+    Attributes
+    ----------
+    kind_map : int
+        Mapping type identifier:
+        - 0-9: Spline (IGA) mappings
+        - 10-19: Analytical mappings with cubic domain boundary
+        - 20-29: Cylinder and torus analytical mappings
+        - 30-39: Shafranov mappings (tokamak equilibrium)
+    params : dict
+        Mapping parameters as a dictionary for reference.
+    params_numpy : ndarray
+        Mapping parameters as a 1D numpy array for efficient computation.
+    pole : bool
+        Whether the mapping has one polar singularity point.
+    periodic_eta3 : bool
+        Whether the domain is periodic in the :math:`\eta_3` direction.
+    cx, cy, cz : ndarray
+        Control points for spline mapping components :math:`F_x`, :math:`F_y`, :math:`F_z` (3D arrays).
+    num_elements : tuple[int]
+        Number of elements in each logical direction (for spline mappings).
+    degree : tuple[int]
+        B-spline degree in each direction (for spline mappings).
+    spl_kind : tuple[bool]
+        Spline type in each direction: True for periodic, False for clamped (for spline mappings).
+    NbaseN : list[int]
+        Number of basis functions in each direction.
+    T : list[ndarray]
+        Knot vectors for each direction.
+    indN : list[ndarray]
+        Global indices of non-vanishing splines per element.
+
+    Methods
+    -------
+    __call__(*etas, change_out_order, squeeze_out, remove_outside, identity_map)
+        Evaluate the physical coordinates from logical coordinates using mapping F.
+    jacobian(*etas, transposed, change_out_order, squeeze_out, remove_outside)
+        Evaluate the Jacobian matrix DF at logical coordinates.
+    jacobian_det(*etas, squeeze_out, remove_outside)
+        Evaluate the Jacobian determinant (volume element) at logical coordinates.
+    jacobian_inv(*etas, transposed, change_out_order, squeeze_out, remove_outside)
+        Evaluate the inverse Jacobian matrix at logical coordinates.
+    metric_tensor(*etas, change_out_order, squeeze_out, remove_outside)
+        Evaluate the metric tensor G = DF^T * DF.
+    pull_back_0form(field, *etas, remove_outside)
+        Pull back scalar fields (0-forms) from physical to logical space.
+    push_forward_1form(field, *etas, remove_outside)
+        Push forward vector fields (1-forms) from logical to physical space.
+    transform(input_field, trans_type, *etas, remove_outside)
+        General transformation between different field representations.
+
+    Notes
+    -----
+    This is an abstract base class. Concrete implementations should be created in the
+    `struphy.geometry.domains` module and specify the mapping via the `kind_map` property
+    and mapping parameters.
+
+    The logical coordinates (eta1, eta2, eta3) must lie in (0, 1)^3. Points outside this
+    range are typically flagged with value -1 in outputs, or optionally removed.
+
+    Examples
+    --------
+    Concrete domain implementations can be created and used as follows:
+
+    &gt;&gt;&gt; domain = Cuboid()  # Simple cubic domain
+    &gt;&gt;&gt; x = domain(0.5, 0.5, 0.5)  # Evaluate mapping at logical coordinates
+    &gt;&gt;&gt; J = domain.jacobian(0.5, 0.5, 0.5)  # Evaluate Jacobian matrix
+    &gt;&gt;&gt; detJ = domain.jacobian_det(0.5, 0.5, 0.5)  # Volume element
+    &quot;&quot;&quot;
+
+    def __init__(
+        self,
+        num_elements: tuple[int] = None,
+        degree: tuple[int] = None,
+        spl_kind: tuple[bool] = None,
+    ):
+        if num_elements is None or degree is None or spl_kind is None:
+            assert self.kind_map &gt;= 10, &quot;Spline mappings must define num_elements, degree and spl_kind.&quot;
+            num_elements = (1, 1, 1)
+            degree = (1, 1, 1)
+            spl_kind = (True, True, True)
+
+        # create IGA attributes
+        self._num_elements = num_elements
+        self._degree = degree
+        self._spl_kind = spl_kind
+
+        self._NbaseN = [
+            num_elements + degree - kind * degree for num_elements, degree, kind in zip(num_elements, degree, spl_kind)
+        ]
+
+        el_b = [xp.linspace(0.0, 1.0, num_elements + 1) for num_elements in num_elements]
+
+        self._T = [bsp.make_knots(el_b, degree, kind) for el_b, degree, kind in zip(el_b, degree, spl_kind)]
+
+        self._indN = [
+            (xp.indices((num_elements, degree + 1))[1] + xp.arange(num_elements)[:, None]) % NbaseN
+            for num_elements, degree, NbaseN in zip(num_elements, degree, self._NbaseN)
+        ]
+
+        # extend to 3d for 2d IGA mappings
+        if 0 &lt; self.kind_map &lt; 10:
+            self._num_elements = (*self._num_elements, 0)
+            self._degree = (*self._degree, 0)
+            self._NbaseN = self._NbaseN + [0]
+
+            self._T = self._T + [xp.zeros((1,), dtype=float)]
+
+            self._indN = self._indN + [xp.zeros((1, 1), dtype=int)]
+
+        # create dummy attributes for analytical mappings
+        if self.kind_map &gt;= 10:
+            self._cx = xp.zeros((1, 1, 1), dtype=float)
+            self._cy = xp.zeros((1, 1, 1), dtype=float)
+            self._cz = xp.zeros((1, 1, 1), dtype=float)
+
+        self._transformation_ids = {
+            &quot;pull&quot;: 0,
+            &quot;push&quot;: 1,
+            &quot;tran&quot;: 2,
+        }
+
+        # keys for performing pull-backs and push-forwards
+        dict_pullpush = {
+            &quot;0&quot;: 0,
+            &quot;3&quot;: 1,
+            &quot;1&quot;: 10,
+            &quot;2&quot;: 11,
+            &quot;v&quot;: 12,
+        }
+
+        # keys for performing transformation
+        dict_tran = {
+            &quot;0_to_3&quot;: 0,
+            &quot;3_to_0&quot;: 1,
+            &quot;1_to_2&quot;: 10,
+            &quot;2_to_1&quot;: 11,
+            &quot;norm_to_v&quot;: 12,
+            &quot;norm_to_1&quot;: 13,
+            &quot;norm_to_2&quot;: 14,
+            &quot;v_to_1&quot;: 15,
+            &quot;v_to_2&quot;: 16,
+            &quot;1_to_v&quot;: 17,
+            &quot;2_to_v&quot;: 18,
+        }
+
+        self._dict_transformations = {
+            &quot;pull&quot;: dict_pullpush,
+            &quot;push&quot;: dict_pullpush,
+            &quot;tran&quot;: dict_tran,
+        }
+
+        self._args_domain = DomainArguments(
+            self.kind_map,
+            self.params_numpy,
+            xp.array(self.degree),
+            self.T[0],
+            self.T[1],
+            self.T[2],
+            self.indN[0],
+            self.indN[1],
+            self.indN[2],
+            self.cx.copy(),  # make sure we don&#39;t have stride = 0
+            self.cy.copy(),  # make sure we don&#39;t have stride = 0
+            self.cz.copy(),  # make sure we don&#39;t have stride = 0
+        )
+
+    def _build_args_domain(self):
+        &quot;&quot;&quot;Build runtime mapping arguments used by compiled evaluation kernels.&quot;&quot;&quot;
+        return DomainArguments(
+            self.kind_map,
+            self.params_numpy,
+            xp.array(self.degree),
+            self.T[0],
+            self.T[1],
+            self.T[2],
+            self.indN[0],
+            self.indN[1],
+            self.indN[2],
+            self.cx.copy(),  # make sure we don&#39;t have stride = 0
+            self.cy.copy(),  # make sure we don&#39;t have stride = 0
+            self.cz.copy(),  # make sure we don&#39;t have stride = 0
+        )
+
+    def _can_build_args_domain(self):
+        required_attrs = (
+            &quot;_kind_map&quot;,
+            &quot;_degree&quot;,
+            &quot;_T&quot;,
+            &quot;_indN&quot;,
+            &quot;_cx&quot;,
+            &quot;_cy&quot;,
+            &quot;_cz&quot;,
+        )
+        return all(hasattr(self, attr) for attr in required_attrs)
+
+    def _rebuild_args_domain(self):
+        if self._can_build_args_domain():
+            self._args_domain = self._build_args_domain()
+        else:
+            self._args_domain = None
+
+    def __deepcopy__(self, memo):
+        cls = self.__class__
+        result = cls.__new__(cls)
+        memo[id(self)] = result
+
+        for key, value in self.__dict__.items():
+            if key == &quot;_args_domain&quot;:
+                continue
+            setattr(result, key, copy.deepcopy(value, memo))
+
+        result._rebuild_args_domain()
+        return result
+
+    def __getstate__(self):
+        state = self.__dict__.copy()
+        state.pop(&quot;_args_domain&quot;, None)
+        return state
+
+    def __setstate__(self, state):
+        self.__dict__.update(state)
+        self._args_domain = None
+        self._rebuild_args_domain()
+
+<div class="viewcode-block" id="Domain.__repr__">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.__repr__">[docs]</a>
+    def __repr__(self):
+        out = f&quot;{self.__class__.__name__}(\n&quot;
+        for k, v in self.params.items():
+            out += &quot; &quot; * 4
+            out += f&quot;{k}={v},\n&quot;
+        out += &quot;)&quot;
+        return out</div>
+
+
+    def __repr_no_defaults__(self):
+        return __class_with_params_repr_no_defaults__(self)
+
+    @property
+    def is_default(self):
+        return all_class_params_are_default(self)
+
+    @property
+    def kind_map(self) -&gt; int:
+        &quot;&quot;&quot;Integer defining the mapping:
+        * &lt;=9: spline mappings
+        * &gt;=10 and &lt;=19: analytical mappings with cubic domain boundary
+        * &gt;=20 and &lt;=29: analytical cylinder and torus mappings
+        * &gt;=30 and &lt;=39: Shafranov mappings (cylinder)&quot;&quot;&quot;
+        if not hasattr(self, &quot;_kind_map&quot;):
+            raise AttributeError(&quot;Must set &#39;self.kind_map&#39; for mappings.&quot;)
+        return self._kind_map
+
+    @kind_map.setter
+    def kind_map(self, new):
+        assert isinstance(new, int)
+        self._kind_map = new
+
+    @property
+    def params(self) -&gt; dict:
+        &quot;&quot;&quot;Mapping parameters passed to __init__() of the class in domains.py, as dictionary.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_params&quot;):
+            self._params = {}
+        return self._params
+
+    @params.setter
+    def params(self, new):
+        assert isinstance(new, dict)
+        if &quot;self&quot; in new:
+            new.pop(&quot;self&quot;)
+        if &quot;__class__&quot; in new:
+            new.pop(&quot;__class__&quot;)
+        self._params = new
+
+    @property
+    def params_numpy(self) -&gt; xp.ndarray:
+        &quot;&quot;&quot;Mapping parameters as numpy array (can be empty).&quot;&quot;&quot;
+        if not hasattr(self, &quot;_params_numpy&quot;):
+            self._params_numpy = xp.array([0], dtype=float)
+        return self._params_numpy
+
+    @params_numpy.setter
+    def params_numpy(self, new):
+        assert isinstance(new, xp.ndarray)
+        assert new.ndim == 1
+        self._params_numpy = new
+
+    @property
+    def pole(self) -&gt; bool:
+        &quot;&quot;&quot;Bool; True if mapping has one polar point.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_pole&quot;):
+            self._pole = False
+        return self._pole
+
+    @pole.setter
+    def pole(self, new):
+        assert isinstance(new, bool)
+        self._pole = new
+
+    @property
+    def periodic_eta3(self) -&gt; bool:
+        r&quot;&quot;&quot;Bool; True if mapping is periodic in :math:`\eta_3` coordinate.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_periodic_eta3&quot;):
+            raise AttributeError(&quot;Must specify whether mapping is periodic in eta3.&quot;)
+        return self._periodic_eta3
+
+    @periodic_eta3.setter
+    def periodic_eta3(self, new):
+        assert isinstance(new, bool)
+        self._periodic_eta3 = new
+
+    @property
+    def cx(self):
+        &quot;&quot;&quot;3d array of control points for first mapping component :math:`F_x`.&quot;&quot;&quot;
+        return self._cx
+
+    @property
+    def cy(self):
+        &quot;&quot;&quot;3d array of control points for second mapping component :math:`F_y`.&quot;&quot;&quot;
+        return self._cy
+
+    @property
+    def cz(self):
+        &quot;&quot;&quot;3d array of control points for third mapping component :math:`F_z`.&quot;&quot;&quot;
+        return self._cz
+
+    @property
+    def num_elements(self):
+        &quot;&quot;&quot;List of number of elements in each direction.&quot;&quot;&quot;
+        return self._num_elements
+
+    @property
+    def degree(self):
+        &quot;&quot;&quot;List of spline degrees in each direction.&quot;&quot;&quot;
+        return self._degree
+
+    @property
+    def spl_kind(self):
+        &quot;&quot;&quot;List of spline type (True=periodic, False=clamped) in each direction.&quot;&quot;&quot;
+        return self._spl_kind
+
+    @property
+    def NbaseN(self):
+        &quot;&quot;&quot;List of number of basis functions for N-splines in each direction.&quot;&quot;&quot;
+        return self._NbaseN
+
+    @property
+    def T(self):
+        &quot;&quot;&quot;List of knot vectors for N-splines in each direction.&quot;&quot;&quot;
+        return self._T
+
+    @property
+    def indN(self):
+        &quot;&quot;&quot;Global indices of non-vanishing splines in each element. Can be accessed via (element index, local spline index).&quot;&quot;&quot;
+        return self._indN
+
+    @property
+    def args_domain(self):
+        &quot;&quot;&quot;Object for all parameters needed for evaluation of metric coefficients.&quot;&quot;&quot;
+        if getattr(self, &quot;_args_domain&quot;, None) is None:
+            self._rebuild_args_domain()
+
+        if self._args_domain is None:
+            raise AttributeError(&quot;DomainArguments are not available because the domain state is incomplete.&quot;)
+
+        return self._args_domain
+
+    @property
+    def dict_transformations(self):
+        &quot;&quot;&quot;Dictionary of str-&gt;int for pull, push and transformation functions.&quot;&quot;&quot;
+        return self._dict_transformations
+
+<div class="viewcode-block" id="Domain.__call__">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.__call__">[docs]</a>
+    def __call__(
+        self,
+        *etas,
+        change_out_order=False,
+        squeeze_out=False,
+        remove_outside=True,
+        identity_map=False,
+    ):
+        r&quot;&quot;&quot;
+        Evaluates the mapping :math:`F : (0, 1)^3 \to \mathbb R^3,\, \boldsymbol \eta \mapsto \mathbf x`.
+
+        Logical coordinates outside of :math:`(0, 1)^3` are evaluated to -1.
+        The type of evaluation depends on the shape of the input ``etas``.
+
+        Parameters
+        ----------
+        *etas : array-like | tuple
+            Logical coordinates at which to evaluate. Two cases are possible:
+                1. 2d numpy array, where coordinates are taken from eta1 = etas[:, 0], eta2 = etas[:, 1], etc. (like markers).
+                2. list/tuple (eta1, eta2, ...), where eta1, eta2, ... can be float or array-like of various shapes.
+
+        change_out_order : bool
+            If True, the axis corresponding to x, y, z coordinates in the output array is the last one, otherwise the first one.
+
+        squeeze_out : bool
+            Whether to remove singleton dimensions in output array.
+
+        remove_outside : bool
+            If True, logical coordinates outside of (0, 1)^3 are NOT evaluated to -1 and are removed in the output array.
+
+        identity_map : bool
+            If True, not the mapping F, but the identity map (0, 1)^3 --&gt; (0, 1)^3 is evaluated
+
+        Returns
+        -------
+        out : ndarray | float
+            The Cartesian coordinates corresponding to the given logical ones.
+        &quot;&quot;&quot;
+
+        if identity_map:
+            which = -1
+        else:
+            which = 0
+
+        return self._evaluate_metric_coefficient(
+            *etas,
+            which=which,
+            change_out_order=change_out_order,
+            squeeze_out=squeeze_out,
+            remove_outside=remove_outside,
+        )</div>
+
+
+<div class="viewcode-block" id="Domain.jacobian">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.jacobian">[docs]</a>
+    def jacobian(
+        self,
+        *etas,
+        transposed=False,
+        change_out_order=False,
+        squeeze_out=False,
+        remove_outside=True,
+    ):
+        r&quot;&quot;&quot;
+        Evaluates the Jacobian matrix :math:`DF : (0, 1)^3 \to \mathbb R^{3 \times 3}`.
+        Logical coordinates outside of :math:`(0, 1)^3` are evaluated to -1.
+
+        Parameters
+        ----------
+        transposed : bool
+            If True, the transposed Jacobian matrix is evaluated.
+
+        change_out_order : bool
+            If True, the axes corresponding to the 3x3 entries in the output array are the last two, otherwise the first two.
+
+        squeeze_out : bool
+            Whether to remove singleton dimensions in output array.
+
+        remove_outside : bool
+            If True, logical coordinates outside of (0, 1)^3 are NOT evaluated to -1 and are removed in the output array.
+
+        Returns
+        -------
+        out : ndarray | float
+            The Jacobian matrix evaluated at given logical coordinates.
+        &quot;&quot;&quot;
+
+        return self._evaluate_metric_coefficient(
+            *etas,
+            which=1,
+            change_out_order=change_out_order,
+            squeeze_out=squeeze_out,
+            transposed=transposed,
+            remove_outside=remove_outside,
+        )</div>
+
+
+<div class="viewcode-block" id="Domain.jacobian_det">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.jacobian_det">[docs]</a>
+    def jacobian_det(
+        self,
+        *etas,
+        squeeze_out=False,
+        remove_outside=True,
+    ):
+        r&quot;&quot;&quot;
+        Evaluates the Jacobian determinant :math:`\sqrt g : (0, 1)^3 \to \mathbb R^+` (only right-handed mappings allowed).
+        Logical coordinates outside of :math:`(0, 1)^3` are evaluated to -1.
+
+        Parameters
+        ----------
+        *etas : array-like | tuple
+            Logical coordinates at which to evaluate. Two cases are possible:
+                1. 2d numpy array, where coordinates are taken from eta1 = etas[:, 0], eta2 = etas[:, 1], etc. (like markers).
+                2. list/tuple (eta1, eta2, ...), where eta1, eta2, ... can be float or array-like of various shapes.
+
+        squeeze_out : bool
+            Whether to remove singleton dimensions in output array.
+
+        remove_outside : bool
+            If True, logical coordinates outside of (0, 1)^3 are NOT evaluated to -1 and are removed in the output array.
+
+        Returns
+        -------
+        out : ndarray | float
+            The Jacobian determinant evaluated at given logical coordinates.
+        &quot;&quot;&quot;
+
+        return self._evaluate_metric_coefficient(
+            *etas,
+            which=2,
+            squeeze_out=squeeze_out,
+            remove_outside=remove_outside,
+        )</div>
+
+
+<div class="viewcode-block" id="Domain.jacobian_inv">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.jacobian_inv">[docs]</a>
+    def jacobian_inv(
+        self,
+        *etas,
+        transposed=False,
+        change_out_order=False,
+        squeeze_out=False,
+        remove_outside=True,
+        avoid_round_off=True,
+    ):
+        r&quot;&quot;&quot;
+        Evaluates the inverse Jacobian matrix :math:`DF^{-1} : (0, 1)^3 \to \mathbb R^{3 \times 3}`.
+        Logical coordinates outside of :math:`(0, 1)^3` are evaluated to -1.
+
+        Parameters
+        ----------
+        *etas : array-like | tuple
+            Logical coordinates at which to evaluate. Two cases are possible:
+                1. 2d numpy array, where coordinates are taken from eta1 = etas[:, 0], eta2 = etas[:, 1], etc. (like markers).
+                2. list/tuple (eta1, eta2, ...), where eta1, eta2, ... can be float or array-like of various shapes.
+
+        transposed : bool
+            If True, the transposed Jacobian matrix is evaluated.
+
+        change_out_order : bool
+            If True, the axes corresponding to the 3x3 entries in the output array are the last two, otherwise the first two.
+
+        squeeze_out : bool
+            Whether to remove singleton dimensions in output array.
+
+        remove_outside : bool
+            If True, logical coordinates outside of (0, 1)^3 are NOT evaluated to -1 and are removed in the output array.
+
+        avoid_round_off : bool
+            Whether to manually set exact zeros in arrays.
+
+        Returns
+        -------
+        out : ndarray | float
+            The inverse Jacobian matrix evaluated at given logical coordinates.
+        &quot;&quot;&quot;
+
+        return self._evaluate_metric_coefficient(
+            *etas,
+            which=3,
+            change_out_order=change_out_order,
+            squeeze_out=squeeze_out,
+            transposed=transposed,
+            remove_outside=remove_outside,
+            avoid_round_off=avoid_round_off,
+        )</div>
+
+
+<div class="viewcode-block" id="Domain.metric">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.metric">[docs]</a>
+    def metric(
+        self,
+        *etas,
+        transposed=False,
+        change_out_order=False,
+        squeeze_out=False,
+        remove_outside=True,
+        avoid_round_off=True,
+    ):
+        r&quot;&quot;&quot;
+        Evaluates the metric tensor :math:`G: (0, 1)^3 \to \mathbb R^{3\times 3}`.
+        Logical coordinates outside of :math:`(0, 1)^3` are evaluated to -1.
+
+        Parameters
+        ----------
+        *etas : array-like | tuple
+            Logical coordinates at which to evaluate. Two cases are possible:
+                1. 2d numpy array, where coordinates are taken from eta1 = etas[:, 0], eta2 = etas[:, 1], etc. (like markers).
+                2. list/tuple (eta1, eta2, ...), where eta1, eta2, ... can be float or array-like of various shapes.
+
+        transposed : bool
+            If True, the transposed Jacobian matrix is evaluated.
+
+        change_out_order : bool
+            If True, the axes corresponding to the 3x3 entries in the output array are the last two, otherwise the first two.
+
+        squeeze_out : bool
+            Whether to remove singleton dimensions in output array.
+
+        remove_outside : bool
+            If True, logical coordinates outside of (0, 1)^3 are NOT evaluated to -1 and are removed in the output array.
+
+        avoid_round_off : bool
+            Whether to manually set exact zeros in arrays.
+
+        Returns
+        -------
+        out : ndarray | float
+            The metric tensor evaluated at given logical coordinates.
+        &quot;&quot;&quot;
+
+        return self._evaluate_metric_coefficient(
+            *etas,
+            which=4,
+            change_out_order=change_out_order,
+            squeeze_out=squeeze_out,
+            transposed=transposed,
+            remove_outside=remove_outside,
+            avoid_round_off=avoid_round_off,
+        )</div>
+
+
+<div class="viewcode-block" id="Domain.metric_inv">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.metric_inv">[docs]</a>
+    def metric_inv(
+        self,
+        *etas,
+        transposed=False,
+        change_out_order=False,
+        squeeze_out=False,
+        remove_outside=True,
+        avoid_round_off=True,
+    ):
+        r&quot;&quot;&quot;
+        Evaluates the inverse metric tensor :math:`G^{-1}: (0, 1)^3 \to \mathbb R^{3\times 3}`.
+        Logical coordinates outside of :math:`(0, 1)^3` are evaluated to -1.
+
+        Parameters
+        ----------
+        *etas : array-like | tuple
+            Logical coordinates at which to evaluate. Two cases are possible:
+                1. 2d numpy array, where coordinates are taken from eta1 = etas[:, 0], eta2 = etas[:, 1], etc. (like markers).
+                2. list/tuple (eta1, eta2, ...), where eta1, eta2, ... can be float or array-like of various shapes.
+
+        transposed : bool
+            If True, the transposed Jacobian matrix is evaluated.
+
+        change_out_order : bool
+            If True, the axes corresponding to the 3x3 entries in the output array are the last two, otherwise the first two.
+
+        squeeze_out : bool
+            Whether to remove singleton dimensions in output array.
+
+        remove_outside : bool
+            If True, logical coordinates outside of (0, 1)^3 are NOT evaluated to -1 and are removed in the output array.
+
+        avoid_round_off : bool
+            Whether to manually set exact zeros in arrays.
+
+        Returns
+        -------
+        out : ndarray | float
+            The inverse metric tensor evaluated at given logical coordinates.
+        &quot;&quot;&quot;
+
+        return self._evaluate_metric_coefficient(
+            *etas,
+            which=5,
+            change_out_order=change_out_order,
+            squeeze_out=squeeze_out,
+            transposed=transposed,
+            remove_outside=remove_outside,
+            avoid_round_off=avoid_round_off,
+        )</div>
+
+
+<div class="viewcode-block" id="Domain.pull">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.pull">[docs]</a>
+    def pull(
+        self,
+        a,
+        *etas,
+        flat_eval=False,
+        kind=&quot;0&quot;,
+        a_kwargs={},
+        change_out_order=False,
+        squeeze_out=False,
+        remove_outside=True,
+        coordinates=&quot;physical&quot;,
+    ):
+        &quot;&quot;&quot;Pull-back of a Cartesian scalar/vector field to a differential p-form.
+
+        Parameters
+        ----------
+        a : callable | list | tuple | array-like
+            The function a(x, y, z) resp. [a_x(x, y, z), a_y(x, y, z), a_z(x, y, z)] to be pulled.
+
+        *etas : array-like | tuple
+            Logical coordinates at which to evaluate. Two cases are possible:
+
+            1. 2d numpy array, where coordinates are taken from eta1 = etas[:, 0], eta2 = etas[:, 1], etc. (like markers).
+            2. list/tuple (eta1, eta2, ...), where eta1, eta2, ... can be float or array-like of various shapes.
+
+        flat_eval : bool
+            Allows to perform flat evaluation when len(etas) == 3 with 1D arrays of same size.
+
+        kind : str
+            Which pull-back to apply, &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39; or &#39;v&#39;.
+
+        a_kwargs : dict
+            Keyword arguments passed to parameter &quot;a&quot; if &quot;a&quot; is a callable: is called as a(*etas, **a_kwargs).
+
+        change_out_order : bool
+            If True, the axes corresponding to the 3 components in the output array are the last two, otherwise the first two.
+
+        squeeze_out : bool
+            Whether to remove singleton dimensions in output array.
+
+        remove_outside : bool
+            If True, logical coordinates outside of (0, 1)^3 are NOT evaluated to -1 and are removed in the output array.
+
+        coordinates : str
+            In which coordinates the input &quot;a&quot; is given (in case of callables). &quot;physical&quot; : a = a(x, y, z).
+            &quot;logical&quot;  : a = a(eta1, eta2, eta3).
+
+        Returns
+        -------
+        out : ndarray | float
+            Pullback of Cartesian vector/scalar field to p-form evaluated at given logical coordinates.
+        &quot;&quot;&quot;
+
+        return self._pull_push_transform(
+            &quot;pull&quot;,
+            a,
+            kind,
+            *etas,
+            flat_eval=flat_eval,
+            change_out_order=change_out_order,
+            squeeze_out=squeeze_out,
+            remove_outside=remove_outside,
+            coordinates=coordinates,
+            a_kwargs=a_kwargs,
+        )</div>
+
+
+<div class="viewcode-block" id="Domain.push">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.push">[docs]</a>
+    def push(
+        self,
+        a,
+        *etas,
+        flat_eval=False,
+        kind=&quot;0&quot;,
+        a_kwargs={},
+        change_out_order=False,
+        squeeze_out=False,
+        remove_outside=True,
+    ):
+        &quot;&quot;&quot;Pushforward of a differential p-form to a Cartesian scalar/vector field.
+
+        Parameters
+        -----------
+        a : callable | list | tuple | array-like
+            The function a(e1, e2, e3) resp. [a_1(e1, e2, e3), a_2(e1, e2, e3), a_3(e1, e2, e3)] to be pushed.
+
+        *etas : array-like | tuple
+            Logical coordinates at which to evaluate. Two cases are possible:
+
+                1. 2d numpy array, where coordinates are taken from eta1 = etas[:, 0], eta2 = etas[:, 1], etc. (like markers).
+                2. list/tuple (eta1, eta2, ...), where eta1, eta2, ... can be float or array-like of various shapes.
+
+        flat_eval : bool
+            Allows to perform flat evaluation when len(etas) == 3 with 1D arrays of same size.
+
+        kind : str
+            Which pushforward to apply, &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39; or &#39;v&#39;.
+
+        a_kwargs : dict
+            Keyword arguments passed to parameter &quot;a&quot; if &quot;a&quot; is a callable: is called as a(*etas, **a_kwargs).
+
+        change_out_order : bool
+            If True, the axes corresponding to the 3 components in the output array are the last two, otherwise the first two.
+
+        squeeze_out : bool
+            Whether to remove singleton dimensions in output array.
+
+        remove_outside : bool
+            If True, logical coordinates outside of (0, 1)^3 are NOT evaluated to -1 and are removed in the output array.
+
+        Returns
+        -------
+        out : ndarray | float
+            Pushforward of p-form to Cartesian vector/scalar field evaluated at given logical coordinates.
+        &quot;&quot;&quot;
+
+        return self._pull_push_transform(
+            &quot;push&quot;,
+            a,
+            kind,
+            *etas,
+            flat_eval=flat_eval,
+            change_out_order=change_out_order,
+            squeeze_out=squeeze_out,
+            remove_outside=remove_outside,
+            a_kwargs=a_kwargs,
+        )</div>
+
+
+<div class="viewcode-block" id="Domain.transform">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.transform">[docs]</a>
+    def transform(
+        self,
+        a,
+        *etas,
+        flat_eval=False,
+        kind=&quot;0_to_3&quot;,
+        a_kwargs={},
+        change_out_order=False,
+        squeeze_out=False,
+        remove_outside=True,
+    ):
+        &quot;&quot;&quot;Transformation between different differential p-forms and/or vector fields.
+
+        Parameters
+        -----------
+        a : callable | list | tuple | array-like
+            The function a(e1, e2, e3) resp. [a_1(e1, e2, e3), a_2(e1, e2, e3), a_3(e1, e2, e3)] to be transformed.
+
+        *etas : array-like | tuple
+            Logical coordinates at which to evaluate. Two cases are possible:
+
+                1. 2d numpy array, where coordinates are taken from eta1 = etas[:, 0], eta2 = etas[:, 1], etc. (like markers).
+                2. list/tuple (eta1, eta2, ...), where eta1, eta2, ... can be float or array-like of various shapes.
+
+        flat_eval : bool
+            Allows to perform flat evaluation when len(etas) == 3 with 1D arrays of same size.
+
+        kind : str
+            Which transformation to apply, such as &#39;0_to_3&#39; for example, see dict_transformations[&#39;tran&#39;] for all options.
+
+        a_kwargs : dict
+            Keyword arguments passed to parameter &quot;a&quot; if &quot;a&quot; is a callable: is called as a(*etas, **a_kwargs).
+
+        change_out_order : bool
+            If True, the axes corresponding to the 3 components in the output array are the last two, otherwise the first two.
+
+        squeeze_out : bool
+            Whether to remove singleton dimensions in output array.
+
+        remove_outside : bool
+            If True, logical coordinates outside of (0, 1)^3 are NOT evaluated to -1 and are removed in the output array.
+
+        Returns
+        -------
+        out : ndarray | float
+            Transformed p-form evaluated at given logical coordinates.
+
+        Notes
+        -----
+        Possible choices for kind are &#39;0_to_3&#39;, &#39;3_to_0&#39;, &#39;1_to_2&#39;, &#39;2_to_1&#39;, &#39;norm_to_v&#39;, &#39;norm_to_1&#39;, &#39;norm_to_2&#39;, &#39;v_to_1&#39;, &#39;v_to_2&#39;, &#39;1_to_v&#39; and &#39;2_to_v&#39;.
+        &quot;&quot;&quot;
+
+        return self._pull_push_transform(
+            &quot;tran&quot;,
+            a,
+            kind,
+            *etas,
+            flat_eval=flat_eval,
+            change_out_order=change_out_order,
+            squeeze_out=squeeze_out,
+            remove_outside=remove_outside,
+            a_kwargs=a_kwargs,
+        )</div>
+
+
+    # ========================
+    # private methods :
+    # ========================
+
+    # ================================
+    def _evaluate_metric_coefficient(self, *etas, which=0, **kwargs):
+        &quot;&quot;&quot;Evaluates metric coefficients. Logical coordinates outside of :math:`(0, 1)^3` are evaluated to -1 for markers evaluation.
+
+        Parameters
+        ----------
+        *etas : array-like | tuple
+            Logical coordinates at which to evaluate. Two cases are possible:
+
+                1. 2d numpy array, where coordinates are taken from eta1 = etas[:, 0], eta2 = etas[:, 1], etc. (like markers).
+                2. list/tuple (eta1, eta2, ...), where eta1, eta2, ... can be float or array-like of various shapes.
+
+        which : int
+            Which metric coefficients to be evaluated (0 : F, 1 : DF, 2 : det(DF), 3 : DF^(-1), 4 : G, 5 : G^(-1)).
+
+        **kwargs
+            Addtional boolean keyword arguments (transposed, change_out_order, squeeze_out, remove_outside, avoid_round_off).
+
+        Returns
+        -------
+        out : ndarray | float
+            The metric coefficient evaluated at the given logical coordinates.
+        &quot;&quot;&quot;
+
+        # set default values
+        transposed = kwargs.get(&quot;transposed&quot;, False)
+        change_out_order = kwargs.get(&quot;change_out_order&quot;, False)
+        squeeze_out = kwargs.get(&quot;squeeze_out&quot;, True)
+        remove_outside = kwargs.get(&quot;remove_outside&quot;, False)
+        avoid_round_off = kwargs.get(&quot;avoid_round_off&quot;, True)
+
+        # markers evaluation
+        if len(etas) == 1:
+            markers = etas[0]
+
+            # to keep C-ordering the (3, 3)-part is in the last indices
+            out = xp.empty((markers.shape[0], 3, 3), dtype=float)
+
+            n_inside = evaluation_kernels.kernel_evaluate_pic(
+                markers,
+                which,
+                self.args_domain,
+                out,
+                remove_outside,
+                avoid_round_off,
+            )
+
+            # move the (3, 3)-part to front
+            out = xp.transpose(out, axes=(1, 2, 0))
+
+            # remove holes
+            out = out[:, :, :n_inside]
+
+            if transposed:
+                out = xp.transpose(out, axes=(1, 0, 2))
+
+            # change size of &quot;out&quot; depending on which metric coeff has been evaluated
+            if which == 0 or which == -1:
+                out = out[:, 0, :]
+                if change_out_order:
+                    out = xp.transpose(out, axes=(1, 0))
+            elif which == 2:
+                out = out[0, 0, :]
+            else:
+                if change_out_order:
+                    out = xp.transpose(out, axes=(2, 0, 1))
+
+        # tensor-product/slice evaluation
+        else:
+            E1, E2, E3, is_sparse_meshgrid = Domain.prepare_eval_pts(
+                etas[0],
+                etas[1],
+                etas[2],
+                flat_eval=False,
+            )
+
+            # to keep C-ordering the (3, 3)-part is in the last indices
+            out = xp.empty(
+                (E1.shape[0], E2.shape[1], E3.shape[2], 3, 3),
+                dtype=float,
+            )
+            evaluation_kernels.kernel_evaluate(
+                E1,
+                E2,
+                E3,
+                which,
+                self.args_domain,
+                out,
+                is_sparse_meshgrid,
+                avoid_round_off,
+            )
+
+            # move the (3, 3)-part to front
+            out = xp.transpose(out, axes=(3, 4, 0, 1, 2))
+
+            if transposed:
+                out = xp.transpose(out, axes=(1, 0, 2, 3, 4))
+
+            if which == 0:
+                out = out[:, 0, :, :, :]
+                if change_out_order:
+                    out = xp.transpose(out, axes=(1, 2, 3, 0))
+            elif which == 2:
+                out = out[0, 0, :, :, :]
+            else:
+                if change_out_order:
+                    out = xp.transpose(out, axes=(2, 3, 4, 0, 1))
+
+            # remove singleton dimensions for slice evaluation
+            if squeeze_out:
+                out = out.squeeze()
+
+            # remove all &quot;dimensions&quot; for point-wise evaluation
+            if out.ndim == 0:
+                out = out.item()
+
+        if isinstance(out, float):
+            return out
+        else:
+            return out.copy()
+
+    # ================================
+    def _pull_push_transform(self, which, a, kind_fun, *etas, flat_eval=False, **kwargs):
+        &quot;&quot;&quot;Evaluates metric coefficients. Logical coordinates outside of :math:`(0, 1)^3` are evaluated to -1 for markers evaluation.
+
+        Parameters
+        ----------
+        which : str
+            Which transformation to apply (one of &quot;pull&quot;, &quot;push&quot; or &quot;tran&quot;).
+
+        a : callable | list | tuple | array-like
+            The function/values to be transformed.
+
+        kind_fun : str
+            The kind of transformation (e.g. &quot;0&quot; or &quot;1&quot; in case of which=&quot;pull&quot;).
+
+        *etas : array-like| tuple
+            Logical coordinates at which to evaluate. Two cases are possible:
+
+                1. 2d numpy array, where coordinates are taken from eta1 = etas[:, 0], eta2 = etas[:, 1], etc. (like markers).
+                2. list/tuple (eta1, eta2, ...), where eta1, eta2, ... can be float or array-like of various shapes.
+
+        flat_eval : bool
+            Allows to perform flat evaluation when len(etas) == 3 with 1D arrays of same size.
+
+        **kwargs
+            Addtional keyword arguments (coordinates, change_out_order, squeeze_out, remove_outside, a_kwargs).
+
+        Returns
+        -------
+        out : ndarray | float
+            4D or 2D (for flat eval) array holding the metric coefficient (first index),
+            evaluated at the given logical coordinates (last three indices).
+        &quot;&quot;&quot;
+
+        # set default values
+        coordinates = kwargs.get(&quot;coordinates&quot;, &quot;logical&quot;)
+        change_out_order = kwargs.get(&quot;change_out_order&quot;, False)
+        squeeze_out = kwargs.get(&quot;squeeze_out&quot;, True)
+        remove_outside = kwargs.get(&quot;remove_outside&quot;, False)
+        a_kwargs = kwargs.get(&quot;a_kwargs&quot;, {})
+
+        # kind of transformation
+        kind_int = self.dict_transformations[which][kind_fun]
+
+        # markers evaluation
+        if len(etas) == 1 or flat_eval:
+            if flat_eval:
+                assert len(etas) == 3
+                assert etas[0].shape == etas[1].shape == etas[2].shape
+                assert etas[0].ndim == 1
+                markers = xp.stack(etas, axis=1)
+            else:
+                markers = etas[0]
+
+            # coordinates (:, 3) and argument evaluation (without holes)
+            if callable(a):
+                if coordinates == &quot;logical&quot;:
+                    A = Domain.prepare_arg(
+                        a,
+                        self(
+                            markers,
+                            change_out_order=True,
+                            remove_outside=remove_outside,
+                            identity_map=True,
+                        ),
+                    )
+                else:
+                    A = Domain.prepare_arg(
+                        a,
+                        self(markers, change_out_order=True, remove_outside=remove_outside),
+                    )
+
+            elif isinstance(a, (list, tuple)):
+                if callable(a[0]):
+                    if coordinates == &quot;logical&quot;:
+                        A = Domain.prepare_arg(
+                            a,
+                            self(
+                                markers,
+                                change_out_order=True,
+                                remove_outside=remove_outside,
+                                identity_map=True,
+                            ),
+                        )
+                    else:
+                        A = Domain.prepare_arg(
+                            a,
+                            self(markers, change_out_order=True, remove_outside=remove_outside),
+                        )
+                else:
+                    A = Domain.prepare_arg(a, markers)
+
+            else:
+                A = Domain.prepare_arg(a, markers)
+
+            # check if A includes holes or not
+            if A.shape[0] == markers.shape[0]:
+                A_has_holes = True
+            else:
+                A_has_holes = False
+
+            # call evaluation kernel
+            out = xp.empty((markers.shape[0], 3), dtype=float)
+
+            # make sure we don&#39;t have stride = 0
+            A = A.copy()
+
+            n_inside = transform_kernels.kernel_pullpush_pic(
+                A,
+                markers,
+                self._transformation_ids[which],
+                kind_int,
+                self.args_domain,
+                out,
+                remove_outside,
+            )
+
+            # move the (3, 3)-part to front
+            out = xp.transpose(out, axes=(1, 0))
+
+            # remove holes
+            out = out[:, :n_inside]
+
+            # check if A has correct shape
+            if not A_has_holes and remove_outside:
+                assert A.shape[0] == out.shape[1]
+
+            # change output order
+            if kind_int &lt; 10:
+                out = out[0, :]
+            else:
+                if change_out_order:
+                    out = xp.transpose(out, axes=(1, 0))
+
+        # tensor-product/slice evaluation
+        else:
+            # convert evaluation points to 3d array of appropriate shape
+            E1, E2, E3, is_sparse_meshgrid = Domain.prepare_eval_pts(
+                etas[0],
+                etas[1],
+                etas[2],
+                flat_eval=False,
+            )
+
+            # convert input to be transformed (a) to 4d array of appropriate shape
+            if coordinates == &quot;logical&quot;:
+                A = Domain.prepare_arg(
+                    a,
+                    E1,
+                    E2,
+                    E3,
+                    is_sparse_meshgrid=is_sparse_meshgrid,
+                    a_kwargs=a_kwargs,
+                )
+            else:
+                X = self(E1, E2, E3)
+                A = Domain.prepare_arg(a, X[0], X[1], X[2], a_kwargs=a_kwargs)
+
+            # call evaluation kernel
+            out = xp.empty(
+                (E1.shape[0], E2.shape[1], E3.shape[2], 3),
+                dtype=float,
+            )
+            transform_kernels.kernel_pullpush(
+                A,
+                E1,
+                E2,
+                E3,
+                self._transformation_ids[which],
+                kind_int,
+                self.args_domain,
+                is_sparse_meshgrid,
+                out,
+            )
+
+            # move the (3, 3)-part to front
+            out = xp.transpose(out, axes=(3, 0, 1, 2))
+
+            # change output order
+            if kind_int &lt; 10:
+                out = out[0, :, :, :]
+            else:
+                if change_out_order:
+                    out = xp.transpose(out, axes=(1, 2, 3, 0))
+
+            # remove singleton dimensions for slice evaluation
+            if squeeze_out:
+                out = out.squeeze()
+
+            # remove all &quot;dimensions&quot; for point-wise evaluation
+            if out.ndim == 0:
+                out = out.item()
+
+        if isinstance(out, float):
+            return out
+        else:
+            return out.copy()
+
+    # ========================
+    # static methods :
+    # ========================
+
+    # ================================
+<div class="viewcode-block" id="Domain.prepare_eval_pts">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.prepare_eval_pts">[docs]</a>
+    @staticmethod
+    def prepare_eval_pts(x, y, z, flat_eval=False):
+        &quot;&quot;&quot;Broadcasts evaluation point sets to 3d arrays of correct shape.
+
+        Parameters
+        ----------
+        x, y, z : float | int | list | array-like
+            Evaluation point sets.
+
+        flat_eval : bool
+            Whether to do a flat evaluation, i.e. f([e11, e12], [e21, e22]) = [f(e11, e21), f(e12, e22)].
+
+        Returns
+        -------
+        E1, E2, E3 : array-like
+            3d arrays of correct shape for evaluation.
+
+        is_sparse_meshgrid : bool
+            Whether arguments fit sparse_meshgrid shape.
+        &quot;&quot;&quot;
+
+        is_sparse_meshgrid = False
+
+        # flat evaluation (works only if all arguments are 1d numpy arrays/lists of equal length!)
+        if flat_eval:
+            # convert list type data to numpy array:
+            if isinstance(x, list):
+                arg_x = xp.array(x)
+            elif isinstance(x, xp.ndarray):
+                arg_x = x
+            else:
+                raise ValueError(&quot;Input x must be a 1d list or numpy array&quot;)
+
+            if isinstance(y, list):
+                arg_y = xp.array(y)
+            elif isinstance(y, xp.ndarray):
+                arg_y = y
+            else:
+                raise ValueError(&quot;Input y must be a 1d list or numpy array&quot;)
+
+            if isinstance(z, list):
+                arg_z = xp.array(z)
+            elif isinstance(z, xp.ndarray):
+                arg_z = z
+            else:
+                raise ValueError(&quot;Input z must be a 1d list or numpy array&quot;)
+
+            assert arg_x.ndim == arg_y.ndim == arg_z.ndim == 1
+            assert arg_x.size == arg_y.size == arg_z.size
+
+            E1 = arg_x[:, None, None]
+            E2 = arg_y[:, None, None]
+            E3 = arg_z[:, None, None]
+
+            # Make sure we don&#39;t have stride 0
+            return E1.copy(), E2.copy(), E3.copy(), is_sparse_meshgrid
+
+        # non-flat evaluation (broadcast to 3d arrays)
+        else:
+            # convert list type data to numpy array:
+            if isinstance(x, float):
+                arg_x = xp.array([x])
+            elif isinstance(x, int):
+                arg_x = xp.array([float(x)])
+            elif isinstance(x, list):
+                arg_x = xp.array(x)
+            elif isinstance(x, xp.ndarray):
+                arg_x = x.copy()
+            else:
+                raise ValueError(f&quot;data type {type(x)} not supported&quot;)
+
+            if isinstance(y, float):
+                arg_y = xp.array([y])
+            elif isinstance(y, int):
+                arg_y = xp.array([float(y)])
+            elif isinstance(y, list):
+                arg_y = xp.array(y)
+            elif isinstance(y, xp.ndarray):
+                arg_y = y.copy()
+            else:
+                raise ValueError(f&quot;data type {type(y)} not supported&quot;)
+
+            if isinstance(z, float):
+                arg_z = xp.array([z])
+            elif isinstance(z, int):
+                arg_z = xp.array([float(z)])
+            elif isinstance(z, list):
+                arg_z = xp.array(z)
+            elif isinstance(z, xp.ndarray):
+                arg_z = z.copy()
+            else:
+                raise ValueError(f&quot;data type {type(z)} not supported&quot;)
+
+            # tensor-product for given three 1D arrays
+            if arg_x.ndim == 1 and arg_y.ndim == 1 and arg_z.ndim == 1:
+                E1, E2, E3 = xp.meshgrid(arg_x, arg_y, arg_z, indexing=&quot;ij&quot;)
+            # given xy-plane at point z:
+            elif arg_x.ndim == 2 and arg_y.ndim == 2 and arg_z.size == 1:
+                E1 = arg_x[:, :, None]
+                E2 = arg_y[:, :, None]
+                E3 = arg_z * xp.ones(E1.shape)
+            # given xz-plane at point y:
+            elif arg_x.ndim == 2 and arg_y.size == 1 and arg_z.ndim == 2:
+                E1 = arg_x[:, None, :]
+                E2 = arg_y * xp.ones(E1.shape)
+                E3 = arg_z[:, None, :]
+            # given yz-plane at point x:
+            elif arg_x.size == 1 and arg_y.ndim == 2 and arg_z.ndim == 2:
+                E2 = arg_y[None, :, :]
+                E3 = arg_z[None, :, :]
+                E1 = arg_x * xp.ones(E2.shape)
+            # given three 3D arrays
+            elif arg_x.ndim == 3 and arg_y.ndim == 3 and arg_z.ndim == 3:
+                # Distinguish if input coordinates are from sparse or dense meshgrid.
+                # Sparse: arg_x.shape = (n1, 1, 1), arg_y.shape = (1, n2, 1), arg_z.shape = (1, 1, n3)
+                # Dense : arg_x.shape = (n1, n2, n3), arg_y.shape = (n1, n2, n3) arg_z.shape = (n1, n2, n3)
+                E1, E2, E3 = arg_x, arg_y, arg_z
+
+                # `arg_x` `arg_y` `arg_z` are all sparse meshgrids.
+                if (
+                    arg_x.shape[1] == 1
+                    and arg_x.shape[2] == 1
+                    and arg_y.shape[0] == 1
+                    and arg_y.shape[2] == 1
+                    and arg_z.shape[0] == 1
+                    and arg_z.shape[1] == 1
+                ):
+                    is_sparse_meshgrid = True
+                # one of `arg_x` `arg_y` `arg_z` is a dense meshgrid.(i.e., all are dense meshgrid) Process each point as default.
+
+            else:
+                raise ValueError(&quot;Argument dimensions not supported&quot;)
+
+            # Make sure we don&#39;t have stride 0
+            return E1.copy(), E2.copy(), E3.copy(), is_sparse_meshgrid</div>
+
+
+    # ================================
+<div class="viewcode-block" id="Domain.prepare_arg">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.prepare_arg">[docs]</a>
+    @staticmethod
+    def prepare_arg(a_in, *Xs, is_sparse_meshgrid=False, a_kwargs={}):
+        &quot;&quot;&quot;Broadcasts argument to be pulled, pushed or transformed to array of correct shape (2d for markers, 4d else).
+
+        Parameters
+        ----------
+        a_in : callable | list | tuple | array-like
+            The argument to be pulled, pushed or transformed.
+
+        *Xs : array-like | tuple
+            The evaluation point sets. Obtained from prepare_eval_pts function.
+
+        is_sparse_meshgrid : bool
+            Whether arguments fit sparse_meshgrid shape. Obtained from prepare_eval_pts function.
+
+        a_kwargs : dict
+            Keyword arguments passed to parameter &quot;a_in&quot; if &quot;a_in&quot; is a callable: is called as a_in(*etas, **a_kwargs).
+
+        Returns
+        -------
+        a_out : array-like
+            The 2d/4d array suitable for evaluation kernels.
+        &quot;&quot;&quot;
+
+        if len(Xs) == 1:
+            flat_eval = True
+        else:
+            flat_eval = False
+
+        # float (point-wise, scalar function)
+        if isinstance(a_in, float):
+            a_out = xp.array([[[[a_in]]]])
+
+        # single callable:
+        # scalar function -&gt; must return a 3d array for 3d evaluation points
+        # vector-valued function -&gt; must return a 4d array of shape (3,:,:,:)
+        elif callable(a_in):
+            if flat_eval:
+                a_out = a_in(Xs[0][:, 0], Xs[0][:, 1], Xs[0][:, 2], **a_kwargs)
+                if a_out.ndim == 1:
+                    a_out = a_out[None, :]
+            else:
+                if is_sparse_meshgrid:
+                    a_out = a_in(
+                        *xp.meshgrid(Xs[0][:, 0, 0], Xs[1][0, :, 0], Xs[2][0, 0, :], indexing=&quot;ij&quot;),
+                        **a_kwargs,
+                    )
+                else:
+                    a_out = a_in(*Xs, **a_kwargs)
+
+                # case of Field.__call__
+                if isinstance(a_out, list):
+                    a_out = xp.array(a_out)
+
+                if a_out.ndim == 3:
+                    a_out = a_out[None, :, :, :]
+
+        # list/tuple of length 1 or 3 containing:
+        # callable(s) that must return 3d array(s) for 3d evaluation points
+        # 1d array(s) (flat_eval=True)
+        # 3d array(s) (flat eval=False)
+        elif isinstance(a_in, (list, tuple)):
+            assert len(a_in) == 1 or len(a_in) == 3
+
+            a_out = []
+            for component in a_in:
+                if callable(component):
+                    if flat_eval:
+                        a_out += [
+                            component(
+                                Xs[0][:, 0],
+                                Xs[0][:, 1],
+                                Xs[0][:, 2],
+                                **a_kwargs,
+                            ),
+                        ]
+                    else:
+                        if is_sparse_meshgrid:
+                            a_out += [
+                                component(
+                                    *xp.meshgrid(
+                                        Xs[0][:, 0, 0],
+                                        Xs[1][0, :, 0],
+                                        Xs[2][0, 0, :],
+                                        indexing=&quot;ij&quot;,
+                                    ),
+                                    **a_kwargs,
+                                ),
+                            ]
+                        else:
+                            a_out += [component(*Xs, **a_kwargs)]
+
+                elif isinstance(component, xp.ndarray):
+                    if flat_eval:
+                        assert component.ndim == 1, logger.info(f&quot;{component.ndim =}&quot;)
+                    else:
+                        assert component.ndim == 3, logger.info(f&quot;{component.ndim =}&quot;)
+
+                    a_out += [component]
+
+                elif isinstance(component, float):
+                    a_out += [xp.array([component])[:, None, None]]
+
+            a_out = xp.array(a_out, dtype=float)
+
+        # numpy array:
+        # 1d array (flat_eval=True and scalar input or flat_eval=False and length 1 (scalar) or length 3 (vector))
+        # 2d array (flat_eval=True and vector-valued input of shape (3,:))
+        # 3d array (flat_eval=False and scalar input)
+        # 4d array (flat_eval=False and vector-valued input of shape (3,:,:,:))
+        elif isinstance(a_in, xp.ndarray):
+            if flat_eval:
+                if a_in.ndim == 1:
+                    a_out = a_in[None, :]
+                elif a_in.ndim == 2:
+                    a_out = a_in[:, :]
+                else:
+                    raise ValueError(
+                        &quot;Input array a_in must be either 1d (scalar) or \
+                    2d (vector-valued, shape (3,:)) for flat evaluation!&quot;,
+                    )
+
+            else:
+                # point-wise evaluation for scalar (len=1) or vector (len=3) input
+                if a_in.ndim == 1:
+                    assert a_in.size == 1 or a_in.size == 3
+                    a_out = a_in[:, None, None, None]
+
+                # tensor-product evaluation (scalar)
+                elif a_in.ndim == 3:
+                    a_out = a_in[None, :, :, :]
+
+                # tensor-product evaluation (vector)
+                elif a_in.ndim == 4:
+                    a_out = a_in[:, :, :, :]
+                else:
+                    raise ValueError(
+                        &quot;Input array a_in must be either 3d (scalar) or \
+                    4d (vector-valued, shape (3,:,:,:)) for non-flat evaluation!&quot;,
+                    )
+
+        else:
+            raise TypeError(
+                &quot;Argument a must be either a float OR a list/tuple of 1 or 3 callable(s)/numpy array(s)/float(s) \
+            OR a single numpy array OR a single callable!&quot;,
+            )
+
+        # make sure that output array is 2d and of shape (:, 1) or (:, 3) for flat evaluation
+        if flat_eval:
+            assert a_out.ndim == 2
+            assert a_out.shape[0] == 1 or a_out.shape[0] == 3
+            a_out = xp.ascontiguousarray(xp.transpose(a_out, axes=(1, 0))).copy()  # Make sure we don&#39;t have stride 0
+
+        # make sure that output array is 4d and of shape (:,:,:, 1) or (:,:,:, 3) for tensor-product/slice evaluation
+        else:
+            assert a_out.ndim == 4
+            assert a_out.shape[0] == 1 or a_out.shape[0] == 3
+            a_out = xp.ascontiguousarray(
+                xp.transpose(a_out, axes=(1, 2, 3, 0)),
+            ).copy()  # Make sure we don&#39;t have stride 0
+
+        return a_out</div>
+
+
+    # ================================
+
+<div class="viewcode-block" id="Domain.get_params_numpy">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.get_params_numpy">[docs]</a>
+    def get_params_numpy(self) -&gt; xp.ndarray:
+        &quot;&quot;&quot;Convert parameter dict into numpy array.&quot;&quot;&quot;
+        params_numpy = []
+        for k, v in self.params.items():
+            params_numpy.append(v)
+        return xp.array(params_numpy)</div>
+
+
+<div class="viewcode-block" id="Domain.create_geometry_mesh">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.create_geometry_mesh">[docs]</a>
+    def create_geometry_mesh(
+        self,
+        nx: int = 32,
+        ny: int = 32,
+        nz: int = 32,
+    ):
+        &quot;&quot;&quot;Create a PyVista mesh with geometry
+
+        Returns
+        -------
+        pyvista.StructuredGrid
+        &quot;&quot;&quot;
+
+        grids_log = [
+            xp.linspace(1e-6, 1.0, nx),
+            xp.linspace(0.0, 1.0, ny),
+            xp.linspace(0.0, 1.0, nz),
+        ]
+
+        tmp = self(*grids_log)
+        grids_phy = [tmp[0], tmp[1], tmp[2]]
+
+        # Create PyVista structured grid
+        mesh = StructuredGrid(grids_phy[0], grids_phy[1], grids_phy[2])
+
+        return mesh</div>
+
+
+<div class="viewcode-block" id="Domain.show_3d">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.show_3d">[docs]</a>
+    def show_3d(
+        self,
+        nx: int = 32,
+        ny: int = 32,
+        nz: int = 32,
+    ):
+        &quot;&quot;&quot;Show the 3D geometry using PyVista.&quot;&quot;&quot;
+        mesh = self.create_geometry_mesh(nx, ny, nz)
+        plotter = Plotter()
+        plotter.add_mesh(mesh, show_edges=True)
+        plotter.show()</div>
+
+
+<div class="viewcode-block" id="Domain.export_geometry">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.export_geometry">[docs]</a>
+    def export_geometry(self, filename: str):
+        &quot;&quot;&quot;Save the geometry to a VTK file.
+
+        Parameters
+        ----------
+        filename : str
+            The name of the file to save the geometry to. Supported formats include .vts, .vtk, .vtp
+        &quot;&quot;&quot;
+        from vtk import vtkGeometryFilter, vtkXMLPolyDataWriter
+
+        mesh = self.create_geometry_mesh()
+        if filename.endswith(&quot;.vts&quot;):
+            mesh.save(filename, binary=True)
+        elif filename.endswith(&quot;.vtp&quot;):
+            # Extract the external surface (Geometry Filter)
+            geom_filter = vtkGeometryFilter()
+            geom_filter.SetInputData(mesh)
+            geom_filter.Update()
+
+            # Write as PolyData (.vtp)
+            writer = vtkXMLPolyDataWriter()
+            writer.SetFileName(filename)
+            writer.SetInputData(geom_filter.GetOutput())
+            writer.Write()
+        else:
+            raise ValueError(&quot;Unsupported file format. Supported formats are .vts, .vtk, .vtp&quot;)</div>
+
+
+<div class="viewcode-block" id="Domain.show">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.show">[docs]</a>
+    def show(
+        self,
+        logical=False,
+        grid_info=None,
+        markers=None,
+        marker_coords=&quot;logical&quot;,
+        show_control_pts=False,
+        figsize=(12, 5),
+        save_dir=None,
+    ):
+        &quot;&quot;&quot;Plots isolines (and control point in case on spline mappings) of the 2D physical domain for eta3 = 0.
+        Markers can be plotted as well (optional).
+
+        Parameters
+        ----------
+        logical : bool
+            Whether to plot the physical domain (False) or logical domain (True).
+
+        plane : str
+            Which physical coordinates to plot (xy, xz or yz) in case of logical=False.
+
+        grid_info : array-like
+            Information about the grid. If not given, the domain is shown with high resolution. If given, can be either
+                * a list of # of elements [Nel1, Nel2, (Nel3)], OR
+                * a 2d array with information about MPI decomposition.
+
+        markers : array-like
+            Markers to be plotted. Can be of shape (Np, 3) or (:, Np, 3). For the former, all markers are plotted with the same color. For the latter, with different colors (are interpreted as orbits in time).
+
+        marker_coords : bool
+            Whether the marker coordinates are logical or physical.
+
+        save_dir : str
+            If given, the figure is saved according the given directory.
+        &quot;&quot;&quot;
+
+        import matplotlib.pyplot as plt
+
+        is_not_cube = self.kind_map &lt; 10 or self.kind_map &gt; 19
+        torus_mappings = (
+            &quot;Tokamak&quot;,
+            &quot;GVECunit&quot;,
+            &quot;DESCunit&quot;,
+            &quot;IGAPolarTorus&quot;,
+            &quot;HollowTorus&quot;,
+        )
+
+        # plot domain without MPI decomposition and high resolution
+        if grid_info is None:
+            e1 = xp.linspace(0.0, 1.0, 16)
+            e2 = xp.linspace(0.0, 1.0, 65)
+
+            if logical:
+                E1, E2 = xp.meshgrid(e1, e2, indexing=&quot;ij&quot;)
+                X = xp.stack((E1, E2), axis=0)
+            else:
+                XYZ = self(e1, e2, 0.0, squeeze_out=True)
+
+            X = XYZ[0]
+            if self.__class__.__name__ in torus_mappings:
+                Y = XYZ[2]
+            else:
+                Y = XYZ[1]
+
+            fig = plt.figure(figsize=figsize)
+            ax = fig.add_subplot(1, 2, 1)
+
+            # eta1-isolines
+            for i in range(e1.size):
+                ax.plot(X[i, :], Y[i, :], &quot;tab:blue&quot;, alpha=0.5, zorder=0)
+
+            # eta2-isolines
+            for j in range(e2.size - int(is_not_cube)):
+                ax.plot(X[:, j], Y[:, j], &quot;tab:blue&quot;, alpha=0.5, zorder=0)
+
+            ax.scatter(X[0, 0], Y[0, 0], 20, &quot;red&quot;, zorder=10)
+            if is_not_cube:
+                ax.scatter(X[0, 32], Y[0, 32], 20, &quot;red&quot;, zorder=10)
+
+            tstr = &quot;&quot;
+            for key, val in self.params.items():
+                if key not in {&quot;cx&quot;, &quot;cy&quot;, &quot;cz&quot;}:
+                    tstr += key + &quot;: &quot; + str(val) + &quot;\n&quot;
+            ax.set_title(self.__class__.__name__ + &quot; at $\\eta_3=0$&quot;)
+            ax.text(
+                0.01,
+                0.99,
+                tstr,
+                ha=&quot;left&quot;,
+                va=&quot;top&quot;,
+                transform=ax.transAxes,
+            )
+
+            # top view
+            e3 = xp.linspace(0.0, 1.0, 65)
+
+            if logical:
+                E1, E2 = xp.meshgrid(e1, e2, indexing=&quot;ij&quot;)
+                X = xp.stack((E1, E2), axis=0)
+            else:
+                theta_0 = self(e1, 0.0, e3, squeeze_out=True)
+                theta_pi = self(e1, 0.5, e3, squeeze_out=True)
+
+            X_0 = theta_0[0]
+            X_pi = theta_pi[0]
+            if self.__class__.__name__ in torus_mappings:
+                Z_0 = theta_0[1]
+                Z_pi = theta_pi[1]
+            else:
+                Z_0 = theta_0[2]
+                Z_pi = theta_pi[2]
+
+            ax2 = fig.add_subplot(1, 2, 2)
+
+            # eta1-isolines
+            for i in range(e1.size):
+                ax2.plot(X_0[i, :], Z_0[i, :], &quot;tab:blue&quot;, alpha=0.5, zorder=0)
+
+            # eta3-isolines
+            for j in range(e2.size):
+                ax2.plot(X_0[:, j], Z_0[:, j], &quot;tab:blue&quot;, alpha=0.5, zorder=0)
+
+            if is_not_cube:
+                # eta1-isolines
+                for i in range(e1.size):
+                    ax2.plot(
+                        X_pi[i, :],
+                        Z_pi[i, :],
+                        &quot;tab:blue&quot;,
+                        alpha=0.5,
+                        zorder=0,
+                    )
+
+                # eta3-isolines
+                for j in range(e2.size):
+                    ax2.plot(
+                        X_pi[:, j],
+                        Z_pi[:, j],
+                        &quot;tab:blue&quot;,
+                        alpha=0.5,
+                        zorder=0,
+                    )
+
+            # magnetic axis
+            ax2.plot(X_0[0, :], Z_0[0, :], &quot;tab:red&quot;, alpha=1.0, zorder=10)
+            ax2.plot(X_pi[0, :], Z_pi[0, :], &quot;tab:red&quot;, alpha=1.0, zorder=10)
+
+            if self.__class__.__name__ in torus_mappings:
+                ylab = &quot;y&quot;
+            else:
+                ylab = &quot;z&quot;
+            ax2.set_xlabel(&quot;x&quot;)
+            ax2.set_ylabel(ylab)
+            ax2.set_title(&quot;top view&quot;)
+            ax2.axis(&quot;equal&quot;)
+
+            # coordinates
+            # e3 = [0., .25, .5, .75]
+            # x, y, z = self(e1, e2, e3)
+            # R = xp.sqrt(x**2 + y**2)
+
+            # fig = plt.figure(figsize=(13, 13))
+            # for n in range(4):
+            #     plt.subplot(2, 2, n + 1)
+            #     plt.contourf(R[:, :, n], z[:, :, n], x[:, :, n])
+            #     plt.title(f&#39;x at {e3[n] = }&#39;)
+            #     plt.colorbar()
+
+            # fig = plt.figure(figsize=(13, 13))
+            # for n in range(4):
+            #     plt.subplot(2, 2, n + 1)
+            #     plt.contourf(R[:, :, n], z[:, :, n], y[:, :, n])
+            #     plt.title(f&#39;y at {e3[n] = }&#39;)
+            #     plt.colorbar()
+
+            # fig = plt.figure(figsize=(13, 13))
+            # for n in range(4):
+            #     plt.subplot(2, 2, n + 1)
+            #     plt.contourf(R[:, :, n], z[:, :, n], z[:, :, n])
+            #     plt.title(f&#39;z at {e3[n] = }&#39;)
+            #     plt.colorbar()
+
+        # plot domain according to given grid [nel1, nel2, (nel3)]
+        elif isinstance(grid_info, list):
+            assert len(grid_info) &gt; 1
+
+            e1 = xp.linspace(0.0, 1.0, grid_info[0] + 1)
+            e2 = xp.linspace(0.0, 1.0, grid_info[1] + 1)
+
+            fig = plt.figure(figsize=figsize)
+            ax = fig.add_subplot(1, 1, 1)
+
+            if logical:
+                E1, E2 = xp.meshgrid(e1, e2, indexing=&quot;ij&quot;)
+
+                # eta1-isolines
+                for i in range(e1.size):
+                    ax.plot(E1[i, :], E2[i, :], &quot;tab:blue&quot;, alpha=0.5)
+
+                # eta2-isolines
+                for j in range(e2.size):
+                    ax.plot(E1[:, j], E2[:, j], &quot;tab:blue&quot;, alpha=0.5)
+
+            else:
+                X = self(e1, e2, 0.0, squeeze_out=True)
+
+                # plot xz-plane for torus mappings, xy-plane else
+                if self.__class__.__name__ in torus_mappings:
+                    co1, co2 = 0, 2
+                else:
+                    co1, co2 = 0, 1
+
+                # eta1-isolines
+                for i in range(e1.size):
+                    ax.plot(X[co1, i, :], X[co2, i, :], &quot;tab:blue&quot;, alpha=0.5)
+
+                # eta2-isolines
+                for j in range(e2.size):
+                    ax.plot(X[co1, :, j], X[co2, :, j], &quot;tab:blue&quot;, alpha=0.5)
+
+        # plot domain with MPI decomposition
+        elif isinstance(grid_info, xp.ndarray):
+            assert grid_info.ndim == 2
+            assert grid_info.shape[1] &gt; 5
+
+            fig = plt.figure(figsize=figsize)
+            ax = fig.add_subplot(1, 1, 1)
+
+            for i in range(grid_info.shape[0]):
+                e1 = xp.linspace(
+                    grid_info[i, 0],
+                    grid_info[i, 1],
+                    int(
+                        grid_info[i, 2],
+                    )
+                    + 1,
+                )
+                e2 = xp.linspace(
+                    grid_info[i, 3],
+                    grid_info[i, 4],
+                    int(
+                        grid_info[i, 5],
+                    )
+                    + 1,
+                )
+
+                if logical:
+                    E1, E2 = xp.meshgrid(e1, e2, indexing=&quot;ij&quot;)
+
+                    # eta1-isolines
+                    first_line = ax.plot(
+                        E1[0, :],
+                        E2[0, :],
+                        label=&quot;rank=&quot; + str(i),
+                        alpha=0.25,
+                    )
+
+                    for j in range(e1.size):
+                        ax.plot(
+                            E1[j, :],
+                            E2[j, :],
+                            color=first_line[0].get_color(),
+                            alpha=0.25,
+                        )
+
+                    # eta2-isolines
+                    for k in range(e2.size):
+                        ax.plot(
+                            E1[:, k],
+                            E2[:, k],
+                            color=first_line[0].get_color(),
+                            alpha=0.25,
+                        )
+
+                else:
+                    X = self(e1, e2, 0.0, squeeze_out=True)
+
+                    # plot xz-plane for torus mappings, xy-plane else
+                    if self.__class__.__name__ in torus_mappings:
+                        co1, co2 = 0, 2
+                    else:
+                        co1, co2 = 0, 1
+
+                    # eta1-isolines
+                    first_line = ax.plot(
+                        X[co1, 0, :],
+                        X[co2, 0, :],
+                        label=&quot;rank=&quot; + str(i),
+                        alpha=0.25,
+                    )
+
+                    for j in range(e1.size):
+                        ax.plot(
+                            X[co1, j, :],
+                            X[co2, j, :],
+                            color=first_line[0].get_color(),
+                            alpha=0.25,
+                        )
+
+                    # eta2-isolines
+                    for k in range(e2.size):
+                        ax.plot(
+                            X[co1, :, k],
+                            X[co2, :, k],
+                            color=first_line[0].get_color(),
+                            alpha=0.25,
+                        )
+
+        else:
+            raise ValueError(&quot;given grid_info is not supported!&quot;)
+
+        # plot control points in case of IGA mappings
+        if not logical and self.kind_map &lt; 10 and show_control_pts:
+            if self.__class__.__name__ == &quot;GVECunit&quot; or self.__class__.__name__ == &quot;DESCunit&quot;:
+                Yc = self.cz[:, :, 0].flatten()
+            else:
+                Yc = self.cy[:, :, 0].flatten()
+            ax.scatter(self.cx[:, :, 0].flatten(), Yc, s=1, color=&quot;b&quot;)
+
+        # plot given markers
+        if markers is not None:
+            assert not (logical and marker_coords != &quot;logical&quot;)
+
+            if self.__class__.__name__ in torus_mappings:
+                co1, co2 = 0, 2
+            else:
+                co1, co2 = 0, 1
+
+            # no time series: plot all markers with the same color
+            if markers.ndim == 2:
+                if not logical and marker_coords == &quot;logical&quot;:
+                    tmp = markers.copy()  # TODO: needed for eta3=0
+                    tmp[:, 2] = 0.0  # TODO: needed for eta3=0
+                    X = self(tmp, remove_outside=True)
+                else:
+                    X = (
+                        markers[:, 0].copy(),
+                        markers[
+                            :,
+                            1,
+                        ].copy(),
+                        markers[:, 2].copy(),
+                    )
+
+                ax.scatter(X[co1], X[co2], s=1, color=&quot;b&quot;)
+
+            # time series: plot markers with different colors
+            elif markers.ndim == 3:
+                colors = [&quot;k&quot;, &quot;m&quot;, &quot;b&quot;, &quot;g&quot;, &quot;r&quot;, &quot;c&quot;, &quot;y&quot;]
+
+                for i in range(markers.shape[1]):
+                    if not logical and marker_coords == &quot;logical&quot;:
+                        # TODO: needed for eta3=0
+                        tmp = markers[:, i, :].copy()
+                        tmp[:, 2] = 0.0  # TODO: needed for eta3 = 0
+                        X = self(tmp, remove_outside=True, squeeze_out=True)
+                    else:
+                        X = (
+                            markers[:, i, 0].copy(),
+                            markers[
+                                :,
+                                i,
+                                1,
+                            ].copy(),
+                            markers[:, i, 2].copy(),
+                        )
+
+                    # ax.scatter(X[co1], X[co2], s=2, color=colors[i%len(colors)])
+                    ax.scatter(X[co1], X[co2], s=2)
+
+        ax.axis(&quot;equal&quot;)
+
+        if isinstance(grid_info, xp.ndarray):
+            plt.legend()
+
+        if self.__class__.__name__ in torus_mappings:
+            ylab = &quot;z&quot;
+        else:
+            ylab = &quot;y&quot;
+        ax.set_xlabel(&quot;x&quot;)
+        ax.set_ylabel(ylab)
+
+        if save_dir is not None:
+            plt.savefig(save_dir, bbox_inches=&quot;tight&quot;)
+        else:
+            plt.show()</div>
+
+
+    def to_dict(self) -&gt; dict:
+        return {
+            &quot;type&quot;: self.__class__.__name__,
+            &quot;params&quot;: self.params,
+        }
+
+    @classmethod
+    def from_dict(cls, dct):
+        from struphy.geometry.utilities import get_domain_by_name
+
+        name = dct[&quot;type&quot;]
+        domain_cls = get_domain_by_name(name)
+        return domain_cls(**dct[&quot;params&quot;])
+
+<div class="viewcode-block" id="Domain.__eq__">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Domain.__eq__">[docs]</a>
+    def __eq__(self, other: &quot;Domain&quot;) -&gt; bool:
+        assert isinstance(other, Domain), f&quot;Cannot compare Domain with {type(other)}.&quot;
+        return self.to_dict() == other.to_dict()</div>
+</div>
+
+
+
+<div class="viewcode-block" id="Spline">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.Spline">[docs]</a>
+class Spline(Domain):
+    r&quot;&quot;&quot;3D IGA spline mapping.
+
+    .. math::
+
+        F: (\eta_1, \eta_2, \eta_3) \mapsto (x, y, z) \textnormal{ as } \left\{\begin{aligned}
+        x &amp;= \sum_{ijk} c^x_{ijk} N_i(\eta_1) N_j(\eta_2) N_k(\eta_3)\,,
+
+        y &amp;= \sum_{ijk} c^y_{ijk} N_i(\eta_1) N_j(\eta_2) N_k(\eta_3)\,,
+
+        z &amp;= \sum_{ijk} c^z_{ijk} N_i(\eta_1) N_j(\eta_2) N_k(\eta_3)\,.
+        \end{aligned}\right.
+    &quot;&quot;&quot;
+
+    def __init__(
+        self,
+        num_elements: tuple[int] = (8, 24, 6),
+        degree: tuple[int] = (2, 3, 1),
+        spl_kind: tuple[bool] = (False, True, True),
+        cx: xp.ndarray | None = None,
+        cy: xp.ndarray | None = None,
+        cz: xp.ndarray | None = None,
+    ):
+        self.kind_map = 0
+
+        # get default control points from default GVEC equilibrium
+        if cx is None or cy is None or cz is None:
+            from struphy.fields_background.equils import GVECequilibrium
+
+            mhd_equil = GVECequilibrium()
+            cx = mhd_equil.domain.cx
+            cx = mhd_equil.domain.cy
+            cx = mhd_equil.domain.cz
+        # assign control points
+        self._cx = cx
+        self._cy = cy
+        self._cz = cz
+
+        # check dimensions
+        assert self.cx.ndim == 3
+        assert self.cy.ndim == 3
+        assert self.cz.ndim == 3
+
+        # make sure that control points are compatible with given spline data
+        expected_shape = tuple([num_elements[n] + (not spl_kind[n]) * degree[n] for n in range(3)])
+
+        assert self.cx.shape == expected_shape
+        assert self.cy.shape == expected_shape
+        assert self.cz.shape == expected_shape
+
+        # identify polar singularity at eta1=0
+        if xp.all(self.cx[0, :, 0] == self.cx[0, 0, 0]):
+            self.pole = True
+        else:
+            self.pole = False
+
+        self.periodic_eta3 = spl_kind[-1]
+
+        # base class
+        super().__init__(num_elements=num_elements, degree=degree, spl_kind=spl_kind)</div>
+
+
+
+<div class="viewcode-block" id="PoloidalSpline">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.PoloidalSpline">[docs]</a>
+class PoloidalSpline(Domain):
+    r&quot;&quot;&quot;Base class for all mappings that use a 2D spline representation
+    :math:`S:(\eta_1, \eta_2) \to (R, Z) \in \mathbb R^2` in the poloidal plane:
+
+    .. math::
+
+        S: (\eta_1, \eta_2) \mapsto (R, Z) \textnormal{ as } \left\{\begin{aligned}
+        R &amp;= \sum_{ij} c^R_{ij} N_i(\eta_1) N_j(\eta_2) \,,
+
+        Z &amp;= \sum_{ij} c^Z_{ij} N_i(\eta_1) N_j(\eta_2) \,.
+        \end{aligned}\right.
+
+    The full map :math:`F: [0, 1]^3 \to \Omega` is obtained by defining :math:`(R, Z, \eta_3) \mapsto (x, y, z)` in the child class.
+    &quot;&quot;&quot;
+
+    def __init__(
+        self,
+        num_elements: tuple[int] = (8, 24),
+        degree: tuple[int] = (2, 3),
+        spl_kind: tuple[bool] = (False, True),
+        cx: xp.ndarray = None,
+        cy: xp.ndarray = None,
+    ):
+        # get default control points
+        if cx is None or cy is None:
+
+            def X(eta1, eta2):
+                return eta1 * xp.cos(2 * xp.pi * eta2) + 3.0
+
+            def Y(eta1, eta2):
+                return eta1 * xp.sin(2 * xp.pi * eta2)
+
+            cx, cy = interp_mapping(num_elements, degree, spl_kind, X, Y)
+
+            # make sure that control points at pole are all the same (eta1=0 there)
+            cx[0] = 3.0
+            cy[0] = 0.0
+
+        # set control point properties
+        self._cx = cx
+        self._cy = cy
+
+        # make sure that control points are 2D
+        assert self.cx.ndim == 2
+        assert self.cy.ndim == 2
+
+        # make sure that control points are compatible with given spline data
+        expected_shape = tuple([num_elements[n] + (not spl_kind[n]) * degree[n] for n in range(2)])
+
+        assert self.cx.shape == expected_shape
+        assert self.cy.shape == expected_shape
+
+        # identify polar singularity at eta1=0
+        if xp.all(self.cx[0, :] == self.cx[0, 0]):
+            self.pole = True
+        else:
+            self.pole = False
+
+        # reshape control points to 3D
+        self._cx = self.cx[:, :, None]
+        self._cy = self.cy[:, :, None]
+        self._cz = xp.zeros((1, 1, 1), dtype=float)
+
+        # init base class
+        super().__init__(num_elements=num_elements, degree=degree, spl_kind=spl_kind)</div>
+
+
+
+<div class="viewcode-block" id="PoloidalSplineStraight">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.PoloidalSplineStraight">[docs]</a>
+class PoloidalSplineStraight(PoloidalSpline):
+    r&quot;&quot;&quot;Cylinder where the poloidal planes are described by a 2D IGA-spline mapping.
+
+    .. math::
+
+        F: (R, Z, \eta_3) \mapsto (x, y, z) \textnormal{ as } \left\{\begin{aligned}
+        x &amp;= R \,,
+
+        y &amp;= Z \,,
+
+        z &amp;= L_z\eta_3\,.
+        \end{aligned}\right.
+    &quot;&quot;&quot;
+
+    def __init__(
+        self,
+        num_elements: tuple[int] = (8, 24),
+        degree: tuple[int] = (2, 3),
+        spl_kind: tuple[bool] = (False, True),
+        cx: xp.ndarray = None,
+        cy: xp.ndarray = None,
+        Lz: float = 4.0,
+    ):
+        self.kind_map = 1
+
+        # get default control points
+        if cx is None or cy is None:
+
+            def X(eta1, eta2):
+                return eta1 * xp.cos(2 * xp.pi * eta2)
+
+            def Y(eta1, eta2):
+                return eta1 * xp.sin(2 * xp.pi * eta2)
+
+            cx, cy = interp_mapping(num_elements, degree, spl_kind, X, Y)
+
+            # make sure that control points at pole are all 0 (eta1=0 there)
+            cx[0] = 0.0
+            cy[0] = 0.0
+
+        self.params_numpy = xp.array([Lz])
+        self.periodic_eta3 = False
+
+        # init base class
+        super().__init__(num_elements=num_elements, degree=degree, spl_kind=spl_kind, cx=cx, cy=cy)</div>
+
+
+
+<div class="viewcode-block" id="PoloidalSplineTorus">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.PoloidalSplineTorus">[docs]</a>
+class PoloidalSplineTorus(PoloidalSpline):
+    r&quot;&quot;&quot;Torus where the poloidal planes are described by a 2D IGA-spline mapping.
+
+    .. math::
+
+        F: (R, Z, \eta_3) \mapsto (x, y, z) \textnormal{ as } \left\{\begin{aligned}
+        x &amp;= R \cos(2\pi\eta_3)  \,,
+
+        y &amp;= R \sin(- 2\pi\eta_3) \,,
+
+        z &amp;= Z \,.
+        \end{aligned}\right.
+
+    Parameters
+    ----------
+    num_elements : tuple[int]
+        Number of elements in each poloidal direction.
+
+    degree : tuple[int]
+        Spline degree in each poloidal direction.
+
+    spl_kind : tuple[bool]
+        Kind of spline in each poloidal direction (True=periodic, False=clamped).
+
+    cx, cy : xp.ndarray
+        Control points (spline coefficients) of the poloidal mapping.
+        If None, a default square-to-disc mapping of radius 1 centered around (x, y) = (3, 0) is interpolated.
+
+    tor_period : int
+        The toroidal angle is between [0, 2*pi/tor_period).
+    &quot;&quot;&quot;
+
+    def __init__(
+        self,
+        num_elements: tuple[int] = (8, 24),
+        degree: tuple[int] = (2, 3),
+        spl_kind: tuple[bool] = (False, True),
+        cx: xp.ndarray = None,
+        cy: xp.ndarray = None,
+        tor_period: int = 3,
+    ):
+        # use setters for mapping attributes
+        self.kind_map = 2
+        self.params_numpy = xp.array([float(tor_period)])
+        self.periodic_eta3 = True
+
+        # get default control points
+        if cx is None or cy is None:
+
+            def X(eta1, eta2):
+                return eta1 * xp.cos(2 * xp.pi * eta2) + 3.0
+
+            def Y(eta1, eta2):
+                return eta1 * xp.sin(2 * xp.pi * eta2)
+
+            cx, cy = interp_mapping(num_elements, degree, spl_kind, X, Y)
+
+            # make sure that control points at pole are all 0 (eta1=0 there)
+            cx[0] = 3.0
+            cy[0] = 0.0
+
+        # init base class
+        super().__init__(
+            num_elements=num_elements,
+            degree=degree,
+            spl_kind=spl_kind,
+            cx=cx,
+            cy=cy,
+        )</div>
+
+
+
+<div class="viewcode-block" id="interp_mapping">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.interp_mapping">[docs]</a>
+def interp_mapping(num_elements, degree, spl_kind, X, Y, Z=None):
+    r&quot;&quot;&quot;Interpolates the mapping :math:`F: (0, 1)^3 \to \mathbb R^3` on the given spline space.
+
+    Parameters
+    -----------
+    num_elements, degree, spl_kind : array-like
+        Defining the spline space.
+
+    X, Y : callable
+        Either X(eta1, eta2) in 2D or X(eta1, eta2, eta3) in 3D.
+
+    Z : callable
+        3rd mapping component Z(eta1, eta2, eta3) in 3D.
+
+    Returns
+    --------
+    cx, cy (, cz) : array-like
+        The control points.
+    &quot;&quot;&quot;
+
+    # number of basis functions
+    NbaseN = [
+        num_elements + degree - kind * degree for num_elements, degree, kind in zip(num_elements, degree, spl_kind)
+    ]
+
+    # element boundaries
+    el_b = [xp.linspace(0.0, 1.0, num_elements + 1) for num_elements in num_elements]
+
+    # spline knot vectors
+    T = [bsp.make_knots(el_b, degree, kind) for el_b, degree, kind in zip(el_b, degree, spl_kind)]
+
+    # greville points
+    I_pts = [bsp.greville(T, degree, kind) for T, degree, kind in zip(T, degree, spl_kind)]
+
+    # 1D interpolation matrices
+    I_mat = [
+        csc_matrix(bsp.collocation_matrix(T, degree, I_pts, kind))
+        for T, degree, I_pts, kind in zip(T, degree, I_pts, spl_kind)
+    ]
+
+    # 2D interpolation
+    if len(num_elements) == 2:
+        I = kron(I_mat[0], I_mat[1], format=&quot;csc&quot;)
+
+        I_pts = xp.meshgrid(I_pts[0], I_pts[1], indexing=&quot;ij&quot;)
+
+        cx = spsolve(I, X(I_pts[0], I_pts[1]).flatten()).reshape(
+            NbaseN[0],
+            NbaseN[1],
+        )
+        cy = spsolve(I, Y(I_pts[0], I_pts[1]).flatten()).reshape(
+            NbaseN[0],
+            NbaseN[1],
+        )
+
+        return cx, cy
+
+    # 3D interpolation
+    elif len(num_elements) == 3:
+        I_LU = [splu(mat) for mat in I_mat]
+
+        x_size = X(I_pts[0], I_pts[1], I_pts[2])
+        y_size = Y(I_pts[0], I_pts[1], I_pts[2])
+        z_size = Z(I_pts[0], I_pts[1], I_pts[2])
+
+        cx = linalg_kron.kron_lusolve_3d(I_LU, x_size)
+        cy = linalg_kron.kron_lusolve_3d(I_LU, y_size)
+        cz = linalg_kron.kron_lusolve_3d(I_LU, z_size)
+
+        return cx, cy, cz
+
+    else:
+        logger.info(&quot;wrong number of elements&quot;)
+
+        return 0.0</div>
+
+
+
+<div class="viewcode-block" id="spline_interpolation_nd">
+<a class="viewcode-back" href="../../../sections/subsections/domains-base.html#struphy.geometry.base.spline_interpolation_nd">[docs]</a>
+def spline_interpolation_nd(degree: list, spl_kind: list, grids_1d: list, values: xp.ndarray):
+    &quot;&quot;&quot;n-dimensional tensor-product spline interpolation with discrete input.
+
+    The interpolation points are passed as a list of 1d arrays, each array with increasing entries g[0]=0 &lt; g[1] &lt; ...
+    The last element must be g[-1] = 1 for clamped interpolation and g[-1] &lt; 1 for periodic interpolation.
+
+    Parameters
+    -----------
+    degree : list[int]
+        Spline degree.
+
+    grids_1d : list[array]
+        Interpolation points in [0, 1].
+
+    spl_kind : list[bool]
+        True: periodic splines, False: clamped splines.
+
+    values: array
+        Function values at interpolation points. values.shape = (grid1.size, ..., gridn.size).
+
+    Returns
+    --------
+    coeffs : xp.array
+        spline coefficients as nd array.
+
+    T : list[array]
+        Knot vector of spline interpolant.
+
+    indN : list[array]
+        Global indices of non-vanishing splines in each element. Can be accessed via (element, local index).
+    &quot;&quot;&quot;
+
+    T = []
+    indN = []
+    I_mat = []
+    I_LU = []
+    for sh, x_grid, p_i, kind_i in zip(values.shape, grids_1d, degree, spl_kind):
+        assert isinstance(x_grid, xp.ndarray)
+        assert sh == x_grid.size
+        assert (
+            xp.all(
+                xp.roll(x_grid, 1)[1:] &lt; x_grid[1:],
+            )
+            and x_grid[-1] &gt; x_grid[-2]
+        )
+        assert x_grid[0] == 0.0
+
+        if kind_i:
+            assert x_grid[-1] &lt; 1.0, &quot;Interpolation points must be &lt;1 for periodic interpolation.&quot;
+            breaks = xp.ones(x_grid.size + 1)
+
+            if p_i % 2 == 0:
+                breaks[1:-1] = (x_grid[1:] + xp.roll(x_grid, 1)[1:]) / 2.0
+                breaks[0] = 0.0
+            else:
+                breaks[:-1] = x_grid
+
+        else:
+            assert (
+                xp.abs(
+                    x_grid[-1] - 1.0,
+                )
+                &lt; 1e-14
+            ), &quot;Interpolation points must include x=1 for clamped interpolation.&quot;
+            # dimension of the 1d spline spaces: dim = breaks.size - 1 + degree = x_grid.size
+            if p_i == 1:
+                breaks = x_grid
+            elif p_i % 2 == 0:
+                breaks = x_grid[p_i // 2 - 1 : -p_i // 2].copy()
+            else:
+                breaks = x_grid[(p_i - 1) // 2 : -(p_i - 1) // 2].copy()
+
+            # cells must be in interval [0, 1]
+            breaks[0] = 0.0
+            breaks[-1] = 1.0
+
+        # breaks = xp.linspace(0., 1., x_grid.size - (not kind_i)*p_i + 1)
+
+        T += [bsp.make_knots(breaks, p_i, periodic=kind_i)]
+
+        indN += [
+            (xp.indices((breaks.size - 1, p_i + 1))[1] + xp.arange(breaks.size - 1)[:, None]) % x_grid.size,
+        ]
+
+        I_mat += [bsp.collocation_matrix(T[-1], p_i, x_grid, periodic=kind_i)]
+
+        I_LU += [splu(csc_matrix(I_mat[-1]))]
+
+    # dimension check
+    for I, x_grid in zip(I_mat, grids_1d):
+        assert I.shape[0] == x_grid.size
+        assert I.shape[0] == I.shape[1]
+
+    # solve system
+    if len(degree) == 1:
+        return I_LU[0].solve(values), T, indN
+    if len(degree) == 2:
+        return linalg_kron.kron_lusolve_2d(I_LU, values), T, indN
+    elif len(degree) == 3:
+        return linalg_kron.kron_lusolve_3d(I_LU, values), T, indN
+    else:
+        raise AssertionError(&quot;Only dimensions &lt; 4 are supported.&quot;)</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

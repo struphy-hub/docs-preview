@@ -1,0 +1,1247 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Verification of MHD Wave Dispersion Relations &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_collections/tutorials/tutorial_linear_mhd_slab_waves_1d';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Kinetic Plasma Dynamics" href="tutorial_vlasov_ampere_one_species_weak_landau.html" />
+    <link rel="prev" title="Maxwell’s equations: Light Wave and Coaxial Waveguide" href="tutorial_maxwell.html" />
+    <link href="../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="tutorial_maxwell.html"
+                          title="previous chapter">Maxwell’s equations: Light Wave and Coaxial Waveguide</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="tutorial_vlasov_ampere_one_species_weak_landau.html"
+                          title="next chapter">Kinetic Plasma Dynamics</a></p>
+  </div></div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../sections/tutorials.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Verification of MHD Wave Dispersion Relations</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Verification-of-MHD-Wave-Dispersion-Relations">
+<h1>Verification of MHD Wave Dispersion Relations<a class="headerlink" href="#Verification-of-MHD-Wave-Dispersion-Relations" title="Link to this heading">#</a></h1>
+<section id="1D-Slab-Waves-in-a-Homogeneous-Magnetized-Plasma">
+<h2>1D Slab Waves in a Homogeneous Magnetized Plasma<a class="headerlink" href="#1D-Slab-Waves-in-a-Homogeneous-Magnetized-Plasma" title="Link to this heading">#</a></h2>
+<p>This tutorial demonstrates verification of the dispersion relations for the shear Alfvén, slow magnetosonic, and fast magnetosonic waves in a homogeneous magnetized plasma slab using the LinearMHD model.</p>
+<section id="Physical-Setup">
+<h3>Physical Setup<a class="headerlink" href="#Physical-Setup" title="Link to this heading">#</a></h3>
+<p>We consider a one-dimensional equilibrium with constant density <span class="math notranslate nohighlight">\(n_0\)</span>, pressure <span class="math notranslate nohighlight">\(p_0\)</span>, and a uniform background magnetic field</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{B}_0 = (B_{0x}, B_{0y}, B_{0z}).\]</div>
+<p>Small-amplitude perturbations are launched with wave vector <span class="math notranslate nohighlight">\(\mathbf{k} = k\,\hat{\mathbf{z}}\)</span>, so the three linear MHD branches reduce to the standard slab-wave dispersion relations. In Struphy units, the Alfvén and sound speeds are</p>
+<div class="math notranslate nohighlight">
+\[v_A^2 = \frac{|\mathbf{B}_0|^2}{n_0}, \qquad c_S^2 = \gamma\,\frac{p_0}{n_0}.\]</div>
+<p>The three wave branches are:</p>
+<div class="math notranslate nohighlight">
+\[\text{shear Alfv\'en}: \qquad \omega = v_A\,k\,\frac{B_{0z}}{|\mathbf{B}_0|},\]</div>
+<div class="math notranslate nohighlight">
+\[\text{slow magnetosonic}: \qquad \omega = k\sqrt{\frac{1}{2}(c_S^2 + v_A^2)\left(1 - \sqrt{1 - \delta}\right)},\]</div>
+<div class="math notranslate nohighlight">
+\[\text{fast magnetosonic}: \qquad \omega = k\sqrt{\frac{1}{2}(c_S^2 + v_A^2)\left(1 + \sqrt{1 - \delta}\right)},\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[\delta = \frac{4 B_{0z}^2 c_S^2 v_A^2}{(c_S^2 + v_A^2)^2 |\mathbf{B}_0|^2}.\]</div>
+<p>We verify these wave speeds by:</p>
+<ol class="arabic simple">
+<li><p>Initializing small velocity perturbations (noise)</p></li>
+<li><p>Running a transient simulation</p></li>
+<li><p>Extracting dominant wave frequencies via FFT power spectrum</p></li>
+<li><p>Comparing fitted wave speeds against analytical predictions</p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cunumpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xp</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DerhamOptions</span><span class="p">,</span>
+    <span class="n">EnvironmentOptions</span><span class="p">,</span>
+    <span class="n">Simulation</span><span class="p">,</span>
+    <span class="n">Time</span><span class="p">,</span>
+    <span class="n">domains</span><span class="p">,</span>
+    <span class="n">equils</span><span class="p">,</span>
+    <span class="n">grids</span><span class="p">,</span>
+    <span class="n">perturbations</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.diagnostics.diagn_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">power_spectrum_2d</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearMHD</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;struphy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Model-and-Equilibrium-Parameters">
+<h3>Model and Equilibrium Parameters<a class="headerlink" href="#Model-and-Equilibrium-Parameters" title="Link to this heading">#</a></h3>
+<p>Define the magnetic field configuration, plasma density, and pressure (via plasma beta) that sets up the equilibrium. These parameters determine the wave speeds we will verify.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Magnetic field components</span>
+<span class="n">B0x</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">B0y</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">B0z</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="c1"># Plasma parameters</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mf">3.0</span>  <span class="c1"># ratio of thermal to magnetic pressure</span>
+<span class="n">n0</span> <span class="o">=</span> <span class="mf">0.7</span>    <span class="c1"># reference density</span>
+
+<span class="c1"># Compute thermal pressure from beta and magnetic pressure</span>
+<span class="n">Bsquare</span> <span class="o">=</span> <span class="n">B0x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">B0y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">B0z</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">p0</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">Bsquare</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Magnetic field: B0 = (</span><span class="si">{</span><span class="n">B0x</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">B0y</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">B0z</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Alfvén speed: v_A = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Bsquare</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n0</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sound speed: c_s = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="o">/</span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n0</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Beta (plasma): </span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Magnetic field: B0 = (0.0, 1.0, 1.0)
+Alfvén speed: v_A = 1.6903
+Sound speed: c_s = 2.6726
+Beta (plasma): 3.0
+</pre></div></div>
+</div>
+</section>
+<section id="Domain-and-Numerical-Discretization">
+<h3>Domain and Numerical Discretization<a class="headerlink" href="#Domain-and-Numerical-Discretization" title="Link to this heading">#</a></h3>
+<p>Set up a 1D periodic domain in the <span class="math notranslate nohighlight">\(z\)</span>-direction with a tensor-product grid. Since the wave propagates along <span class="math notranslate nohighlight">\(z\)</span>, we keep <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> as single-element.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1D domain (extended in z)</span>
+<span class="n">domain</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">Cuboid</span><span class="p">(</span><span class="n">r3</span><span class="o">=</span><span class="mf">60.0</span><span class="p">)</span>  <span class="c1"># z ∈ [0, 60)</span>
+
+<span class="c1"># Grid: 1D in z with 64 elements (fine enough to resolve waves)</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">TensorProductGrid</span><span class="p">(</span><span class="n">num_elements</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span>
+
+<span class="c1"># Derham options for 1D:</span>
+<span class="c1"># - degree=(1,1,3): cubic edges in z for smooth wave representation</span>
+<span class="n">derham_opts</span> <span class="o">=</span> <span class="n">DerhamOptions</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Domain: z ∈ [0, </span><span class="si">{</span><span class="n">domain</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;r3&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grid elements: </span><span class="si">{</span><span class="n">grid</span><span class="o">.</span><span class="n">num_elements</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Derham degree: </span><span class="si">{</span><span class="n">derham_opts</span><span class="o">.</span><span class="n">degree</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Domain: z ∈ [0, 60.0)
+Grid elements: (1, 1, 64)
+Derham degree: (1, 1, 3)
+</pre></div></div>
+</div>
+</section>
+<section id="Model-Instantiation-and-Propagator-Options">
+<h3>Model Instantiation and Propagator Options<a class="headerlink" href="#Model-Instantiation-and-Propagator-Options" title="Link to this heading">#</a></h3>
+<p>Create a LinearMHD model and configure the propagators for the shear Alfvén and magnetosonic branches. We use the implicit time-stepping algorithm for stability over the long simulation window.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model instance</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearMHD</span><span class="p">()</span>
+
+<span class="c1"># Choose implicit or explicit time-stepping</span>
+<span class="n">algo</span> <span class="o">=</span> <span class="s2">&quot;implicit&quot;</span>  <span class="c1"># Alternative: &quot;explicit&quot;</span>
+
+<span class="c1"># Propagator options</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">shear_alf</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">shear_alf</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span><span class="n">algo</span><span class="o">=</span><span class="n">algo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Initial-Conditions">
+<h3>Initial Conditions<a class="headerlink" href="#Initial-Conditions" title="Link to this heading">#</a></h3>
+<p>Add small random perturbations to velocity components. These perturbations excite a broadband spectrum of waves that we will analyze via FFT. The background equilibrium (magnetic field, density, pressure) is set via the <code class="docutils literal notranslate"><span class="pre">equil</span></code> object in the Simulation.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set velocity perturbations (small noise to excite waves)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">mhd</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span><span class="n">perturbations</span><span class="o">.</span><span class="n">Noise</span><span class="p">(</span><span class="n">amp</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">comp</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">mhd</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span><span class="n">perturbations</span><span class="o">.</span><span class="n">Noise</span><span class="p">(</span><span class="n">amp</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">comp</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">mhd</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">add_perturbation</span><span class="p">(</span><span class="n">perturbations</span><span class="o">.</span><span class="n">Noise</span><span class="p">(</span><span class="n">amp</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">comp</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">))</span>
+
+<span class="c1"># Build equilibrium object</span>
+<span class="n">equil</span> <span class="o">=</span> <span class="n">equils</span><span class="o">.</span><span class="n">HomogenSlab</span><span class="p">(</span><span class="n">B0x</span><span class="o">=</span><span class="n">B0x</span><span class="p">,</span> <span class="n">B0y</span><span class="o">=</span><span class="n">B0y</span><span class="p">,</span> <span class="n">B0z</span><span class="o">=</span><span class="n">B0z</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span> <span class="n">n0</span><span class="o">=</span><span class="n">n0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Simulation-Setup-and-Execution">
+<h3>Simulation Setup and Execution<a class="headerlink" href="#Simulation-Setup-and-Execution" title="Link to this heading">#</a></h3>
+<p>Configure the simulation environment, time-stepping parameters, and run the transient dynamics. We run for a long enough time to collect sufficient wave cycles for accurate FFT analysis.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Environment and file management</span>
+<span class="n">test_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;struphy_verification_tests&quot;</span><span class="p">)</span>
+<span class="n">out_folders</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_folder</span><span class="p">,</span> <span class="s2">&quot;LinearMHD&quot;</span><span class="p">)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">EnvironmentOptions</span><span class="p">(</span><span class="n">out_folders</span><span class="o">=</span><span class="n">out_folders</span><span class="p">,</span> <span class="n">sim_folder</span><span class="o">=</span><span class="s2">&quot;slab_waves_1d&quot;</span><span class="p">)</span>
+
+<span class="c1"># Time-stepping: dt=0.15 is stable for implicit stepping</span>
+<span class="n">time_opts</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">Tend</span><span class="o">=</span><span class="mf">180.0</span><span class="p">)</span>
+
+<span class="c1"># Instantiate and run simulation</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+    <span class="n">time_opts</span><span class="o">=</span><span class="n">time_opts</span><span class="p">,</span>
+    <span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">,</span>
+    <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+    <span class="n">derham_opts</span><span class="o">=</span><span class="n">derham_opts</span><span class="p">,</span>
+    <span class="n">equil</span><span class="o">=</span><span class="n">equil</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running simulation: dt=</span><span class="si">{</span><span class="n">time_opts</span><span class="o">.</span><span class="n">dt</span><span class="si">}</span><span class="s2">, Tend=</span><span class="si">{</span><span class="n">time_opts</span><span class="o">.</span><span class="n">Tend</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Simulation complete.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Post-processing</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Post-processing complete.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model LinearMHD ...
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running simulation: dt=0.15, Tend=180.0
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Time stepping: 100%|██████████| 1200/1200 [01:35&lt;00:00, 12.50step/s]
+Struphy run finished.
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/LinearMHD/slab_waves_1d
+
+Reading hdf5 data of following species:
+em_fields:
+  b_field: &lt;HDF5 group &#34;/feec/em_fields/b_field&#34; (3 members)&gt;
+mhd:
+  density: &lt;HDF5 dataset &#34;density&#34;: shape (1201, 3, 3, 70), type &#34;&lt;f8&#34;&gt;
+  pressure: &lt;HDF5 dataset &#34;pressure&#34;: shape (1201, 3, 3, 70), type &#34;&lt;f8&#34;&gt;
+  velocity: &lt;HDF5 group &#34;/feec/mhd/velocity&#34; (3 members)&gt;
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Simulation complete.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+100%|██████████| 1/1 [00:00&lt;00:00,  1.23it/s]
+100%|██████████| 3/3 [00:00&lt;00:00,  3.27it/s]
+Creation of Struphy Fields done.
+
+Evaluating fields ...
+100%|██████████| 1201/1201 [00:01&lt;00:00, 600.59it/s]
+
+Creating vtk in /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/LinearMHD/slab_waves_1d/post_processing/fields_data ...
+100%|██████████| 1201/1201 [00:01&lt;00:00, 916.42it/s]
+
+No kinetic data found in hdf5 file, skipping post-processing of kinetic data.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Post-processing complete.
+</pre></div></div>
+</div>
+</section>
+<section id="Diagnostics:-FFT-Analysis-and-Wave-Speed-Verification">
+<h3>Diagnostics: FFT Analysis and Wave Speed Verification<a class="headerlink" href="#Diagnostics:-FFT-Analysis-and-Wave-Speed-Verification" title="Link to this heading">#</a></h3>
+<p>Extract velocity and pressure data over time, compute power spectra, and fit dominant frequencies to extract wave speeds. We compare the fitted speeds against the theoretical predictions for shear Alfvén, slow and fast magnetosonic waves.</p>
+<p><strong>Shear Alfvén wave</strong>: expected speed <span class="math notranslate nohighlight">\(\approx {0.707} \, v_A\)</span></p>
+<p><strong>Slow and fast magnetosonic waves</strong>: derived from dispersion relation involving both <span class="math notranslate nohighlight">\(v_A\)</span> and <span class="math notranslate nohighlight">\(c_s\)</span>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load plotting data</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+
+<span class="c1"># Extract velocity and pressure time-series</span>
+<span class="n">u_of_t</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">spline_values</span><span class="o">.</span><span class="n">mhd</span><span class="o">.</span><span class="n">velocity_log</span><span class="o">.</span><span class="n">data</span>
+<span class="n">p_of_t</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">spline_values</span><span class="o">.</span><span class="n">mhd</span><span class="o">.</span><span class="n">pressure_log</span><span class="o">.</span><span class="n">data</span>
+
+<span class="c1"># Dispersion relation parameters</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">3</span>  <span class="c1"># Adiabatic index</span>
+<span class="n">disp_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;B0x&quot;</span><span class="p">:</span> <span class="n">B0x</span><span class="p">,</span>
+    <span class="s2">&quot;B0y&quot;</span><span class="p">:</span> <span class="n">B0y</span><span class="p">,</span>
+    <span class="s2">&quot;B0z&quot;</span><span class="p">:</span> <span class="n">B0z</span><span class="p">,</span>
+    <span class="s2">&quot;p0&quot;</span><span class="p">:</span> <span class="n">p0</span><span class="p">,</span>
+    <span class="s2">&quot;n0&quot;</span><span class="p">:</span> <span class="n">n0</span><span class="p">,</span>
+    <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="n">gamma</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># 1. Shear Alfvén wave analysis from velocity</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Shear Alfvén Wave Analysis ===&quot;</span><span class="p">)</span>
+<span class="n">_1</span><span class="p">,</span> <span class="n">_2</span><span class="p">,</span> <span class="n">_3</span><span class="p">,</span> <span class="n">coeffs_alfven</span> <span class="o">=</span> <span class="n">power_spectrum_2d</span><span class="p">(</span>
+    <span class="n">u_of_t</span><span class="p">,</span>
+    <span class="s2">&quot;velocity_log&quot;</span><span class="p">,</span>
+    <span class="n">grids</span><span class="o">=</span><span class="n">sim</span><span class="o">.</span><span class="n">grids_log</span><span class="p">,</span>
+    <span class="n">grids_mapped</span><span class="o">=</span><span class="n">sim</span><span class="o">.</span><span class="n">grids_phy</span><span class="p">,</span>
+    <span class="n">component</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">slice_at</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+    <span class="n">do_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">disp_name</span><span class="o">=</span><span class="s2">&quot;MHDhomogenSlab&quot;</span><span class="p">,</span>
+    <span class="n">disp_params</span><span class="o">=</span><span class="n">disp_params</span><span class="p">,</span>
+    <span class="n">fit_branches</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">noise_level</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">extr_order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">fit_degree</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,),</span>
+<span class="p">)</span>
+
+<span class="c1"># Theoretical Alfvén speed</span>
+<span class="n">vA</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Bsquare</span> <span class="o">/</span> <span class="n">n0</span><span class="p">)</span>
+<span class="n">v_alfven_theory</span> <span class="o">=</span> <span class="n">vA</span> <span class="o">*</span> <span class="n">B0z</span> <span class="o">/</span> <span class="n">xp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Bsquare</span><span class="p">)</span>
+<span class="n">v_alfven_fit</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">coeffs_alfven</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Théoretical Alfvén speed: </span><span class="si">{</span><span class="n">v_alfven_theory</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fitted Alfvén speed:      </span><span class="si">{</span><span class="n">v_alfven_fit</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Relative error:           </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">v_alfven_fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">v_alfven_theory</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">v_alfven_theory</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="n">error_alfven</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">coeffs_alfven</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">v_alfven_theory</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">error_alfven</span> <span class="o">&lt;</span> <span class="mf">0.07</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Alfvén wave speed error </span><span class="si">{</span><span class="n">error_alfven</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> exceeds tolerance&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Alfvén wave verification passed.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/LinearMHD/slab_waves_1d/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(1201,)
+self.grids_log[0].shape =(2,)
+self.grids_log[1].shape =(2,)
+self.grids_log[2].shape =(65,)
+self.grids_phy[0].shape =(2, 2, 65)
+self.grids_phy[1].shape =(2, 2, 65)
+self.grids_phy[2].shape =(2, 2, 65)
+
+self.spline_values:
+    em_fields
+        b_field_log
+    mhd
+        velocity_log
+        pressure_log
+        density_log
+
+self.orbits:
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+=== Shear Alfvén Wave Analysis ===
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_linear_mhd_slab_waves_1d_13_2.png" src="../../_images/_collections_tutorials_tutorial_linear_mhd_slab_waves_1d_13_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Théoretical Alfvén speed: 1.195229
+Fitted Alfvén speed:      1.133052
+Relative error:           5.20%
+✓ Alfvén wave verification passed.
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2. Magnetosonic waves analysis from pressure</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Slow and Fast Magnetosonic Wave Analysis ===&quot;</span><span class="p">)</span>
+<span class="n">_1</span><span class="p">,</span> <span class="n">_2</span><span class="p">,</span> <span class="n">_3</span><span class="p">,</span> <span class="n">coeffs_sonic</span> <span class="o">=</span> <span class="n">power_spectrum_2d</span><span class="p">(</span>
+    <span class="n">p_of_t</span><span class="p">,</span>
+    <span class="s2">&quot;pressure_log&quot;</span><span class="p">,</span>
+    <span class="n">grids</span><span class="o">=</span><span class="n">sim</span><span class="o">.</span><span class="n">grids_log</span><span class="p">,</span>
+    <span class="n">grids_mapped</span><span class="o">=</span><span class="n">sim</span><span class="o">.</span><span class="n">grids_phy</span><span class="p">,</span>
+    <span class="n">component</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">slice_at</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+    <span class="n">do_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">disp_name</span><span class="o">=</span><span class="s2">&quot;MHDhomogenSlab&quot;</span><span class="p">,</span>
+    <span class="n">disp_params</span><span class="o">=</span><span class="n">disp_params</span><span class="p">,</span>
+    <span class="n">fit_branches</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">noise_level</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+    <span class="n">extr_order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">fit_degree</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="c1"># Theoretical magnetosonic speeds</span>
+<span class="n">cS</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">p0</span> <span class="o">/</span> <span class="n">n0</span><span class="p">)</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">B0z</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">cS</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">vA</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="n">cS</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">vA</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">Bsquare</span><span class="p">)</span>
+<span class="n">v_slow_theory</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">cS</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">vA</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">xp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)))</span>
+<span class="n">v_fast_theory</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">cS</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">vA</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">xp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)))</span>
+
+<span class="n">v_slow_fit</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">coeffs_sonic</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">v_fast_fit</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">coeffs_sonic</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Slow Magnetosonic Wave:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Théoretical speed: </span><span class="si">{</span><span class="n">v_slow_theory</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Fitted speed:      </span><span class="si">{</span><span class="n">v_slow_fit</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Relative error:    </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">v_slow_fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">v_slow_theory</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">v_slow_theory</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Fast Magnetosonic Wave:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Théoretical speed: </span><span class="si">{</span><span class="n">v_fast_theory</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Fitted speed:      </span><span class="si">{</span><span class="n">v_fast_fit</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Relative error:    </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">v_fast_fit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">v_fast_theory</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">v_fast_theory</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="n">error_slow</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">coeffs_sonic</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">v_slow_theory</span><span class="p">)</span>
+<span class="n">error_fast</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">coeffs_sonic</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">v_fast_theory</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">error_slow</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Slow wave speed error </span><span class="si">{</span><span class="n">error_slow</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> exceeds tolerance&quot;</span>
+<span class="k">assert</span> <span class="n">error_fast</span> <span class="o">&lt;</span> <span class="mf">0.19</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Fast wave speed error </span><span class="si">{</span><span class="n">error_fast</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> exceeds tolerance&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ Magnetosonic wave verification passed.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=== Slow and Fast Magnetosonic Wave Analysis ===
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_linear_mhd_slab_waves_1d_14_1.png" src="../../_images/_collections_tutorials_tutorial_linear_mhd_slab_waves_1d_14_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+Slow Magnetosonic Wave:
+  Théoretical speed: 1.073990
+  Fitted speed:      1.030155
+  Relative error:    4.08%
+
+Fast Magnetosonic Wave:
+  Théoretical speed: 2.974314
+  Fitted speed:      3.154332
+  Relative error:    6.05%
+
+✓ Magnetosonic wave verification passed.
+</pre></div></div>
+</div>
+</section>
+<section id="Conclusion">
+<h3>Conclusion<a class="headerlink" href="#Conclusion" title="Link to this heading">#</a></h3>
+<p>This tutorial successfully verified the dispersion relations for three branches of MHD waves in a homogeneous magnetized plasma:</p>
+<ol class="arabic simple">
+<li><p><strong>Shear Alfvén wave</strong> propagates perpendicular to the ambient magnetic field at the magnetic tension-driven speed.</p></li>
+<li><p><strong>Slow magnetosonic wave</strong> is a hybrid mode combining acoustic and magnetic effects, with lower phase velocity.</p></li>
+<li><p><strong>Fast magnetosonic wave</strong> is a magnetically-dominated mode with higher phase velocity, approaching <span class="math notranslate nohighlight">\(\sqrt{c_s^2 + v_A^2}\)</span> at high frequencies.</p></li>
+</ol>
+<p>The FFT-based power spectrum analysis provides a robust method to extract wave speeds from simulation data and verify the model’s fidelity to the underlying MHD theory. This verification validates both the physical model implementation and the numerical discretization.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cleanup temporary simulation folder</span>
+<span class="k">if</span> <span class="kc">False</span><span class="p">:</span>  <span class="c1"># Set to True to enable cleanup</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">test_folder</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cleaned up </span><span class="si">{</span><span class="n">test_folder</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not remove </span><span class="si">{</span><span class="n">test_folder</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="tutorial_maxwell.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Maxwell’s equations: Light Wave and Coaxial Waveguide</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tutorial_vlasov_ampere_one_species_weak_landau.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Kinetic Plasma Dynamics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#1D-Slab-Waves-in-a-Homogeneous-Magnetized-Plasma">1D Slab Waves in a Homogeneous Magnetized Plasma</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Physical-Setup">Physical Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Model-and-Equilibrium-Parameters">Model and Equilibrium Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Domain-and-Numerical-Discretization">Domain and Numerical Discretization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Model-Instantiation-and-Propagator-Options">Model Instantiation and Propagator Options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Initial-Conditions">Initial Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Simulation-Setup-and-Execution">Simulation Setup and Execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Diagnostics:-FFT-Analysis-and-Wave-Speed-Verification">Diagnostics: FFT Analysis and Wave Speed Verification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/_collections/tutorials/tutorial_linear_mhd_slab_waves_1d.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

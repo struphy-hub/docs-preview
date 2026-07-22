@@ -1,0 +1,969 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>struphy.models.toy_drift &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/struphy/models/toy_drift';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href="../../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">struphy.models.toy_drift</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for struphy.models.toy_drift</h1><div class="highlight"><pre>
+<span></span>import copy
+
+import cunumpy as xp
+from feectools.ddm.mpi import mpi as MPI
+
+from struphy import BaseUnits
+from struphy.io.options import LiteralOptions
+from struphy.models.base import StruphyModel
+from struphy.models.scalars import FunctionScalarFEEC, KineticEnergyPIC, Scalars
+from struphy.models.species import (
+    FieldSpecies,
+    ParticleSpecies,
+)
+from struphy.models.variables import FEECVariable, PICVariable
+from struphy.pic.accumulation import accum_kernels_gc
+from struphy.pic.accumulation.particles_to_grid import ParticlesToGrid
+from struphy.propagators.base import Propagator
+from struphy.propagators.poisson_solve import PoissonSolve
+from struphy.propagators.push_guiding_center_bx_estar import PushGuidingCenterBxEstar
+from struphy.utils.pyccel import Pyccelkernel
+
+rank = MPI.COMM_WORLD.Get_rank()
+
+
+<div class="viewcode-block" id="ToyDrift">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.ToyDrift">[docs]</a>
+class ToyDrift(StruphyModel):
+    r&quot;&quot;&quot;Electrostatic drift toy model for a single ion species in a given background magnetic field.
+
+    Parameters
+    ----------
+    base_units : BaseUnits
+        Base units for normalization (default: ``BaseUnits(kBT=1.0)``).
+    charge_number : int
+        Charge number (in units of the positive elementary charge) of the ion species (default: 1).
+    mass_number : float
+        Mass number (in units of the proton mass) of the ion species (default: 1.0).
+    epsilon : float, optional
+        Normalized cyclotron period: :math:`1 / (\hat{\omega}_\mathrm{c} \hat{t})`.
+        If ``None``, computed from ``base_units`` and the charge/mass numbers.
+    &quot;&quot;&quot;
+
+    @classmethod
+    def model_type(cls) -&gt; LiteralOptions.ModelTypes:
+        return &quot;Toy&quot;
+
+    ## species
+
+    class EMFields(FieldSpecies):
+        def __init__(self):
+            self.phi = FEECVariable(space=&quot;H1&quot;)
+            self.init_variables()
+
+    class KineticIons(ParticleSpecies):
+        def __init__(
+            self,
+            charge_number: int = 1,
+            mass_number: float = 1.0,
+            epsilon: float = None,
+            alpha: float = None,
+        ):
+            self.var = PICVariable(space=&quot;Particles5D&quot;)
+            self.init_variables(
+                charge_number=charge_number,
+                mass_number=mass_number,
+                epsilon=epsilon,
+                alpha=alpha,
+            )
+
+    ## propagators
+
+    class Propagators:
+        def __init__(
+            self,
+            phi: FEECVariable = None,
+            rho: ParticlesToGrid = None,
+            rho_coeffs: float = None,
+        ):
+            self.gc_poisson = PoissonSolve(rho=rho, rho_coeffs=rho_coeffs)
+            self.gc_poisson.options.stab_eps = 0.0
+            self.gc_poisson.options.stab_mat = &quot;M0ad&quot;
+            self.push_gc_bxe = PushGuidingCenterBxEstar(phi=phi)
+
+    ## abstract methods
+
+    def __init__(
+        self,
+        base_units: BaseUnits = BaseUnits(kBT=1.0),
+        charge_number: int = 1,
+        mass_number: float = 1.0,
+        epsilon: float = None,
+        alpha: float = None,
+    ):
+
+        # 0. store input parameters
+        self.params = copy.deepcopy(locals())
+
+        # 1. instantiate all species
+        self.em_fields = self.EMFields()
+        self.kinetic_ions = self.KineticIons(
+            charge_number,
+            mass_number,
+            epsilon,
+            alpha,
+        )
+
+        # 2. derive units (must be done after instantiating species to access charge and mass numbers)
+        self.setup_equation_params(base_units=base_units)
+
+        # 3. instantiate all propagators
+        alpha = self.kinetic_ions.equation_params.alpha
+        epsilon = self.kinetic_ions.equation_params.epsilon
+        rho = ParticlesToGrid(
+            self.kinetic_ions.var,
+            &quot;H1&quot;,
+            Pyccelkernel(accum_kernels_gc.gc_density_0form),
+        )
+        self.propagators = self.Propagators(
+            phi=self.em_fields.phi,
+            rho=rho,
+            rho_coeffs=alpha**2 / epsilon,
+        )
+
+        # 4. assign variables to propagators
+        self.propagators.gc_poisson.variables.phi = self.em_fields.phi
+        self.propagators.push_gc_bxe.variables.ions = self.kinetic_ions.var
+
+        # 5. define scalars to be tracked during simulation
+        field_energy = FunctionScalarFEEC(self._compute_en_phi)
+        particle_energy = KineticEnergyPIC(self.kinetic_ions.var)
+        self.scalars = Scalars(
+            en_phi=field_energy,
+            en_particles=particle_energy,
+            en_tot=field_energy + particle_energy,
+        )
+
+    @property
+    def bulk_species(self):
+        return self.kinetic_ions
+
+    @property
+    def velocity_scale(self):
+        return &quot;thermal&quot;
+
+    def allocate_helpers(self):
+        &quot;&quot;&quot;Prepare initial particle weights for the Poisson right-hand side.
+
+        :meta private:
+        &quot;&quot;&quot;
+        self._tmp3 = xp.empty(1, dtype=float)
+        self._e_field = Propagator.derham.V1.zeros()
+
+        assert self.kinetic_ions.charge_number &gt; 0, &quot;Model written only for positive ions.&quot;
+
+        # Poisson right-hand side
+        particles = self.kinetic_ions.var.particles
+        particles.weights = particles.weights_at_t0.copy()
+
+        if particles.control_variate:
+            particles.update_weights()
+
+    def _compute_en_phi(self):
+        phi = self.em_fields.phi.spline.vector
+        e1 = Propagator.derham.grad.dot(-phi, out=self._e_field)
+        return 0.5 * Propagator.mass_ops.M1.dot_inner(e1, e1)
+
+    ## default parameters
+    def generate_default_parameter_file(self, path=None, prompt=True):
+        params_path = super().generate_default_parameter_file(path=path, prompt=prompt)
+        new_file = []
+        with open(params_path, &quot;r&quot;) as f:
+            for line in f:
+                if &quot;BaseUnits(&quot; in line:
+                    new_file += [&quot;base_units = BaseUnits(kBT=1.0)\n&quot;]
+                elif &quot;saving_params = &quot; in line:
+                    new_file += [&quot;\nbinplot = BinningPlot(slice=&#39;e1&#39;, n_bins=128, ranges=(0.0, 1.0))\n&quot;]
+                    new_file += [&quot;saving_params = SavingParameters(binning_plots=(binplot,))\n\n&quot;]
+                else:
+                    new_file += [line]
+
+        with open(params_path, &quot;w&quot;) as f:
+            for line in new_file:
+                f.write(line)
+
+<div class="viewcode-block" id="ToyDrift.doc_pde">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.ToyDrift.doc_pde">[docs]</a>
+    @classmethod
+    def doc_pde(cls):
+        r&quot;&quot;&quot;**PDEs solved by model:**
+
+        Drift equation:
+
+        .. math::
+
+            \frac{\partial f}{\partial t} + \frac{\mathbf{E} \times \mathbf{b}_0}{B^{*}_{\parallel}} \cdot \frac{\partial f}{\partial \mathbf{X}} = 0
+
+        Poisson equation:
+
+        .. math::
+
+            -\nabla \cdot \nabla \phi = \int f B^*_\parallel \, \textnormal{d} v_\parallel \textnormal{d} \mu
+
+        where :math:`f(\mathbf{X}, v_\parallel, \mu, t)` is the guiding center distribution and
+
+        .. math::
+
+            \mathbf{E} = -\nabla \phi, \qquad \mathbf{B}^* = \mathbf{B}_0 + \varepsilon v_\parallel \nabla \times \mathbf{b}_0, \qquad B^*_\parallel = \mathbf{B}^* \cdot \mathbf{b}_0
+
+        The control variate method can be activated in the Poisson equation; if enabled, the following Poisson equation is solved:
+
+        .. math::
+
+            -\nabla \cdot \nabla \phi = \int (f - f_0) B^*_\parallel \, \textnormal{d} v_\parallel \textnormal{d} \mu
+        &quot;&quot;&quot;</div>
+
+
+<div class="viewcode-block" id="ToyDrift.doc_normalization">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.ToyDrift.doc_normalization">[docs]</a>
+    @classmethod
+    def doc_normalization(cls):
+        r&quot;&quot;&quot;The reference speed is the ion thermal velocity:
+
+        .. math::
+
+            \hat v = \hat v_i,\qquad \hat E = \hat v_i \hat B,\qquad \hat\phi = \hat E \hat x.
+        &quot;&quot;&quot;</div>
+
+
+<div class="viewcode-block" id="ToyDrift.doc_scalar_quantities">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.ToyDrift.doc_scalar_quantities">[docs]</a>
+    @classmethod
+    def doc_scalar_quantities(cls):
+        r&quot;&quot;&quot;**The following scalars are tracked during simulation:**
+
+        - Electrostatic field energy: ``en_phi``
+        - Particle kinetic energy: ``en_particles``
+        - Total energy: ``en_tot``&quot;&quot;&quot;</div>
+
+
+<div class="viewcode-block" id="ToyDrift.doc_discretization">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.ToyDrift.doc_discretization">[docs]</a>
+    @classmethod
+    def doc_discretization(cls):
+        &quot;&quot;&quot;Time integration is performed by the following propagators (in sequence):
+
+        1. :class:`~struphy.propagators.poisson_solve.PoissonSolve`
+        2. :class:`~struphy.propagators.push_guiding_center_bx_estar.PushGuidingCenterBxEstar`
+        &quot;&quot;&quot;
+        doc = rf&quot;&quot;&quot;**1. PoissonFieldSolve:**
+
+{PoissonSolve.__doc__}
+
+**2. PushGuidingCenterBxEstar:**
+
+{PushGuidingCenterBxEstar.__doc__}
+&quot;&quot;&quot;
+        return doc</div>
+
+
+<div class="viewcode-block" id="ToyDrift.doc_long_description">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.ToyDrift.doc_long_description">[docs]</a>
+    @classmethod
+    def doc_long_description(cls):
+        r&quot;&quot;&quot;ToyDrift is a stripped-down guiding-center model used to isolate the
+        electrostatic drift part of the dynamics. It is intended for algorithm
+        prototyping and reduced verification problems rather than production
+        drift-kinetic studies.&quot;&quot;&quot;</div>
+
+
+<div class="viewcode-block" id="ToyDrift.doc_examples">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.ToyDrift.doc_examples">[docs]</a>
+    @classmethod
+    def doc_examples(cls):
+        r&quot;&quot;&quot;Create and initialize the toy drift model:
+
+        .. code-block:: python
+
+            from struphy.models import ToyDrift
+
+            model = ToyDrift()
+            model.em_fields.phi
+            model.kinetic_ions.var
+        &quot;&quot;&quot;</div>
+
+
+<div class="viewcode-block" id="ToyDrift.doc_use_cases">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.ToyDrift.doc_use_cases">[docs]</a>
+    @classmethod
+    def doc_use_cases(cls):
+        r&quot;&quot;&quot;This model is appropriate for:
+
+        - reduced electrostatic guiding-center benchmarks
+        - testing the field solve plus :math:`\mathbf E\times\mathbf B` pusher
+        - algorithm prototyping before moving to the full drift-kinetic model&quot;&quot;&quot;</div>
+
+
+<div class="viewcode-block" id="ToyDrift.doc_cannot_be_used_for">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.ToyDrift.doc_cannot_be_used_for">[docs]</a>
+    @classmethod
+    def doc_cannot_be_used_for(cls):
+        r&quot;&quot;&quot;This model is not suitable for:
+
+        - full drift-kinetic dynamics with parallel streaming
+        - electromagnetic perturbations
+        - high-fidelity turbulence studies
+        - full-orbit kinetic physics&quot;&quot;&quot;</div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
