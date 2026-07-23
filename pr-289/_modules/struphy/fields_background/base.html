@@ -1,0 +1,2783 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>struphy.fields_background.base &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/struphy/fields_background/base';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href="../../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">struphy.fields_background.base</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for struphy.fields_background.base</h1><div class="highlight"><pre>
+<span></span>&quot;Base classes for MHD equilibria.&quot;
+
+import logging
+from abc import ABCMeta, abstractmethod
+
+import cunumpy as xp
+from matplotlib import pyplot as plt
+from pyevtk.hl import gridToVTK
+
+from struphy.geometry.base import Domain
+from struphy.utils.utils import (
+    __class_with_params_repr_no_defaults__,
+    __dataclass_repr_no_defaults__,
+    all_class_params_are_default,
+)
+
+logger = logging.getLogger(&quot;struphy&quot;)
+
+
+<div class="viewcode-block" id="FluidEquilibrium">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium">[docs]</a>
+class FluidEquilibrium(metaclass=ABCMeta):
+    &quot;&quot;&quot;
+    Abstract base class for callable fluid equilibria on arbitrary domains.
+
+    This class provides a unified interface for representing fluid equilibrium states,
+    including velocity, pressure, and number density fields. It supports coordinate
+    transformations between logical (reference) and physical domains through the Domain
+    object, enabling computations on mapped domains.
+
+    Attributes
+    ----------
+    params : dict
+        Dictionary of parameters passed to the class initialization. Automatically
+        strips &#39;self&#39; and &#39;__class__&#39; entries.
+    domain : Domain
+        Domain object that characterizes the mapping from the logical cube [0, 1]^3
+        to the physical domain. Enables coordinate transformations and differential
+        form conversions (0-forms, 1-forms, 2-forms, 3-forms).
+
+    Implementation Requirements
+    ---------------------------
+    Child classes must provide at least one method from each of these pairs:
+
+    * Velocity: either ``u_xyz`` (Cartesian) or override ``uv`` (logical coordinates)
+    * Pressure: either ``p_xyz`` (Cartesian) or override ``p0`` (0-form on logical domain)
+    * Number Density: either ``n_xyz`` (Cartesian) or override ``n0`` (0-form on logical domain)
+
+    Derived Quantities
+    ------------------
+    The class automatically provides derived fields computed from the basic fields:
+
+    * Temperature: ``t0``, ``t3`` (from p/n)
+    * Thermal velocity: ``vth0``, ``vth3`` (from temperature)
+    * Entropy density: ``s0_monoatomic``, ``s3_monoatomic``, ``s0_diatomic``, ``s3_diatomic``
+
+    Differential Forms
+    -------------------
+    Vector fields (velocity) are available as:
+
+    * ``uv``: contravariant components on logical domain
+    * ``u1``: 1-form components
+    * ``u2``: 2-form components
+    * ``u_cart``: Cartesian components with physical coordinates
+
+    Scalar fields are available as 0-forms (point values) and 3-forms (densities):
+
+    * ``p0``, ``p3``: pressure
+    * ``n0``, ``n3``: number density
+    * ``t0``, ``t3``: temperature
+    * ``q0``, ``q3``: square root of pressure
+
+    Notes
+    -----
+    The class uses abstract methods to enforce implementation in child classes.
+    Subclasses should override coordinate-appropriate base methods (CartesianFluidEquilibrium
+    or LogicalFluidEquilibrium) to simplify implementation.
+    &quot;&quot;&quot;
+
+    @property
+    def params(self) -&gt; dict:
+        &quot;&quot;&quot;Parameters passed to __init__() of the class in equils.py, as dictionary.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_params&quot;):
+            self._params = {}
+        return self._params
+
+    @params.setter
+    def params(self, new):
+        assert isinstance(new, dict)
+        if &quot;self&quot; in new:
+            new.pop(&quot;self&quot;)
+        if &quot;__class__&quot; in new:
+            new.pop(&quot;__class__&quot;)
+        self._params = new
+
+    @property
+    def domain(self):
+        &quot;&quot;&quot;Domain object that characterizes the mapping from the logical to the physical domain.&quot;&quot;&quot;
+        assert hasattr(self, &quot;_domain&quot;), (
+            &quot;Domain for FluidEquilibrium not set; do obj.domain = ... to have access to all transformations.&quot;
+        )
+        return self._domain
+
+    @domain.setter
+    def domain(self, new_domain):
+        assert isinstance(new_domain, Domain) or new_domain is None
+        self._domain = new_domain
+
+    def __repr__(self) -&gt; str:
+        out = f&quot;{self.__class__.__name__}(\n&quot;
+        for k, v in self.params.items():
+            out += &quot; &quot; * 4
+            out += f&quot;{k}={v},\n&quot;
+        out += &quot;)&quot;
+        return out
+
+    def __repr_no_defaults__(self):
+        return __class_with_params_repr_no_defaults__(self)
+
+    @property
+    def is_default(self):
+        return all_class_params_are_default(self)
+
+    ###########################
+    # Vector-valued callables #
+    ###########################
+
+<div class="viewcode-block" id="FluidEquilibrium.u1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.u1">[docs]</a>
+    def u1(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;1-form components of velocity on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.transform(
+            self.uv(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;v_to_1&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.u2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.u2">[docs]</a>
+    def u2(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;2-form components of velocity on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.transform(
+            self.uv(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;v_to_2&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.uv">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.uv">[docs]</a>
+    def uv(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Contra-variant components of velocity on logical cube [0, 1]^3.&quot;&quot;&quot;
+        xyz = self.domain(*etas, squeeze_out=False)
+        return self.domain.pull(self.u_xyz(xyz[0], xyz[1], xyz[2]), *etas, kind=&quot;v&quot;, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.u_cart">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.u_cart">[docs]</a>
+    def u_cart(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Cartesian components of velocity evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        out = self.domain.push(
+            self.uv(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;v&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )
+        return out, self.domain(*etas, squeeze_out=squeeze_out)</div>
+
+
+    ###########################
+    # Scalar-valued callables #
+    ###########################
+
+<div class="viewcode-block" id="FluidEquilibrium.p0">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.p0">[docs]</a>
+    def p0(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;0-form pressure on logical cube [0, 1]^3.&quot;&quot;&quot;
+        xyz = self.domain(*etas, squeeze_out=False)
+        return self.domain.pull(self.p_xyz(xyz[0], xyz[1], xyz[2]), *etas, kind=&quot;0&quot;, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.p3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.p3">[docs]</a>
+    def p3(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;3-form pressure on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.transform(
+            self.p0(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;0_to_3&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.n0">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.n0">[docs]</a>
+    def n0(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;0-form number density on logical cube [0, 1]^3.&quot;&quot;&quot;
+        xyz = self.domain(*etas, squeeze_out=False)
+        return self.domain.pull(self.n_xyz(xyz[0], xyz[1], xyz[2]), *etas, kind=&quot;0&quot;, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.n3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.n3">[docs]</a>
+    def n3(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;3-form number density on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.transform(
+            self.n0(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;0_to_3&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.t0">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.t0">[docs]</a>
+    def t0(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;0-form temperature on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.p0(*etas, squeeze_out=squeeze_out) / self.n0(*etas, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.t3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.t3">[docs]</a>
+    def t3(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;3-form temperature on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.transform(
+            self.t0(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;0_to_3&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.vth0">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.vth0">[docs]</a>
+    def vth0(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;0-form thermal velocity on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return xp.sqrt(self.t0(*etas, squeeze_out=squeeze_out))</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.vth3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.vth3">[docs]</a>
+    def vth3(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;3-form thermal velocity on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.transform(
+            self.vth0(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;0_to_3&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.q0">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.q0">[docs]</a>
+    def q0(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;0-form square root of the pressure on logical cube [0, 1]^3.&quot;&quot;&quot;
+        # xyz = self.domain(*etas, squeeze_out=False)
+        p = self.p0(*etas)
+        q = xp.sqrt(p)
+        return self.domain.pull(q, *etas, kind=&quot;0&quot;, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.q3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.q3">[docs]</a>
+    def q3(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;3-form square root of the pressure on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.transform(
+            self.q0(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;0_to_3&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.s0_monoatomic">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.s0_monoatomic">[docs]</a>
+    def s0_monoatomic(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;0-form entropy density on logical cube [0, 1]^3.
+        Hard coded assumption : gamma = 5/3 (monoatomic perfect gaz)
+        &quot;&quot;&quot;
+        # xyz = self.domain(*etas, squeeze_out=False)
+        p = self.p0(*etas)
+        n = self.n0(*etas)
+        s = n * xp.log(p / (2 / 3 * xp.power(n, 5 / 3)))
+        return self.domain.pull(s, *etas, kind=&quot;0&quot;, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.s3_monoatomic">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.s3_monoatomic">[docs]</a>
+    def s3_monoatomic(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;3-form entropy density on logical cube [0, 1]^3.
+        Hard coded assumption : gamma = 5/3 (monoatomic perfect gaz)
+        &quot;&quot;&quot;
+        return self.domain.transform(
+            self.s0_monoatomic(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;0_to_3&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.s0_diatomic">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.s0_diatomic">[docs]</a>
+    def s0_diatomic(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;0-form entropy density on logical cube [0, 1]^3.
+        Hard coded assumption : gamma = 7/5 (diatomic perfect gaz)
+        &quot;&quot;&quot;
+        # xyz = self.domain(*etas, squeeze_out=False)
+        p = self.p0(*etas)
+        n = self.n0(*etas)
+        s = n * xp.log(p / (2 / 5 * xp.power(n, 7 / 5)))
+        return self.domain.pull(s, *etas, kind=&quot;0&quot;, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.s3_diatomic">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.s3_diatomic">[docs]</a>
+    def s3_diatomic(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;3-form entropy density on logical cube [0, 1]^3.
+        Hard coded assumption : gamma = 5/3 (monoatomic perfect gaz)
+        &quot;&quot;&quot;
+        return self.domain.transform(
+            self.s0_diatomic(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;0_to_3&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+    #########################################################
+    # Single components (for input of commuting projectors) #
+    #########################################################
+
+<div class="viewcode-block" id="FluidEquilibrium.u1_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.u1_1">[docs]</a>
+    def u1_1(self, *etas, squeeze_out=False):
+        return self.u1(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.u1_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.u1_2">[docs]</a>
+    def u1_2(self, *etas, squeeze_out=False):
+        return self.u1(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.u1_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.u1_3">[docs]</a>
+    def u1_3(self, *etas, squeeze_out=False):
+        return self.u1(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.u2_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.u2_1">[docs]</a>
+    def u2_1(self, *etas, squeeze_out=False):
+        return self.u2(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.u2_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.u2_2">[docs]</a>
+    def u2_2(self, *etas, squeeze_out=False):
+        return self.u2(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.u2_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.u2_3">[docs]</a>
+    def u2_3(self, *etas, squeeze_out=False):
+        return self.u2(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.uv_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.uv_1">[docs]</a>
+    def uv_1(self, *etas, squeeze_out=False):
+        return self.uv(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.uv_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.uv_2">[docs]</a>
+    def uv_2(self, *etas, squeeze_out=False):
+        return self.uv(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.uv_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.uv_3">[docs]</a>
+    def uv_3(self, *etas, squeeze_out=False):
+        return self.uv(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.u_cart_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.u_cart_1">[docs]</a>
+    def u_cart_1(self, *etas, squeeze_out=False):
+        return self.u_cart(*etas, squeeze_out=squeeze_out)[0][0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.u_cart_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.u_cart_2">[docs]</a>
+    def u_cart_2(self, *etas, squeeze_out=False):
+        return self.u_cart(*etas, squeeze_out=squeeze_out)[0][1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.u_cart_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.u_cart_3">[docs]</a>
+    def u_cart_3(self, *etas, squeeze_out=False):
+        return self.u_cart(*etas, squeeze_out=squeeze_out)[0][2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.to_dict">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.to_dict">[docs]</a>
+    def to_dict(self) -&gt; dict:
+        return {
+            &quot;type&quot;: self.__class__.__name__,
+            &quot;params&quot;: self.params,
+        }</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.from_dict">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.from_dict">[docs]</a>
+    @classmethod
+    def from_dict(cls, dct: dict | None) -&gt; &quot;FluidEquilibrium&quot;:
+        if dct is None:
+            return None
+        equil = cls.get_equil_by_name(dct[&quot;type&quot;])
+        return equil(**dct[&quot;params&quot;])</div>
+
+
+<div class="viewcode-block" id="FluidEquilibrium.get_equil_by_name">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibrium.get_equil_by_name">[docs]</a>
+    @classmethod
+    def get_equil_by_name(cls, equil_name: str) -&gt; type[&quot;FluidEquilibrium&quot;]:
+        from struphy.fields_background import equils
+
+        try:
+            equil_class: FluidEquilibrium = getattr(equils, equil_name)
+            if not issubclass(equil_class, FluidEquilibrium):
+                raise TypeError(f&quot;{equil_name} is not a FluidEquilibrium subclass.&quot;)
+            else:
+                return equil_class
+        except AttributeError:
+            raise ModuleNotFoundError(f&quot;{equil_name} not found in equils.&quot;)</div>
+
+
+    def __eq__(self, other: &quot;FluidEquilibrium&quot;) -&gt; bool:
+        assert isinstance(other, FluidEquilibrium), f&quot;Cannot compare FluidEquilibrium with {type(other)}.&quot;
+        return self.to_dict() == other.to_dict()</div>
+
+
+
+<div class="viewcode-block" id="CartesianFluidEquilibrium">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.CartesianFluidEquilibrium">[docs]</a>
+class CartesianFluidEquilibrium(FluidEquilibrium):
+    r&quot;&quot;&quot;
+    Specialization for equilibria defined in Cartesian coordinates.
+
+    Child classes must implement the abstract methods ``u_xyz``, ``p_xyz``, and ``n_xyz``,
+    which return velocity, pressure, and number density in Cartesian physical space (x, y, z).
+    The base class automatically handles coordinate transformations and differential form conversions.
+    &quot;&quot;&quot;
+
+<div class="viewcode-block" id="CartesianFluidEquilibrium.u_xyz">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.CartesianFluidEquilibrium.u_xyz">[docs]</a>
+    @abstractmethod
+    def u_xyz(self, x, y, z):
+        &quot;&quot;&quot;Cartesian velocity in physical space.
+        Must return the components as a tuple.&quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="CartesianFluidEquilibrium.p_xyz">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.CartesianFluidEquilibrium.p_xyz">[docs]</a>
+    @abstractmethod
+    def p_xyz(self, x, y, z):
+        &quot;&quot;&quot;Equilibrium pressure in physical space.&quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="CartesianFluidEquilibrium.n_xyz">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.CartesianFluidEquilibrium.n_xyz">[docs]</a>
+    @abstractmethod
+    def n_xyz(self, x, y, z):
+        &quot;&quot;&quot;Equilibrium number density in physical space.&quot;&quot;&quot;
+        pass</div>
+
+
+    @FluidEquilibrium.domain.setter
+    def domain(self, new_domain):
+        super(CartesianFluidEquilibrium, type(self)).domain.fset(self, new_domain)</div>
+
+
+
+<div class="viewcode-block" id="LogicalFluidEquilibrium">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.LogicalFluidEquilibrium">[docs]</a>
+class LogicalFluidEquilibrium(FluidEquilibrium):
+    r&quot;&quot;&quot;
+    Specialization for equilibria defined on the logical cube [0, 1]^3.
+
+    Child classes must implement the abstract methods ``uv``, ``p0``, and ``n0``,
+    which return contravariant velocity, 0-form pressure, and 0-form number density
+    on the logical reference domain. Useful for direct implementation when physical
+    coordinates are obtained via coordinate transformation through the domain mapping.
+    &quot;&quot;&quot;
+
+<div class="viewcode-block" id="LogicalFluidEquilibrium.uv">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.LogicalFluidEquilibrium.uv">[docs]</a>
+    @abstractmethod
+    def uv(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Contra-variant (vector field) velocity on logical cube [0, 1]^3.
+        Must return the components as a tuple.
+        &quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="LogicalFluidEquilibrium.p0">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.LogicalFluidEquilibrium.p0">[docs]</a>
+    @abstractmethod
+    def p0(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;0-form pressure on logical cube [0, 1]^3.&quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="LogicalFluidEquilibrium.n0">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.LogicalFluidEquilibrium.n0">[docs]</a>
+    @abstractmethod
+    def n0(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;0-form density on logical cube [0, 1]^3.&quot;&quot;&quot;
+        pass</div>
+
+
+    @FluidEquilibrium.domain.setter
+    def domain(self, new_domain):
+        super(LogicalFluidEquilibrium, type(self)).domain.fset(self, new_domain)</div>
+
+
+
+<div class="viewcode-block" id="NumericalFluidEquilibrium">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.NumericalFluidEquilibrium">[docs]</a>
+class NumericalFluidEquilibrium(LogicalFluidEquilibrium):
+    r&quot;&quot;&quot;
+    Specialization for equilibria with numerically computed domain mappings.
+
+    Child classes must provide a ``numerical_domain`` property that returns a Domain object
+    representing the mapping from the logical cube [0, 1]^3 to the physical domain.
+    This class overrides the domain property to use the numerically computed mapping.
+    &quot;&quot;&quot;
+
+    @property
+    @abstractmethod
+    def numerical_domain(self):
+        &quot;&quot;&quot;Numerically computed mapping from the logical cube [0, 1]^3 to the physical domain
+        in the form of a :class:`~struphy.geometry.base.Domain` object.&quot;&quot;&quot;
+        pass
+
+    @property
+    def domain(self):
+        return self.numerical_domain</div>
+
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB">[docs]</a>
+class FluidEquilibriumWithB(FluidEquilibrium):
+    &quot;&quot;&quot;
+    Extension of FluidEquilibrium with magnetic field and its gradient.
+
+    Child classes must implement either Cartesian (``b_xyz``, ``gradB_xyz``) or
+    logical (``bv``, ``gradB1``) methods for magnetic field and its gradient.
+    Provides methods for 1-form and 2-form transformations of the magnetic field.
+    &quot;&quot;&quot;
+
+    @FluidEquilibrium.domain.setter
+    def domain(self, new_domain):
+        super(FluidEquilibriumWithB, type(self)).domain.fset(self, new_domain)
+
+    ###########################
+    # Vector-valued callables #
+    ###########################
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.b1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.b1">[docs]</a>
+    def b1(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;1-form components of magnetic field on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.transform(
+            self.bv(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;v_to_1&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.b2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.b2">[docs]</a>
+    def b2(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;2-form components of magnetic field on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.transform(
+            self.bv(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;v_to_2&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.bv">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.bv">[docs]</a>
+    def bv(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Contra-variant components of  magnetic field on logical cube [0, 1]^3.&quot;&quot;&quot;
+        xyz = self.domain(*etas, squeeze_out=False)
+        return self.domain.pull(self.b_xyz(xyz[0], xyz[1], xyz[2]), *etas, kind=&quot;v&quot;, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.b_cart">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.b_cart">[docs]</a>
+    def b_cart(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Cartesian components of magnetic field evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        b_out = self.domain.push(
+            self.bv(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;v&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )
+        return b_out, self.domain(*etas, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.unit_b1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.unit_b1">[docs]</a>
+    def unit_b1(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Unit vector components of magnetic field (1-form) on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.pull(self.unit_b_cart(*etas, squeeze_out=False)[0], *etas, kind=&quot;1&quot;, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.unit_b2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.unit_b2">[docs]</a>
+    def unit_b2(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Unit vector components of magnetic field (2-form) on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.pull(self.unit_b_cart(*etas, squeeze_out=False)[0], *etas, kind=&quot;2&quot;, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.unit_bv">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.unit_bv">[docs]</a>
+    def unit_bv(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Unit vector components of magnetic field (contra-variant) on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.pull(self.unit_b_cart(*etas, squeeze_out=False)[0], *etas, kind=&quot;v&quot;, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.unit_b_cart">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.unit_b_cart">[docs]</a>
+    def unit_b_cart(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Unit vector Cartesian components of magnetic field evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        b, xyz = self.b_cart(*etas, squeeze_out=squeeze_out)
+        absB = self.absB0(*etas, squeeze_out=squeeze_out)
+        out = xp.array([b[0] / absB, b[1] / absB, b[2] / absB], dtype=float)
+        return out, xyz</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.gradB1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.gradB1">[docs]</a>
+    def gradB1(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;1-form components of gradient of magnetic field strength evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        xyz = self.domain(*etas, squeeze_out=False)
+        return self.domain.pull(self.gradB_xyz(xyz[0], xyz[1], xyz[2]), *etas, kind=&quot;1&quot;, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.gradB2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.gradB2">[docs]</a>
+    def gradB2(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;2-form components of gradient of magnetic field strength evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        return self.domain.transform(
+            self.gradB1(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;1_to_2&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.gradBv">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.gradBv">[docs]</a>
+    def gradBv(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Contra-variant components of gradient of magnetic field strength evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        return self.domain.transform(
+            self.gradB1(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;1_to_v&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.gradB_cart">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.gradB_cart">[docs]</a>
+    def gradB_cart(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Cartesian components of gradient of magnetic field strength evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        gradB_out = self.domain.push(
+            self.gradB1(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;1&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )
+        return gradB_out, self.domain(*etas)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.a1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.a1">[docs]</a>
+    def a1(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;1-form components of vector potential on logical cube [0, 1]^3.&quot;&quot;&quot;
+        avail_list = [&quot;HomogenSlab&quot;]
+        assert self.__class__.__name__ in avail_list, (
+            f&#39;Vector potential currently available only for {avail_list}, but mhd_equil is &quot;{self.__class__.__name__}&quot;.&#39;
+        )
+
+        return self.domain.transform(
+            self.a2(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;2_to_1&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.a2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.a2">[docs]</a>
+    def a2(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;2-form components of vector potential on logical cube [0, 1]^3.&quot;&quot;&quot;
+        avail_list = [&quot;HomogenSlab&quot;]
+        assert self.__class__.__name__ in avail_list, (
+            f&#39;Vector potential currently available only for {avail_list}, but mhd_equil is &quot;{self.__class__.__name__}&quot;.&#39;
+        )
+
+        xyz = self.domain(*etas, squeeze_out=False)
+        return self.domain.pull(self.a_xyz(xyz[0], xyz[1], xyz[2]), *etas, kind=&quot;2&quot;, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.av">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.av">[docs]</a>
+    def av(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Contra-variant components of vector potneital on logical cube [0, 1]^3.&quot;&quot;&quot;
+        avail_list = [&quot;HomogenSlab&quot;]
+        assert self.__class__.__name__ in avail_list, (
+            f&#39;Vector potential currently available only for {avail_list}, but mhd_equil is &quot;{self.__class__.__name__}&quot;.&#39;
+        )
+
+        return self.domain.transform(
+            self.a2(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;2_to_v&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+    ###########################
+    # Scalar-valued callables #
+    ###########################
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.absB0">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.absB0">[docs]</a>
+    def absB0(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;0-form absolute value of magnetic field on logical cube [0, 1]^3.&quot;&quot;&quot;
+        b, xyz = self.b_cart(*etas, squeeze_out=squeeze_out)
+        return xp.sqrt(b[0] ** 2 + b[1] ** 2 + b[2] ** 2)</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.absB3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.absB3">[docs]</a>
+    def absB3(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;3-form absolute value of magnetic field on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.transform(
+            self.absB0(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;0_to_3&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.u_para0">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.u_para0">[docs]</a>
+    def u_para0(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;0-form parallel velocity on logical cube [0, 1]^3.&quot;&quot;&quot;
+        tmp_uv = self.uv(*etas, squeeze_out=squeeze_out)
+        tmp_unit_b1 = self.unit_b1(*etas, squeeze_out=squeeze_out)
+        return sum([ji * bi for ji, bi in zip(tmp_uv, tmp_unit_b1)])</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.u_para3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.u_para3">[docs]</a>
+    def u_para3(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;3-form parallel velocity on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.transform(
+            self.u_para0(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;0_to_3&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+    #########################################################
+    # Single components (for input of commuting projectors) #
+    #########################################################
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.b1_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.b1_1">[docs]</a>
+    def b1_1(self, *etas, squeeze_out=False):
+        return self.b1(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.b1_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.b1_2">[docs]</a>
+    def b1_2(self, *etas, squeeze_out=False):
+        return self.b1(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.b1_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.b1_3">[docs]</a>
+    def b1_3(self, *etas, squeeze_out=False):
+        return self.b1(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.b2_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.b2_1">[docs]</a>
+    def b2_1(self, *etas, squeeze_out=False):
+        return self.b2(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.b2_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.b2_2">[docs]</a>
+    def b2_2(self, *etas, squeeze_out=False):
+        return self.b2(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.b2_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.b2_3">[docs]</a>
+    def b2_3(self, *etas, squeeze_out=False):
+        return self.b2(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.bv_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.bv_1">[docs]</a>
+    def bv_1(self, *etas, squeeze_out=False):
+        return self.bv(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.bv_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.bv_2">[docs]</a>
+    def bv_2(self, *etas, squeeze_out=False):
+        return self.bv(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.bv_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.bv_3">[docs]</a>
+    def bv_3(self, *etas, squeeze_out=False):
+        return self.bv(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.b_cart_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.b_cart_1">[docs]</a>
+    def b_cart_1(self, *etas, squeeze_out=False):
+        return self.b_cart(*etas, squeeze_out=squeeze_out)[0][0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.b_cart_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.b_cart_2">[docs]</a>
+    def b_cart_2(self, *etas, squeeze_out=False):
+        return self.b_cart(*etas, squeeze_out=squeeze_out)[0][1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.b_cart_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.b_cart_3">[docs]</a>
+    def b_cart_3(self, *etas, squeeze_out=False):
+        return self.b_cart(*etas, squeeze_out=squeeze_out)[0][2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.unit_b1_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.unit_b1_1">[docs]</a>
+    def unit_b1_1(self, *etas, squeeze_out=False):
+        return self.unit_b1(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.unit_b1_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.unit_b1_2">[docs]</a>
+    def unit_b1_2(self, *etas, squeeze_out=False):
+        return self.unit_b1(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.unit_b1_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.unit_b1_3">[docs]</a>
+    def unit_b1_3(self, *etas, squeeze_out=False):
+        return self.unit_b1(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.unit_b2_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.unit_b2_1">[docs]</a>
+    def unit_b2_1(self, *etas, squeeze_out=False):
+        return self.unit_b2(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.unit_b2_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.unit_b2_2">[docs]</a>
+    def unit_b2_2(self, *etas, squeeze_out=False):
+        return self.unit_b2(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.unit_b2_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.unit_b2_3">[docs]</a>
+    def unit_b2_3(self, *etas, squeeze_out=False):
+        return self.unit_b2(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.unit_bv_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.unit_bv_1">[docs]</a>
+    def unit_bv_1(self, *etas, squeeze_out=False):
+        return self.unit_bv(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.unit_bv_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.unit_bv_2">[docs]</a>
+    def unit_bv_2(self, *etas, squeeze_out=False):
+        return self.unit_bv(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.unit_bv_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.unit_bv_3">[docs]</a>
+    def unit_bv_3(self, *etas, squeeze_out=False):
+        return self.unit_bv(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.gradB1_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.gradB1_1">[docs]</a>
+    def gradB1_1(self, *etas, squeeze_out=False):
+        return self.gradB1(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.gradB1_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.gradB1_2">[docs]</a>
+    def gradB1_2(self, *etas, squeeze_out=False):
+        return self.gradB1(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.gradB1_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.gradB1_3">[docs]</a>
+    def gradB1_3(self, *etas, squeeze_out=False):
+        return self.gradB1(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.gradB2_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.gradB2_1">[docs]</a>
+    def gradB2_1(self, *etas, squeeze_out=False):
+        return self.gradB2(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.gradB2_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.gradB2_2">[docs]</a>
+    def gradB2_2(self, *etas, squeeze_out=False):
+        return self.gradB2(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.gradB2_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.gradB2_3">[docs]</a>
+    def gradB2_3(self, *etas, squeeze_out=False):
+        return self.gradB2(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.gradBv_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.gradBv_1">[docs]</a>
+    def gradBv_1(self, *etas, squeeze_out=False):
+        return self.gradBv(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.gradBv_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.gradBv_2">[docs]</a>
+    def gradBv_2(self, *etas, squeeze_out=False):
+        return self.gradBv(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.gradBv_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.gradBv_3">[docs]</a>
+    def gradBv_3(self, *etas, squeeze_out=False):
+        return self.gradBv(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.a1_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.a1_1">[docs]</a>
+    def a1_1(self, *etas, squeeze_out=False):
+        return self.a1(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.a1_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.a1_2">[docs]</a>
+    def a1_2(self, *etas, squeeze_out=False):
+        return self.a1(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.a1_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.a1_3">[docs]</a>
+    def a1_3(self, *etas, squeeze_out=False):
+        return self.a1(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.a2_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.a2_1">[docs]</a>
+    def a2_1(self, *etas, squeeze_out=False):
+        return self.a2(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.a2_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.a2_2">[docs]</a>
+    def a2_2(self, *etas, squeeze_out=False):
+        return self.a2(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.a2_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.a2_3">[docs]</a>
+    def a2_3(self, *etas, squeeze_out=False):
+        return self.a2(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.av_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.av_1">[docs]</a>
+    def av_1(self, *etas, squeeze_out=False):
+        return self.av(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.av_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.av_2">[docs]</a>
+    def av_2(self, *etas, squeeze_out=False):
+        return self.av(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.av_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.av_3">[docs]</a>
+    def av_3(self, *etas, squeeze_out=False):
+        return self.av(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+    ###########
+    # Methods #
+    ###########
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.parallel_component">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.parallel_component">[docs]</a>
+    def parallel_component(self, *etas, squeeze_out=False):
+        raise NotImplementedError()</div>
+
+
+<div class="viewcode-block" id="FluidEquilibriumWithB.perpendicular_component">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.FluidEquilibriumWithB.perpendicular_component">[docs]</a>
+    def perpendicular_component(self, *etas, squeeze_out=False):
+        raise NotImplementedError()</div>
+</div>
+
+
+
+<div class="viewcode-block" id="CartesianFluidEquilibriumWithB">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.CartesianFluidEquilibriumWithB">[docs]</a>
+class CartesianFluidEquilibriumWithB(CartesianFluidEquilibrium, FluidEquilibriumWithB):
+    r&quot;&quot;&quot;
+    Specialization for fluid equilibria with magnetic field in Cartesian coordinates.
+
+    Child classes must implement the abstract methods ``b_xyz`` and ``gradB_xyz``,
+    which return magnetic field and its gradient strength in Cartesian physical space.
+    &quot;&quot;&quot;
+
+<div class="viewcode-block" id="CartesianFluidEquilibriumWithB.b_xyz">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.CartesianFluidEquilibriumWithB.b_xyz">[docs]</a>
+    @abstractmethod
+    def b_xyz(self, x, y, z):
+        &quot;&quot;&quot;Cartesian magnetic field in physical space.
+        Must return the components as a tuple.&quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="CartesianFluidEquilibriumWithB.gradB_xyz">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.CartesianFluidEquilibriumWithB.gradB_xyz">[docs]</a>
+    @abstractmethod
+    def gradB_xyz(self, x, y, z):
+        &quot;&quot;&quot;Cartesian gradient of magnetic field strength in physical space. Must return the components as a tuple.&quot;&quot;&quot;
+        pass</div>
+
+
+    @CartesianFluidEquilibrium.domain.setter
+    def domain(self, new_domain):
+        super(CartesianFluidEquilibriumWithB, type(self)).domain.fset(self, new_domain)</div>
+
+
+
+<div class="viewcode-block" id="LogicalFluidEquilibriumWithB">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.LogicalFluidEquilibriumWithB">[docs]</a>
+class LogicalFluidEquilibriumWithB(LogicalFluidEquilibrium, FluidEquilibriumWithB):
+    r&quot;&quot;&quot;
+    Specialization for fluid equilibria with magnetic field on the logical cube [0, 1]^3.
+
+    Child classes must implement the abstract methods ``bv`` (contravariant magnetic field)
+    and ``gradB1`` (1-form gradient of magnetic field strength) on the logical domain.
+    &quot;&quot;&quot;
+
+<div class="viewcode-block" id="LogicalFluidEquilibriumWithB.bv">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.LogicalFluidEquilibriumWithB.bv">[docs]</a>
+    @abstractmethod
+    def bv(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Contra-variant (vector field) magnetic field on logical cube [0, 1]^3.
+        Must return the components as a tuple.
+        &quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="LogicalFluidEquilibriumWithB.gradB1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.LogicalFluidEquilibriumWithB.gradB1">[docs]</a>
+    @abstractmethod
+    def gradB1(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Co-variant (1-from) gradient of magnetic field strength on logical cube [0, 1]^3.
+        Must return the components as a tuple.
+        &quot;&quot;&quot;
+        pass</div>
+
+
+    @LogicalFluidEquilibrium.domain.setter
+    def domain(self, new_domain):
+        super(LogicalFluidEquilibriumWithB, type(self)).domain.fset(self, new_domain)</div>
+
+
+
+<div class="viewcode-block" id="NumericalFluidEquilibriumWithB">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.NumericalFluidEquilibriumWithB">[docs]</a>
+class NumericalFluidEquilibriumWithB(LogicalFluidEquilibriumWithB):
+    r&quot;&quot;&quot;
+    Specialization for fluid equilibria with magnetic field and numerically computed domain mappings.
+
+    Child classes must provide a ``numerical_domain`` property that returns a Domain object.
+    This class overrides the domain property to use the numerically computed mapping.
+    &quot;&quot;&quot;
+
+    @property
+    @abstractmethod
+    def numerical_domain(self):
+        &quot;&quot;&quot;Numerically computed mapping from the logical cube [0, 1]^3 to the physical domain
+        in the form of a :class:`~struphy.geometry.base.Domain` object.&quot;&quot;&quot;
+        pass
+
+    @property
+    def domain(self):
+        return self.numerical_domain</div>
+
+
+
+<div class="viewcode-block" id="MHDequilibrium">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium">[docs]</a>
+class MHDequilibrium(FluidEquilibriumWithB):
+    &quot;&quot;&quot;
+    Extension of FluidEquilibriumWithB with current density field.
+
+    Child classes must implement either Cartesian (``j_xyz``) or logical (``jv``) methods
+    for current density. The velocity field is derived from current density as j/n,
+    overriding the base FluidEquilibrium. Provides methods for 1-form and 2-form
+    transformations of the current density.
+    &quot;&quot;&quot;
+
+    @FluidEquilibriumWithB.domain.setter
+    def domain(self, new_domain):
+        super(MHDequilibrium, type(self)).domain.fset(self, new_domain)
+
+    ###########################
+    # Vector-valued callables #
+    ###########################
+
+<div class="viewcode-block" id="MHDequilibrium.j1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.j1">[docs]</a>
+    def j1(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;1-form components of current on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.transform(
+            self.jv(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;v_to_1&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.j2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.j2">[docs]</a>
+    def j2(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;2-form components of current on logical cube [0, 1]^3.&quot;&quot;&quot;
+        return self.domain.transform(
+            self.jv(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;v_to_2&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.jv">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.jv">[docs]</a>
+    def jv(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Contra-variant components of current on logical cube [0, 1]^3.&quot;&quot;&quot;
+        xyz = self.domain(*etas, squeeze_out=False)
+        return self.domain.pull(self.j_xyz(xyz[0], xyz[1], xyz[2]), *etas, kind=&quot;v&quot;, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.j_cart">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.j_cart">[docs]</a>
+    def j_cart(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Cartesian components of current evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        j_out = self.domain.push(
+            self.jv(*etas, squeeze_out=False),
+            *etas,
+            kind=&quot;v&quot;,
+            a_kwargs={&quot;squeeze_out&quot;: False},
+            squeeze_out=squeeze_out,
+        )
+        return j_out, self.domain(*etas, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.u1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.u1">[docs]</a>
+    def u1(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;1-form components of mean velocity evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        return self.j1(
+            *etas,
+            squeeze_out=squeeze_out,
+        ) / self.n0(
+            *etas,
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.u2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.u2">[docs]</a>
+    def u2(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;2-form components of mean velocity evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        return self.j2(
+            *etas,
+            squeeze_out=squeeze_out,
+        ) / self.n0(
+            *etas,
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.uv">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.uv">[docs]</a>
+    def uv(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Contra-variant components of mean velocity evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        return self.jv(
+            *etas,
+            squeeze_out=squeeze_out,
+        ) / self.n0(
+            *etas,
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.u_cart">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.u_cart">[docs]</a>
+    def u_cart(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Cartesian components of mean velocity evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        u_out = self.j_cart(
+            *etas,
+            squeeze_out=squeeze_out,
+        )[0] / self.n0(
+            *etas,
+            squeeze_out=squeeze_out,
+        )
+        return u_out, self.domain(*etas, squeeze_out=squeeze_out)</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.curl_unit_b1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.curl_unit_b1">[docs]</a>
+    def curl_unit_b1(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;1-form components of curl of unit magnetic field evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        return self.domain.pull(
+            self.curl_unit_b_cart(*etas, squeeze_out=False)[0],
+            *etas,
+            kind=&quot;1&quot;,
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.curl_unit_b2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.curl_unit_b2">[docs]</a>
+    def curl_unit_b2(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;2-form components of curl of unit magnetic field evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        return self.domain.pull(
+            self.curl_unit_b_cart(*etas, squeeze_out=False)[0],
+            *etas,
+            kind=&quot;2&quot;,
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.curl_unit_bv">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.curl_unit_bv">[docs]</a>
+    def curl_unit_bv(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Contra-variant components of curl of unit magnetic field evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        return self.domain.pull(
+            self.curl_unit_b_cart(*etas, squeeze_out=False)[0],
+            *etas,
+            kind=&quot;v&quot;,
+            squeeze_out=squeeze_out,
+        )</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.curl_unit_b_cart">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.curl_unit_b_cart">[docs]</a>
+    def curl_unit_b_cart(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Cartesian components of curl of unit magnetic field evaluated on logical cube [0, 1]^3. Returns also (x,y,z).&quot;&quot;&quot;
+        b, xyz = self.b_cart(*etas, squeeze_out=squeeze_out)
+        j, xyz = self.j_cart(*etas, squeeze_out=squeeze_out)
+        gradB, xyz = self.gradB_cart(*etas, squeeze_out=squeeze_out)
+        absB = self.absB0(*etas, squeeze_out=squeeze_out)
+        out = xp.array(
+            [
+                j[0] / absB + (b[1] * gradB[2] - b[2] * gradB[1]) / absB**2,
+                j[1] / absB + (b[2] * gradB[0] - b[0] * gradB[2]) / absB**2,
+                j[2] / absB + (b[0] * gradB[1] - b[1] * gradB[0]) / absB**2,
+            ],
+            dtype=float,
+        )
+        return out, xyz</div>
+
+
+    ###########################
+    # Scalar-valued callables #
+    ###########################
+
+<div class="viewcode-block" id="MHDequilibrium.absJ0">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.absJ0">[docs]</a>
+    def absJ0(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;0-form absolute value of current on logical cube [0, 1]^3.&quot;&quot;&quot;
+        j, xyz = self.j_cart(*etas, squeeze_out=squeeze_out)
+        return xp.sqrt(j[0] ** 2 + j[1] ** 2 + j[2] ** 2)</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.curl_unit_b_dot_b0">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.curl_unit_b_dot_b0">[docs]</a>
+    def curl_unit_b_dot_b0(self, *etas, squeeze_out=False):
+        r&quot;&quot;&quot;0-form of :math:`(\nabla \times \mathbf b_0) \times \mathbf b_0` evaluated on logical cube [0, 1]^3.&quot;&quot;&quot;
+        curl_b, xyz = self.curl_unit_b_cart(*etas, squeeze_out=squeeze_out)
+        b, xyz = self.unit_b_cart(*etas, squeeze_out=squeeze_out)
+        out = curl_b[0] * b[0] + curl_b[1] * b[1] + curl_b[2] * b[2]
+        return out</div>
+
+
+    ###################
+    # Single components
+    ###################
+
+<div class="viewcode-block" id="MHDequilibrium.j1_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.j1_1">[docs]</a>
+    def j1_1(self, *etas, squeeze_out=False):
+        return self.j1(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.j1_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.j1_2">[docs]</a>
+    def j1_2(self, *etas, squeeze_out=False):
+        return self.j1(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.j1_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.j1_3">[docs]</a>
+    def j1_3(self, *etas, squeeze_out=False):
+        return self.j1(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.j2_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.j2_1">[docs]</a>
+    def j2_1(self, *etas, squeeze_out=False):
+        return self.j2(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.j2_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.j2_2">[docs]</a>
+    def j2_2(self, *etas, squeeze_out=False):
+        return self.j2(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.j2_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.j2_3">[docs]</a>
+    def j2_3(self, *etas, squeeze_out=False):
+        return self.j2(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.jv_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.jv_1">[docs]</a>
+    def jv_1(self, *etas, squeeze_out=False):
+        return self.jv(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.jv_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.jv_2">[docs]</a>
+    def jv_2(self, *etas, squeeze_out=False):
+        return self.jv(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.jv_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.jv_3">[docs]</a>
+    def jv_3(self, *etas, squeeze_out=False):
+        return self.jv(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.j_cart_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.j_cart_1">[docs]</a>
+    def j_cart_1(self, *etas, squeeze_out=False):
+        return self.j_cart(*etas, squeeze_out=squeeze_out)[0][0]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.j_cart_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.j_cart_2">[docs]</a>
+    def j_cart_2(self, *etas, squeeze_out=False):
+        return self.j_cart(*etas, squeeze_out=squeeze_out)[0][1]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.j_cart_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.j_cart_3">[docs]</a>
+    def j_cart_3(self, *etas, squeeze_out=False):
+        return self.j_cart(*etas, squeeze_out=squeeze_out)[0][2]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.curl_unit_b1_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.curl_unit_b1_1">[docs]</a>
+    def curl_unit_b1_1(self, *etas, squeeze_out=False):
+        return self.curl_unit_b1(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.curl_unit_b1_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.curl_unit_b1_2">[docs]</a>
+    def curl_unit_b1_2(self, *etas, squeeze_out=False):
+        return self.curl_unit_b1(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.curl_unit_b1_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.curl_unit_b1_3">[docs]</a>
+    def curl_unit_b1_3(self, *etas, squeeze_out=False):
+        return self.curl_unit_b1(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.curl_unit_b2_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.curl_unit_b2_1">[docs]</a>
+    def curl_unit_b2_1(self, *etas, squeeze_out=False):
+        return self.curl_unit_b2(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.curl_unit_b2_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.curl_unit_b2_2">[docs]</a>
+    def curl_unit_b2_2(self, *etas, squeeze_out=False):
+        return self.curl_unit_b2(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.curl_unit_b2_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.curl_unit_b2_3">[docs]</a>
+    def curl_unit_b2_3(self, *etas, squeeze_out=False):
+        return self.curl_unit_b2(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.curl_unit_bv_1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.curl_unit_bv_1">[docs]</a>
+    def curl_unit_bv_1(self, *etas, squeeze_out=False):
+        return self.curl_unit_bv(*etas, squeeze_out=squeeze_out)[0]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.curl_unit_bv_2">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.curl_unit_bv_2">[docs]</a>
+    def curl_unit_bv_2(self, *etas, squeeze_out=False):
+        return self.curl_unit_bv(*etas, squeeze_out=squeeze_out)[1]</div>
+
+
+<div class="viewcode-block" id="MHDequilibrium.curl_unit_bv_3">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.curl_unit_bv_3">[docs]</a>
+    def curl_unit_bv_3(self, *etas, squeeze_out=False):
+        return self.curl_unit_bv(*etas, squeeze_out=squeeze_out)[2]</div>
+
+
+    ##########
+    # Plotting
+    ##########
+
+<div class="viewcode-block" id="MHDequilibrium.show">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.MHDequilibrium.show">[docs]</a>
+    def show(self, n1=16, n2=33, n3=21, n_planes=5):
+        &quot;&quot;&quot;Generate vtk files of equilibirum and do some 2d plots with matplotlib.
+
+        Parameters
+        ----------
+        n1, n2, n3 : int
+            Evaluation points of mapping in each direcion.
+
+        n_planes : int
+            Number of planes to show perpendicular to eta3.&quot;&quot;&quot;
+
+        import struphy
+
+        torus_mappings = (
+            &quot;Tokamak&quot;,
+            &quot;GVECunit&quot;,
+            &quot;DESCunit&quot;,
+            &quot;IGAPolarTorus&quot;,
+            &quot;HollowTorus&quot;,
+        )
+
+        e1 = xp.linspace(0.0001, 1, n1)
+        e2 = xp.linspace(0, 1, n2)
+        e3 = xp.linspace(0, 1, n3)
+
+        if self.domain.__class__.__name__ in (&quot;GVECunit&quot;, &quot;DESCunit&quot;):
+            if n_planes &gt; 1:
+                jump = (n3 - 1) / (n_planes - 1)
+            else:
+                jump = 0
+        else:
+            n_planes = 1
+            jump = 0
+
+        x, y, z = self.domain(e1, e2, e3)
+        logger.info(&quot;Evaluation of mapping done.&quot;)
+        det_df = self.domain.jacobian_det(e1, e2, e3)
+        p = self.p0(e1, e2, e3)
+        logger.info(&quot;Computation of pressure done.&quot;)
+
+        # ori 240624
+        n_dens = self.n0(e1, e2, e3)
+        logger.info(&quot;Computation of density done.&quot;)
+
+        absB = self.absB0(e1, e2, e3)
+        logger.info(&quot;Computation of abs(B) done.&quot;)
+        j_cart, xyz = self.j_cart(e1, e2, e3)
+        logger.info(&quot;Computation of current density done.&quot;)
+        absJ = xp.sqrt(j_cart[0] ** 2 + j_cart[1] ** 2 + j_cart[2] ** 2)
+
+        _path = struphy.__path__[0] + &quot;/fields_background/mhd_equil/gvec/output/&quot;
+        gridToVTK(
+            _path + &quot;vtk/gvec_equil&quot;,
+            x,
+            y,
+            z,
+            pointData={&quot;det_df&quot;: det_df, &quot;pressure&quot;: p, &quot;absB&quot;: absB},
+        )
+        logger.info(&quot;Generation of vtk files done.&quot;)
+
+        # show params
+        logger.info(&quot;\nEquilibrium parameters:&quot;)
+        for key, val in self.params.items():
+            logger.info(f&quot;{key}: {val}&quot;)
+
+        logger.info(&quot;\nMapping parameters:&quot;)
+        for key, val in self.domain.params.items():
+            if key not in {&quot;cx&quot;, &quot;cy&quot;, &quot;cz&quot;}:
+                logger.info(f&quot;{key}: {val}&quot;)
+
+        # poloidal plane grid
+        fig = plt.figure(figsize=(13, xp.ceil(n_planes / 2) * 6.5))
+        for n in range(n_planes):
+            xpp = x[:, :, int(n * jump)].squeeze()
+            yp = y[:, :, int(n * jump)].squeeze()
+            zp = z[:, :, int(n * jump)].squeeze()
+
+            if self.domain.__class__.__name__ in torus_mappings:
+                pc1 = xp.sqrt(xpp**2 + yp**2)
+                pc2 = zp
+                l1 = &quot;R&quot;
+                l2 = &quot;Z&quot;
+            else:
+                pc1 = xpp
+                pc2 = yp
+                l1 = &quot;x&quot;
+                l2 = &quot;y&quot;
+
+            ax = fig.add_subplot(int(xp.ceil(n_planes / 2)), 2, n + 1)
+            for i in range(pc1.shape[0]):
+                for j in range(pc1.shape[1] - 1):
+                    if i &lt; pc1.shape[0] - 1:
+                        ax.plot(
+                            [pc1[i, j], pc1[i + 1, j]],
+                            [pc2[i, j], pc2[i + 1, j]],
+                            &quot;b&quot;,
+                            linewidth=0.6,
+                        )
+                    if j &lt; pc1.shape[1] - 1:
+                        ax.plot(
+                            [pc1[i, j], pc1[i, j + 1]],
+                            [pc2[i, j], pc2[i, j + 1]],
+                            &quot;b&quot;,
+                            linewidth=0.6,
+                        )
+
+            ax.scatter(pc1[0, 0], pc2[0, 0], 20, &quot;red&quot;, zorder=10)
+            # ax.scatter(pc1[0, 32], pc2[0, 32], 20, &#39;red&#39;, zorder=10)
+
+            ax.set_xlabel(l1)
+            ax.set_ylabel(l2)
+            ax.axis(&quot;equal&quot;)
+            ax.set_title(
+                r&quot;Poloidal plane at $\eta_3$={0:4.3f}&quot;.format(e3[int(n * jump)]),
+            )
+
+        # top view
+        e1 = xp.linspace(0, 1, n1)  # radial coordinate in [0, 1]
+        e2 = xp.linspace(0, 1, 3)  # poloidal angle in [0, 1]
+        e3 = xp.linspace(0, 1, n3)  # toroidal angle in [0, 1]
+
+        xt, yt, zt = self.domain(e1, e2, e3)
+
+        fig = plt.figure(figsize=(13, 2 * 6.5))
+        ax = fig.add_subplot()
+        for m in range(2):
+            xpp = xt[:, m, :].squeeze()
+            yp = yt[:, m, :].squeeze()
+            zp = zt[:, m, :].squeeze()
+
+            if self.domain.__class__.__name__ in torus_mappings:
+                tc1 = xpp
+                tc2 = yp
+                l1 = &quot;x&quot;
+                l2 = &quot;y&quot;
+            else:
+                tc1 = xpp
+                tc2 = zp
+                l1 = &quot;x&quot;
+                l2 = &quot;z&quot;
+
+            for i in range(tc1.shape[0]):
+                for j in range(tc1.shape[1] - 1):
+                    if i &lt; tc1.shape[0] - 1:
+                        ax.plot(
+                            [tc1[i, j], tc1[i + 1, j]],
+                            [tc2[i, j], tc2[i + 1, j]],
+                            &quot;b&quot;,
+                            linewidth=0.6,
+                        )
+                    if j &lt; tc1.shape[1] - 1:
+                        if i == 0:
+                            ax.plot(
+                                [tc1[i, j], tc1[i, j + 1]],
+                                [tc2[i, j], tc2[i, j + 1]],
+                                &quot;r&quot;,
+                                linewidth=1,
+                            )
+                        else:
+                            ax.plot(
+                                [tc1[i, j], tc1[i, j + 1]],
+                                [tc2[i, j], tc2[i, j + 1]],
+                                &quot;b&quot;,
+                                linewidth=0.6,
+                            )
+            ax.set_xlabel(l1)
+            ax.set_ylabel(l2)
+            ax.axis(&quot;equal&quot;)
+            ax.set_title(&quot;Device top view&quot;)
+
+        # Jacobian determinant
+        fig = plt.figure(figsize=(13, xp.ceil(n_planes / 2) * 6.5))
+        for n in range(n_planes):
+            xpp = x[:, :, int(n * jump)].squeeze()
+            yp = y[:, :, int(n * jump)].squeeze()
+            zp = z[:, :, int(n * jump)].squeeze()
+
+            if self.domain.__class__.__name__ in torus_mappings:
+                pc1 = xp.sqrt(xpp**2 + yp**2)
+                pc2 = zp
+                l1 = &quot;R&quot;
+                l2 = &quot;Z&quot;
+            else:
+                pc1 = xpp
+                pc2 = yp
+                l1 = &quot;x&quot;
+                l2 = &quot;y&quot;
+
+            detp = det_df[:, :, int(n * jump)].squeeze()
+
+            ax = fig.add_subplot(int(xp.ceil(n_planes / 2)), 2, n + 1)
+            map = ax.contourf(pc1, pc2, detp, 30)
+            ax.set_xlabel(l1)
+            ax.set_ylabel(l2)
+            ax.axis(&quot;equal&quot;)
+            ax.set_title(
+                r&quot;Jacobian determinant at $\eta_3$={0:4.3f}&quot;.format(e3[int(n * jump)]),
+            )
+            fig.colorbar(map, ax=ax, location=&quot;right&quot;)
+
+        # pressure
+        fig = plt.figure(figsize=(15, xp.ceil(n_planes / 2) * 6.5))
+        for n in range(n_planes):
+            xpp = x[:, :, int(n * jump)].squeeze()
+            yp = y[:, :, int(n * jump)].squeeze()
+            zp = z[:, :, int(n * jump)].squeeze()
+
+            if self.domain.__class__.__name__ in torus_mappings:
+                pc1 = xp.sqrt(xpp**2 + yp**2)
+                pc2 = zp
+                l1 = &quot;R&quot;
+                l2 = &quot;Z&quot;
+            else:
+                pc1 = xpp
+                pc2 = yp
+                l1 = &quot;x&quot;
+                l2 = &quot;y&quot;
+
+            pp = p[:, :, int(n * jump)].squeeze()
+
+            ax = fig.add_subplot(int(xp.ceil(n_planes / 2)), 2, n + 1)
+            map = ax.contourf(pc1, pc2, pp, 30)
+            ax.set_xlabel(l1)
+            ax.set_ylabel(l2)
+            ax.axis(&quot;equal&quot;)
+            ax.set_title(
+                r&quot;Pressure at $\eta_3$={0:4.3f}&quot;.format(e3[int(n * jump)]),
+            )
+            fig.colorbar(map, ax=ax, location=&quot;right&quot;)
+
+        # density
+        fig = plt.figure(figsize=(15, xp.ceil(n_planes / 2) * 6.5))
+        for n in range(n_planes):
+            xpp = x[:, :, int(n * jump)].squeeze()
+            yp = y[:, :, int(n * jump)].squeeze()
+            zp = z[:, :, int(n * jump)].squeeze()
+
+            if self.domain.__class__.__name__ in torus_mappings:
+                pc1 = xp.sqrt(xpp**2 + yp**2)
+                pc2 = zp
+                l1 = &quot;R&quot;
+                l2 = &quot;Z&quot;
+            else:
+                pc1 = xpp
+                pc2 = yp
+                l1 = &quot;x&quot;
+                l2 = &quot;y&quot;
+
+            nn = n_dens[:, :, int(n * jump)].squeeze()
+
+            ax = fig.add_subplot(int(xp.ceil(n_planes / 2)), 2, n + 1)
+            map = ax.contourf(pc1, pc2, nn, 30)
+            ax.set_xlabel(l1)
+            ax.set_ylabel(l2)
+            ax.axis(&quot;equal&quot;)
+            ax.set_title(
+                r&quot;Equilibrium density at $\eta_3$={0:4.3f}&quot;.format(e3[int(n * jump)]),
+            )
+            fig.colorbar(map, ax=ax, location=&quot;right&quot;)
+
+        # magnetic field strength
+        fig = plt.figure(figsize=(15, xp.ceil(n_planes / 2) * 6.5))
+        for n in range(n_planes):
+            xpp = x[:, :, int(n * jump)].squeeze()
+            yp = y[:, :, int(n * jump)].squeeze()
+            zp = z[:, :, int(n * jump)].squeeze()
+
+            if self.domain.__class__.__name__ in torus_mappings:
+                pc1 = xp.sqrt(xpp**2 + yp**2)
+                pc2 = zp
+                l1 = &quot;R&quot;
+                l2 = &quot;Z&quot;
+            else:
+                pc1 = xpp
+                pc2 = yp
+                l1 = &quot;x&quot;
+                l2 = &quot;y&quot;
+
+            ab = absB[:, :, int(n * jump)].squeeze()
+
+            ax = fig.add_subplot(int(xp.ceil(n_planes / 2)), 2, n + 1)
+            map = ax.contourf(pc1, pc2, ab, 30)
+            ax.set_xlabel(l1)
+            ax.set_ylabel(l2)
+            ax.axis(&quot;equal&quot;)
+            ax.set_title(
+                r&quot;Magnetic field strength at $\eta_3$={0:4.3f}&quot;.format(e3[int(n * jump)]),
+            )
+            fig.colorbar(map, ax=ax, location=&quot;right&quot;)
+
+        # current density
+        fig = plt.figure(figsize=(15, xp.ceil(n_planes / 2) * 6.5))
+        for n in range(n_planes):
+            xpp = x[:, :, int(n * jump)].squeeze()
+            yp = y[:, :, int(n * jump)].squeeze()
+            zp = z[:, :, int(n * jump)].squeeze()
+
+            if self.domain.__class__.__name__ in torus_mappings:
+                pc1 = xp.sqrt(xpp**2 + yp**2)
+                pc2 = zp
+                l1 = &quot;R&quot;
+                l2 = &quot;Z&quot;
+            else:
+                pc1 = xpp
+                pc2 = yp
+                l1 = &quot;x&quot;
+                l2 = &quot;y&quot;
+
+            ab = absJ[:, :, int(n * jump)].squeeze()
+
+            ax = fig.add_subplot(int(xp.ceil(n_planes / 2)), 2, n + 1)
+            map = ax.contourf(pc1, pc2, ab, 30)
+            ax.set_xlabel(l1)
+            ax.set_ylabel(l2)
+            ax.axis(&quot;equal&quot;)
+            ax.set_title(
+                r&quot;Current density (abs) at $\eta_3$={0:4.3f}&quot;.format(e3[int(n * jump)]),
+            )
+            fig.colorbar(map, ax=ax, location=&quot;right&quot;)
+
+        plt.show()</div>
+</div>
+
+
+
+<div class="viewcode-block" id="CartesianMHDequilibrium">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.CartesianMHDequilibrium">[docs]</a>
+class CartesianMHDequilibrium(MHDequilibrium):
+    r&quot;&quot;&quot;
+    Specialization for MHD equilibria in Cartesian coordinates.
+
+    Child classes must implement the abstract methods ``b_xyz``, ``j_xyz``, ``p_xyz``,
+    ``n_xyz``, and ``gradB_xyz`` in Cartesian physical space.
+    &quot;&quot;&quot;
+
+<div class="viewcode-block" id="CartesianMHDequilibrium.b_xyz">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.CartesianMHDequilibrium.b_xyz">[docs]</a>
+    @abstractmethod
+    def b_xyz(self, x, y, z):
+        &quot;&quot;&quot;Cartesian magnetic field in physical space.
+        Must return the components as a tuple.&quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="CartesianMHDequilibrium.j_xyz">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.CartesianMHDequilibrium.j_xyz">[docs]</a>
+    @abstractmethod
+    def j_xyz(self, x, y, z):
+        &quot;&quot;&quot;Cartesian current (curl of magnetic field) in physical space.
+        Must return the components as a tuple.&quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="CartesianMHDequilibrium.p_xyz">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.CartesianMHDequilibrium.p_xyz">[docs]</a>
+    @abstractmethod
+    def p_xyz(self, x, y, z):
+        &quot;&quot;&quot;Equilibrium pressure in physical space.&quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="CartesianMHDequilibrium.n_xyz">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.CartesianMHDequilibrium.n_xyz">[docs]</a>
+    @abstractmethod
+    def n_xyz(self, x, y, z):
+        &quot;&quot;&quot;Equilibrium number density in physical space.&quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="CartesianMHDequilibrium.gradB_xyz">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.CartesianMHDequilibrium.gradB_xyz">[docs]</a>
+    @abstractmethod
+    def gradB_xyz(self, x, y, z):
+        &quot;&quot;&quot;Cartesian gradient of magnetic field strength in physical space.
+        Must return the components as a tuple.&quot;&quot;&quot;
+        pass</div>
+
+
+    @MHDequilibrium.domain.setter
+    def domain(self, new_domain):
+        super(CartesianMHDequilibrium, type(self)).domain.fset(self, new_domain)</div>
+
+
+
+<div class="viewcode-block" id="AxisymmMHDequilibrium">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.AxisymmMHDequilibrium">[docs]</a>
+class AxisymmMHDequilibrium(CartesianMHDequilibrium):
+    r&quot;&quot;&quot;
+    Base class for ideal axisymmetric MHD equilibria based on a poloidal flux function
+    :math:`\psi(R, Z)` and a toroidal field function :math:`g_{tor}(R, Z)`
+    in a cylindrical coordinate system :math:`(R, \phi, Z)`.
+
+    The magnetic field and current density are then given by
+
+    .. math::
+
+        \mathbf B = \nabla \psi \times \nabla \phi + g_{tor} \nabla \phi\,,\qquad \mathbf j = \nabla \times \mathbf B\,.
+
+    The pressure and density profiles need to be implemented by child classes.
+    &quot;&quot;&quot;
+
+<div class="viewcode-block" id="AxisymmMHDequilibrium.psi">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.AxisymmMHDequilibrium.psi">[docs]</a>
+    @abstractmethod
+    def psi(self, R, Z, dR=0, dZ=0):
+        &quot;&quot;&quot;Poloidal flux function per radian. First AND second derivatives dR=0,1,2 and dZ=0,1,2 must be implemented.&quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="AxisymmMHDequilibrium.g_tor">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.AxisymmMHDequilibrium.g_tor">[docs]</a>
+    @abstractmethod
+    def g_tor(self, R, Z, dR=0, dZ=0):
+        &quot;&quot;&quot;Toroidal field function. First derivatives dR=0,1 and dZ=0,1 must be implemented.&quot;&quot;&quot;
+        pass</div>
+
+
+    @property
+    @abstractmethod
+    def psi_range(self):
+        &quot;&quot;&quot;Psi on-axis and at plasma boundary returned as list [psi_axis, psi_boundary].&quot;&quot;&quot;
+        pass
+
+    @property
+    @abstractmethod
+    def psi_axis_RZ(self):
+        &quot;&quot;&quot;Location of magnetic axis in R-Z-coordinates returned as list [psi_axis_R, psi_axis_Z].&quot;&quot;&quot;
+        pass
+
+<div class="viewcode-block" id="AxisymmMHDequilibrium.p_xyz">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.AxisymmMHDequilibrium.p_xyz">[docs]</a>
+    @abstractmethod
+    def p_xyz(self, x, y, z):
+        &quot;&quot;&quot;Equilibrium pressure in physical space.&quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="AxisymmMHDequilibrium.n_xyz">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.AxisymmMHDequilibrium.n_xyz">[docs]</a>
+    @abstractmethod
+    def n_xyz(self, x, y, z):
+        &quot;&quot;&quot;Equilibrium number density in physical space.&quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="AxisymmMHDequilibrium.b_xyz">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.AxisymmMHDequilibrium.b_xyz">[docs]</a>
+    def b_xyz(self, x, y, z):
+        &quot;&quot;&quot;Cartesian B-field components calculated as BR = -(dpsi/dZ)/R, BPhi = g_tor/R, BZ = (dpsi/dR)/R.&quot;&quot;&quot;
+
+        R, Phi, Z = self.inverse_map(x, y, z)
+
+        # at phi = 0°
+        BR = -self.psi(R, Z, dZ=1) / R
+        BP = self.g_tor(R, Z) / R
+        BZ = self.psi(R, Z, dR=1) / R
+
+        # push-forward to Cartesian components
+        Bx = BR * xp.cos(Phi) - BP * xp.sin(Phi)
+        By = BR * xp.sin(Phi) + BP * xp.cos(Phi)
+        Bz = 1 * BZ
+
+        return Bx, By, Bz</div>
+
+
+<div class="viewcode-block" id="AxisymmMHDequilibrium.j_xyz">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.AxisymmMHDequilibrium.j_xyz">[docs]</a>
+    def j_xyz(self, x, y, z):
+        &quot;&quot;&quot;Cartesian current density components calculated as curl(B).&quot;&quot;&quot;
+
+        R, Phi, Z = self.inverse_map(x, y, z)
+
+        # at phi = 0° (j = curl(B))
+        jR = -self.g_tor(R, Z, dZ=1) / R
+        jP = -self.psi(R, Z, dZ=2) / R + self.psi(R, Z, dR=1) / R**2 - self.psi(R, Z, dR=2) / R
+        jZ = self.g_tor(R, Z, dR=1) / R
+
+        # push-forward to Cartesian components
+        jx = jR * xp.cos(Phi) - jP * xp.sin(Phi)
+        jy = jR * xp.sin(Phi) + jP * xp.cos(Phi)
+        jz = 1 * jZ
+
+        return jx, jy, jz</div>
+
+
+<div class="viewcode-block" id="AxisymmMHDequilibrium.gradB_xyz">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.AxisymmMHDequilibrium.gradB_xyz">[docs]</a>
+    def gradB_xyz(self, x, y, z):
+        &quot;&quot;&quot;Cartesian gradient |B| components calculated as grad(sqrt(BR**2 + BPhi**2 + BZ**2)).&quot;&quot;&quot;
+
+        R, Phi, Z = self.inverse_map(x, y, z)
+
+        RabsB = xp.sqrt(
+            self.psi(R, Z, dZ=1) ** 2 + self.g_tor(R, Z) ** 2 + self.psi(R, Z, dR=1) ** 2,
+        )
+
+        # at phi = 0° (gradB = grad(absB))
+        gradBR = (
+            -RabsB / R**2
+            + (
+                self.psi(R, Z, dZ=1)
+                * self.psi(
+                    R,
+                    Z,
+                    dR=1,
+                    dZ=1,
+                )
+                + self.psi(R, Z, dR=1) * self.psi(R, Z, dR=2)
+            )
+            / RabsB
+            / R
+        )
+        gradBP = 0.0
+        gradBZ = (
+            (self.psi(R, Z, dZ=1) * self.psi(R, Z, dZ=2) + self.psi(R, Z, dR=1) * self.psi(R, Z, dR=1, dZ=1))
+            / RabsB
+            / R
+        )
+
+        # push-forward to Cartesian components
+        gradBx = gradBR * xp.cos(Phi) - gradBP * xp.sin(Phi)
+        gradBy = gradBR * xp.sin(Phi) + gradBP * xp.cos(Phi)
+        gradBz = 1 * gradBZ
+
+        return gradBx, gradBy, gradBz</div>
+
+
+<div class="viewcode-block" id="AxisymmMHDequilibrium.inverse_map">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.AxisymmMHDequilibrium.inverse_map">[docs]</a>
+    @staticmethod
+    def inverse_map(x, y, z):
+        &quot;&quot;&quot;Inverse cylindrical mapping.&quot;&quot;&quot;
+
+        R = xp.sqrt(x**2 + y**2)
+        P = xp.arctan2(y, x)
+        Z = 1 * z
+
+        return R, P, Z</div>
+
+
+    @CartesianMHDequilibrium.domain.setter
+    def domain(self, new_domain):
+        super(AxisymmMHDequilibrium, type(self)).domain.fset(self, new_domain)</div>
+
+
+
+<div class="viewcode-block" id="LogicalMHDequilibrium">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.LogicalMHDequilibrium">[docs]</a>
+class LogicalMHDequilibrium(MHDequilibrium):
+    r&quot;&quot;&quot;
+    Specialization for MHD equilibria on the logical cube [0, 1]^3.
+
+    Child classes must implement the abstract methods ``bv``, ``jv``, ``p0``, ``n0``,
+    and ``gradB1`` on the logical reference domain.
+    &quot;&quot;&quot;
+
+<div class="viewcode-block" id="LogicalMHDequilibrium.bv">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.LogicalMHDequilibrium.bv">[docs]</a>
+    @abstractmethod
+    def bv(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Contra-variant (vector field) magnetic field on logical cube [0, 1]^3.
+        Must return the components as a tuple.
+        &quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="LogicalMHDequilibrium.jv">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.LogicalMHDequilibrium.jv">[docs]</a>
+    @abstractmethod
+    def jv(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;Contra-variant (vector field) current density (=curl B) on logical cube [0, 1]^3.
+        Must return the components as a tuple.
+        &quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="LogicalMHDequilibrium.p0">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.LogicalMHDequilibrium.p0">[docs]</a>
+    @abstractmethod
+    def p0(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;0-form pressure on logical cube [0, 1]^3.
+        Must return the components as a tuple.
+        &quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="LogicalMHDequilibrium.n0">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.LogicalMHDequilibrium.n0">[docs]</a>
+    @abstractmethod
+    def n0(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;0-form density on logical cube [0, 1]^3.&quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="LogicalMHDequilibrium.gradB1">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.LogicalMHDequilibrium.gradB1">[docs]</a>
+    @abstractmethod
+    def gradB1(self, *etas, squeeze_out=False):
+        &quot;&quot;&quot;1-form gradient of magnetic field strength strength on logical cube [0, 1]^3.
+        Must return the components as a tuple.
+        &quot;&quot;&quot;
+        pass</div>
+
+
+    @MHDequilibrium.domain.setter
+    def domain(self, new_domain):
+        super(LogicalMHDequilibrium, type(self)).domain.fset(self, new_domain)</div>
+
+
+
+<div class="viewcode-block" id="NumericalMHDequilibrium">
+<a class="viewcode-back" href="../../../sections/subsections/equils-base.html#struphy.fields_background.base.NumericalMHDequilibrium">[docs]</a>
+class NumericalMHDequilibrium(LogicalMHDequilibrium):
+    r&quot;&quot;&quot;
+    Specialization for MHD equilibria with numerically computed domain mappings.
+
+    Child classes must provide a ``numerical_domain`` property that returns a Domain object.
+    This class overrides the domain property to use the numerically computed mapping.
+    &quot;&quot;&quot;
+
+    @property
+    @abstractmethod
+    def numerical_domain(self):
+        &quot;&quot;&quot;Numerically computed mapping from the logical cube [0, 1]^3 to the physical domain
+        in the form of a :class:`~struphy.geometry.base.Domain` object.&quot;&quot;&quot;
+        pass
+
+    @property
+    def domain(self) -&gt; Domain:
+        return self.numerical_domain</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

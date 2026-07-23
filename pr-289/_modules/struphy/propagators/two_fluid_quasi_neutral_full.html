@@ -1,0 +1,1132 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>struphy.propagators.two_fluid_quasi_neutral_full &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/struphy/propagators/two_fluid_quasi_neutral_full';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href="../../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">struphy.propagators.two_fluid_quasi_neutral_full</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for struphy.propagators.two_fluid_quasi_neutral_full</h1><div class="highlight"><pre>
+<span></span>import logging
+from dataclasses import dataclass
+from typing import Callable, get_args
+from warnings import warn
+
+from feectools.api.essential_bc import apply_essential_bc_stencil
+from feectools.ddm.mpi import mpi as MPI
+from feectools.linalg.basic import IdentityOperator
+from feectools.linalg.block import BlockLinearOperator, BlockVector, BlockVectorSpace
+from feectools.linalg.solvers import inverse
+
+from struphy.feec.basis_projection_ops import BasisProjectionOperators
+from struphy.feec.mass import L2Projector, WeightedMassOperators
+from struphy.io.options import LiteralOptions, OptionsBase
+from struphy.linear_algebra.solver import SolverParameters
+from struphy.models.variables import FEECVariable
+from struphy.propagators.base import Propagator
+from struphy.utils.utils import check_option
+
+logger = logging.getLogger(&quot;struphy&quot;)
+
+
+<div class="viewcode-block" id="TwoFluidQuasiNeutralFull">
+<a class="viewcode-back" href="../../../sections/subsections/propagators-avail.html#struphy.propagators.two_fluid_quasi_neutral_full.TwoFluidQuasiNeutralFull">[docs]</a>
+class TwoFluidQuasiNeutralFull(Propagator):
+    r&quot;&quot;&quot;:ref:`FEEC &lt;gempic&gt;` discretization of the following equations:
+    find :math:`\mathbf u \in H(\textnormal{div})`, :math:`\mathbf u_e \in H(\textnormal{div})` and  :math:`\mathbf \phi \in L^2` such that
+
+    .. math::
+
+        \int_{\Omega} \partial_t  \mathbf{u}\cdot \mathbf{v} \, \textrm d\mathbf{x} &amp;=  \int_{\Omega}  \phi \nabla \! \cdot \! \mathbf{v} \, \textrm d\mathbf{x}  + \int_{\Omega}  \mathbf{u}\! \times \! \mathbf{B}_0 \cdot \mathbf{v} \, \textrm d\mathbf{x} + \nu \int_{\Omega} \nabla \mathbf{u}\! : \! \nabla \mathbf{v} \, \textrm d\mathbf{x} + \int_{\Omega} f \mathbf{v} \, \textrm d\mathbf{x} \qquad \forall \, \mathbf{v} \in H(\textrm{div}) \,.
+        \\[2mm]
+        0 &amp;= - \int_{\Omega} \phi \nabla \! \cdot \! \mathbf{v_e} \, \textrm d\mathbf{x} - \int_{\Omega} \mathbf{u_e} \! \times \! \mathbf{B}_0 \cdot \mathbf{v_e} \, \textrm d\mathbf{x}  + \nu_e \int_{\Omega} \nabla \mathbf{u_e}  \!: \! \nabla \mathbf{v_e} \, \textrm d\mathbf{x} + \int_{\Omega} f_e \mathbf{v_e} \, \textrm d\mathbf{x} \qquad \forall \ \mathbf{v_e} \in H(\textrm{div}) \,.
+        \\[2mm]
+        0 &amp;= \int_{\Omega} \psi \nabla \cdot (\mathbf{u}-\mathbf{u_e}) \, \textrm d\mathbf{x} \qquad \forall \, \psi \in L^2 \,.
+
+    :ref:`time_discret`: fully implicit.
+    &quot;&quot;&quot;
+
+    # =========================================================================
+    ### State variables (ion velocity u, electron velocity ue, pressure phi)
+    # =========================================================================
+
+<div class="viewcode-block" id="TwoFluidQuasiNeutralFull.Variables">
+<a class="viewcode-back" href="../../../sections/subsections/propagators-avail.html#struphy.propagators.two_fluid_quasi_neutral_full.TwoFluidQuasiNeutralFull.Variables">[docs]</a>
+    class Variables:
+        &quot;&quot;&quot;Container for variables advanced by :class:`TwoFluidQuasiNeutralFull`.
+
+        Attributes
+        ----------
+        u : FEECVariable or None
+            Ion velocity variable in ``&quot;Hdiv&quot;`` space.
+        ue : FEECVariable or None
+            Electron velocity variable in ``&quot;Hdiv&quot;`` space.
+        phi : FEECVariable or None
+            Electrostatic potential variable in ``&quot;L2&quot;`` space.
+        &quot;&quot;&quot;
+
+        def __init__(self) -&gt; None:
+            self._u: FEECVariable | None = None
+            self._ue: FEECVariable | None = None
+            self._phi: FEECVariable | None = None
+
+        @property
+        def u(self) -&gt; FEECVariable | None:
+            return self._u
+
+        @u.setter
+        def u(self, new):
+            assert isinstance(new, FEECVariable)
+            assert new.space == &quot;Hdiv&quot;
+            self._u = new
+
+        @property
+        def ue(self) -&gt; FEECVariable | None:
+            return self._ue
+
+        @ue.setter
+        def ue(self, new):
+            assert isinstance(new, FEECVariable)
+            assert new.space == &quot;Hdiv&quot;
+            self._ue = new
+
+        @property
+        def phi(self) -&gt; FEECVariable | None:
+            return self._phi
+
+        @phi.setter
+        def phi(self, new):
+            assert isinstance(new, FEECVariable)
+            assert new.space == &quot;L2&quot;
+            self._phi = new</div>
+
+
+    def __init__(self):
+        self.variables = self.Variables()
+
+    # =========================================================================
+    ### Options
+    # =========================================================================
+
+<div class="viewcode-block" id="TwoFluidQuasiNeutralFull.Options">
+<a class="viewcode-back" href="../../../sections/subsections/propagators-avail.html#struphy.propagators.two_fluid_quasi_neutral_full.TwoFluidQuasiNeutralFull.Options">[docs]</a>
+    @dataclass(repr=False)
+    class Options(OptionsBase):
+        &quot;&quot;&quot;Configuration options for :class:`TwoFluidQuasiNeutralFull`.
+
+        Parameters
+        ----------
+        nu : float, default=1.0
+            Ion viscosity coefficient.
+        nu_e : float, default=1.0
+            Electron viscosity coefficient.
+        eps_norm : float, default=1e-3
+            Normalization/scaling parameter in Lorentz coupling terms.
+        boundary_data_u : dict[tuple[int, int], Callable] or None, default=None
+            Inhomogeneous Dirichlet data for ion velocity faces.
+        boundary_data_ue : dict[tuple[int, int], Callable] or None, default=None
+            Inhomogeneous Dirichlet data for electron velocity faces.
+        source_u : Callable or None, default=None
+            Source term for ion momentum equation.
+        source_ue : Callable or None, default=None
+            Source term for electron momentum equation.
+        stab_sigma : float or None, default=None
+            Optional stabilization coefficient for electron block.
+        solver : LiteralOptions.OptsGenSolver, default=&quot;gmres&quot;
+            Linear/saddle-point solver used for the global system.
+        solver_params : SolverParameters or None, default=None
+            Solver controls.
+        &quot;&quot;&quot;
+
+        nu: float = 1.0
+        nu_e: float = 1.0
+        eps_norm: float = 1e-3
+
+        boundary_data_u: dict[tuple[int, int], Callable] | None = None
+        boundary_data_ue: dict[tuple[int, int], Callable] | None = None
+
+        source_u: Callable | None = None
+        source_ue: Callable | None = None
+
+        stab_sigma: float | None = None
+
+        solver: LiteralOptions.OptsGenSolver = &quot;gmres&quot;
+        solver_params: SolverParameters | None = None
+
+        def __post_init__(self):
+            # --- physical parameter sanity checks ---
+            if self.nu &lt; 0:
+                raise ValueError(f&quot;nu must be non-negative, got {self.nu}&quot;)
+            if self.nu_e &lt; 0:
+                raise ValueError(f&quot;nu_e must be non-negative, got {self.nu_e}&quot;)
+            if self.eps_norm &lt;= 0:
+                raise ValueError(f&quot;eps_norm must be positive, got {self.eps_norm}&quot;)
+
+            # --- warn if no source terms ---
+            if self.source_u is None:
+                warn(&quot;No source_u specified — defaulting to zero.&quot;)
+            if self.source_ue is None:
+                warn(&quot;No source_ue specified — defaulting to zero.&quot;)
+
+            # --- defaults ---
+            if self.stab_sigma is None:
+                warn(&quot;stab_sigma not specified, defaulting to 0.0&quot;)
+                self.stab_sigma = 0.0
+
+            check_option(self.solver, LiteralOptions.OptsGenSolver, LiteralOptions.OptsSaddlePointSolver)
+            if self.solver_params is None:
+                self.solver_params = SolverParameters()</div>
+
+
+    @property
+    def options(self) -&gt; Options:
+        assert hasattr(self, &quot;_options&quot;), &quot;Options not set.&quot;
+        return self._options
+
+    @options.setter
+    def options(self, new):
+        assert isinstance(new, self.Options)
+        self._options = new
+        logger.info(f&quot;\nNew options for propagator &#39;{self.__class__.__name__}&#39;:\n{self._options}&quot;)
+
+    # =========================================================================
+    ### Boundary condition helpers
+    # =========================================================================
+
+    def _get_dirichlet_faces(self):
+        &quot;&quot;&quot;Infer which faces have Dirichlet BCs by comparing derham and derham_v0.
+
+        A face is Dirichlet if it is unclamped in derham but clamped in derham_v0
+        (i.e. lifting is True there).
+        &quot;&quot;&quot;
+        faces = []
+        derham = self.derham
+        derham_v0 = derham
+
+        if derham_v0 is None:
+            return faces
+
+        bc = derham.dirichlet_bc
+        bc_v0 = derham_v0.dirichlet_bc
+
+        for d in range(3):
+            if derham.spl_kind[d]:
+                continue  # periodic axis, no Dirichlet
+            for s, side in enumerate((-1, 1)):
+                # clamped in v0 but not in derham =&gt; this is a lifted (inhom Dirichlet) face
+                unclamped = not bc[d][s]
+                clamped_v0 = bc_v0[d][s] if bc_v0 is not None else False
+                if unclamped and clamped_v0:
+                    faces.append((d, side))
+                # clamped in both =&gt; homogeneous Dirichlet, also need to zero DOFs
+                elif bc[d][s] and clamped_v0:
+                    faces.append((d, side))
+        return faces
+
+    def _apply_essential_bc(self, vec):
+        &quot;&quot;&quot;Zero out Dirichlet DOFs, inferred from derham vs derham_v0.&quot;&quot;&quot;
+        for d, side in self._dirichlet_faces:
+            apply_essential_bc_stencil(vec[0], axis=d, ext=side, order=0)
+
+    # =========================================================================
+    ### Allocate
+    # =========================================================================
+
+    def allocate(self):
+
+        self._rank = self.derham.comm.Get_rank() if self.derham.comm is not None else 0
+        self._dt = None
+
+        # ---- v0 de Rham complex (from derham.derham_v0) ----------------------
+        self._derham_v0 = self.derham
+
+        self._mass_ops_v0 = WeightedMassOperators(
+            self._derham_v0,
+            self.domain,
+            eq_mhd=self.mass_ops.eq_mhd,
+        )
+        self._basis_ops_v0 = BasisProjectionOperators(
+            self._derham_v0,
+            self.domain,
+            eq_mhd=self.basis_ops.weights[&quot;eq_mhd&quot;],
+        )
+
+        # ---- Dirichlet faces (inferred from derham vs derham_v0) -------------
+
+        self._dirichlet_faces = self._get_dirichlet_faces()
+
+        # ---- unconstrained operators (for RHS assembly) ----------------------
+
+        self._M2 = self.mass_ops.M2
+        self._M2B = -self.mass_ops.M2B
+        self._div = self.derham.div
+        self._curl = self.derham.curl
+        self._S21 = self.basis_ops.S21
+
+        self._lapl = (
+            self._div.T @ self.mass_ops.M3 @ self._div + self._S21.T @ self._curl.T @ self._M2 @ self._curl @ self._S21
+        )
+
+        self._A11 = -self._M2B / self.options.eps_norm + self.options.nu * self._lapl
+        self._A22 = (
+            -self.options.stab_sigma * IdentityOperator(self.derham.V2)
+            + self._M2B / self.options.eps_norm
+            + self.options.nu_e * self._lapl
+        )
+
+        # ---- constrained operators (for system matrix) -----------------------
+
+        self._M2_v0 = self._mass_ops_v0.M2
+        self._M3_v0 = self._mass_ops_v0.M3
+        self._M2B_v0 = -self._mass_ops_v0.M2B
+        self._div_v0 = self._derham_v0.div
+        self._curl_v0 = self._derham_v0.curl
+        self._S21_v0 = self._basis_ops_v0.S21
+
+        self._lapl_v0 = (
+            self._div_v0.T @ self._M3_v0 @ self._div_v0
+            + self._S21_v0.T @ self._curl_v0.T @ self._M2_v0 @ self._curl_v0 @ self._S21_v0
+        )
+
+        self._A11_v0 = -self._M2B_v0 / self.options.eps_norm + self.options.nu * self._lapl_v0
+        self._A22_v0 = (
+            -self.options.stab_sigma * IdentityOperator(self._derham_v0.V2)
+            + self._M2B_v0 / self.options.eps_norm
+            + self.options.nu_e * self._lapl_v0
+        )
+
+        # ---- block saddle-point system ----------------------------------------
+
+        self._block_domain_v0 = BlockVectorSpace(self._derham_v0.V2, self._derham_v0.V2)
+        self._block_codomain_v0 = self._block_domain_v0
+        self._block_codomain_B_v0 = self._derham_v0.V3
+
+        self._B1_v0 = -self._M3_v0 @ self._div_v0
+        self._B2_v0 = self._M3_v0 @ self._div_v0
+
+        self._B_v0 = BlockLinearOperator(
+            self._block_domain_v0, self._block_codomain_B_v0, blocks=[[self._B1_v0, self._B2_v0]]
+        )
+
+        self._block_domain_M = BlockVectorSpace(self._block_domain_v0, self._block_codomain_B_v0)
+
+        _A_init = BlockLinearOperator(
+            self._block_domain_v0, self._block_codomain_v0, blocks=[[self._A11_v0, None], [None, self._A22_v0]]
+        )
+        _M_init = BlockLinearOperator(
+            self._block_domain_M, self._block_domain_M, blocks=[[_A_init, self._B_v0.T], [self._B_v0, None]]
+        )
+
+        if self.options.solver in get_args(LiteralOptions.OptsSaddlePointSolver):
+            self._Minv = inverse(
+                _M_init,
+                self.options.solver,
+                A11=self._A11_v0,
+                A22=self._A22_v0,
+                B1=self._B1_v0,
+                B2=self._B2_v0,
+                recycle=self.options.solver_params.recycle,
+                tol=self.options.solver_params.tol,
+                maxiter=self.options.solver_params.maxiter,
+                verbose=self.options.solver_params.verbose,
+            )
+        else:
+            self._Minv = inverse(
+                _M_init,
+                self.options.solver,
+                recycle=self.options.solver_params.recycle,
+                tol=self.options.solver_params.tol,
+                maxiter=self.options.solver_params.maxiter,
+                verbose=self.options.solver_params.verbose,
+            )
+
+        # ---- projector -------------------------------------------------------
+
+        self._projector = L2Projector(space_id=&quot;Hdiv&quot;, mass_ops=self.mass_ops)
+
+        # ---- solution spline functions (unconstrained) -----------------------
+
+        self._u = self.derham.create_spline_function(&quot;u&quot;, space_id=&quot;Hdiv&quot;)
+        self._ue = self.derham.create_spline_function(&quot;ue&quot;, space_id=&quot;Hdiv&quot;)
+        self._phi = self.derham.create_spline_function(&quot;phi&quot;, space_id=&quot;L2&quot;)
+
+        # ---- BC lifts (unconstrained) ----------------------------------------
+
+        self._u_prime = self.derham.create_spline_function(&quot;u_prime&quot;, space_id=&quot;Hdiv&quot;)
+        self._ue_prime = self.derham.create_spline_function(&quot;ue_prime&quot;, space_id=&quot;Hdiv&quot;)
+
+        for u_prime, boundary_data in [
+            (self._u_prime, self.options.boundary_data_u),
+            (self._ue_prime, self.options.boundary_data_ue),
+        ]:
+            if boundary_data is None:
+                continue
+            for (d, side), f_bc in boundary_data.items():
+                if (d, side) in self._dirichlet_faces:
+                    bc_pulled = lambda *etas, f=f_bc: self.domain.pull(
+                        [
+                            lambda x, y, z, f=f: f(x, y, z)[0],
+                            lambda x, y, z, f=f: f(x, y, z)[1],
+                            lambda x, y, z, f=f: f(x, y, z)[2],
+                        ],
+                        *etas,
+                        kind=&quot;2&quot;,
+                    )
+                    _vec = self._projector(
+                        [
+                            lambda *etas: bc_pulled(*etas)[0],
+                            lambda *etas: bc_pulled(*etas)[1],
+                            lambda *etas: bc_pulled(*etas)[2],
+                        ]
+                    )
+                    for d2, side2 in self._dirichlet_faces:
+                        if (d2, side2) != (d, side):
+                            apply_essential_bc_stencil(_vec[0], axis=d2, ext=side2, order=0)
+                    u_prime.vector += _vec
+
+        self._u_prime_v0 = self._derham_v0.create_spline_function(&quot;u_prime_v0&quot;, space_id=&quot;Hdiv&quot;)
+        self._ue_prime_v0 = self._derham_v0.create_spline_function(&quot;ue_prime_v0&quot;, space_id=&quot;Hdiv&quot;)
+
+        self._u_prime_v0.vector = self._u_prime.vector
+        self._ue_prime_v0.vector = self._ue_prime.vector
+
+        # ---- projected source terms (unconstrained) --------------------------
+
+        self._rhs_u = self.derham.create_spline_function(&quot;rhs_u&quot;, space_id=&quot;Hdiv&quot;)
+        self._rhs_ue = self.derham.create_spline_function(&quot;rhs_ue&quot;, space_id=&quot;Hdiv&quot;)
+
+        for rhs, source in [(self._rhs_u, self.options.source_u), (self._rhs_ue, self.options.source_ue)]:
+            if source is not None:
+                src_pulled = lambda *etas, f=source: self.domain.pull(
+                    [
+                        lambda x, y, z, f=f: f(x, y, z)[0],
+                        lambda x, y, z, f=f: f(x, y, z)[1],
+                        lambda x, y, z, f=f: f(x, y, z)[2],
+                    ],
+                    *etas,
+                    kind=&quot;2&quot;,
+                )
+                rhs.vector = self._projector.get_dofs(
+                    [
+                        lambda *etas: src_pulled(*etas)[0],
+                        lambda *etas: src_pulled(*etas)[1],
+                        lambda *etas: src_pulled(*etas)[2],
+                    ]
+                )
+
+        # ---- pre-allocated RHS vectors (v0, reused each time step) -----------
+
+        self._rhs_vec_u = self._derham_v0.create_spline_function(&quot;rhs_vec_u&quot;, space_id=&quot;Hdiv&quot;)
+        self._rhs_vec_ue = self._derham_v0.create_spline_function(&quot;rhs_vec_ue&quot;, space_id=&quot;Hdiv&quot;)
+
+    # =========================================================================
+    ### Time step
+    # =========================================================================
+
+    def __call__(self, dt):
+
+        # --- copy current state ---
+        self._u.vector = self.variables.u.spline.vector
+        self._ue.vector = self.variables.ue.spline.vector
+
+        # --- rebuild system matrix if dt changed ---
+        if dt != self._dt:  #  TODO change uzawa A11 block too
+            self._dt = dt
+            _A = BlockLinearOperator(
+                self._block_domain_v0,
+                self._block_codomain_v0,
+                blocks=[[self._A11_v0 + self._M2_v0 / dt, None], [None, self._A22_v0]],
+            )
+
+            _M = BlockLinearOperator(
+                self._block_domain_M, self._block_domain_M, blocks=[[_A, self._B_v0.T], [self._B_v0, None]]
+            )
+            self._Minv.linop = _M
+
+        # --- assemble RHS in unconstrained space, then zero boundary DOFs ---
+        # ion:      F1 = rhs_u + M2/dt * u - (A11 + M2/dt) * u&#39;
+        # electron: F2 = rhs_ue - A22 * ue&#39;
+        self._rhs_vec_u.vector = (
+            self._rhs_u.vector  # TODO boundary operator
+            + self._M2.dot(self._u.vector) / dt
+            - self._A11.dot(self._u_prime.vector)
+            - self._M2.dot(self._u_prime.vector) / dt
+        )
+        self._rhs_vec_ue.vector = self._rhs_ue.vector - self._A22.dot(self._ue_prime.vector)
+
+        self._apply_essential_bc(self._rhs_vec_u.vector)
+        self._apply_essential_bc(self._rhs_vec_ue.vector)
+
+        # --- build block RHS and solve ---
+        _F = BlockVector(self._block_domain_v0, blocks=[self._rhs_vec_u.vector, self._rhs_vec_ue.vector])
+        _RHS = BlockVector(self._block_domain_M, blocks=[_F, self._block_codomain_B_v0.zeros()])
+
+        _sol = self._Minv.dot(_RHS)
+        info = self._Minv.get_info()
+
+        # --- reconstruct full solution: u = u_0 + u&#39; ---
+        self._u.vector = _sol[0][0] + self._u_prime_v0.vector
+        self._ue.vector = _sol[0][1] + self._ue_prime_v0.vector
+        self._phi.vector = _sol[1]
+
+        # --- update FEEC variables ---
+        max_diffs = self.update_feec_variables(u=self._u.vector, ue=self._ue.vector, phi=self._phi.vector)
+
+        if self.options.solver_params.info and self._rank == 0:
+            logger.info(f&quot;Status: {info[&#39;success&#39;]}, Iterations: {info[&#39;niter&#39;]}&quot;)
+            logger.info(f&quot;Max diffs: {max_diffs}&quot;)
+            logger.info(f&quot;Status: {info[&#39;success&#39;]}, Iterations: {info[&#39;niter&#39;]}&quot;)
+            logger.info(f&quot;Max diffs: {max_diffs}&quot;)</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

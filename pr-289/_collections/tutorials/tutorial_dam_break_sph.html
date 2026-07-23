@@ -1,0 +1,1296 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2D Dam Break Simulation with SPH &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_collections/tutorials/tutorial_dam_break_sph';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Geometry (mapped domains)" href="tutorial_domains.html" />
+    <link rel="prev" title="2D Hagen-Poiseuille Channel Flow with SPH" href="tutorial_hagen_poiseuille_sph.html" />
+    <link href="../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="tutorial_hagen_poiseuille_sph.html"
+                          title="previous chapter">2D Hagen-Poiseuille Channel Flow with SPH</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="tutorial_domains.html"
+                          title="next chapter">Geometry (mapped domains)</a></p>
+  </div></div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../sections/tutorials.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">2D Dam Break Simulation with SPH</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="2D-Dam-Break-Simulation-with-SPH">
+<h1>2D Dam Break Simulation with SPH<a class="headerlink" href="#2D-Dam-Break-Simulation-with-SPH" title="Link to this heading">#</a></h1>
+<section id="Collapse-of-a-Fluid-Column-under-Gravity">
+<h2>Collapse of a Fluid Column under Gravity<a class="headerlink" href="#Collapse-of-a-Fluid-Column-under-Gravity" title="Link to this heading">#</a></h2>
+<p>This tutorial simulates a classic <strong>2D dam break</strong>: a dense fluid column confined to the left quarter of a closed box is released at <span class="math notranslate nohighlight">\(t=0\)</span>. Gravity pulls the fluid downward and the pressure gradient drives a horizontal spreading wave. The SPH method naturally handles the large interface deformation and free-surface dynamics.</p>
+<section id="Physical-Setup">
+<h3>Physical Setup<a class="headerlink" href="#Physical-Setup" title="Link to this heading">#</a></h3>
+<p>The domain is a <span class="math notranslate nohighlight">\(1 \times 1\)</span> box with <strong>reflective walls</strong> on all sides. At <span class="math notranslate nohighlight">\(t = 0\)</span> the fluid occupies the region <span class="math notranslate nohighlight">\(x \in [0, L/4]\)</span> at density <span class="math notranslate nohighlight">\(\rho_\text{high}\)</span>; the rest of the box is effectively empty (markers with negligible weight are removed). As the fluid evolves:</p>
+<ol class="arabic simple">
+<li><p>The column collapses under downward gravity <span class="math notranslate nohighlight">\(g_y\)</span>.</p></li>
+<li><p>The pressure gradient (<span class="math notranslate nohighlight">\(\propto c_s^2 \nabla\rho\)</span> in the isothermal model) drives a shock-like spreading wave.</p></li>
+<li><p>Viscosity damps small-scale velocity fluctuations and stabilises the SPH.</p></li>
+<li><p>Reflections off the walls cause the fluid to slosh and eventually reach a hydrostatic equilibrium with density concentrated at the bottom.</p></li>
+</ol>
+</section>
+<section id="SPH-parameters-for-compressible-free-surface-flows">
+<h3>SPH parameters for compressible free-surface flows<a class="headerlink" href="#SPH-parameters-for-compressible-free-surface-flows" title="Link to this heading">#</a></h3>
+<p>The isothermal equation of state <span class="math notranslate nohighlight">\(p = \kappa \rho\)</span> is used with a <strong>weak compressibility</strong> coefficient <span class="math notranslate nohighlight">\(\kappa = c_s^2 \ll 1\)</span>. This keeps the flow subsonic (Mach number <span class="math notranslate nohighlight">\(\text{Ma} = U_\text{max}/c_s \ll 1\)</span>) while allowing large density variations — the <em>Weakly Compressible SPH</em> (WCSPH) regime.</p>
+<p>Markers with very small weights (corresponding to the near-vacuum region) are removed by the <code class="docutils literal notranslate"><span class="pre">reject_weights</span></code> option before the simulation starts.</p>
+</section>
+<section id="What-to-expect">
+<h3>What to expect<a class="headerlink" href="#What-to-expect" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The dense column hits the right wall, runs up it, and splashes back.</p></li>
+<li><p>Multiple reflections produce complex sloshing dynamics.</p></li>
+<li><p>At late times (<span class="math notranslate nohighlight">\(t \gtrsim 2\)</span>) the fluid settles near the bottom, forming a stable layer.</p></li>
+<li><p>As a qualitative verification we check that <strong>no markers escape the closed box</strong> throughout the simulation.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BoundaryParameters</span><span class="p">,</span>
+    <span class="n">EnvironmentOptions</span><span class="p">,</span>
+    <span class="n">KernelDensityPlot</span><span class="p">,</span>
+    <span class="n">LoadingParameters</span><span class="p">,</span>
+    <span class="n">SavingParameters</span><span class="p">,</span>
+    <span class="n">Simulation</span><span class="p">,</span>
+    <span class="n">SortingParameters</span><span class="p">,</span>
+    <span class="n">Time</span><span class="p">,</span>
+    <span class="n">WeightsParameters</span><span class="p">,</span>
+    <span class="n">domains</span><span class="p">,</span>
+    <span class="n">equils</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ViscousEulerSPH</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.ode.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ButcherTableau</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;struphy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Physical-and-Numerical-Parameters">
+<h3>Physical and Numerical Parameters<a class="headerlink" href="#Physical-and-Numerical-Parameters" title="Link to this heading">#</a></h3>
+<p>The free-fall time from height <span class="math notranslate nohighlight">\(H/2\)</span> is <span class="math notranslate nohighlight">\(\sqrt{2(H/2)/g_y} \approx 0.32\)</span>, so <span class="math notranslate nohighlight">\(T_\text{end} = 3\)</span> covers roughly 9 free-fall times. The sound speed <span class="math notranslate nohighlight">\(c_s = \sqrt{\kappa} \approx 0.45\)</span>, giving Mach number <span class="math notranslate nohighlight">\(\text{Ma} = \sqrt{2 g_y H/2}/c_s \approx 0.71\)</span> — weakly supersonic, which is acceptable for WCSPH with small <span class="math notranslate nohighlight">\(\kappa\)</span>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Physical parameters</span>
+<span class="n">kappa</span>  <span class="o">=</span> <span class="mf">0.2</span>    <span class="c1"># isothermal coefficient (= c_s^2); weak compressibility</span>
+<span class="n">mu</span>     <span class="o">=</span> <span class="mf">0.05</span>   <span class="c1"># dynamic viscosity (small, for stability)</span>
+<span class="n">g_y</span>    <span class="o">=</span> <span class="mf">10.0</span>   <span class="c1"># gravitational acceleration (downward = -y direction)</span>
+<span class="n">r1</span>     <span class="o">=</span> <span class="mf">1.0</span>    <span class="c1"># domain width  (x)</span>
+<span class="n">r2</span>     <span class="o">=</span> <span class="mf">1.0</span>    <span class="c1"># domain height (y)</span>
+<span class="n">n_high</span> <span class="o">=</span> <span class="mf">0.1</span>    <span class="c1"># initial density of the fluid column</span>
+
+<span class="c1"># Derived</span>
+<span class="n">c_s</span>     <span class="o">=</span> <span class="n">kappa</span><span class="o">**</span><span class="mf">0.5</span>
+<span class="n">U_max</span>   <span class="o">=</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">g_y</span> <span class="o">*</span> <span class="n">r2</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>   <span class="c1"># rough free-fall velocity scale</span>
+<span class="n">Ma</span>      <span class="o">=</span> <span class="n">U_max</span> <span class="o">/</span> <span class="n">c_s</span>
+
+<span class="c1"># Numerical parameters</span>
+<span class="n">nx</span>       <span class="o">=</span> <span class="mi">8</span>    <span class="c1"># boxes per spatial dimension</span>
+<span class="n">ppb</span>      <span class="o">=</span> <span class="mi">32</span>   <span class="c1"># particles per box</span>
+<span class="n">plot_pts</span> <span class="o">=</span> <span class="mi">21</span>   <span class="c1"># KDE evaluation points per dimension</span>
+
+<span class="c1"># Time stepping: CFL limit ~ h/c_s = (r1/nx)/c_s</span>
+<span class="n">dt</span>   <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">Tend</span> <span class="o">=</span> <span class="mf">3.0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sound speed:      c_s  = </span><span class="si">{</span><span class="n">c_s</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max velocity est: U_max = </span><span class="si">{</span><span class="n">U_max</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  (Mach = </span><span class="si">{</span><span class="n">Ma</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fluid density:    n_high = </span><span class="si">{</span><span class="n">n_high</span><span class="si">}</span><span class="s2">  (vacuum elsewhere)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time stepping:    dt=</span><span class="si">{</span><span class="n">dt</span><span class="si">}</span><span class="s2">, Tend=</span><span class="si">{</span><span class="n">Tend</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">Tend</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span><span class="si">}</span><span class="s2"> steps&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total particles:  ~</span><span class="si">{</span><span class="n">ppb</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nx</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="mi">4</span><span class="si">}</span><span class="s2"> (left quarter of domain)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Sound speed:      c_s  = 0.447
+Max velocity est: U_max = 3.162  (Mach = 7.07)
+Fluid density:    n_high = 0.1  (vacuum elsewhere)
+Time stepping:    dt=0.02, Tend=3.0, 150 steps
+Total particles:  ~512 (left quarter of domain)
+</pre></div></div>
+</div>
+</section>
+<section id="Model-Setup">
+<h3>Model Setup<a class="headerlink" href="#Model-Setup" title="Link to this heading">#</a></h3>
+<p>All three physical effects are active: pressure (<code class="docutils literal notranslate"><span class="pre">with_p=True</span></code>), viscosity (<code class="docutils literal notranslate"><span class="pre">with_viscosity=True</span></code>). The 2D Gaussian kernel is used. Gravity enters as a downward vector <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">-g_y,</span> <span class="pre">0)</span></code> in the pressure propagator.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">ViscousEulerSPH</span><span class="p">(</span><span class="n">with_B0</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">with_p</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_viscosity</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">butcher</span> <span class="o">=</span> <span class="n">ButcherTableau</span><span class="p">(</span><span class="n">algo</span><span class="o">=</span><span class="s2">&quot;forward_euler&quot;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">options</span>     <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span><span class="n">butcher</span><span class="o">=</span><span class="n">butcher</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_sph_p</span><span class="o">.</span><span class="n">options</span>   <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_sph_p</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span>
+    <span class="n">kernel_type</span><span class="o">=</span><span class="s2">&quot;gaussian_2d&quot;</span><span class="p">,</span>
+    <span class="n">gravity</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="n">g_y</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>   <span class="c1"># downward gravity</span>
+    <span class="n">kappa</span><span class="o">=</span><span class="n">kappa</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_viscous</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_viscous</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span>
+    <span class="n">kernel_type</span><span class="o">=</span><span class="s2">&quot;gaussian_2d&quot;</span><span class="p">,</span>
+    <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ViscousEulerSPH configured (pressure + viscosity + gravity).&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  kappa=</span><span class="si">{</span><span class="n">kappa</span><span class="si">}</span><span class="s2">, mu=</span><span class="si">{</span><span class="n">mu</span><span class="si">}</span><span class="s2">, g_y=</span><span class="si">{</span><span class="n">g_y</span><span class="si">}</span><span class="s2"> (downward)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ViscousEulerSPH configured (pressure + viscosity + gravity).
+  kappa=0.2, mu=0.05, g_y=10.0 (downward)
+</pre></div></div>
+</div>
+</section>
+<section id="Domain,-Boundary-Conditions-and-Diagnostics">
+<h3>Domain, Boundary Conditions and Diagnostics<a class="headerlink" href="#Domain,-Boundary-Conditions-and-Diagnostics" title="Link to this heading">#</a></h3>
+<p>The box has <strong>reflective walls</strong> on all sides (<code class="docutils literal notranslate"><span class="pre">bc=&quot;reflect&quot;</span></code>) with SPH mirror ghost particles (<code class="docutils literal notranslate"><span class="pre">bc_sph=&quot;mirror&quot;</span></code>). The <code class="docutils literal notranslate"><span class="pre">reject_weights</span></code> option removes near-vacuum markers (those with weight below the threshold) so that only the dense left-column particles are simulated.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">n_markers=1.0</span></code> option in <code class="docutils literal notranslate"><span class="pre">SavingParameters</span></code> saves every marker orbit at each time step, enabling post-hoc visualisation of particle trajectories.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">domain</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">Cuboid</span><span class="p">(</span><span class="n">r1</span><span class="o">=</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="o">=</span><span class="n">r2</span><span class="p">)</span>
+
+<span class="n">loading_params</span>  <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span><span class="n">ppb</span><span class="o">=</span><span class="n">ppb</span><span class="p">,</span> <span class="n">loading</span><span class="o">=</span><span class="s2">&quot;tesselation&quot;</span><span class="p">)</span>
+<span class="n">weights_params</span>  <span class="o">=</span> <span class="n">WeightsParameters</span><span class="p">(</span><span class="n">reject_weights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+<span class="n">boundary_params</span> <span class="o">=</span> <span class="n">BoundaryParameters</span><span class="p">(</span>
+    <span class="n">bc</span>    <span class="o">=</span><span class="p">(</span><span class="s2">&quot;reflect&quot;</span><span class="p">,</span> <span class="s2">&quot;reflect&quot;</span><span class="p">,</span>  <span class="s2">&quot;periodic&quot;</span><span class="p">),</span>
+    <span class="n">bc_sph</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;mirror&quot;</span><span class="p">,</span>  <span class="s2">&quot;mirror&quot;</span><span class="p">,</span>   <span class="s2">&quot;periodic&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">sorting_params</span> <span class="o">=</span> <span class="n">SortingParameters</span><span class="p">(</span>
+    <span class="n">boxes_per_dim</span><span class="o">=</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">dims_mask</span><span class="o">=</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">kd_plot</span> <span class="o">=</span> <span class="n">KernelDensityPlot</span><span class="p">(</span><span class="n">pts_e1</span><span class="o">=</span><span class="n">plot_pts</span><span class="p">,</span> <span class="n">pts_e2</span><span class="o">=</span><span class="n">plot_pts</span><span class="p">,</span> <span class="n">pts_e3</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">saving_params</span> <span class="o">=</span> <span class="n">SavingParameters</span><span class="p">(</span>
+    <span class="n">n_markers</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>              <span class="c1"># save all marker positions every step</span>
+    <span class="n">kernel_density_plots</span><span class="o">=</span><span class="p">(</span><span class="n">kd_plot</span><span class="p">,),</span>
+<span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span>
+    <span class="n">loading_params</span><span class="o">=</span><span class="n">loading_params</span><span class="p">,</span>
+    <span class="n">weights_params</span><span class="o">=</span><span class="n">weights_params</span><span class="p">,</span>
+    <span class="n">boundary_params</span><span class="o">=</span><span class="n">boundary_params</span><span class="p">,</span>
+    <span class="n">sorting_params</span><span class="o">=</span><span class="n">sorting_params</span><span class="p">,</span>
+    <span class="n">saving_params</span><span class="o">=</span><span class="n">saving_params</span><span class="p">,</span>
+    <span class="n">bufsize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;2D closed box [</span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">×</span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="s2">], reflective walls on all sides&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vacuum markers (weight &lt; 1e-6) removed before simulation&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2D closed box [1.0×1.0], reflective walls on all sides
+Vacuum markers (weight &lt; 1e-6) removed before simulation
+</pre></div></div>
+</div>
+</section>
+<section id="Initial-Conditions">
+<h3>Initial Conditions<a class="headerlink" href="#Initial-Conditions" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">step_function_xy</span></code> density profile places <span class="math notranslate nohighlight">\(\rho = \rho_\text{high}\)</span> where <span class="math notranslate nohighlight">\(x &lt; L/4\)</span> and <span class="math notranslate nohighlight">\(y &lt; H\)</span>, and near-vacuum (<span class="math notranslate nohighlight">\(\sim 10^{-8}\)</span>) elsewhere. The near-vacuum markers are then removed by the <code class="docutils literal notranslate"><span class="pre">reject_weights</span></code> filter, leaving only the dense left-column particles.</p>
+<p>We colour each marker by its initial <span class="math notranslate nohighlight">\(x\)</span>-position (normalised to <span class="math notranslate nohighlight">\([0, 1]\)</span> within the column) to track how the fluid mixes during the dam break.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">background</span> <span class="o">=</span> <span class="n">equils</span><span class="o">.</span><span class="n">ConstantVelocity</span><span class="p">(</span>
+    <span class="n">density_profile</span><span class="o">=</span><span class="s2">&quot;step_function_xy&quot;</span><span class="p">,</span>
+    <span class="n">n</span><span class="o">=</span><span class="n">n_high</span><span class="p">,</span>
+    <span class="n">upper_x</span><span class="o">=</span><span class="n">r1</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span>   <span class="c1"># dense column: x &lt; r1/4</span>
+    <span class="n">upper_y</span><span class="o">=</span><span class="n">r2</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial condition: dense column (n=</span><span class="si">{</span><span class="n">n_high</span><span class="si">}</span><span class="s2">) for x &lt; </span><span class="si">{</span><span class="n">r1</span><span class="o">/</span><span class="mi">4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Near-vacuum markers (x &gt; r1/4) will be removed by reject_weights&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Initial condition: dense column (n=0.1) for x &lt; 0.25
+Near-vacuum markers (x &gt; r1/4) will be removed by reject_weights
+</pre></div></div>
+</div>
+</section>
+<section id="Simulation-Setup-and-Execution">
+<h3>Simulation Setup and Execution<a class="headerlink" href="#Simulation-Setup-and-Execution" title="Link to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;struphy_verification_tests&quot;</span><span class="p">)</span>
+<span class="n">out_folders</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">test_folder</span><span class="p">,</span> <span class="s2">&quot;ViscousEulerSPH&quot;</span><span class="p">)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">EnvironmentOptions</span><span class="p">(</span><span class="n">out_folders</span><span class="o">=</span><span class="n">out_folders</span><span class="p">,</span> <span class="n">sim_folder</span><span class="o">=</span><span class="s2">&quot;dam_break&quot;</span><span class="p">)</span>
+
+<span class="n">time_opts</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">Tend</span><span class="o">=</span><span class="n">Tend</span><span class="p">,</span> <span class="n">split_algo</span><span class="o">=</span><span class="s2">&quot;Strang&quot;</span><span class="p">)</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+    <span class="n">time_opts</span><span class="o">=</span><span class="n">time_opts</span><span class="p">,</span>
+    <span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">,</span>
+    <span class="n">grid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">derham_opts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running 2D dam break: dt=</span><span class="si">{</span><span class="n">dt</span><span class="si">}</span><span class="s2">, Tend=</span><span class="si">{</span><span class="n">Tend</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Simulation complete.&quot;</span><span class="p">)</span>
+
+<span class="n">sim</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Post-processing complete.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model ViscousEulerSPH ...
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running 2D dam break: dt=0.02, Tend=3.0
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Time stepping: 100%|██████████| 150/150 [00:22&lt;00:00,  6.71step/s]
+Struphy run finished.
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/ViscousEulerSPH/dam_break
+
+No feec fields found in hdf5 file, skipping post-processing of fields.
+Evaluation of 512 marker orbits for euler_fluid
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Simulation complete.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 151/151 [00:00&lt;00:00, 368.21it/s]
+Evaluation of sph density for euler_fluid
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Post-processing complete.
+</pre></div></div>
+</div>
+</section>
+<section id="Load-Diagnostics">
+<h3>Load Diagnostics<a class="headerlink" href="#Load-Diagnostics" title="Link to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+
+<span class="c1"># KDE density field: shape (Nt+1, pts_e1, pts_e2, 1)</span>
+<span class="n">ee1</span><span class="p">,</span> <span class="n">ee2</span><span class="p">,</span> <span class="n">ee3</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">n_sph</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">view_0</span><span class="o">.</span><span class="n">grid_n_sph</span>
+<span class="n">n_sph</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">n_sph</span><span class="o">.</span><span class="n">euler_fluid</span><span class="o">.</span><span class="n">view_0</span><span class="o">.</span><span class="n">n_sph</span>
+
+<span class="c1"># Marker orbits: shape (Nt_orb, n_markers, n_attrs)</span>
+<span class="c1"># attrs for vdim=2: [x, y, z, v1, v2, w, diag, id]</span>
+<span class="n">orbits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">orbits</span><span class="o">.</span><span class="n">euler_fluid</span><span class="p">)</span>
+
+<span class="n">Nt</span>      <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">Tend</span> <span class="o">/</span> <span class="n">dt</span><span class="p">)</span>
+<span class="n">times</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">Tend</span><span class="p">,</span> <span class="n">Nt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">Nt_orb</span>  <span class="o">=</span> <span class="n">orbits</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">t_orbit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">Tend</span><span class="p">,</span> <span class="n">Nt_orb</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ee1</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">r1</span>   <span class="c1"># physical x, shape (pts_e1, pts_e2)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ee2</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">r2</span>   <span class="c1"># physical y</span>
+<span class="n">n_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">n_sph</span><span class="p">)</span>            <span class="c1"># (Nt+1, pts_e1, pts_e2, 1)</span>
+
+<span class="c1"># Colour each marker by its initial x position within the column</span>
+<span class="n">x_init</span> <span class="o">=</span> <span class="n">orbits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">c_val</span>  <span class="o">=</span> <span class="n">x_init</span> <span class="o">/</span> <span class="p">(</span><span class="n">r1</span> <span class="o">/</span> <span class="mf">4.0</span><span class="p">)</span>        <span class="c1"># 0 = left wall, 1 = dam face</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;KDE field shape:   </span><span class="si">{</span><span class="n">n_arr</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Marker orbits:     </span><span class="si">{</span><span class="n">orbits</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">  [</span><span class="si">{</span><span class="n">Nt_orb</span><span class="si">}</span><span class="s2"> snapshots, </span><span class="si">{</span><span class="n">orbits</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> markers]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/struphy_verification_tests/ViscousEulerSPH/dam_break/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(151,)
+
+self.spline_values:
+
+self.orbits:
+    euler_fluid, shape = (151, 512, 8)
+        Number of time points: 151
+        Number of particles:   512
+        Number of attributes:  8
+
+self.f:
+
+self.n_sph:
+    euler_fluid
+        view_0
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+KDE field shape:   (151, 21, 21, 1)
+Marker orbits:     (151, 512, 8)  [151 snapshots, 512 markers]
+</pre></div></div>
+</div>
+</section>
+<section id="Visualisation:-Density-Field-Snapshots">
+<h3>Visualisation: Density Field Snapshots<a class="headerlink" href="#Visualisation:-Density-Field-Snapshots" title="Link to this heading">#</a></h3>
+<p>Twelve equally spaced snapshots show the KDE density field (colour map) overlaid with marker positions (coloured by initial <span class="math notranslate nohighlight">\(x\)</span>). The colour gradient from blue (left wall) to red (dam face) reveals how the fluid column mixes as it spreads across the domain.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snapshot_inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nt</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">orb_inds</span>      <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nt_orb</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">vmax_plot</span>     <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">n_arr</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">oidx</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">snapshot_inds</span><span class="p">,</span> <span class="n">orb_inds</span><span class="p">):</span>
+    <span class="n">n_2d</span> <span class="o">=</span> <span class="n">n_arr</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">n_2d</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax_plot</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span> <span class="n">shading</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">orbits</span><span class="p">[</span><span class="n">oidx</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">orbits</span><span class="p">[</span><span class="n">oidx</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">c</span><span class="o">=</span><span class="n">c_val</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;autumn&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">vmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;$t = </span><span class="si">{</span><span class="n">times</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$y$&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">im</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\rho$ (KDE)&quot;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span>
+    <span class="sa">rf</span><span class="s2">&quot;2D dam break: $\kappa=</span><span class="si">{</span><span class="n">kappa</span><span class="si">}</span><span class="s2">$, $g_y=</span><span class="si">{</span><span class="n">g_y</span><span class="si">}</span><span class="s2">$, $\mu=</span><span class="si">{</span><span class="n">mu</span><span class="si">}</span><span class="s2">$, </span><span class="si">{</span><span class="n">nx</span><span class="si">}</span><span class="s2">\times</span><span class="si">{</span><span class="n">nx</span><span class="si">}</span><span class="s2"> boxes&quot;</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_11001/933893305.py:31: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  plt.tight_layout()
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_dam_break_sph_15_1.png" src="../../_images/_collections_tutorials_tutorial_dam_break_sph_15_1.png" />
+</div>
+</div>
+</section>
+<section id="Visualisation:-Final-Marker-State">
+<h3>Visualisation: Final Marker State<a class="headerlink" href="#Visualisation:-Final-Marker-State" title="Link to this heading">#</a></h3>
+<p>Show the final particle configuration to check that the fluid has settled into a stable layer at the bottom of the box.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sc</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">orbits</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">orbits</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">c_val</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;autumn&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$y$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;Final state at $t = </span><span class="si">{</span><span class="n">Tend</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Initial position (0=left wall, 1=dam face)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_dam_break_sph_17_0.png" src="../../_images/_collections_tutorials_tutorial_dam_break_sph_17_0.png" />
+</div>
+</div>
+</section>
+<section id="Verification-Check">
+<h3>Verification Check<a class="headerlink" href="#Verification-Check" title="Link to this heading">#</a></h3>
+<p>Since the dam break has no simple analytical steady state, the verification is a <strong>domain-bounds assertion</strong>: no marker should escape the closed reflective box. A 1% tolerance accounts for the finite displacement during a single time step.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_all</span> <span class="o">=</span> <span class="n">orbits</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">y_all</span> <span class="o">=</span> <span class="n">orbits</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x_all</span><span class="p">)),</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x_all</span><span class="p">))</span>
+<span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y_all</span><span class="p">)),</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y_all</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Dam Break Domain Bounds Verification ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  x range: [</span><span class="si">{</span><span class="n">x_min</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">x_max</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]  (domain [0, </span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">])&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  y range: [</span><span class="si">{</span><span class="n">y_min</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">y_max</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]  (domain [0, </span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="s2">])&quot;</span><span class="p">)</span>
+
+<span class="n">tol</span> <span class="o">=</span> <span class="mf">0.01</span>   <span class="c1"># 1% of domain size</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">x_min</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="n">tol</span> <span class="o">*</span> <span class="n">r1</span> <span class="ow">and</span> <span class="n">x_max</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">tol</span><span class="p">)</span> <span class="o">*</span> <span class="n">r1</span><span class="p">,</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Markers escaped x-domain: x in [</span><span class="si">{</span><span class="n">x_min</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">x_max</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✓ x-domain bounds check passed.&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✗ </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">y_min</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="n">tol</span> <span class="o">*</span> <span class="n">r2</span> <span class="ow">and</span> <span class="n">y_max</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">tol</span><span class="p">)</span> <span class="o">*</span> <span class="n">r2</span><span class="p">,</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Markers escaped y-domain: y in [</span><span class="si">{</span><span class="n">y_min</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">y_max</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ y-domain bounds check passed.&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=== Dam Break Domain Bounds Verification ===
+  x range: [0.0000, 1.0000]  (domain [0, 1.0])
+  y range: [0.0000, 0.9844]  (domain [0, 1.0])
+
+✓ x-domain bounds check passed.
+✓ y-domain bounds check passed.
+</pre></div></div>
+</div>
+</section>
+<section id="Conclusion">
+<h3>Conclusion<a class="headerlink" href="#Conclusion" title="Link to this heading">#</a></h3>
+<p>This tutorial demonstrated the SPH method for a free-surface flow problem:</p>
+<ul class="simple">
+<li><p><strong>Weakly Compressible SPH (WCSPH)</strong>: the isothermal equation of state with small <span class="math notranslate nohighlight">\(\kappa\)</span> provides a pressure response that keeps the flow subsonic while allowing large density variations — the hallmark of free-surface SPH.</p></li>
+<li><p><strong>Mirror ghost particles</strong> enforce reflective boundary conditions on all four walls without special treatment for free surfaces.</p></li>
+<li><p><strong>Reject-weights</strong> cleanly removes near-vacuum markers before the simulation, avoiding spurious SPH interactions in the void region.</p></li>
+<li><p><strong>Marker colouring</strong> by initial position reveals the mixing and transport patterns during the collapse and subsequent sloshing.</p></li>
+<li><p>The domain-bounds assertion verifies that the boundary conditions work correctly throughout the highly dynamic simulation.</p></li>
+</ul>
+<p>The dam break is a standard benchmark for validating SPH implementations. More quantitative comparisons (run-up height, wave arrival time) can be made against published experimental data or higher-resolution SPH simulations.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optional cleanup</span>
+<span class="k">if</span> <span class="kc">False</span><span class="p">:</span>   <span class="c1"># set to True to remove simulation output</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">test_folder</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cleaned up </span><span class="si">{</span><span class="n">test_folder</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="tutorial_hagen_poiseuille_sph.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2D Hagen-Poiseuille Channel Flow with SPH</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tutorial_domains.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Geometry (mapped domains)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Collapse-of-a-Fluid-Column-under-Gravity">Collapse of a Fluid Column under Gravity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Physical-Setup">Physical Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SPH-parameters-for-compressible-free-surface-flows">SPH parameters for compressible free-surface flows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#What-to-expect">What to expect</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Physical-and-Numerical-Parameters">Physical and Numerical Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Model-Setup">Model Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Domain,-Boundary-Conditions-and-Diagnostics">Domain, Boundary Conditions and Diagnostics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Initial-Conditions">Initial Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Simulation-Setup-and-Execution">Simulation Setup and Execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-Diagnostics">Load Diagnostics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Visualisation:-Density-Field-Snapshots">Visualisation: Density Field Snapshots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Visualisation:-Final-Marker-State">Visualisation: Final Marker State</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Verification-Check">Verification Check</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/_collections/tutorials/tutorial_dam_break_sph.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
