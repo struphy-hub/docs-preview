@@ -1,0 +1,1067 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>struphy.models.vlasov_maxwell_one_species &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/struphy/models/vlasov_maxwell_one_species';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href="../../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">struphy.models.vlasov_maxwell_one_species</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for struphy.models.vlasov_maxwell_one_species</h1><div class="highlight"><pre>
+<span></span>import copy
+import logging
+
+import cunumpy as xp
+from feectools.ddm.mpi import mpi as MPI
+
+from struphy import BaseUnits
+from struphy.io.options import LiteralOptions
+from struphy.models.base import StruphyModel
+from struphy.models.scalars import BilinearEnergyFEEC, FunctionScalarPIC, KineticEnergyPIC, Scalars
+from struphy.models.species import (
+    FieldSpecies,
+    ParticleSpecies,
+)
+from struphy.models.variables import FEECVariable, PICVariable
+from struphy.pic.accumulation import accum_kernels
+from struphy.pic.accumulation.particles_to_grid import ParticlesToGrid
+from struphy.propagators.base import Propagator
+from struphy.propagators.maxwell_weak_ampere import MaxwellWeakAmpere
+from struphy.propagators.poisson_solve import PoissonSolve
+from struphy.propagators.push_eta import PushEta
+from struphy.propagators.push_vxb import PushVxB
+from struphy.propagators.vlasov_ampere_coupling import VlasovAmpereCoupling
+from struphy.utils.pyccel import Pyccelkernel
+
+logger = logging.getLogger(&quot;struphy&quot;)
+
+rank = MPI.COMM_WORLD.Get_rank()
+
+
+<div class="viewcode-block" id="VlasovMaxwellOneSpecies">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.VlasovMaxwellOneSpecies">[docs]</a>
+class VlasovMaxwellOneSpecies(StruphyModel):
+    &quot;&quot;&quot;Vlasov-Maxwell equations for one kinetic species.
+
+    Parameters
+    ----------
+    base_units: BaseUnits
+        Base units for normalization (default: BaseUnits())
+    charge_number: int
+        Charge number (in units of the positive elementary charge) of the species (default: 1)
+    mass_number: float
+        Mass number (in units of Proton mass) of the species (default: 1.0)
+    alpha: float, optional
+        Dimensionless parameter: plasma frequency / cyclotron frequency. If None, computed from units and charge/mass numbers.
+    epsilon: float, optional
+        Normalized cyclotron period: 1 / (cyclotron frequency × time unit). If None, computed from units and charge/mass numbers.
+    measure_gauss_law: bool
+        Whether to track the Gauss-law error as a scalar quantity (default: False)
+    &quot;&quot;&quot;
+
+    @classmethod
+    def model_type(cls) -&gt; LiteralOptions.ModelTypes:
+        return &quot;Kinetic&quot;
+
+    ## species
+
+    class EMFields(FieldSpecies):
+        def __init__(self):
+            self.e_field = FEECVariable(space=&quot;Hcurl&quot;)
+            self.b_field = FEECVariable(space=&quot;Hdiv&quot;)
+            self.phi = FEECVariable(space=&quot;H1&quot;)
+            self.init_variables()
+
+    class KineticIons(ParticleSpecies):
+        def __init__(
+            self,
+            charge_number: int = 1,
+            mass_number: float = 1.0,
+            alpha: float = None,
+            epsilon: float = None,
+        ):
+            self.var = PICVariable(space=&quot;Particles6D&quot;)
+            self.init_variables(
+                charge_number=charge_number,
+                mass_number=mass_number,
+                alpha=alpha,
+                epsilon=epsilon,
+            )
+
+    ## propagators
+
+    class Propagators:
+        def __init__(
+            self,
+            b2_var: FEECVariable = None,
+        ):
+            self.maxwell = MaxwellWeakAmpere()
+            self.push_eta = PushEta()
+            self.push_vxb = PushVxB(b2_var=b2_var)
+            self.coupling_va = VlasovAmpereCoupling()
+
+    ## abstract methods
+
+    def __init__(
+        self,
+        base_units: BaseUnits = BaseUnits(),
+        charge_number: int = 1,
+        mass_number: float = 1.0,
+        alpha: float = None,
+        epsilon: float = None,
+        measure_gauss_law: bool = False,
+    ):
+
+        # 0. store input parameters
+        self.params = copy.deepcopy(locals())
+
+        # 1. instantiate all species
+        self.em_fields = self.EMFields()
+        self.kinetic_ions = self.KineticIons(
+            charge_number,
+            mass_number,
+            alpha,
+            epsilon,
+        )
+
+        # 2. derive units (must be done after instantiating species to access charge and mass numbers)
+        self.setup_equation_params(base_units=base_units)
+
+        # 3. instantiate all propagators
+        self.propagators = self.Propagators(b2_var=self.em_fields.b_field)
+
+        # 4. assign variables to propagators
+        self.propagators.maxwell.variables.e = self.em_fields.e_field
+        self.propagators.maxwell.variables.b = self.em_fields.b_field
+        self.propagators.push_eta.variables.var = self.kinetic_ions.var
+        self.propagators.push_vxb.variables.ions = self.kinetic_ions.var
+        self.propagators.coupling_va.variables.e = self.em_fields.e_field
+        self.propagators.coupling_va.variables.ions = self.kinetic_ions.var
+
+        # 5. define scalars to be tracked during simulation
+        electric_energy = BilinearEnergyFEEC(self.em_fields.e_field)
+        magnetic_energy = BilinearEnergyFEEC(self.em_fields.b_field)
+        particle_energy = KineticEnergyPIC(
+            self.kinetic_ions.var,
+            normalization=self.kinetic_ions.equation_params.alpha**2,
+        )
+        scalars_dict = {
+            &quot;en_E&quot;: electric_energy,
+            &quot;en_B&quot;: magnetic_energy,
+            &quot;en_f&quot;: particle_energy,
+            &quot;en_tot&quot;: electric_energy + magnetic_energy + particle_energy,
+        }
+        if measure_gauss_law:
+            scalars_dict[&quot;gauss_error&quot;] = FunctionScalarPIC(self.calculate_gauss_error, self.kinetic_ions.var)
+        self.scalars = Scalars(**scalars_dict)
+
+        # initial Poisson (not a propagator used in time stepping)
+        alpha = self.kinetic_ions.equation_params.alpha
+        epsilon = self.kinetic_ions.equation_params.epsilon
+        particles_to_grid = ParticlesToGrid(
+            self.kinetic_ions.var,
+            &quot;H1&quot;,
+            Pyccelkernel(accum_kernels.charge_density_0form),
+        )
+
+        self.initial_poisson = PoissonSolve(
+            rho=particles_to_grid,
+            rho_coeffs=alpha**2 / epsilon,
+        )
+        self.initial_poisson.variables.phi = self.em_fields.phi
+
+        # property to measure violation of gauss law from control variate
+        self.measure_gauss_law = measure_gauss_law
+
+    @property
+    def bulk_species(self):
+        return self.kinetic_ions
+
+    @property
+    def velocity_scale(self):
+        return &quot;light&quot;
+
+    def allocate_helpers(self):
+        &quot;&quot;&quot;Solve initial Poisson equation.
+
+        :meta private:
+        &quot;&quot;&quot;
+        self._tmp = xp.empty(1, dtype=float)
+
+        particles = self.kinetic_ions.var.particles
+
+        if self.measure_gauss_law:
+            self.op = Propagator.derham.grad.T @ Propagator.mass_ops.M1
+            self.subcom_residual = xp.empty(shape=particles.mpi_size, dtype=float)
+            self.intercom_residual = xp.empty(shape=particles.num_clones, dtype=float)
+
+        logger.info(&quot;\nINITIAL POISSON SOLVE:&quot;)
+
+        # use control variate method (reset weights after Poisson solve)
+        particles.update_weights()
+
+        self.initial_poisson.allocate()
+
+        # keep the AccumulatorVector built by the propagator for the Gauss-law diagnostic below
+        self.charge_accum = self.initial_poisson.sources[0]
+
+        # Solve with dt=1. and compute electric field
+        logger.info(&quot;Solving initial Poisson problem...&quot;)
+        self.initial_poisson(1.0)
+
+        phi = self.initial_poisson.variables.phi.spline.vector
+        Propagator.derham.grad.dot(-phi, out=self.em_fields.e_field.spline.vector)
+        logger.info(&quot;... Done.&quot;)
+
+        # reset particle weights
+        particles.weights = particles.weights_at_t0.copy()
+
+    def calculate_gauss_error(self):
+        # control variate method
+        particles = self.kinetic_ions.var.particles
+        particles.update_weights()
+        self.charge_accum()
+        rhs = self.charge_accum.vectors[0]
+        # reset particle weights
+        particles.weights = particles.weights_at_t0.copy()
+
+        # non control variate method
+        e = self.em_fields.e_field.spline.vector
+        lhs = self.op.dot(e)
+
+        # calculate local residual of local MPI rank
+        loc_residual = xp.max(xp.abs(lhs.toarray() - rhs.toarray()))
+
+        # logger.info(f&quot;{MPI.COMM_WORLD.Get_rank() = }, {xp.max(xp.abs(lhs.toarray())) = }&quot;)
+        # logger.info(f&quot;{MPI.COMM_WORLD.Get_rank() = }, {xp.max(xp.abs(rhs.toarray())) = }&quot;)
+        # logger.info(f&quot;{loc_residual = }&quot;)
+
+        # return the maximum residual across all MPI rank
+        particles._gather_scalar_in_subcomm_array(scalar=loc_residual, out=self.subcom_residual)
+        particles._gather_scalar_in_intercomm_array(scalar=loc_residual, out=self.intercom_residual)
+
+        return xp.max([xp.max(self.subcom_residual), xp.max(self.intercom_residual)])
+
+    ## default parameters
+    def generate_default_parameter_file(self, path=None, prompt=True):
+        params_path = super().generate_default_parameter_file(path=path, prompt=prompt)
+        new_file = []
+        with open(params_path, &quot;r&quot;) as f:
+            for line in f:
+                if &quot;coupling_va.Options&quot; in line:
+                    new_file += [line]
+                    new_file += [&quot;model.initial_poisson.options = model.initial_poisson.Options()\n&quot;]
+                elif &quot;saving_params = &quot; in line:
+                    new_file += [&quot;\nbinplot = BinningPlot(slice=&#39;e1&#39;, n_bins=128, ranges=(0.0, 1.0))\n&quot;]
+                    new_file += [&quot;saving_params = SavingParameters(binning_plots=(binplot,))\n\n&quot;]
+                elif &quot;VlasovMaxwellOneSpecies()&quot; in line:
+                    new_file += [&quot;\nmodel = VlasovMaxwellOneSpecies(measure_gauss_law=True)\n&quot;]
+                else:
+                    new_file += [line]
+
+        with open(params_path, &quot;w&quot;) as f:
+            for line in new_file:
+                f.write(line)
+
+<div class="viewcode-block" id="VlasovMaxwellOneSpecies.doc_pde">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.VlasovMaxwellOneSpecies.doc_pde">[docs]</a>
+    @classmethod
+    def doc_pde(cls):
+        r&quot;&quot;&quot;**PDEs solved by model:**
+
+        Vlasov equation:
+
+        .. math::
+
+            \frac{\partial f}{\partial t} + \mathbf{v} \cdot \nabla f + \frac{1}{\varepsilon} \left( \mathbf{E} + \mathbf{v} \times \left( \mathbf{B} + \mathbf{B}_0 \right) \right) \cdot \frac{\partial f}{\partial \mathbf{v}} = 0
+
+        Ampère&#39;s law:
+
+        .. math::
+
+            -\frac{\partial \mathbf{E}}{\partial t} + \nabla \times \mathbf{B} = \frac{\alpha^2}{\varepsilon} \int_{\mathbb{R}^3} \mathbf{v} f \, \text{d}^3 \mathbf{v}
+
+        Faraday&#39;s law:
+
+        .. math::
+
+            \frac{\partial \mathbf{B}}{\partial t} + \nabla \times \mathbf{E} = 0
+
+        where :math:`Z=-1` and :math:`A=1/1836` for electrons.
+
+        At initial time the weak Poisson equation is solved once to weakly satisfy Gauss&#39; law,
+
+        .. math::
+
+            \int_{\Omega} \nabla \psi^{\top} \cdot \nabla \phi \, \textrm{d} \mathbf{x} &amp;= \frac{\alpha^2}{\varepsilon} \int_{\Omega} \int_{\mathbb{R}^3} \psi \, (f - f_0) \, \text{d}^3 \mathbf{v} \, \textrm{d} \mathbf{x} \qquad \forall \ \psi \in H^1
+            \\[2mm]
+            \mathbf{E}(t=0) &amp;= -\nabla \phi(t=0)
+
+        Moreover, it is assumed that
+
+        .. math::
+
+            \nabla \times \mathbf{B}_0 = \frac{\alpha^2}{\varepsilon} \int_{\mathbb{R}^3} \mathbf{v} f_0 \, \text{d}^3 \mathbf{v}
+
+        where :math:`\mathbf{B}_0` is the static equilibrium magnetic field.
+        &quot;&quot;&quot;</div>
+
+
+<div class="viewcode-block" id="VlasovMaxwellOneSpecies.doc_normalization">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.VlasovMaxwellOneSpecies.doc_normalization">[docs]</a>
+    @classmethod
+    def doc_normalization(cls):
+        r&quot;&quot;&quot;The model uses the light speed as reference velocity:
+
+        .. math::
+
+            \hat v = c,\qquad \hat E = \hat B \hat v,\qquad \hat\phi = \hat E \hat x.
+
+        The species parameters are :math:`\alpha=\hat\Omega_p/\hat\Omega_c` and
+        :math:`\varepsilon=1/(\hat\Omega_c\hat t)`.&quot;&quot;&quot;</div>
+
+
+<div class="viewcode-block" id="VlasovMaxwellOneSpecies.doc_scalar_quantities">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.VlasovMaxwellOneSpecies.doc_scalar_quantities">[docs]</a>
+    @classmethod
+    def doc_scalar_quantities(cls):
+        r&quot;&quot;&quot;**The following scalars are tracked during simulation:**
+
+        - Electric field energy: ``en_E``
+        - Magnetic field energy: ``en_B``
+        - Particle kinetic energy: ``en_f``
+        - Total energy: ``en_tot``
+        - Optional Gauss-law diagnostic: ``gauss_error``&quot;&quot;&quot;</div>
+
+
+<div class="viewcode-block" id="VlasovMaxwellOneSpecies.doc_discretization">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.VlasovMaxwellOneSpecies.doc_discretization">[docs]</a>
+    @classmethod
+    def doc_discretization(cls):
+        &quot;&quot;&quot;Time integration is performed by the following propagators (in sequence):
+
+        1. :class:`~struphy.propagators.maxwell_weak_ampere.MaxwellWeakAmpere`
+        2. :class:`~struphy.propagators.push_eta.PushEta`
+        3. :class:`~struphy.propagators.push_vxb.PushVxB`
+        4. :class:`~struphy.propagators.vlasov_ampere_coupling.VlasovAmpereCoupling`
+        &quot;&quot;&quot;
+        doc = rf&quot;&quot;&quot;**1. propagators.maxwell.Maxwell:**
+
+{MaxwellWeakAmpere.__doc__}
+
+**2. PushEta:**
+
+{PushEta.__doc__}
+
+**3. PushVxB:**
+
+{PushVxB.__doc__}
+
+**4. VlasovAmpereCoupling:**
+
+{VlasovAmpereCoupling.__doc__}
+&quot;&quot;&quot;
+        return doc</div>
+
+
+<div class="viewcode-block" id="VlasovMaxwellOneSpecies.doc_long_description">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.VlasovMaxwellOneSpecies.doc_long_description">[docs]</a>
+    @classmethod
+    def doc_long_description(cls):
+        r&quot;&quot;&quot;VlasovMaxwellOneSpecies is the fully electromagnetic one-species PIC
+        model in Struphy. It evolves particles and fields self-consistently and
+        supports an optional control-variate formulation for the field coupling.&quot;&quot;&quot;</div>
+
+
+<div class="viewcode-block" id="VlasovMaxwellOneSpecies.doc_examples">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.VlasovMaxwellOneSpecies.doc_examples">[docs]</a>
+    @classmethod
+    def doc_examples(cls):
+        r&quot;&quot;&quot;Create and initialize a Vlasov-Maxwell model:
+
+        .. code-block:: python
+
+            from struphy.models import VlasovMaxwellOneSpecies
+
+            model = VlasovMaxwellOneSpecies()
+            model.em_fields.e_field
+            model.em_fields.b_field
+            model.kinetic_ions.var
+        &quot;&quot;&quot;</div>
+
+
+<div class="viewcode-block" id="VlasovMaxwellOneSpecies.doc_use_cases">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.VlasovMaxwellOneSpecies.doc_use_cases">[docs]</a>
+    @classmethod
+    def doc_use_cases(cls):
+        r&quot;&quot;&quot;This model is appropriate for:
+
+        - self-consistent electromagnetic kinetic simulations
+        - one-species PIC benchmarks
+        - wave-particle interaction studies with evolving magnetic fields
+        - verification of the full Vlasov-Maxwell splitting&quot;&quot;&quot;</div>
+
+
+<div class="viewcode-block" id="VlasovMaxwellOneSpecies.doc_cannot_be_used_for">
+<a class="viewcode-back" href="../../../sections/subsections/models-all.html#struphy.models.VlasovMaxwellOneSpecies.doc_cannot_be_used_for">[docs]</a>
+    @classmethod
+    def doc_cannot_be_used_for(cls):
+        r&quot;&quot;&quot;This model is not suitable for:
+
+        - multi-species plasma dynamics without extension
+        - collisional kinetic closures
+        - reduced electrostatic-only models where magnetic evolution is unnecessary
+        - linearized delta-f studies that should use the dedicated linear models&quot;&quot;&quot;</div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

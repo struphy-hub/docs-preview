@@ -1,0 +1,1138 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>struphy.propagators.shear_alfven_current_coupling_5d &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/struphy/propagators/shear_alfven_current_coupling_5d';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href="../../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">struphy.propagators.shear_alfven_current_coupling_5d</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for struphy.propagators.shear_alfven_current_coupling_5d</h1><div class="highlight"><pre>
+<span></span>import logging
+from dataclasses import dataclass
+from typing import Literal
+
+from feectools.ddm.mpi import mpi as MPI
+from feectools.linalg.block import BlockVector
+from feectools.linalg.solvers import inverse
+from line_profiler import profile
+
+from struphy.feec import preconditioner
+from struphy.feec.basis_projection_ops import (
+    BasisProjectionOperator,
+    BasisProjectionOperatorLocal,
+)
+from struphy.io.options import LiteralOptions, OptionsBase
+from struphy.linear_algebra.schur_solver import SchurSolver
+from struphy.linear_algebra.solver import SolverParameters
+from struphy.models.variables import FEECVariable, PICVariable
+from struphy.ode.solvers import ODEsolverFEEC
+from struphy.ode.utils import ButcherTableau
+from struphy.pic.accumulation import accum_kernels_gc
+from struphy.pic.accumulation.filter import FilterParameters
+from struphy.pic.accumulation.particles_to_grid import AccumulatorVector
+from struphy.propagators.base import Propagator
+from struphy.utils.pyccel import Pyccelkernel
+from struphy.utils.utils import check_option
+
+logger = logging.getLogger(&quot;struphy&quot;)
+
+
+<div class="viewcode-block" id="ShearAlfvenCurrentCoupling5D">
+<a class="viewcode-back" href="../../../sections/subsections/propagators-avail.html#struphy.propagators.shear_alfven_current_coupling_5d.ShearAlfvenCurrentCoupling5D">[docs]</a>
+class ShearAlfvenCurrentCoupling5D(Propagator):
+    r&quot;&quot;&quot;:ref:`FEEC &lt;gempic&gt;` discretization of the following equations: 
+    find :math:`\mathbf U \in \{H(\textnormal{curl}), H(\textnormal{div}), (H^1)^3\}` and  :math:`\mathbf B \in H(\textnormal{div})` such that
+
+    .. math::
+
+        \left\{ 
+            \begin{aligned} 
+                \int \rho_0 &amp;\frac{\partial \tilde{\mathbf U}}{\partial t} \cdot \mathbf V \, \textnormal{d} \mathbf{x} = \int \left(\tilde{\mathbf B} - \frac{A_\textnormal{h}}{A_b} \iint f^\text{vol} \mu \mathbf{b}_0\textnormal{d} \mu \textnormal{d} v_\parallel \right) \cdot \nabla \times (\tilde{\mathbf B} \times \mathbf V) \, \textnormal{d} \mathbf{x} \quad \forall \, \mathbf V \in \{H(\textnormal{curl}), H(\textnormal{div}), (H^1)^3\}\,, \,,
+                \\
+                &amp;\frac{\partial \tilde{\mathbf B}}{\partial t} = - \nabla \times (\tilde{\mathbf B} \times \tilde{\mathbf U}) \,.
+            \end{aligned}
+        \right.
+
+    :ref:`time_discret`: Crank-Nicolson (implicit mid-point). System size reduction via :class:`~struphy.linear_algebra.schur_solver.SchurSolver`:
+
+    .. math::
+
+        \begin{bmatrix} 
+            \mathbf u^{n+1} - \mathbf u^n \\ \mathbf b^{n+1} - \mathbf b^n
+        \end{bmatrix} 
+        = \frac{\Delta t}{2} \,.
+        \begin{bmatrix} 
+            0 &amp; (\mathbb M^{2,n})^{-1} \mathcal {T^2}^\top \mathbb C^\top \\ - \mathbb C \mathcal {T^2} (\mathbb M^{2,n})^{-1} &amp; 0 
+        \end{bmatrix} 
+        \begin{bmatrix}
+            {\mathbb M^{2,n}}(\mathbf u^{n+1} + \mathbf u^n) \\ \mathbb M_2(\mathbf b^{n+1} + \mathbf b^n) + \sum_k^{N_p} \omega_k \mu_k \hat{\mathbf b}¹_0 (\boldsymbol \eta_k) \cdot \left(\frac{1}{\sqrt{g(\boldsymbol \eta_k)}} \vec \Lambda² (\boldsymbol \eta_k) \right)
+        \end{bmatrix} \,,
+
+    where 
+    :math:`\mathcal{T}^2 = \hat \Pi \left[\frac{\tilde{\mathbf B}^2}{\sqrt{g} \times \vec \Lambda^2\right]`  and
+    :math:`\mathbb M^{2,n}` is a :class:`~struphy.feec.mass.WeightedMassOperators` being weighted with :math:`\rho_\text{eq}`, the MHD equilibirum density. 
+    &quot;&quot;&quot;
+
+<div class="viewcode-block" id="ShearAlfvenCurrentCoupling5D.Variables">
+<a class="viewcode-back" href="../../../sections/subsections/propagators-avail.html#struphy.propagators.shear_alfven_current_coupling_5d.ShearAlfvenCurrentCoupling5D.Variables">[docs]</a>
+    class Variables:
+        &quot;&quot;&quot;Container for variables advanced by :class:`ShearAlfvenCurrentCoupling5D`.
+
+        Attributes
+        ----------
+        u : FEECVariable
+            Velocity variable in one of ``&quot;Hcurl&quot;``, ``&quot;Hdiv&quot;``, or
+            ``&quot;H1vec&quot;``.
+        b : FEECVariable
+            Magnetic-field variable in ``&quot;Hdiv&quot;`` space.
+        &quot;&quot;&quot;
+
+        def __init__(self):
+            self._u: FEECVariable = None
+            self._b: FEECVariable = None
+
+        @property
+        def u(self) -&gt; FEECVariable:
+            return self._u
+
+        @u.setter
+        def u(self, new):
+            assert isinstance(new, FEECVariable)
+            assert new.space in (&quot;Hcurl&quot;, &quot;Hdiv&quot;, &quot;H1vec&quot;)
+            self._u = new
+
+        @property
+        def b(self) -&gt; FEECVariable:
+            return self._b
+
+        @b.setter
+        def b(self, new):
+            assert isinstance(new, FEECVariable)
+            assert new.space == &quot;Hdiv&quot;
+            self._b = new</div>
+
+
+    def __init__(self, energetic_ions: PICVariable = None):
+        &quot;&quot;&quot;
+        Parameters
+        ----------
+        energetic_ions : PICVariable, default=None
+            Energetic-ion particle distribution (``&quot;Particles5D&quot;`` space) providing
+            the current source for the shear Alfvén wave coupling.
+        &quot;&quot;&quot;
+        self.variables = self.Variables()
+        self.energetic_ions = energetic_ions
+
+<div class="viewcode-block" id="ShearAlfvenCurrentCoupling5D.Options">
+<a class="viewcode-back" href="../../../sections/subsections/propagators-avail.html#struphy.propagators.shear_alfven_current_coupling_5d.ShearAlfvenCurrentCoupling5D.Options">[docs]</a>
+    @dataclass(repr=False)
+    class Options(OptionsBase):
+        &quot;&quot;&quot;Configuration options for :class:`ShearAlfvenCurrentCoupling5D`.
+
+        Parameters
+        ----------
+        ep_scale : float, default=1.0
+            Scaling factor for particle accumulation terms.
+        u_space : LiteralOptions.OptsVecSpace, default=&quot;Hdiv&quot;
+            FEEC space used for velocity variable ``u``.
+        algo : {&quot;implicit&quot;, &quot;explicit&quot;}, default=&quot;implicit&quot;
+            Time stepping algorithm.
+        solver : LiteralOptions.OptsSymmSolver, default=&quot;pcg&quot;
+            Symmetric iterative solver.
+        precond : LiteralOptions.OptsMassPrecond, default=&quot;MassMatrixDiagonalPreconditioner&quot;
+            Preconditioner for mass-matrix block.
+        solver_params : SolverParameters, default=None
+            Solver controls.
+        filter_params : FilterParameters, default=None
+            Particle-to-grid filtering parameters.
+        butcher : ButcherTableau, default=None
+            Explicit Runge-Kutta tableau for ``algo=&quot;explicit&quot;``.
+        nonlinear : bool, default=True
+            If ``True``, include nonlinear TB operator updates.
+        &quot;&quot;&quot;
+
+        # specific literals
+        OptsAlgo = Literal[&quot;implicit&quot;, &quot;explicit&quot;]
+        # propagator options
+        ep_scale: float = 1.0
+        u_space: LiteralOptions.OptsVecSpace = &quot;Hdiv&quot;
+        algo: OptsAlgo = &quot;implicit&quot;
+        solver: LiteralOptions.OptsSymmSolver = &quot;pcg&quot;
+        precond: LiteralOptions.OptsMassPrecond = &quot;MassMatrixDiagonalPreconditioner&quot;
+        solver_params: SolverParameters = None
+        filter_params: FilterParameters = None
+        butcher: ButcherTableau = None
+        nonlinear: bool = True
+
+        def __post_init__(self):
+            # checks
+            check_option(self.u_space, LiteralOptions.OptsVecSpace)
+            check_option(self.algo, self.OptsAlgo)
+            check_option(self.solver, LiteralOptions.OptsSymmSolver)
+            check_option(self.precond, LiteralOptions.OptsMassPrecond)
+            assert isinstance(self.ep_scale, float)
+            assert isinstance(self.nonlinear, bool)
+
+            # defaults
+            if self.solver_params is None:
+                self.solver_params = SolverParameters()
+
+            if self.filter_params is None:
+                self.filter_params = FilterParameters()
+
+            if self.algo == &quot;explicit&quot; and self.butcher is None:
+                self.butcher = ButcherTableau()</div>
+
+
+    @property
+    def options(self) -&gt; Options:
+        if not hasattr(self, &quot;_options&quot;):
+            self._options = self.Options()
+        return self._options
+
+    @options.setter
+    def options(self, new):
+        assert isinstance(new, self.Options)
+        self._options = new
+        logger.info(f&quot;\nNew options for propagator &#39;{self.__class__.__name__}&#39;:\n{self._options}&quot;)
+
+    @profile
+    def allocate(self):
+        self._u_form = self.derham.space_to_form[self.options.u_space]
+
+        # call operatros
+        id_M = &quot;M&quot; + self._u_form + &quot;n&quot;
+        id_T = &quot;T&quot; + self._u_form
+
+        _A = getattr(self.mass_ops, id_M)
+        _T = getattr(self.basis_ops, id_T)
+        M2 = self.mass_ops.M2
+        curl = self.derham.curl
+        PB = getattr(self.basis_ops, &quot;PB&quot;)
+
+        # define Accumulator and arguments
+        self._ACC = AccumulatorVector(
+            self.energetic_ions.particles,
+            &quot;H1&quot;,
+            Pyccelkernel(accum_kernels_gc.gc_mag_density_0form),
+            self.mass_ops,
+            self.domain.args_domain,
+            filter_params=self.options.filter_params,
+        )
+
+        # Preconditioner
+        if self.options.precond is None:
+            pc = None
+        else:
+            pc_class = getattr(preconditioner, self.options.precond)
+            pc = pc_class(getattr(self.mass_ops, id_M))
+
+        if self.options.nonlinear:
+            # initialize operator TB
+            self._initialize_projection_operator_TB()
+
+            _T = _T + self._TB
+            _TT = _T.T + self._TBT
+
+        else:
+            _TT = _T.T
+
+        if self.options.algo == &quot;implicit&quot;:
+            self._info = self.options.solver_params.info
+
+            # define block matrix [[A B], [C I]] (without time step size dt in the diagonals)
+            self._B = -1 / 2 * _TT @ curl.T @ M2
+            self._B2 = -1 / 2 * _TT @ curl.T @ PB.T
+
+            self._C = 1 / 2 * curl @ _T
+
+            # Instantiate Schur solver (constant in this case)
+            _BC = self._B @ self._C
+
+            self._schur_solver = SchurSolver(
+                _A,
+                _BC,
+                self.options.solver,
+                precond=pc,
+                solver_params=self.options.solver_params,
+            )
+
+            # allocate dummy vectors to avoid temporary array allocations
+            self._u_tmp1 = self.variables.u.spline.vector.space.zeros()
+            self._u_tmp2 = self.variables.u.spline.vector.space.zeros()
+            self._b_tmp1 = self.variables.b.spline.vector.space.zeros()
+
+            self._byn = self._B.codomain.zeros()
+            self._tmp_acc = self._B2.codomain.zeros()
+
+        else:
+            self._info = False
+
+            # define vector field
+            A_inv = inverse(
+                _A,
+                self.options.solver,
+                pc=pc,
+                tol=self.options.solver_params.tol,
+                maxiter=self.options.solver_params.maxiter,
+                verbose=self.options.solver_params.verbose,
+            )
+            _f1 = A_inv @ _TT @ curl.T @ M2
+            _f1_acc = A_inv @ _TT @ curl.T @ PB.T
+            _f2 = curl @ _T
+
+            # allocate output of vector field
+            out_acc = self.variables.u.spline.vector.space.zeros()
+            out1 = self.variables.u.spline.vector.space.zeros()
+            out2 = self.variables.b.spline.vector.space.zeros()
+
+            def f1(t, y1, y2, out: BlockVector = out1):
+                _f1.dot(y2, out=out)
+                _f1_acc.dot(self._ACC.vectors[0], out=out_acc)
+                out += out_acc
+                out.update_ghost_regions()
+                return out
+
+            def f2(t, y1, y2, out: BlockVector = out2):
+                _f2.dot(y1, out=out)
+                out *= -1.0
+                out.update_ghost_regions()
+                return out
+
+            vector_field = {self.variables.u.spline.vector: f1, self.variables.b.spline.vector: f2}
+            self._ode_solver = ODEsolverFEEC(vector_field, butcher=self.options.butcher)
+
+    def __call__(self, dt):
+        # update time-dependent operator TB
+        if self.options.nonlinear:
+            self._update_weights_TB()
+
+        # current FE coeffs
+        un = self.variables.u.spline.vector
+        bn = self.variables.b.spline.vector
+
+        # accumulate
+        self._ACC(self.options.ep_scale)
+
+        if self.options.algo == &quot;implicit&quot;:
+            # solve for new u coeffs (no tmps created here)
+            byn = self._B.dot(bn, out=self._byn)
+            b2acc = self._B2.dot(self._ACC.vectors[0], out=self._tmp_acc)
+            byn += b2acc
+
+            un1, info = self._schur_solver(un, byn, dt, out=self._u_tmp1)
+
+            # new b coeffs (no tmps created here)
+            _u = un.copy(out=self._u_tmp2)
+            _u += un1
+            bn1 = self._C.dot(_u, out=self._b_tmp1)
+            bn1 *= -dt
+            bn1 += bn
+
+            diffs = self.update_feec_variables(u=un1, b=bn1)
+
+        else:
+            self._ode_solver(0.0, dt)
+
+        if self._info and MPI.COMM_WORLD.Get_rank() == 0:
+            if self.options.algo == &quot;implicit&quot;:
+                logger.info(f&quot;Status     for ShearAlfvenCurrentCoupling5D: {info[&#39;success&#39;]}&quot;)
+                logger.info(f&quot;Iterations for ShearAlfvenCurrentCoupling5D: {info[&#39;niter&#39;]}&quot;)
+                logger.info(f&quot;Maxdiff up for ShearAlfvenCurrentCoupling5D: {diffs[&#39;u&#39;]}&quot;)
+                logger.info(f&quot;Maxdiff b2 for ShearAlfvenCurrentCoupling5D: {diffs[&#39;b&#39;]}&quot;)
+                logger.info(&quot;&quot;)
+
+    def _initialize_projection_operator_TB(self):
+        r&quot;&quot;&quot;Initialize BasisProjectionOperator TB with the time-varying weight.
+
+        .. math::
+
+            \mathcal{T}^B_{(\mu,ijk),(\nu,mno)} := \hat \Pi¹_{(\mu,ijk)} \left[ \epsilon_{\mu \alpha \nu} \frac{\tilde{B}²_\alpha}{\sqrt{g}} \Lambda²_{\nu,mno} \right] \,.
+
+        &quot;&quot;&quot;
+
+        # Call the projector and the space
+        P1 = self.derham.P1
+        Vh = self.derham.fem_spaces[self._u_form]
+
+        # Femfield for the field evaluation
+        self._bf = self.derham.create_spline_function(&quot;bf&quot;, &quot;Hdiv&quot;)
+
+        # Initialize BasisProjectionOperator
+        if self.derham._with_local_projectors:
+            self._TB = BasisProjectionOperatorLocal(
+                P1,
+                Vh,
+                [
+                    [None, None, None],
+                    [None, None, None],
+                    [None, None, None],
+                ],
+                transposed=False,
+                use_cache=True,
+                polar_shift=True,
+                V_extraction_op=self.derham.extraction_ops[self._u_form],
+                V_boundary_op=self.derham.boundary_ops[self._u_form],
+                P_boundary_op=self.derham.boundary_ops[&quot;1&quot;],
+            )
+            self._TBT = BasisProjectionOperatorLocal(
+                P1,
+                Vh,
+                [
+                    [None, None, None],
+                    [None, None, None],
+                    [None, None, None],
+                ],
+                transposed=True,
+                use_cache=True,
+                polar_shift=True,
+                V_extraction_op=self.derham.extraction_ops[self._u_form],
+                V_boundary_op=self.derham.boundary_ops[self._u_form],
+                P_boundary_op=self.derham.boundary_ops[&quot;1&quot;],
+            )
+        else:
+            self._TB = BasisProjectionOperator(
+                P1,
+                Vh,
+                [
+                    [None, None, None],
+                    [None, None, None],
+                    [None, None, None],
+                ],
+                transposed=False,
+                use_cache=True,
+                polar_shift=True,
+                V_extraction_op=self.derham.extraction_ops[self._u_form],
+                V_boundary_op=self.derham.boundary_ops[self._u_form],
+                P_boundary_op=self.derham.boundary_ops[&quot;1&quot;],
+            )
+            self._TBT = BasisProjectionOperator(
+                P1,
+                Vh,
+                [
+                    [None, None, None],
+                    [None, None, None],
+                    [None, None, None],
+                ],
+                transposed=True,
+                use_cache=True,
+                polar_shift=True,
+                V_extraction_op=self.derham.extraction_ops[self._u_form],
+                V_boundary_op=self.derham.boundary_ops[self._u_form],
+                P_boundary_op=self.derham.boundary_ops[&quot;1&quot;],
+            )
+
+    def _update_weights_TB(self):
+        &quot;&quot;&quot;Updats time-dependent weights of the BasisProjectionOperator TB&quot;&quot;&quot;
+
+        # Update Femfield
+        self.variables.b.spline.vector.copy(out=self._bf.vector)
+
+        # define callable weights
+        def bf1(x, y, z):
+            return self._bf(x, y, z, local=True)[0]
+
+        def bf2(x, y, z):
+            return self._bf(x, y, z, local=True)[1]
+
+        def bf3(x, y, z):
+            return self._bf(x, y, z, local=True)[2]
+
+        from struphy.feec.utilities import LocalRotationMatrix
+
+        rot_B = LocalRotationMatrix(bf1, bf2, bf3)
+
+        fun = []
+
+        if self._u_form == &quot;v&quot;:
+            for m in range(3):
+                fun += [[]]
+                for n in range(3):
+                    fun[-1] += [
+                        lambda e1, e2, e3, m=m, n=n: rot_B(e1, e2, e3)[:, :, :, m, n],
+                    ]
+
+        elif self._u_form == &quot;1&quot;:
+            for m in range(3):
+                fun += [[]]
+                for n in range(3):
+                    fun[-1] += [
+                        lambda e1, e2, e3, m=m, n=n: (
+                            rot_B(e1, e2, e3)
+                            @ self.domain.metric_inv(
+                                e1,
+                                e2,
+                                e3,
+                                change_out_order=True,
+                                squeeze_out=False,
+                            )
+                        )[:, :, :, m, n],
+                    ]
+
+        else:
+            for m in range(3):
+                fun += [[]]
+                for n in range(3):
+                    fun[-1] += [
+                        lambda e1, e2, e3, m=m, n=n: (
+                            rot_B(e1, e2, e3)[:, :, :, m, n]
+                            / abs(self.domain.jacobian_det(e1, e2, e3, squeeze_out=False))
+                        ),
+                    ]
+
+        # update BasisProjectionOperator
+        self._TB.update_weights(fun)
+        self._TBT.update_weights(fun)</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

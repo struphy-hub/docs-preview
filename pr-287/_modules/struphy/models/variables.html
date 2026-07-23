@@ -1,0 +1,1545 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>struphy.models.variables &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/struphy/models/variables';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href="../../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">struphy.models.variables</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for struphy.models.variables</h1><div class="highlight"><pre>
+<span></span># for type checking (cyclic imports)
+from __future__ import annotations
+
+import inspect
+import logging
+from abc import ABCMeta, abstractmethod
+from typing import TYPE_CHECKING
+
+import cunumpy as xp
+from feectools.ddm.mpi import mpi as MPI
+
+from struphy.feec.linear_operators import BoundaryOperator
+from struphy.feec.psydac_derham import Derham, SplineFunction
+from struphy.fields_background.base import FluidEquilibrium
+from struphy.fields_background.projected_equils import ProjectedFluidEquilibrium
+from struphy.geometry.base import Domain
+from struphy.geometry.utilities import TransformedPformComponent
+from struphy.initial.perturbations import Perturbation
+from struphy.io.options import FieldsBackground, LiteralOptions
+from struphy.kinetic_background.base import KineticBackground
+from struphy.pic import particles
+from struphy.pic.base import Particles
+from struphy.pic.particles import ParticlesSPH
+from struphy.utils.clone_config import CloneConfig
+from struphy.utils.utils import check_option
+
+if TYPE_CHECKING:
+    from struphy.models.species import FieldSpecies, FluidSpecies, ParticleSpecies, Species
+
+logger = logging.getLogger(&quot;struphy&quot;)
+
+
+class Variable(metaclass=ABCMeta):
+    &quot;&quot;&quot;
+    Abstract base class for a single variable of a Species object.
+
+    Variables represent the fundamental degrees of freedom in a plasma simulation. The complete solution
+    of a StruphyModel is a collection of Variables organized within Species. Multiple Variables can be
+    combined within a Species to represent different physical quantities (e.g., density, velocity, temperature).
+
+    Attributes
+    ----------
+    space : str
+        The function space or discretization type of the variable (e.g., &#39;H1&#39; for finite elements,
+        &#39;Particles6D&#39; for PIC, &#39;ParticlesSPH&#39; for SPH). Must be implemented by subclasses.
+    backgrounds : FluidEquilibrium | KineticBackground | None
+        Static background(s) representing equilibrium or reference state. Multiple backgrounds can be added
+        and are combined by addition. Defaults to None.
+    perturbations : Perturbation | list[Perturbation] | None
+        Initial perturbations added to backgrounds to define initial conditions.
+        Multiple perturbations can be added and are combined by addition. Defaults to None.
+    save_data : bool
+        Flag indicating whether this variable&#39;s data should be saved during simulation (default=True).
+    species : Species
+        Reference to the parent Species object containing this variable.
+
+    Methods
+    -------
+    allocate()
+        Allocate memory and initialize data structures. Must be implemented by subclasses.
+    add_background(background)
+        Add a static background condition to the variable.
+    show_backgrounds()
+        Display information about defined backgrounds.
+    show_perturbations()
+        Display information about defined perturbations.
+
+    Notes
+    -----
+    The initial condition for a variable is constructed as: background(s) + perturbation(s).
+    If neither is specified, the variable initializes to zero.
+
+    All concrete implementations (FEECVariable, PICVariable, SPHVariable) must define the `space` property
+    and implement the `allocate()` method.
+    &quot;&quot;&quot;
+
+    @property
+    @abstractmethod
+    def space(self):
+        &quot;&quot;&quot;The function space of the variable, e.g. &#39;H1&#39; for finite element variables or &#39;Particles6D&#39; for PIC variables.&quot;&quot;&quot;
+        pass
+
+    @abstractmethod
+    def allocate(self):
+        &quot;&quot;&quot;Alocate object and memory for variable.&quot;&quot;&quot;
+
+    def __repr__(self):
+        return f&quot;{self.__class__.__name__} ({self.space})&quot;
+
+    @property
+    def backgrounds(self):
+        &quot;&quot;&quot;The static background. Multiple backgrounds can be defined in a list,
+        via the add_background method.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_backgrounds&quot;):
+            self._backgrounds = None
+        return self._backgrounds
+
+    @property
+    def perturbations(self):
+        &quot;&quot;&quot;The perturbations. Multiple perturbations can be defined in a list,
+        via the add_perturbation method defined in sub-classes.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_perturbations&quot;):
+            self._perturbations = None
+        return self._perturbations
+
+    @property
+    def save_data(self):
+        &quot;&quot;&quot;Store variable data during simulation (default=True).&quot;&quot;&quot;
+        if not hasattr(self, &quot;_save_data&quot;):
+            self._save_data = True
+        return self._save_data
+
+    @save_data.setter
+    def save_data(self, new):
+        assert isinstance(new, bool)
+        self._save_data = new
+
+    @property
+    def species(self) -&gt; Species:
+        if not hasattr(self, &quot;_species&quot;):
+            self._species = None
+        return self._species
+
+    @property
+    def __name__(self):
+        if not hasattr(self, &quot;_name&quot;):
+            self._name = None
+        return self._name
+
+    def add_background(self, background):
+        &quot;&quot;&quot;Add a static background for this variable.
+        Multiple backgrounds can be added up.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_backgrounds&quot;) or self.backgrounds is None:
+            self._backgrounds = background
+        else:
+            if not isinstance(self.backgrounds, list):
+                self._backgrounds = [self.backgrounds]
+            self._backgrounds += [background]
+        logger.info(
+            f&quot;\nAdded background\n{background}\nto variable &#39;{self.__name__}&#39; of species &#39;{self.species.__class__.__name__}&#39;.&quot;
+        )
+
+    def show_backgrounds(self):
+        print(f&quot;\nBackgrounds for variable &#39;{self.__name__}&#39; of species &#39;{self.species.__class__.__name__}&#39;:&quot;)
+        if self.backgrounds is not None:
+            if isinstance(self.backgrounds, list):
+                for background in self.backgrounds:
+                    print(background)
+            else:
+                print(self.backgrounds)
+        else:
+            print(&quot;None.&quot;)
+
+    def show_perturbations(self):
+        print(f&quot;\nPerturbations for variable &#39;{self.__name__}&#39; of species &#39;{self.species.__class__.__name__}&#39;:&quot;)
+        if self.perturbations is not None:
+            if isinstance(self.perturbations, list):
+                for perturbation in self.perturbations:
+                    print(perturbation)
+            else:
+                print(self.perturbations)
+        else:
+            print(&quot;None.&quot;)
+
+
+<div class="viewcode-block" id="FEECVariable">
+<a class="viewcode-back" href="../../../sections/api_guide.html#struphy.models.variables.FEECVariable">[docs]</a>
+class FEECVariable(Variable):
+    &quot;&quot;&quot;
+    Grid-based finite element variable using FEEC (Finite Element Exterior Calculus) discretization.
+
+    FEECVariable represents field quantities discretized on a computational grid using finite element
+    methods. It supports arbitrary FEEC spaces (H1, Hdiv, Hcurl, L2) and is used for electromagnetic
+    fields, fluid moments, or other spatially distributed quantities.
+
+    Parameters
+    ----------
+    space : str
+        The FEEC function space. Options: &#39;H1&#39;, &#39;HDiv&#39;, &#39;HCurl&#39;, &#39;L2&#39;.
+        Determines the continuity and smoothness properties of the discretization.
+
+    Attributes
+    ----------
+    space : str
+        The FEEC function space. Options: &#39;H1&#39;, &#39;HDiv&#39;, &#39;HCurl&#39;, &#39;L2&#39;.
+        Determines the continuity and smoothness properties of the discretization.
+    spline : SplineFunction
+        The underlying spline-based representation of the field on the computational mesh.
+        Only available after calling `allocate()`.
+    species : FieldSpecies | FluidSpecies
+        Parent species containing this variable.
+    backgrounds : FieldsBackground | None
+        Equilibrium fields added to initial conditions.
+    perturbations : Perturbation | list[Perturbation] | None
+        Initial perturbations added to backgrounds.
+
+    Methods
+    -------
+    add_background(background)
+        Add an equilibrium field background.
+    add_perturbation(perturbation)
+        Add initial perturbations to the field.
+    allocate(derham, domain, equil)
+        Allocate spline function and initialize on the mesh.
+
+    Notes
+    -----
+    Initial conditions are constructed by combining backgrounds and perturbations:
+    initial_field = background(s) + perturbation(s)
+
+    If neither background nor perturbation is specified, the variable initializes to zero.
+
+    Examples
+    --------
+    &gt;&gt;&gt; E_field = FEECVariable(space=&#39;Hdiv&#39;)  # For electric field
+    &gt;&gt;&gt; E_field.add_background(FieldsBackground(type=&#39;uniform&#39;, magnitude=1.0))
+    &quot;&quot;&quot;
+
+    def __init__(self, space: LiteralOptions.OptsFEECSpace = &quot;H1&quot;):
+        check_option(space, LiteralOptions.OptsFEECSpace)
+        self._space = space
+
+    @property
+    def space(self) -&gt; str:
+        return self._space
+
+    @property
+    def lifting_function(self) -&gt; Perturbation | None:
+        &quot;&quot;&quot;The lifting function for the case of lifting of boundary conditions.
+        Its values at the boundary determine the inhomogeneous boundary conditions.
+        If None, no lifting is applied.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_lifting_function&quot;):
+            self._lifting_function = None
+        return self._lifting_function
+
+    @lifting_function.setter
+    def lifting_function(self, new: Perturbation | None):
+        self._lifting_function = new
+
+    @property
+    def spline(self) -&gt; SplineFunction:
+        if not hasattr(self, &quot;_spline&quot;):
+            raise ValueError(&quot;Warning: spline not allocated yet. Call allocate() first.&quot;)
+        return self._spline
+
+    @property
+    def spline_lift(self) -&gt; SplineFunction | None:
+        &quot;&quot;&quot;The lifting function for the case of lifting of boundary conditions. Only allocated if lifting_function is not None.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_spline_lift&quot;):
+            self._spline_lift = None
+        return self._spline_lift
+
+    @property
+    def spline_0(self) -&gt; SplineFunction | None:
+        &quot;&quot;&quot;The spline function with zero boundary conditions, used for the lifting of boundary conditions. Only allocated if lifting_function is not None.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_spline_0&quot;):
+            self._spline_0 = None
+        return self._spline_0
+
+    @property
+    def boundary_spline(self) -&gt; SplineFunction | None:
+        &quot;&quot;&quot;The spline function representing the boundary conditions, used for the lifting of boundary conditions. Only allocated if lifting_function is not None.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_boundary_spline&quot;):
+            self._boundary_spline = None
+        return self._boundary_spline
+
+    @property
+    def boundary_op(self) -&gt; BoundaryOperator | None:
+        &quot;&quot;&quot;The boundary operator, used for the lifting of boundary conditions. Only allocated if lifting_function is not None.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_boundary_op&quot;):
+            self._boundary_op = None
+        return self._boundary_op
+
+    @property
+    def derham_lift(self) -&gt; Derham | None:
+        &quot;&quot;&quot;The Derham object for the lifting function. Only allocated if lifting_function is not None.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_derham_lift&quot;):
+            self._derham_lift = None
+        return self._derham_lift
+
+    @property
+    def species(self) -&gt; FieldSpecies | FluidSpecies:
+        if not hasattr(self, &quot;_species&quot;):
+            self._species = None
+        return self._species
+
+<div class="viewcode-block" id="FEECVariable.add_background">
+<a class="viewcode-back" href="../../../sections/api_guide.html#struphy.models.variables.FEECVariable.add_background">[docs]</a>
+    def add_background(self, background: FieldsBackground):
+        super().add_background(background)</div>
+
+
+<div class="viewcode-block" id="FEECVariable.add_perturbation">
+<a class="viewcode-back" href="../../../sections/api_guide.html#struphy.models.variables.FEECVariable.add_perturbation">[docs]</a>
+    def add_perturbation(self, perturbation: Perturbation):
+        &quot;&quot;&quot;Add an initial :class:`~struphy.initial.base.Perturbation` for this variable.
+        Multiple perturbations can be added up.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_perturbations&quot;) or self.perturbations is None:
+            self._perturbations = perturbation
+        else:
+            if not isinstance(self.perturbations, list):
+                self._perturbations = [self.perturbations]
+            self._perturbations += [perturbation]
+        logger.info(
+            f&quot;\nAdded perturbation\n{perturbation}\nto variable &#39;{self.__name__}&#39; of species &#39;{self.species.__class__.__name__}&#39;.&quot;
+        )</div>
+
+
+<div class="viewcode-block" id="FEECVariable.allocate">
+<a class="viewcode-back" href="../../../sections/api_guide.html#struphy.models.variables.FEECVariable.allocate">[docs]</a>
+    def allocate(
+        self,
+        derham: Derham,
+        domain: Domain = None,
+        equil: FluidEquilibrium = None,
+    ):
+        self._spline = derham.create_spline_function(
+            name=self.__name__,
+            space_id=self.space,
+            backgrounds=self.backgrounds,
+            perturbations=self.perturbations,
+            domain=domain,
+            equil=equil,
+        )
+
+        self._derham_lift = None
+        self._spline_lift = None
+
+        if self.lifting_function is not None:
+            check_bcs = False
+            for bc in derham.bcs:
+                if &quot;dirichlet&quot; in bc:
+                    check_bcs = True
+                    break
+            assert check_bcs, (
+                f&quot;Lifting of boundary conditions can only be applied if at least one homogenous Dirichlet boundary condition is present in the Derham object, but here {derham.bcs = }&quot;
+            )
+
+            # create another Derham object with the same options but with homogenous Dirichlet BCs replaced by free BCs, to be used for the lifting function
+            dct = derham.to_dict()
+            bcs_lift = list(dct[&quot;options&quot;][&quot;bcs&quot;])
+            for i, bc in enumerate(bcs_lift):
+                if bc is not None:
+                    bcn = list(bc)  # convert tuple to list to allow modification
+                    if bcn[0] == &quot;dirichlet&quot;:
+                        bcn[0] = &quot;free&quot;
+                    if bcn[1] == &quot;dirichlet&quot;:
+                        bcn[1] = &quot;free&quot;
+                    bcn = tuple(bcn)  # convert back to tuple
+                    bcs_lift[i] = bcn
+            dct[&quot;options&quot;][&quot;bcs&quot;] = tuple(bcs_lift)  # convert list back to tuple
+
+            self._derham_lift = Derham.from_dict(dct, comm=derham.comm)
+
+            # spline function for the lifting function
+            self._spline_lift = self.derham_lift.create_spline_function(
+                name=self.__name__ + &quot;_lift&quot; if self.__name__ is not None else None,
+                space_id=self.space,
+                domain=domain,
+                equil=equil,
+            )
+
+            # project lifting function to spline space
+            ptb = self.lifting_function
+
+            if self.space in {
+                &quot;H1&quot;,
+                &quot;L2&quot;,
+            }:  # TODO: this is a copy-paste from SplineFunction.initialize_coeffs(), to be unified
+                if ptb.given_in_basis is None:
+                    ptb.given_in_basis = &quot;0&quot;
+
+                fun = TransformedPformComponent(
+                    ptb,
+                    ptb.given_in_basis,
+                    derham.space_to_form[self.space],
+                    domain=domain,
+                )
+            elif self.space in {&quot;Hcurl&quot;, &quot;Hdiv&quot;, &quot;H1vec&quot;}:
+                fun_vec = [None] * 3
+                fun_vec[ptb.comp] = ptb
+
+                if ptb.given_in_basis is None:
+                    ptb.given_in_basis = &quot;v&quot;
+                # pullback callable for each component
+                fun = []
+                for comp in range(3):
+                    fun += [
+                        TransformedPformComponent(
+                            fun_vec,
+                            ptb.given_in_basis,
+                            derham.space_to_form[self.space],
+                            comp=comp,
+                            domain=domain,
+                        ),
+                    ]
+
+            # peform projection
+            self.spline_lift.vector += self.derham_lift.projectors[derham.space_to_form[self.space]](fun)
+
+            # other helper objects for the lifting of boundary conditions
+            self._spline_0 = self.spline_lift.copy()
+            self.spline_0.vector[:] = self.spline_lift.vector[:]
+            self._boundary_spline = self.spline_lift.copy()
+            self._boundary_op = BoundaryOperator(self.spline_lift.space, self.space, derham.dirichlet_bc)
+
+            self.compute_boundary_spline()</div>
+
+
+    def compute_boundary_spline(self, spline_lift: SplineFunction | None = None):
+        &quot;&quot;&quot;Compute boundary_spline = spline_lift - spline_0. If spline_lift is None, uses self.spline_lift from the initial condition.
+        This method can be used to update the boundary spline during the simulation if the lifting function changes in time.&quot;&quot;&quot;
+        # update spline_0
+        if spline_lift is None:
+            spline_lift = self.spline_lift
+        self.boundary_op.dot(spline_lift.vector, out=self.spline_0.vector)
+
+        # set new boundary spline
+        diff_vec = spline_lift.vector - self.spline_0.vector
+        self.boundary_spline.vector[:] = diff_vec[:]</div>
+
+
+
+<div class="viewcode-block" id="PICVariable">
+<a class="viewcode-back" href="../../../sections/api_guide.html#struphy.models.variables.PICVariable">[docs]</a>
+class PICVariable(Variable):
+    &quot;&quot;&quot;
+    Kinetic variable using Particle-In-Cell (PIC) discretization in phase space.
+
+    PICVariable represents kinetic distribution functions discretized via marker/particle methods
+    in 3D configuration space plus velocity space (3D+2D or 3D+3D). Supports various phase-space
+    decompositions for efficient kinetic simulations.
+
+    Attributes
+    ----------
+    space : str
+        Phase space decomposition. Options include, among others:
+        - &#39;Particles6D&#39;: Full 3D config + 3D velocity space
+        - &#39;Particles5D&#39;: 3D config + 2D gyro-velocity space (for strong magnetic fields)
+    particles : Particles
+        The marker/particle object managing kinetic data. Only available after `allocate()`.
+    particles_class : type
+        Reference to the Particles class corresponding to the space.
+    species : ParticleSpecies
+        Parent kinetic species containing this variable.
+    backgrounds : KineticBackground
+        Mandatory equilibrium distribution function (e.g., Maxwellian).
+    initial_condition : KineticBackground
+        The initial kinetic distribution. If not explicitly set, uses the background.
+    perturbations : Perturbation | list[Perturbation] | None
+        Perturbations to moments of the distribution function.
+    n_as_volume_form : bool
+        Whether number density is represented as a differential form (volume-weighted) or scalar.
+    n_to_save : int
+        Number of markers for which trajectories are saved.
+    saved_markers : ndarray
+        Array storing saved marker data.
+
+    Methods
+    -------
+    add_background(background, n_as_volume_form)
+        Set mandatory equilibrium distribution (e.g., Maxwellian).
+    add_initial_condition(init)
+        Set initial kinetic distribution (must be consistent with background).
+    show_initial_condition()
+        Display current initial condition information.
+    allocate(clone_config, derham, domain, equil, projected_equil)
+        Initialize particles and allocate marker arrays.
+
+    Notes
+    -----
+    The background is mandatory and often used for noise reduction. The initial condition should be
+    consistent with the background to avoid numerical artifacts.
+
+    If no initial condition is specified, the background is used as the initial condition.
+    If both are specified, they should be the same base distribution with perturbations on top.
+
+    Examples
+    --------
+    &gt;&gt;&gt; electrons = PICVariable(space=&#39;Particles6D&#39;)
+    &gt;&gt;&gt; maxwellian = Maxwellian3D(n=(1.0, None), vth2=(0.1, None))
+    &gt;&gt;&gt; electrons.add_background(maxwellian)
+    &gt;&gt;&gt; pert = TorusModesCos(amps=(0.1,))
+    &gt;&gt;&gt; electrons.add_perturbation(pert)
+    &quot;&quot;&quot;
+
+    def __init__(self, space: LiteralOptions.OptsPICSpace = &quot;Particles6D&quot;):
+        check_option(space, LiteralOptions.OptsPICSpace)
+        self._space = space
+
+        for name, cls in inspect.getmembers(particles):
+            if inspect.isclass(cls) and cls.__module__ == particles.__name__ and name == space:
+                self._particles_class = cls
+
+    @property
+    def space(self) -&gt; LiteralOptions.OptsPICSpace:
+        return self._space
+
+    @property
+    def particles_class(self) -&gt; Particles:
+        return self._particles_class
+
+    @property
+    def particles(self) -&gt; Particles:
+        if not hasattr(self, &quot;_particles&quot;):
+            raise ValueError(&quot;Warning: particles not allocated yet. Call allocate() first.&quot;)
+        return self._particles
+
+    @property
+    def species(self) -&gt; ParticleSpecies:
+        if not hasattr(self, &quot;_species&quot;):
+            self._species = None
+        return self._species
+
+    @property
+    def n_as_volume_form(self) -&gt; bool:
+        &quot;&quot;&quot;Whether the number density n is given as a volume form or a scalar function (=default).&quot;&quot;&quot;
+        if not hasattr(self, &quot;_n_as_volume_form&quot;):
+            self._n_as_volume_form = False
+        return self._n_as_volume_form
+
+<div class="viewcode-block" id="PICVariable.add_background">
+<a class="viewcode-back" href="../../../sections/api_guide.html#struphy.models.variables.PICVariable.add_background">[docs]</a>
+    def add_background(self, background: KineticBackground, n_as_volume_form: bool = False):
+        self._n_as_volume_form = n_as_volume_form
+        super().add_background(background)</div>
+
+
+<div class="viewcode-block" id="PICVariable.add_initial_condition">
+<a class="viewcode-back" href="../../../sections/api_guide.html#struphy.models.variables.PICVariable.add_initial_condition">[docs]</a>
+    def add_initial_condition(self, init: KineticBackground):
+        &quot;&quot;&quot;The initial condition must be consistent with the background.&quot;&quot;&quot;
+        self._initial_condition = init
+        logger.info(
+            f&quot;\nAdded initial condition\n{init}\nto variable &#39;{self.__name__}&#39; of species &#39;{self.species.__class__.__name__}&#39;.&quot;
+        )</div>
+
+
+<div class="viewcode-block" id="PICVariable.show_initial_condition">
+<a class="viewcode-back" href="../../../sections/api_guide.html#struphy.models.variables.PICVariable.show_initial_condition">[docs]</a>
+    def show_initial_condition(self):
+        print(f&quot;\nInitial condition for variable &#39;{self.__name__}&#39; of species &#39;{self.species.__class__.__name__}&#39;:&quot;)
+        if self.initial_condition is not None:
+            print(self.initial_condition)
+        else:
+            print(&quot;Same as background.&quot;)</div>
+
+
+    @property
+    def initial_condition(self) -&gt; KineticBackground:
+        if not hasattr(self, &quot;_initial_condition&quot;):
+            self._initial_condition = self.backgrounds
+        return self._initial_condition
+
+<div class="viewcode-block" id="PICVariable.allocate">
+<a class="viewcode-back" href="../../../sections/api_guide.html#struphy.models.variables.PICVariable.allocate">[docs]</a>
+    def allocate(
+        self,
+        clone_config: CloneConfig = None,
+        derham: Derham = None,
+        domain: Domain = None,
+        equil: FluidEquilibrium = None,
+        projected_equil: ProjectedFluidEquilibrium = None,
+    ):
+        # assert isinstance(self.species, KineticSpecies)
+        assert isinstance(self.backgrounds, KineticBackground), (
+            &quot;List input not allowed, you can sum Kineticbackgrounds before passing them to add_background.&quot;
+        )
+
+        if derham is None:
+            domain_decomp = None
+        else:
+            domain_array = derham.domain_array
+            nprocs = derham.domain_decomposition.nprocs
+            domain_decomp = (domain_array, nprocs)
+
+        kinetic_class = getattr(particles, self.space)
+
+        comm_world = MPI.COMM_WORLD
+        if comm_world.Get_size() == 1:
+            comm_world = None
+
+        self._particles: Particles = kinetic_class(
+            comm_world=comm_world,
+            clone_config=clone_config,
+            domain_decomp=domain_decomp,
+            name=self.species.__class__.__name__,
+            loading_params=self.species.loading_params,
+            weights_params=self.species.weights_params,
+            boundary_params=self.species.boundary_params,
+            sorting_params=self.species.sorting_params,
+            bufsize=self.species.bufsize,
+            domain=domain,
+            equil=equil,
+            projected_equil=projected_equil,
+            background=self.backgrounds,
+            initial_condition=self.initial_condition,
+            n_as_volume_form=self.n_as_volume_form,
+            equation_params=self.species.equation_params,
+        )
+
+        if self.species.sorting_params.do_sort:
+            sort = True
+        else:
+            sort = False
+        self.particles.draw_markers(sort=sort)
+
+        # set zero velocity according to loading_params
+        zero_index = xp.nonzero(self.particles.loading_params.set_zero_velocity)[0].flatten()
+        self.particles.set_velocities_comp(velocity=0.0, comp=zero_index)
+
+        self.particles.initialize_weights()
+
+        # allocate array for saving markers if not present
+        n_markers = self.species.saving_params.n_markers
+        if isinstance(n_markers, float):
+            if n_markers &gt; 1.0:
+                self._n_to_save = int(n_markers)
+            else:
+                self._n_to_save = int(self.particles.n_mks_global * n_markers)
+        else:
+            self._n_to_save = n_markers
+
+        assert self._n_to_save &lt;= self.particles.Np, (
+            f&quot;The number of markers for which data should be stored (={self._n_to_save}) must be &lt;= than the total number of markers (={self.particles.Np})&quot;
+        )
+        if self._n_to_save &gt; 0:
+            self._saved_markers = xp.zeros(
+                (self._n_to_save, self.particles.markers.shape[1]),
+                dtype=float,
+            )</div>
+
+
+        # other data (wave-particle power exchange, etc.)
+        # TODO
+
+    @property
+    def n_to_save(self) -&gt; int:
+        return self._n_to_save
+
+    @property
+    def saved_markers(self) -&gt; xp.ndarray:
+        return self._saved_markers</div>
+
+
+
+<div class="viewcode-block" id="SPHVariable">
+<a class="viewcode-back" href="../../../sections/api_guide.html#struphy.models.variables.SPHVariable">[docs]</a>
+class SPHVariable(Variable):
+    &quot;&quot;&quot;
+    Fluid variable using Smoothed Particle Hydrodynamics (SPH) discretization.
+
+    SPHVariable represents macroscopic fluid quantities (density, velocity, temperature) using
+    SPH methods, where fields are reconstructed from marker positions and properties. This is a
+    particle-based Lagrangian approach to fluid dynamics.
+
+    Attributes
+    ----------
+    space : str
+        Always &#39;ParticlesSPH&#39; for SPH method.
+    particles : ParticlesSPH
+        The SPH marker/particle object. Only available after `allocate()`.
+    particles_class : type
+        Reference to the ParticlesSPH class.
+    particle_data : dict
+        Dictionary storing particle-associated data fields.
+    species : ParticleSpecies
+        Parent SPH species containing this variable.
+    backgrounds : FluidEquilibrium
+        Background fluid state (density, velocity, pressure profiles).
+    perturbations : dict[str, Perturbation]
+        Perturbations to density (&#39;n&#39;) and velocity components (&#39;u1&#39;, &#39;u2&#39;, &#39;u3&#39;).
+        Each component can have independent perturbations or None.
+    n_as_volume_form : bool
+        Always True for SPH; number density represented as volume-weighted quantity.
+    n_to_save : int
+        Number of SPH particles for which data is saved.
+    saved_markers : ndarray
+        Array storing saved particle data.
+
+    Methods
+    -------
+    add_background(background)
+        Set the background fluid equilibrium state.
+    add_perturbation(del_n, del_u1, del_u2, del_u3)
+        Add perturbations to density and/or velocity components.
+    show_perturbations()
+        Display detailed information about density and velocity perturbations.
+    allocate(derham, domain, equil, projected_equil)
+        Initialize SPH particles and allocate marker arrays.
+
+    Notes
+    -----
+    Initial conditions combine background and perturbations:
+    - density: background + del_n
+    - velocity: background + (del_u1, del_u2, del_u3)
+
+    If neither background nor perturbations are specified, fields initialize to zero.
+
+    Examples
+    --------
+    &gt;&gt;&gt; fluid = SPHVariable()
+    &gt;&gt;&gt; equil = HomogenSlab()
+    &gt;&gt;&gt; fluid.add_background(equil)
+    &gt;&gt;&gt; pert = TorusModesCos(amps=(0.1,))
+    &gt;&gt;&gt; fluid.add_perturbation(del_n=pert, del_u1=pert)
+    &quot;&quot;&quot;
+
+    def __init__(self):
+        self._space = &quot;ParticlesSPH&quot;
+        self._n_as_volume_form = True
+        self._particle_data = {}
+
+    @property
+    def space(self):
+        return self._space
+
+    @property
+    def particles_class(self) -&gt; Particles:
+        return ParticlesSPH
+
+    @property
+    def particles(self) -&gt; ParticlesSPH:
+        if not hasattr(self, &quot;_particles&quot;):
+            raise ValueError(&quot;Warning: particles not allocated yet. Call allocate() first.&quot;)
+        return self._particles
+
+    @property
+    def particle_data(self):
+        return self._particle_data
+
+    @property
+    def species(self) -&gt; ParticleSpecies:
+        if not hasattr(self, &quot;_species&quot;):
+            self._species = None
+        return self._species
+
+    @property
+    def n_as_volume_form(self) -&gt; bool:
+        &quot;&quot;&quot;Whether the number density n is given as a volume form or scalar function (=default).&quot;&quot;&quot;
+        return self._n_as_volume_form
+
+<div class="viewcode-block" id="SPHVariable.add_background">
+<a class="viewcode-back" href="../../../sections/api_guide.html#struphy.models.variables.SPHVariable.add_background">[docs]</a>
+    def add_background(self, background: FluidEquilibrium):
+        super().add_background(background)</div>
+
+
+<div class="viewcode-block" id="SPHVariable.add_perturbation">
+<a class="viewcode-back" href="../../../sections/api_guide.html#struphy.models.variables.SPHVariable.add_perturbation">[docs]</a>
+    def add_perturbation(
+        self,
+        del_n: Perturbation = None,
+        del_u1: Perturbation = None,
+        del_u2: Perturbation = None,
+        del_u3: Perturbation = None,
+    ):
+        &quot;&quot;&quot;Add an initial :class:`~struphy.initial.base.Perturbation` for the fluid density and/or velocity.&quot;&quot;&quot;
+        self._perturbations = {}
+        self._perturbations[&quot;n&quot;] = del_n
+        self._perturbations[&quot;u1&quot;] = del_u1
+        self._perturbations[&quot;u2&quot;] = del_u2
+        self._perturbations[&quot;u3&quot;] = del_u3
+
+        if del_n is not None:
+            logger.info(
+                f&quot;\nAdded density perturbation\n{del_n}\nto variable &#39;{self.__name__}&#39; of species &#39;{self.species.__class__.__name__}&#39;.&quot;
+            )
+        if del_u1 is not None:
+            logger.info(
+                f&quot;\nAdded velocity component u1 perturbation\n{del_u1}\nto variable &#39;{self.__name__}&#39; of species &#39;{self.species.__class__.__name__}&#39;.&quot;
+            )
+        if del_u2 is not None:
+            logger.info(
+                f&quot;\nAdded velocity component u2 perturbation\n{del_u2}\nto variable &#39;{self.__name__}&#39; of species &#39;{self.species.__class__.__name__}&#39;.&quot;
+            )
+        if del_u3 is not None:
+            logger.info(
+                f&quot;\nAdded velocity component u3 perturbation\n{del_u3}\nto variable &#39;{self.__name__}&#39; of species &#39;{self.species.__class__.__name__}&#39;.&quot;
+            )</div>
+
+
+<div class="viewcode-block" id="SPHVariable.show_perturbations">
+<a class="viewcode-back" href="../../../sections/api_guide.html#struphy.models.variables.SPHVariable.show_perturbations">[docs]</a>
+    def show_perturbations(self):
+        print(f&quot;Perturbations for variable &#39;{self.__name__}&#39; of species &#39;{self.species.__class__.__name__}&#39;:&quot;)
+        if self.perturbations is not None:
+            for key, perturbation in self.perturbations.items():
+                print(perturbation)
+        else:
+            print(&quot;None.&quot;)</div>
+
+
+    @property
+    def perturbations(self) -&gt; dict[str, Perturbation]:
+        if not hasattr(self, &quot;_perturbations&quot;):
+            self._perturbations = None
+        return self._perturbations
+
+<div class="viewcode-block" id="SPHVariable.allocate">
+<a class="viewcode-back" href="../../../sections/api_guide.html#struphy.models.variables.SPHVariable.allocate">[docs]</a>
+    def allocate(
+        self,
+        derham: Derham = None,
+        domain: Domain = None,
+        equil: FluidEquilibrium = None,
+        projected_equil: ProjectedFluidEquilibrium = None,
+    ):
+        assert isinstance(self.backgrounds, FluidEquilibrium), (
+            &quot;List input not allowed, you can sum Kineticbackgrounds before passing them to add_background.&quot;
+        )
+
+        self.backgrounds.domain = domain
+
+        if derham is None:
+            domain_decomp = None
+        else:
+            domain_array = derham.domain_array
+            nprocs = derham.domain_decomposition.nprocs
+            domain_decomp = (domain_array, nprocs)
+
+        comm_world = MPI.COMM_WORLD
+        if comm_world.Get_size() == 1:
+            comm_world = None
+
+        self._particles = ParticlesSPH(
+            comm_world=comm_world,
+            domain_decomp=domain_decomp,
+            name=self.species.__class__.__name__,
+            loading_params=self.species.loading_params,
+            weights_params=self.species.weights_params,
+            boundary_params=self.species.boundary_params,
+            sorting_params=self.species.sorting_params,
+            bufsize=self.species.bufsize,
+            domain=domain,
+            equil=equil,
+            projected_equil=projected_equil,
+            background=self.backgrounds,
+            n_as_volume_form=self.n_as_volume_form,
+            perturbations=self.perturbations,
+            equation_params=self.species.equation_params,
+        )
+
+        if self.species.sorting_params.do_sort:
+            sort = True
+        else:
+            sort = False
+        self.particles.draw_markers(sort=sort)
+        self.particles.initialize_weights()
+
+        # if self.particles.sorting_boxes.communicate:
+        #     self.particles.put_particles_in_boxes()
+
+        # allocate array for saving markers if not present
+        n_markers = self.species.saving_params.n_markers
+        if isinstance(n_markers, float):
+            if n_markers &gt; 1.0:
+                self._n_to_save = int(n_markers)
+            else:
+                self._n_to_save = int(self.particles.n_mks_global * n_markers)
+        else:
+            self._n_to_save = n_markers
+
+        assert self._n_to_save &lt;= self.particles.Np, (
+            f&quot;The number of markers for which data should be stored (={self._n_to_save}) must be &lt;= than the total number of markers (={self.particles.Np})&quot;
+        )
+        if self._n_to_save &gt; 0:
+            self._saved_markers = xp.zeros(
+                (self._n_to_save, self.particles.markers.shape[1]),
+                dtype=float,
+            )</div>
+
+
+        # other data (wave-particle power exchange, etc.)
+        # TODO
+
+    @property
+    def n_to_save(self) -&gt; int:
+        return self._n_to_save
+
+    @property
+    def saved_markers(self) -&gt; xp.ndarray:
+        return self._saved_markers</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1291 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SPH in Beltrami force field &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_collections/tutorials/tutorial_beltrami_sph';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Gas Expansion with ViscousEulerSPH" href="tutorial_gas_expansion_sph.html" />
+    <link rel="prev" title="Particle tracing" href="tutorial_particle_tracing.html" />
+    <link href="../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="tutorial_particle_tracing.html"
+                          title="previous chapter">Particle tracing</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="tutorial_gas_expansion_sph.html"
+                          title="next chapter">Gas Expansion with <code class="docutils literal notranslate"><span class="pre">ViscousEulerSPH</span></code></a></p>
+  </div></div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../sections/tutorials.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">SPH in Beltrami force field</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="SPH-in-Beltrami-force-field">
+<h1>SPH in Beltrami force field<a class="headerlink" href="#SPH-in-Beltrami-force-field" title="Link to this heading">#</a></h1>
+<p>In this tutorial, you will set up and run a pressure-less SPH example in Struphy, then inspect particle evolution with simple diagnostics.</p>
+<p>This notebook focuses on pressure-less flow in a Beltrami force field (model <code class="docutils literal notranslate"><span class="pre">PressureLessSPH</span></code>). If you want to start from template parameter files, generate them from the command line:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struphy params PressureLessSPH
+</pre></div>
+</div>
+<p>The notebook keeps everything in Python so you can adjust parameters interactively and rerun sections quickly.</p>
+<section id="Pressure-Less-Flow-in-a-Beltrami-Force-Field">
+<h2>Pressure-Less Flow in a Beltrami Force Field<a class="headerlink" href="#Pressure-Less-Flow-in-a-Beltrami-Force-Field" title="Link to this heading">#</a></h2>
+<p>We begin with a particle system in a 3D box domain <span class="math notranslate nohighlight">\(\Omega \subset \mathbb{R}^3\)</span>.</p>
+<p>Given an initial velocity field <span class="math notranslate nohighlight">\(\mathbf{u}_0(\mathbf{x})\)</span>, we seek trajectories <span class="math notranslate nohighlight">\((\mathbf{x}_p, \mathbf{v}_p)\)</span> for particles <span class="math notranslate nohighlight">\(p=0,\dots,N-1\)</span> satisfying</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+ \dot{\mathbf x}_p &amp;= \mathbf v_p\,,\qquad &amp;&amp; \mathbf x_p(0) = \mathbf x_{p0}\,,
+ \\[2mm]
+ \dot{\mathbf v}_p &amp;= -\nabla p(\mathbf x_p)\,,\qquad &amp;&amp; \mathbf v_p(0) = \mathbf u_0(\mathbf x_p(0))\,.
+\end{aligned}\end{split}\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(p \in H^1(\Omega)\)</span> is a prescribed scalar field. In this example, we choose <span class="math notranslate nohighlight">\(p\)</span> so that the force field has Beltrami structure.</p>
+<p>In practice, the workflow is: import APIs, define geometry and time stepping, set marker loading, configure propagators, run, and visualize.</p>
+<p>First, import the Struphy components used throughout this tutorial.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvironmentOptions</span><span class="p">,</span> <span class="n">Time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">domains</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">equils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">grids</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DerhamOptions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BoundaryParameters</span><span class="p">,</span>
+    <span class="n">LoadingParameters</span><span class="p">,</span>
+    <span class="n">WeightsParameters</span><span class="p">,</span>
+    <span class="n">SortingParameters</span><span class="p">,</span>
+    <span class="n">SavingParameters</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Simulation</span>
+</pre></div>
+</div>
+</div>
+<section id="Step-1:-Create-Environment,-Time-Integrator,-and-Domain">
+<h3>Step 1: Create Environment, Time Integrator, and Domain<a class="headerlink" href="#Step-1:-Create-Environment,-Time-Integrator,-and-Domain" title="Link to this heading">#</a></h3>
+<p>Set up a Cartesian (cuboid) domain and use Strang splitting for time integration. These choices define the simulation skeleton before any particle data are attached.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># environment options</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">EnvironmentOptions</span><span class="p">()</span>
+
+<span class="c1"># time stepping</span>
+<span class="n">time_opts</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">Tend</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">split_algo</span><span class="o">=</span><span class="s2">&quot;Strang&quot;</span><span class="p">)</span>
+
+<span class="c1"># geometry</span>
+<span class="n">l1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span>
+<span class="n">r1</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">l3</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">r3</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">domain</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">Cuboid</span><span class="p">(</span><span class="n">l1</span><span class="o">=</span><span class="n">l1</span><span class="p">,</span> <span class="n">r1</span><span class="o">=</span><span class="n">r1</span><span class="p">,</span> <span class="n">l2</span><span class="o">=</span><span class="n">l2</span><span class="p">,</span> <span class="n">r2</span><span class="o">=</span><span class="n">r2</span><span class="p">,</span> <span class="n">l3</span><span class="o">=</span><span class="n">l3</span><span class="p">,</span> <span class="n">r3</span><span class="o">=</span><span class="n">r3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Step-2:-Define-the-Beltrami-Background">
+<h3>Step 2: Define the Beltrami Background<a class="headerlink" href="#Step-2:-Define-the-Beltrami-Background" title="Link to this heading">#</a></h3>
+<p>Next, define velocity, pressure, and density functions for the background equilibrium. We pass these to <code class="docutils literal notranslate"><span class="pre">GenericCartesianFluidEquilibrium</span></code>, which will later be used to initialize the particle state.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct Beltrami flow</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">u_fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="n">ux</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">uy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">uz</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">ux</span><span class="p">,</span> <span class="n">uy</span><span class="p">,</span> <span class="n">uz</span>
+
+<span class="n">p_fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">n_fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="c1"># put the functions in a generic equilibrium container</span>
+<span class="n">bel_flow</span> <span class="o">=</span> <span class="n">equils</span><span class="o">.</span><span class="n">GenericCartesianFluidEquilibrium</span><span class="p">(</span><span class="n">u_xyz</span><span class="o">=</span><span class="n">u_fun</span><span class="p">,</span> <span class="n">p_xyz</span><span class="o">=</span><span class="n">p_fun</span><span class="p">,</span> <span class="n">n_xyz</span><span class="o">=</span><span class="n">n_fun</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Step-3:-Choose-Grid-and-de-Rham-Options">
+<h3>Step 3: Choose Grid and de Rham Options<a class="headerlink" href="#Step-3:-Choose-Grid-and-de-Rham-Options" title="Link to this heading">#</a></h3>
+<p>Even for particle-based dynamics, Struphy uses spline-based projections for some fields. Here we define a tensor-product grid and matching de Rham settings.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fluid equilibrium (can be used as part of initial conditions)</span>
+<span class="n">equil</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># grid</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">TensorProductGrid</span><span class="p">(</span><span class="n">num_elements</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># derham options</span>
+<span class="n">bcs</span> <span class="o">=</span> <span class="p">((</span><span class="s2">&quot;free&quot;</span><span class="p">,</span> <span class="s2">&quot;free&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;free&quot;</span><span class="p">,</span> <span class="s2">&quot;free&quot;</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">derham_opts</span> <span class="o">=</span> <span class="n">DerhamOptions</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bcs</span><span class="o">=</span><span class="n">bcs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Step-4:-Instantiate-the-PressureLessSPH-Simulation">
+<h3>Step 4: Instantiate the <code class="docutils literal notranslate"><span class="pre">PressureLessSPH</span></code> Simulation<a class="headerlink" href="#Step-4:-Instantiate-the-PressureLessSPH-Simulation" title="Link to this heading">#</a></h3>
+<p>Create a lightweight model instance and combine it with the environment, domain, and discretization settings from the previous steps.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import model</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">PressureLessSPH</span>
+
+<span class="c1"># light-weight model instance</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">PressureLessSPH</span><span class="p">(</span><span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
+                 <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+                 <span class="n">time_opts</span><span class="o">=</span><span class="n">time_opts</span><span class="p">,</span>
+                 <span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">,</span>
+                 <span class="n">equil</span><span class="o">=</span><span class="n">equil</span><span class="p">,</span>
+                 <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+                 <span class="n">derham_opts</span><span class="o">=</span><span class="n">derham_opts</span><span class="p">,)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/hostedtoolcache/Python/3.10.20/x64/lib/python3.10/site-packages/struphy/models/species.py:198: UserWarning: Override equation parameter self.epsilon =1.0
+  warnings.warn(f&#34;Override equation parameter {self.epsilon =}&#34;)
+</pre></div></div>
+</div>
+</section>
+<section id="Step-5:-Configure-Marker-Loading-and-Saving">
+<h3>Step 5: Configure Marker Loading and Saving<a class="headerlink" href="#Step-5:-Configure-Marker-Loading-and-Saving" title="Link to this heading">#</a></h3>
+<p>Now set particle-marker parameters. In this example we:</p>
+<ul class="simple">
+<li><p>load <code class="docutils literal notranslate"><span class="pre">Np=1000</span></code> particles</p></li>
+<li><p>keep default weight construction</p></li>
+<li><p>apply reflective boundaries in <span class="math notranslate nohighlight">\(x,y\)</span> and periodic in <span class="math notranslate nohighlight">\(z\)</span></p></li>
+<li><p>save all markers via <code class="docutils literal notranslate"><span class="pre">n_markers=1.0</span></code></p></li>
+</ul>
+<p>We also keep sorting simple with one box per direction for this first run.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loading_params</span> <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span><span class="n">Np</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">weights_params</span> <span class="o">=</span> <span class="n">WeightsParameters</span><span class="p">()</span>
+<span class="n">boundary_params</span> <span class="o">=</span> <span class="n">BoundaryParameters</span><span class="p">(</span><span class="n">bc</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;reflect&quot;</span><span class="p">,</span> <span class="s2">&quot;reflect&quot;</span><span class="p">,</span> <span class="s2">&quot;periodic&quot;</span><span class="p">))</span>
+<span class="n">sorting_params</span> <span class="o">=</span> <span class="n">SortingParameters</span><span class="p">(</span><span class="n">boxes_per_dim</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">saving_params</span> <span class="o">=</span> <span class="n">SavingParameters</span><span class="p">(</span><span class="n">n_markers</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">cold_fluid</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span>
+    <span class="n">loading_params</span><span class="o">=</span><span class="n">loading_params</span><span class="p">,</span>
+    <span class="n">weights_params</span><span class="o">=</span><span class="n">weights_params</span><span class="p">,</span>
+    <span class="n">boundary_params</span><span class="o">=</span><span class="n">boundary_params</span><span class="p">,</span>
+    <span class="n">sorting_params</span><span class="o">=</span><span class="n">sorting_params</span><span class="p">,</span>
+    <span class="n">saving_params</span><span class="o">=</span><span class="n">saving_params</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Step-6:-Set-Propagator-Options">
+<h3>Step 6: Set Propagator Options<a class="headerlink" href="#Step-6:-Set-Propagator-Options" title="Link to this heading">#</a></h3>
+<p>Configure the particle pushers. The key detail is to pass the Beltrami pressure potential to <code class="docutils literal notranslate"><span class="pre">push_v</span></code>, so the velocity update uses the intended force field.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># propagator options</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ButcherTableau</span>
+
+<span class="n">butcher</span> <span class="o">=</span> <span class="n">ButcherTableau</span><span class="p">(</span><span class="n">algo</span><span class="o">=</span><span class="s2">&quot;forward_euler&quot;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span><span class="n">butcher</span><span class="o">=</span><span class="n">butcher</span><span class="p">)</span>
+
+<span class="n">phi</span> <span class="o">=</span> <span class="n">bel_flow</span><span class="o">.</span><span class="n">p0</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_v</span><span class="o">.</span><span class="n">phi</span> <span class="o">=</span> <span class="n">phi</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Step-7:-Apply-Initial-Conditions">
+<h3>Step 7: Apply Initial Conditions<a class="headerlink" href="#Step-7:-Apply-Initial-Conditions" title="Link to this heading">#</a></h3>
+<p>Attach the Beltrami equilibrium as the background state for the cold fluid species. No additional perturbation is added in this tutorial run.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># background, perturbations and initial conditions</span>
+<span class="n">model</span><span class="o">.</span><span class="n">cold_fluid</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">bel_flow</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Step-8:-Run,-Post-Process,-and-Visualize">
+<h3>Step 8: Run, Post-Process, and Visualize<a class="headerlink" href="#Step-8:-Run,-Post-Process,-and-Visualize" title="Link to this heading">#</a></h3>
+<p>Execute the simulation pipeline in order:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">run()</span></code> to advance particles in time</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pproc()</span></code> to build post-processed outputs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">load_plotting_data()</span></code> to bring diagnostics into memory</p></li>
+</ol>
+<p>Then plot marker trajectories to inspect how the Beltrami-driven flow evolves.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model PressureLessSPH ...
+Time stepping: 100%|██████████| 200/200 [00:01&lt;00:00, 154.23step/s]
+Struphy run finished.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1
+
+No feec fields found in hdf5 file, skipping post-processing of fields.
+Evaluation of 1000 marker orbits for cold_fluid
+100%|██████████| 201/201 [00:00&lt;00:00, 235.92it/s]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(201,)
+
+self.spline_values:
+
+self.orbits:
+    cold_fluid, shape = (201, 1000, 8)
+        Number of time points: 201
+        Number of particles:   1000
+        Number of attributes:  8
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">28</span><span class="p">))</span>
+
+<span class="n">orbits</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">orbits</span><span class="o">.</span><span class="n">cold_fluid</span>
+
+<span class="n">coloring</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">orbits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">orbits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="o">+</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">orbits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.0</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="n">time_opts</span><span class="o">.</span><span class="n">dt</span>
+<span class="n">Nt</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">t_grid</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">interval</span> <span class="o">=</span> <span class="n">Nt</span> <span class="o">/</span> <span class="mi">20</span>
+<span class="n">plot_ct</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nt</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="n">interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plot_ct</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">plot_ct</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">orbits</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">orbits</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">coloring</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;square&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;n0_scatter&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">l2</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gas at t=</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">plot_ct</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+i=0
+i=10
+i=20
+i=30
+i=40
+i=50
+i=60
+i=70
+i=80
+i=90
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_beltrami_sph_21_1.png" src="../../_images/_collections_tutorials_tutorial_beltrami_sph_21_1.png" />
+</div>
+</div>
+</section>
+<section id="Step-9:-Repeat-with-Structured-Marker-Loading">
+<h3>Step 9: Repeat with Structured Marker Loading<a class="headerlink" href="#Step-9:-Repeat-with-Structured-Marker-Loading" title="Link to this heading">#</a></h3>
+<p>To compare loading strategies, run a second simulation in a separate folder (<code class="docutils literal notranslate"><span class="pre">sim_2</span></code>) so outputs stay isolated from the first run.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># light-weight model instance</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">PressureLessSPH</span><span class="p">(</span><span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="c1"># environment options</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">EnvironmentOptions</span><span class="p">(</span><span class="n">sim_folder</span><span class="o">=</span><span class="s2">&quot;sim_2&quot;</span><span class="p">)</span>
+
+<span class="c1"># simulation instance</span>
+<span class="n">sim_tess</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">spawn_sister</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>This time, use tessellation-based loading so markers start on a regular grid-like pattern. This gives a useful contrast to random loading when you inspect the trajectory plots.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loading_params</span> <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span><span class="n">ppb</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">loading</span><span class="o">=</span><span class="s2">&quot;tesselation&quot;</span><span class="p">)</span>
+<span class="n">weights_params</span> <span class="o">=</span> <span class="n">WeightsParameters</span><span class="p">()</span>
+<span class="n">boundary_params</span> <span class="o">=</span> <span class="n">BoundaryParameters</span><span class="p">(</span><span class="n">bc</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;reflect&quot;</span><span class="p">,</span> <span class="s2">&quot;reflect&quot;</span><span class="p">,</span> <span class="s2">&quot;periodic&quot;</span><span class="p">))</span>
+<span class="n">sorting_params</span> <span class="o">=</span> <span class="n">SortingParameters</span><span class="p">(</span><span class="n">boxes_per_dim</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">saving_params</span> <span class="o">=</span> <span class="n">SavingParameters</span><span class="p">(</span><span class="n">n_markers</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">cold_fluid</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span>
+    <span class="n">loading_params</span><span class="o">=</span><span class="n">loading_params</span><span class="p">,</span>
+    <span class="n">weights_params</span><span class="o">=</span><span class="n">weights_params</span><span class="p">,</span>
+    <span class="n">boundary_params</span><span class="o">=</span><span class="n">boundary_params</span><span class="p">,</span>
+    <span class="n">sorting_params</span><span class="o">=</span><span class="n">sorting_params</span><span class="p">,</span>
+    <span class="n">saving_params</span><span class="o">=</span><span class="n">saving_params</span><span class="p">,</span>
+    <span class="n">bufsize</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># propagator options</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ButcherTableau</span>
+
+<span class="n">butcher</span> <span class="o">=</span> <span class="n">ButcherTableau</span><span class="p">(</span><span class="n">algo</span><span class="o">=</span><span class="s2">&quot;forward_euler&quot;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span><span class="n">butcher</span><span class="o">=</span><span class="n">butcher</span><span class="p">)</span>
+
+<span class="n">phi</span> <span class="o">=</span> <span class="n">bel_flow</span><span class="o">.</span><span class="n">p0</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_v</span><span class="o">.</span><span class="n">phi</span> <span class="o">=</span> <span class="n">phi</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># background, perturbations and initial conditions</span>
+<span class="n">model</span><span class="o">.</span><span class="n">cold_fluid</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">bel_flow</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_tess</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model PressureLessSPH ...
+Time stepping: 100%|██████████| 200/200 [00:01&lt;00:00, 138.05step/s]
+Struphy run finished.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_tess</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_2
+
+No feec fields found in hdf5 file, skipping post-processing of fields.
+Evaluation of 1024 marker orbits for cold_fluid
+100%|██████████| 201/201 [00:00&lt;00:00, 233.37it/s]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_tess</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_2/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(201,)
+
+self.spline_values:
+
+self.orbits:
+    cold_fluid, shape = (201, 1024, 8)
+        Number of time points: 201
+        Number of particles:   1024
+        Number of attributes:  8
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">28</span><span class="p">))</span>
+
+<span class="n">orbits</span> <span class="o">=</span> <span class="n">sim_tess</span><span class="o">.</span><span class="n">orbits</span><span class="o">.</span><span class="n">cold_fluid</span>
+
+<span class="n">coloring</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">orbits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">orbits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="o">+</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">orbits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.0</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="n">time_opts</span><span class="o">.</span><span class="n">dt</span>
+<span class="n">Nt</span> <span class="o">=</span> <span class="n">sim_tess</span><span class="o">.</span><span class="n">t_grid</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">interval</span> <span class="o">=</span> <span class="n">Nt</span> <span class="o">/</span> <span class="mi">20</span>
+<span class="n">plot_ct</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nt</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="n">interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plot_ct</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">plot_ct</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">orbits</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">orbits</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">coloring</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;square&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;n0_scatter&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">l2</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gas at t=</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">plot_ct</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+i=0
+i=10
+i=20
+i=30
+i=40
+i=50
+i=60
+i=70
+i=80
+i=90
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_beltrami_sph_31_1.png" src="../../_images/_collections_tutorials_tutorial_beltrami_sph_31_1.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="tutorial_particle_tracing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Particle tracing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tutorial_gas_expansion_sph.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Gas Expansion with <code class="docutils literal notranslate"><span class="pre">ViscousEulerSPH</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Pressure-Less-Flow-in-a-Beltrami-Force-Field">Pressure-Less Flow in a Beltrami Force Field</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1:-Create-Environment,-Time-Integrator,-and-Domain">Step 1: Create Environment, Time Integrator, and Domain</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2:-Define-the-Beltrami-Background">Step 2: Define the Beltrami Background</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-3:-Choose-Grid-and-de-Rham-Options">Step 3: Choose Grid and de Rham Options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-4:-Instantiate-the-PressureLessSPH-Simulation">Step 4: Instantiate the <code class="docutils literal notranslate"><span class="pre">PressureLessSPH</span></code> Simulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-5:-Configure-Marker-Loading-and-Saving">Step 5: Configure Marker Loading and Saving</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-6:-Set-Propagator-Options">Step 6: Set Propagator Options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-7:-Apply-Initial-Conditions">Step 7: Apply Initial Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-8:-Run,-Post-Process,-and-Visualize">Step 8: Run, Post-Process, and Visualize</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-9:-Repeat-with-Structured-Marker-Loading">Step 9: Repeat with Structured Marker Loading</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/_collections/tutorials/tutorial_beltrami_sph.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

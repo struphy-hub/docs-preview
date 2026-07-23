@@ -1,0 +1,1686 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>struphy.models.base &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/struphy/models/base';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href="../../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">struphy.models.base</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for struphy.models.base</h1><div class="highlight"><pre>
+<span></span>import logging
+import os
+from abc import ABCMeta, abstractmethod
+from textwrap import indent
+
+import cunumpy as xp
+from feectools.ddm.mpi import MockMPI
+from feectools.ddm.mpi import mpi as MPI
+
+try:
+    from IPython.display import HTML, Markdown, display
+except ImportError:
+
+    def HTML(data):
+        return data
+
+    def Markdown(data):
+        return data
+
+    def display(*objects, **kwargs):
+        return objects[0] if objects else None
+
+
+from line_profiler import profile
+from scope_profiler import ProfileManager
+
+from struphy import BaseUnits
+from struphy.io.options import LiteralOptions
+from struphy.models.scalars import Scalars
+from struphy.models.species import DiagnosticSpecies, FieldSpecies, FluidSpecies, ParticleSpecies, Species
+from struphy.models.variables import FEECVariable, PICVariable, SPHVariable
+from struphy.physics.physics import Units
+from struphy.pic.base import Particles
+from struphy.propagators.base import Propagator
+from struphy.utils.clone_config import CloneConfig
+from struphy.utils.docstring_converter import rst_to_html, rst_to_markdown
+from struphy.utils.utils import __class_with_params_repr_no_defaults__, all_class_params_are_default, all_subclasses
+
+logger = logging.getLogger(&quot;struphy&quot;)
+
+
+class StruphyModelMeta(ABCMeta):
+    def __iter__(cls):
+        return iter(all_subclasses(cls))
+
+
+<div class="viewcode-block" id="StruphyModel">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel">[docs]</a>
+class StruphyModel(metaclass=StruphyModelMeta):
+    &quot;&quot;&quot;
+    Abstract base class for all Struphy models.
+
+    This class defines the interface for plasma simulation models in Struphy. Concrete implementations
+    must specify the model type (Fluid, Kinetic, Hybrid, or Toy), define propagators for time integration,
+    and configure species (field, fluid, particle, and diagnostic). The class provides core functionality
+    for managing species, scalar quantities, time integration, and particle diagnostics.
+
+    Attributes
+    ----------
+    species : dict
+        Dictionary of all species (field, fluid, and particle) in the model.
+    field_species : dict
+        Dictionary of field species in the model.
+    fluid_species : dict
+        Dictionary of fluid species in the model.
+    particle_species : dict
+        Dictionary of particle species in the model.
+    diagnostic_species : dict
+        Dictionary of diagnostic species in the model.
+    scalars : Scalars or None
+        Scalar quantities to be tracked and saved during simulation.
+    prop_list : list
+        List of propagator objects controlling time integration.
+    clone_config : CloneConfig or None
+        Configuration for domain clones if used in parallelization.
+
+    Abstract Methods (must be implemented by subclasses)
+    ----------------------------------------------------
+    model_type : classmethod
+        Must return one of &quot;Fluid&quot;, &quot;Kinetic&quot;, &quot;Hybrid&quot;, or &quot;Toy&quot;.
+    bulk_species : property
+        Must specify the dominant plasma species.
+    velocity_scale : property
+        Must return velocity scale: &quot;alfvén&quot;, &quot;cyclotron&quot;, &quot;light&quot;, or &quot;thermal&quot;.
+    allocate_helpers : method
+        Must allocate helper arrays and perform initial solves.
+    Propagators : class
+        Must define the propagators used for time integration.
+    __init__ : method
+        Must perform a light-weight initialization of the model.
+
+    Notes
+    -----
+    All Struphy models must be subclasses of ``StruphyModel`` and should be added to ``struphy/models/``
+    in one of the modules: ``fluid.py``, ``kinetic.py``, ``hybrid.py``, or ``toy.py``.
+
+    Time integration is performed by calling the ``integrate()`` method with a time step and
+    splitting algorithm (Lie-Trotter or Strang). The model manages the execution of all propagators
+    in sequence to advance the simulation state.
+
+    Species management is handled automatically through property caching. Species attributes are
+    discovered at runtime and categorized by type.
+
+    Examples
+    --------
+    Subclasses should implement:
+
+    .. code-block:: python
+
+        class MyFluidModel(StruphyModel):
+            @classmethod
+            def model_type(cls):
+                return &quot;Fluid&quot;
+
+            @property
+            def bulk_species(self):
+                return self.electrons
+
+            @property
+            def velocity_scale(self):
+                return &quot;thermal&quot;
+
+            def allocate_helpers(self):
+                # Initialize helper arrays
+                pass
+
+            class Propagators:
+                # Define propagators
+                pass
+    &quot;&quot;&quot;
+
+    # ----------------
+    # Abstract methods
+    # ----------------
+
+<div class="viewcode-block" id="StruphyModel.model_type">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.model_type">[docs]</a>
+    @classmethod
+    @abstractmethod
+    def model_type(cls) -&gt; LiteralOptions.ModelTypes:
+        &quot;&quot;&quot;Model type (Fluid, Kinetic, Hybrid, or Toy)&quot;&quot;&quot;
+        pass</div>
+
+
+<div class="viewcode-block" id="StruphyModel.Propagators">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.Propagators">[docs]</a>
+    @abstractmethod
+    class Propagators:
+        pass</div>
+
+
+    @abstractmethod
+    def __init__(self):
+        pass
+
+    @property
+    @abstractmethod
+    def bulk_species() -&gt; Species:
+        &quot;&quot;&quot;Bulk species of the plasma. Must be an attribute of species_static().&quot;&quot;&quot;
+
+    @property
+    @abstractmethod
+    def velocity_scale() -&gt; str:
+        &quot;&quot;&quot;Velocity unit scale of the model.
+        Must be one of &quot;alfvén&quot;, &quot;cyclotron&quot;, &quot;light&quot; or &quot;thermal&quot;.&quot;&quot;&quot;
+
+<div class="viewcode-block" id="StruphyModel.allocate_helpers">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.allocate_helpers">[docs]</a>
+    @abstractmethod
+    def allocate_helpers(self):
+        &quot;&quot;&quot;Allocate helper arrays and perform initial solves if needed.&quot;&quot;&quot;</div>
+
+
+    # --------------
+    # Common methods
+    # --------------
+    def __repr__(self):
+        out = f&quot;{self.__class__.__name__}(\n&quot;
+        for k, v in self.params.items():
+            out += &quot; &quot; * 4
+            out += f&quot;{k}={v},\n&quot;
+        out += &quot;)&quot;
+        return out
+
+    def __repr_no_defaults__(self) -&gt; str:
+        return __class_with_params_repr_no_defaults__(self)
+
+    @property
+    def is_default(self):
+        return all_class_params_are_default(self)
+
+    # def __str__(self):
+    #     for k, v in self.__dict__.items():
+    #         logger.info(f&quot;{k + &#39;:&#39;:&lt;20}{v}&quot;)
+    #     return &quot;&quot;
+
+    # def __str__(self):
+    #     out = f&quot;{self.__class__.__name__}\n&quot;
+    #     for k, v in self.species.items():
+    #         out += f&quot;    {k}:\n&quot;
+    #         out += f&quot;{v}&quot;
+    #     return out
+
+    forced_heading_level = 5
+
+<div class="viewcode-block" id="StruphyModel.info">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.info">[docs]</a>
+    @classmethod
+    def info(cls):
+        summary = (
+            rst_to_html(cls.__doc__).split(&quot;Parameters&quot;)[0].split(&quot;&lt;&quot;)[0]
+            if cls.__doc__
+            else &quot;&quot;&quot;Description not available for this model.&quot;&quot;&quot;
+        )
+        summary = &quot; &quot;.join(summary.split())
+        doc = f&quot;**{summary}**\n&quot;
+        doc += rf&quot;&quot;&quot;To see detailed information on the model, run the following methods:
+        
+.. code-block:: python
+
+    {cls.name()}.pde()
+    {cls.name()}.normalization()
+    {cls.name()}.scalar_quantities()
+    {cls.name()}.discretization()
+    {cls.name()}.long_description()
+    {cls.name()}.examples()
+    {cls.name()}.use_cases()
+    {cls.name()}.cannot_be_used_for()
+&quot;&quot;&quot;
+        return display(HTML(rst_to_html(doc, forced_heading_level=cls.forced_heading_level)))</div>
+
+
+<div class="viewcode-block" id="StruphyModel.pde">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.pde">[docs]</a>
+    @classmethod
+    def pde(cls):
+        doc_pde = getattr(cls, &quot;doc_pde&quot;, None)
+        doc = doc_pde.__doc__ if doc_pde else &quot;&quot;&quot;PDE description not available for this model.&quot;&quot;&quot;
+        return display(HTML(rst_to_html(doc, forced_heading_level=cls.forced_heading_level)))</div>
+
+
+<div class="viewcode-block" id="StruphyModel.normalization">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.normalization">[docs]</a>
+    @classmethod
+    def normalization(cls):
+        doc_normalization = getattr(cls, &quot;doc_normalization&quot;, None)
+        doc = &quot;**Normalization:**\n&quot;
+        doc += (
+            doc_normalization.__doc__
+            if doc_normalization
+            else &quot;&quot;&quot;Description of normalization not available for this model.&quot;&quot;&quot;
+        )
+        return display(HTML(rst_to_html(doc, forced_heading_level=cls.forced_heading_level)))</div>
+
+
+<div class="viewcode-block" id="StruphyModel.scalar_quantities">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.scalar_quantities">[docs]</a>
+    @classmethod
+    def scalar_quantities(cls):
+        doc_scalar_quantities = getattr(cls, &quot;doc_scalar_quantities&quot;, None)
+        doc = (
+            doc_scalar_quantities.__doc__
+            if doc_scalar_quantities
+            else &quot;&quot;&quot;Description of scalar quantities not available for this model.&quot;&quot;&quot;
+        )
+        return display(HTML(rst_to_html(doc, forced_heading_level=cls.forced_heading_level)))</div>
+
+
+<div class="viewcode-block" id="StruphyModel.discretization">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.discretization">[docs]</a>
+    @classmethod
+    def discretization(cls):
+        doc_discretization = getattr(cls, &quot;doc_discretization&quot;, None)
+        doc = &quot;**Discretization (Propagators called in sequence):**\n&quot;
+        doc += (
+            doc_discretization()
+            if doc_discretization
+            else &quot;&quot;&quot;Description of discretization not available for this model.&quot;&quot;&quot;
+        )
+        return display(HTML(rst_to_html(doc, forced_heading_level=cls.forced_heading_level)))</div>
+
+
+<div class="viewcode-block" id="StruphyModel.long_description">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.long_description">[docs]</a>
+    @classmethod
+    def long_description(cls):
+        doc_long_description = getattr(cls, &quot;doc_long_description&quot;, None)
+        doc = &quot;**Long description:**\n&quot;
+        doc += (
+            doc_long_description.__doc__
+            if doc_long_description
+            else &quot;&quot;&quot;Long description not available for this model.&quot;&quot;&quot;
+        )
+        return display(HTML(rst_to_html(doc, forced_heading_level=cls.forced_heading_level)))</div>
+
+
+<div class="viewcode-block" id="StruphyModel.examples">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.examples">[docs]</a>
+    @classmethod
+    def examples(cls):
+        doc_examples = getattr(cls, &quot;doc_examples&quot;, None)
+        doc = &quot;**Examples:**\n&quot;
+        doc += doc_examples.__doc__ if doc_examples else &quot;&quot;&quot;Examples not available for this model.&quot;&quot;&quot;
+        return display(HTML(rst_to_html(doc, forced_heading_level=cls.forced_heading_level)))</div>
+
+
+<div class="viewcode-block" id="StruphyModel.use_cases">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.use_cases">[docs]</a>
+    @classmethod
+    def use_cases(cls):
+        doc_use_cases = getattr(cls, &quot;doc_use_cases&quot;, None)
+        doc = &quot;**Use cases:**\n&quot;
+        doc += doc_use_cases.__doc__ if doc_use_cases else &quot;&quot;&quot;Description of use cases not available for this model.&quot;&quot;&quot;
+        return display(HTML(rst_to_html(doc, forced_heading_level=cls.forced_heading_level)))</div>
+
+
+<div class="viewcode-block" id="StruphyModel.cannot_be_used_for">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.cannot_be_used_for">[docs]</a>
+    @classmethod
+    def cannot_be_used_for(cls):
+        doc_cannot_be_used_for = getattr(cls, &quot;doc_cannot_be_used_for&quot;, None)
+        doc = &quot;**Cannot be used for:**\n&quot;
+        doc += (
+            doc_cannot_be_used_for.__doc__
+            if doc_cannot_be_used_for
+            else &quot;&quot;&quot;Information on scenarios for which the model is not suitable is not available.&quot;&quot;&quot;
+        )
+        return display(HTML(rst_to_html(doc, forced_heading_level=cls.forced_heading_level)))</div>
+
+
+<div class="viewcode-block" id="StruphyModel.name">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.name">[docs]</a>
+    @classmethod
+    def name(cls) -&gt; str:
+        return cls.__name__</div>
+
+
+<div class="viewcode-block" id="StruphyModel.create_doc">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.create_doc">[docs]</a>
+    @classmethod
+    def create_doc(cls) -&gt; &quot;Documentation&quot;:
+        doc = Documentation(cls)
+        return doc</div>
+
+
+    @property
+    def scalars(self) -&gt; Scalars | None:
+        &quot;&quot;&quot;Scalars to be updated and saved during the simulation.&quot;&quot;&quot;
+        return getattr(self, &quot;_scalars&quot;, Scalars())
+
+    @scalars.setter
+    def scalars(self, value: Scalars):
+        assert isinstance(value, Scalars)
+        self._scalars = value
+
+<div class="viewcode-block" id="StruphyModel.update_scalar_quantities">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.update_scalar_quantities">[docs]</a>
+    @profile
+    def update_scalar_quantities(self):
+        &quot;&quot;&quot;Update scalar quantities by calling their .update() method.
+        This should be called at the end of each time step in the simulation loop.&quot;&quot;&quot;
+        if self.scalars is not None:
+            self.scalars.update()</div>
+
+
+<div class="viewcode-block" id="StruphyModel.print_scalar_quantities">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.print_scalar_quantities">[docs]</a>
+    def print_scalar_quantities(self):
+        &quot;&quot;&quot;
+        Check if scalars are not &quot;nan&quot; and print to screen.
+        &quot;&quot;&quot;
+        sq_str = &quot;&quot;
+        for key, scalar in self.scalars.dct.items():
+            val = scalar.value[0]
+            assert not xp.isnan(val), f&quot;Scalar {key} is {val}.&quot;
+            sq_str += f&quot;{key}:&quot;.ljust(25) + &quot;{:4.2e}\n&quot;.format(val).rjust(26)
+        print(sq_str)</div>
+
+
+<div class="viewcode-block" id="StruphyModel.setup_equation_params">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.setup_equation_params">[docs]</a>
+    def setup_equation_params(self, base_units: BaseUnits):
+        &quot;&quot;&quot;Compute units and set equation parameters for each fluid and kinetic species.&quot;&quot;&quot;
+        self.base_units = base_units
+        self.units = Units(base_units)
+
+        if self.bulk_species is None:
+            A_bulk = None
+            Z_bulk = None
+        else:
+            A_bulk = self.bulk_species.mass_number
+            Z_bulk = self.bulk_species.charge_number
+
+        self.units.derive_units(
+            velocity_scale=self.velocity_scale,
+            A_bulk=A_bulk,
+            Z_bulk=Z_bulk,
+        )
+
+        for _, species in self.fluid_species.items():
+            assert isinstance(species, FluidSpecies)
+            species.setup_equation_params(units=self.units)
+
+        for _, species in self.particle_species.items():
+            assert isinstance(species, ParticleSpecies)
+            species.setup_equation_params(units=self.units)</div>
+
+
+<div class="viewcode-block" id="StruphyModel.show_equation_params">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.show_equation_params">[docs]</a>
+    def show_equation_params(self):
+        &quot;&quot;&quot;Print the equation parameters for each species to screen.&quot;&quot;&quot;
+        for _, species in self.fluid_species.items():
+            assert isinstance(species, FluidSpecies)
+            species.equation_params.show()
+
+        for _, species in self.particle_species.items():
+            assert isinstance(species, ParticleSpecies)
+            species.equation_params.show()</div>
+
+
+<div class="viewcode-block" id="StruphyModel.integrate">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.integrate">[docs]</a>
+    @profile
+    def integrate(self, dt, split_algo=&quot;LieTrotter&quot;):
+        &quot;&quot;&quot;
+        Advance the model by a time step ``dt`` by sequentially calling its Propagators.
+
+        Parameters
+        ----------
+        dt : float
+            Time step of time integration.
+
+        split_algo : str
+            Splitting algorithm. Currently available: &quot;LieTrotter&quot; and &quot;Strang&quot;.
+        &quot;&quot;&quot;
+
+        # first order in time
+        if split_algo == &quot;LieTrotter&quot;:
+            for propagator in self.prop_list:
+                prop_name = propagator.__class__.__name__
+
+                with ProfileManager.profile_region(&quot;prop: &quot; + prop_name):
+                    propagator(dt)
+
+        # second order in time
+        elif split_algo == &quot;Strang&quot;:
+            assert len(self.prop_list) &gt; 1
+
+            for propagator in self.prop_list[:-1]:
+                prop_name = type(propagator).__name__
+                with ProfileManager.profile_region(&quot;prop: &quot; + prop_name):
+                    propagator(dt / 2)
+
+            propagator = self.prop_list[-1]
+            prop_name = type(propagator).__name__
+            with ProfileManager.profile_region(&quot;prop: &quot; + prop_name):
+                propagator(dt)
+
+            for propagator in self.prop_list[:-1][::-1]:
+                prop_name = type(propagator).__name__
+                with ProfileManager.profile_region(&quot;prop: &quot; + prop_name):
+                    propagator(dt / 2)
+
+        else:
+            raise NotImplementedError(
+                f&quot;Splitting scheme {split_algo} not available.&quot;,
+            )</div>
+
+
+<div class="viewcode-block" id="StruphyModel.update_markers_to_be_saved">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.update_markers_to_be_saved">[docs]</a>
+    @profile
+    def update_markers_to_be_saved(self):
+        &quot;&quot;&quot;
+        Writes markers with IDs that are supposed to be saved into corresponding array.
+        &quot;&quot;&quot;
+
+        for name, species in self.particle_species.items():
+            assert isinstance(species, ParticleSpecies)
+            assert len(species.variables) == 1, &quot;More than 1 variable per kinetic species is not allowed.&quot;
+            for _, var in species.variables.items():
+                assert isinstance(var, PICVariable | SPHVariable)
+                obj = var.particles
+                assert isinstance(obj, Particles)
+
+            if var.n_to_save &gt; 0:
+                markers_on_proc = xp.logical_and(
+                    obj.markers[:, -1] &gt;= 0.0,
+                    obj.markers[:, -1] &lt; var.n_to_save,
+                )
+                n_markers_on_proc = xp.count_nonzero(markers_on_proc)
+                var.saved_markers[:] = -1.0
+                var.saved_markers[:n_markers_on_proc] = obj.markers[markers_on_proc]</div>
+
+
+<div class="viewcode-block" id="StruphyModel.update_distr_functions">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.update_distr_functions">[docs]</a>
+    @profile
+    def update_distr_functions(self):
+        &quot;&quot;&quot;
+        Writes distribution functions slices that are supposed to be saved into corresponding array.
+        &quot;&quot;&quot;
+
+        dim_to_int = {&quot;e1&quot;: 0, &quot;e2&quot;: 1, &quot;e3&quot;: 2, &quot;v1&quot;: 3, &quot;v2&quot;: 4, &quot;v3&quot;: 5}
+
+        for name, species in self.particle_species.items():
+            assert isinstance(species, ParticleSpecies)
+            assert len(species.variables) == 1, &quot;More than 1 variable per kinetic species is not allowed.&quot;
+            for _, var in species.variables.items():
+                assert isinstance(var, PICVariable | SPHVariable)
+                obj = var.particles
+                assert isinstance(obj, Particles)
+
+                if obj.n_cols_diagnostics &gt; 0:
+                    for i in range(obj.n_cols_diagnostics):
+                        str_dn = f&quot;d{i + 1}&quot;
+                        dim_to_int[str_dn] = 3 + obj.vdim + 3 + i
+
+                for bin_plot in species.saving_params.binning_plots:
+                    comps = bin_plot.slice.split(&quot;_&quot;)
+                    components = [False] * (3 + obj.vdim + 3 + obj.n_cols_diagnostics)
+
+                    for comp in comps:
+                        components[dim_to_int[comp]] = True
+
+                    edges = bin_plot.bin_edges
+                    binning_quantity = bin_plot.output_quantity
+                    divide_by_jac = bin_plot.divide_by_jac
+                    f_slice, df_slice = obj.binning(
+                        components, edges, output_quantity=binning_quantity, divide_by_jac=divide_by_jac
+                    )
+
+                    bin_plot.f[:] = f_slice
+                    bin_plot.df[:] = df_slice
+
+                for kd_plot in species.saving_params.kernel_density_plots:
+                    h1 = 1 / obj.boxes_per_dim[0]
+                    h2 = 1 / obj.boxes_per_dim[1]
+                    h3 = 1 / obj.boxes_per_dim[2]
+
+                    ndim = xp.count_nonzero([d &gt; 1 for d in obj.boxes_per_dim])
+                    if ndim == 0:
+                        kernel_type = &quot;gaussian_3d&quot;
+                    else:
+                        kernel_type = &quot;gaussian_&quot; + str(ndim) + &quot;d&quot;
+
+                    pts = kd_plot.plot_pts
+                    n_sph = obj.eval_density(
+                        *pts,
+                        h1=h1,
+                        h2=h2,
+                        h3=h3,
+                        kernel_type=kernel_type,
+                        fast=True,
+                    )
+                    kd_plot.n_sph[:] = n_sph</div>
+
+
+<div class="viewcode-block" id="StruphyModel.generate_default_parameter_file">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.generate_default_parameter_file">[docs]</a>
+    def generate_default_parameter_file(
+        self,
+        path: str = None,
+        prompt: bool = True,
+    ):
+        &quot;&quot;&quot;Generate a parameter file with default options for each species,
+        and save it to the current input path.
+
+        The default name is params_&lt;model_name&gt;.yml.
+
+        Parameters
+        ----------
+        path : str
+            Alternative path to getcwd()/params_MODEL.py.
+
+        prompt : bool
+            Whether to prompt for overwriting the specified .yml file.
+
+        Returns
+        -------
+        params_path : str
+            The path of the parameter file.
+        &quot;&quot;&quot;
+
+        if path is None:
+            path = os.path.join(os.getcwd(), f&quot;params_{self.__class__.__name__}.py&quot;)
+
+        # create new default file
+        try:
+            file = open(path, &quot;x&quot;)
+        except FileExistsError:
+            if not prompt:
+                yn = &quot;Y&quot;
+            else:
+                yn = input(f&quot;\nFile {path} exists, overwrite (Y/n)? &quot;)
+            if yn in (&quot;&quot;, &quot;Y&quot;, &quot;y&quot;, &quot;yes&quot;, &quot;Yes&quot;):
+                file = open(path, &quot;w&quot;)
+            else:
+                logger.info(&quot;exiting ...&quot;)
+                exit()
+        except FileNotFoundError:
+            folder = os.path.join(&quot;/&quot;, *path.split(&quot;/&quot;)[:-1])
+            if not prompt:
+                yn = &quot;Y&quot;
+            else:
+                yn = input(f&quot;\nFolder {folder} does not exist, create (Y/n)? &quot;)
+            if yn in (&quot;&quot;, &quot;Y&quot;, &quot;y&quot;, &quot;yes&quot;, &quot;Yes&quot;):
+                os.makedirs(folder)
+                file = open(path, &quot;x&quot;)
+            else:
+                logger.info(&quot;exiting ...&quot;)
+                exit()
+
+        # loop over species to create parameter snippets
+        variables_params = &quot;&quot;
+        particle_params = &quot;&quot;&quot;\n# -------------------
+# Particle parameters
+# -------------------\n&quot;&quot;&quot;
+        init_bckgr_pic = &quot;\n# Background for kinetic species\n&quot;
+        has_feec = False
+        has_pic = False
+        has_sph = False
+        for sn, species in self.species.items():
+            assert isinstance(species, Species)
+
+            if isinstance(species, ParticleSpecies):
+                particle_params += &quot;\nloading_params = LoadingParameters()\n&quot;
+                particle_params += &quot;weights_params = WeightsParameters()\n&quot;
+                particle_params += &quot;boundary_params = BoundaryParameters()\n&quot;
+                particle_params += &quot;sorting_params = SortingParameters()\n&quot;
+                particle_params += &quot;saving_params = SavingParameters()\n&quot;
+                particle_params += f&quot;model.{sn}.set_markers(loading_params=loading_params,\n&quot;
+                txt = &quot;weights_params=weights_params,\n&quot;
+                particle_params += indent(txt, &quot; &quot; * len(f&quot;model.{sn}.set_markers(&quot;))
+                txt = &quot;boundary_params=boundary_params,\n&quot;
+                particle_params += indent(txt, &quot; &quot; * len(f&quot;model.{sn}.set_markers(&quot;))
+                txt = &quot;sorting_params=sorting_params,\n&quot;
+                particle_params += indent(txt, &quot; &quot; * len(f&quot;model.{sn}.set_markers(&quot;))
+                txt = &quot;saving_params=saving_params,\n&quot;
+                particle_params += indent(txt, &quot; &quot; * len(f&quot;model.{sn}.set_markers(&quot;))
+                txt = &quot;)\n&quot;
+                particle_params += indent(txt, &quot; &quot; * len(f&quot;model.{sn}.set_markers(&quot;))
+
+            for vn, var in species.variables.items():
+                variables_params += f&quot;model.{sn}.{vn}.save_data = True\n&quot;
+
+                if isinstance(var, FEECVariable):
+                    has_feec = True
+                    init_bckgr_feec = &quot;\n# Background for (some) FEEC variables\n&quot;
+                    init_pert_feec = &quot;\n# Perturbations for (some) FEEC variables\n&quot;
+                    if var.space in (&quot;H1&quot;, &quot;L2&quot;):
+                        init_bckgr_feec += f&quot;model.{sn}.{vn}.add_background(FieldsBackground())\n&quot;
+                        init_pert_feec += f&quot;model.{sn}.{vn}.add_perturbation(perturbations.TorusModesCos())\n&quot;
+                    else:
+                        init_bckgr_feec += f&quot;model.{sn}.{vn}.add_background(FieldsBackground())\n&quot;
+                        init_pert_feec += (
+                            f&quot;model.{sn}.{vn}.add_perturbation(perturbations.TorusModesCos(given_in_basis=&#39;v&#39;, comp=0))\n\
+model.{sn}.{vn}.add_perturbation(perturbations.TorusModesCos(given_in_basis=&#39;v&#39;, comp=1))\n\
+model.{sn}.{vn}.add_perturbation(perturbations.TorusModesCos(given_in_basis=&#39;v&#39;, comp=2))\n&quot;
+                        )
+
+                elif isinstance(var, PICVariable):
+                    has_pic = True
+                    init_pert_pic = &quot;\n# Perturbations for (some) kinetic species\n&quot;
+                    init_pert_pic += &quot;perturbation = perturbations.TorusModesCos()\n&quot;
+                    if &quot;6D&quot; in var.space:
+                        init_bckgr_pic += &quot;maxwellian_1 = maxwellians.Maxwellian3D(n=(1.0, None))\n&quot;
+                        init_bckgr_pic += &quot;maxwellian_2 = maxwellians.Maxwellian3D(n=(0.1, None))\n&quot;
+                        init_pert_pic += &quot;maxwellian_1pt = maxwellians.Maxwellian3D(n=(1.0, perturbation))\n&quot;
+                        init_pert_pic += &quot;init = maxwellian_1pt + maxwellian_2\n&quot;
+                        init_pert_pic += f&quot;model.{sn}.{vn}.add_initial_condition(init)\n&quot;
+                    elif &quot;5D&quot; in var.space:
+                        init_bckgr_pic += &quot;maxwellian_1 = maxwellians.GyroMaxwellian2D(n=(1.0, None), equil=equil)\n&quot;
+                        init_bckgr_pic += &quot;maxwellian_2 = maxwellians.GyroMaxwellian2D(n=(0.1, None), equil=equil)\n&quot;
+                        init_pert_pic += (
+                            &quot;maxwellian_1pt = maxwellians.GyroMaxwellian2D(n=(1.0, perturbation), equil=equil)\n&quot;
+                        )
+                        init_pert_pic += &quot;init = maxwellian_1pt + maxwellian_2\n&quot;
+                        init_pert_pic += f&quot;model.{sn}.{vn}.add_initial_condition(init)\n&quot;
+                    if &quot;3D&quot; in var.space:
+                        init_bckgr_pic += &quot;maxwellian_1 = maxwellians.ColdPlasma(n=(1.0, None))\n&quot;
+                        init_bckgr_pic += &quot;maxwellian_2 = maxwellians.ColdPlasma(n=(0.1, None))\n&quot;
+                        init_pert_pic += &quot;maxwellian_1pt = maxwellians.ColdPlasma(n=(1.0, perturbation))\n&quot;
+                        init_pert_pic += &quot;init = maxwellian_1pt + maxwellian_2\n&quot;
+                        init_pert_pic += f&quot;model.{sn}.{vn}.add_initial_condition(init)\n&quot;
+                    init_bckgr_pic += &quot;background = maxwellian_1 + maxwellian_2\n&quot;
+                    init_bckgr_pic += f&quot;model.{sn}.{vn}.add_background(background)\n&quot;
+
+                elif isinstance(var, SPHVariable):
+                    has_sph = True
+                    init_bckgr_sph = &quot;\n# Background for (some) sph variables\n&quot;
+                    init_pert_sph = &quot;\n# Perturbations for (some) sph variables\n&quot;
+                    init_bckgr_sph += &quot;background = equils.ConstantVelocity()\n&quot;
+                    init_bckgr_sph += f&quot;model.{sn}.{vn}.add_background(background)\n&quot;
+                    init_pert_sph += &quot;perturbation = perturbations.TorusModesCos()\n&quot;
+                    init_pert_sph += f&quot;model.{sn}.{vn}.add_perturbation(del_n=perturbation)\n&quot;
+
+        file.write(f&quot;&quot;&quot;# -----------------------------
+# Description of the simulation
+# -----------------------------
+# Please fill in a verbal description of the simulation. 
+# It will be printed at the beginning of the simulation and can be used to keep track of the different runs.
+
+name = \&quot;Default {self.__class__.__name__}\&quot;
+description = \&quot;\&quot;\&quot;\nThis is the default simulation for the model {self.__class__.__name__}. 
+It is meant to be a template for users to set up their own simulations with this model. 
+It contains all the necessary components of a Struphy simulation, including the model, 
+the environment options, the time stepping options, the geometry, the equilibrium, 
+the grid, the Derham options, and the initial conditions. 
+Users can modify this file to set up their own simulations with different parameters and initial conditions.\n\&quot;\&quot;\&quot;\n&quot;&quot;&quot;)
+
+        file.write(&quot;&quot;&quot;
+import logging
+from struphy import set_logging_level
+set_logging_level(logging.WARNING)\n&quot;&quot;&quot;)
+
+        file.write(&quot;&quot;&quot;\n# ------------------
+# Import Struphy API
+# ------------------\n&quot;&quot;&quot;)
+
+        file.write(&quot;&quot;&quot;\nfrom struphy import (
+    BaseUnits,
+    DerhamOptions,
+    EnvironmentOptions,
+    FieldsBackground,
+    Simulation,
+    Time,
+    domains,
+    equils,
+    grids,
+    perturbations,
+)\n&quot;&quot;&quot;)
+
+        if has_pic or has_sph:
+            file.write(&quot;&quot;&quot;\n# For particles:\nfrom struphy import (
+    BinningPlot,
+    BoundaryParameters,
+    KernelDensityPlot,
+    LoadingParameters,
+    WeightsParameters,
+    SortingParameters,
+    SavingParameters,
+    maxwellians,
+)\n&quot;&quot;&quot;)
+
+        file.write(&quot;&quot;&quot;\n# ---------------------
+# Instance of the model
+# ---------------------\n&quot;&quot;&quot;)
+
+        file.write(f&quot;\nfrom struphy.models import {self.__class__.__name__}\n&quot;)
+
+        file.write(&quot;\n# Units\n&quot;)
+        file.write(&quot;base_units = BaseUnits()\n&quot;)
+
+        file.write(&quot;\n# Model instance\n&quot;)
+        file.write(f&quot;model = {self.__class__.__name__}(base_units=base_units)\n&quot;)
+
+        file.write(&quot;\n# List all variables and decide whether to save their data\n&quot;)
+        file.write(variables_params)
+
+        file.write(&quot;&quot;&quot;\n# --------------------------
+# Instance of the simulation
+# --------------------------\n&quot;&quot;&quot;)
+
+        file.write(&quot;\n# Environment options\n&quot;)
+        file.write(&quot;env = EnvironmentOptions()\n&quot;)
+
+        file.write(&quot;\n# Time stepping\n&quot;)
+        file.write(&quot;time_opts = Time()\n&quot;)
+
+        file.write(&quot;\n# Geometry\n&quot;)
+        file.write(&quot;domain = domains.Cuboid()\n&quot;)
+
+        file.write(&quot;\n# Fluid equilibrium (can be used as part of initial conditions)\n&quot;)
+        file.write(&quot;equil = equils.HomogenSlab()\n&quot;)
+
+        # if has_feec:
+        grid = &quot;grid = grids.TensorProductGrid()\n&quot;
+        derham = &quot;derham_opts = DerhamOptions()\n&quot;
+        # else:
+        #     grid = &quot;grid = None\n&quot;
+        #     derham = &quot;derham_opts = None\n&quot;
+
+        file.write(&quot;\n# Grid\n&quot;)
+        file.write(grid)
+
+        file.write(&quot;\n# Derham options\n&quot;)
+        file.write(derham)
+
+        file.write(&quot;\n# Simulation object\n&quot;)
+        file.write(&quot;&quot;&quot;sim = Simulation(
+    model=model,
+    name=name,
+    description=description,
+    params_path=__file__,
+    env=env,
+    time_opts=time_opts,
+    domain=domain,
+    equil=equil,
+    grid=grid,
+    derham_opts=derham_opts,
+)\n&quot;&quot;&quot;)
+
+        if has_pic or has_sph:
+            file.write(particle_params)
+
+        file.write(&quot;&quot;&quot;\n# ------------------
+# Propagator options
+# ------------------\n\n&quot;&quot;&quot;)
+        for prop in self.propagators.__dict__:
+            file.write(f&quot;model.propagators.{prop}.options = model.propagators.{prop}.Options()\n&quot;)
+
+        file.write(&quot;&quot;&quot;\n# ------------------
+# Initial conditions
+# ------------------
+# Initial conditions are the sum of the background(s) and the perturbation(s).
+# If backgrounds or perturbations are not specified, they are assumed to be zero.\n&quot;&quot;&quot;)
+        if has_feec:
+            file.write(init_bckgr_feec)
+            file.write(init_pert_feec)
+        if has_pic:
+            file.write(&quot;&quot;&quot;
+# For kinetic species the background is mandatory.
+# For kinetic species, if add_initial_condition() is not called, the background is taken as the kinetic initial condition.
+# For kinetic species the perturbations are added to the moments of the distribution function (defined as tuples).\n&quot;&quot;&quot;)
+            file.write(init_bckgr_pic)
+            file.write(init_pert_pic)
+        if has_sph:
+            file.write(init_bckgr_sph)
+            file.write(init_pert_sph)
+
+        file.write(&#39;\nif __name__ == &quot;__main__&quot;:\n&#39;)
+        file.write(&quot;    sim.run()&quot;)
+
+        file.close()
+
+        logger.info(
+            f&quot;\nDefault parameter file for &#39;{self.__class__.__name__}&#39; has been created in the cwd ({path}).\n\
+You can now launch a simulation with &#39;python params_{self.__class__.__name__}.py&#39;&quot;,
+        )
+
+        return path</div>
+
+
+<div class="viewcode-block" id="StruphyModel.to_dict">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.to_dict">[docs]</a>
+    def to_dict(self) -&gt; dict:
+        &quot;&quot;&quot;Serialize the model configuration to a dictionary.&quot;&quot;&quot;
+        dct = {&quot;model&quot;: self.__class__.__name__}
+        return dct</div>
+
+
+<div class="viewcode-block" id="StruphyModel.from_dict">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.from_dict">[docs]</a>
+    @classmethod
+    def from_dict(cls, dct) -&gt; &quot;StruphyModel&quot;:
+        &quot;&quot;&quot;Deserialize a model configuration from a dictionary.&quot;&quot;&quot;
+        model_name = dct[&quot;model&quot;]
+        return cls.from_name(model_name)</div>
+
+
+<div class="viewcode-block" id="StruphyModel.from_name">
+<a class="viewcode-back" href="../../../sections/subsections/models-base.html#struphy.models.base.StruphyModel.from_name">[docs]</a>
+    @classmethod
+    def from_name(cls, name: str) -&gt; &quot;StruphyModel&quot;:
+        &quot;&quot;&quot;Instantiate a model from its name.&quot;&quot;&quot;
+        from struphy.models.utils import get_model_by_name
+
+        model_cls = get_model_by_name(name)
+        return model_cls()</div>
+
+
+    # -------------
+    # Model species
+    # -------------
+
+    @property
+    def field_species(self) -&gt; dict:
+        if not hasattr(self, &quot;_field_species&quot;):
+            self._field_species = {}
+            for k, v in self.__dict__.items():
+                if isinstance(v, FieldSpecies):
+                    self._field_species[k] = v
+        return self._field_species
+
+    @property
+    def fluid_species(self) -&gt; dict:
+        if not hasattr(self, &quot;_fluid_species&quot;):
+            self._fluid_species = {}
+            for k, v in self.__dict__.items():
+                if isinstance(v, FluidSpecies):
+                    self._fluid_species[k] = v
+        return self._fluid_species
+
+    @property
+    def particle_species(self) -&gt; dict:
+        if not hasattr(self, &quot;_particle_species&quot;):
+            self._particle_species = {}
+            for k, v in self.__dict__.items():
+                if isinstance(v, ParticleSpecies):
+                    self._particle_species[k] = v
+        return self._particle_species
+
+    @property
+    def diagnostic_species(self) -&gt; dict:
+        if not hasattr(self, &quot;_diagnostic_species&quot;):
+            self._diagnostic_species = {}
+            for k, v in self.__dict__.items():
+                if isinstance(v, DiagnosticSpecies):
+                    self._diagnostic_species[k] = v
+        return self._diagnostic_species
+
+    @property
+    def species(self):
+        if not hasattr(self, &quot;_species&quot;):
+            self._species = self.field_species | self.fluid_species | self.particle_species
+        return self._species
+
+    # -----------------
+    # Common properties
+    # -----------------
+
+    @property
+    def clone_config(self):
+        &quot;&quot;&quot;Config in case domain clones are used.&quot;&quot;&quot;
+        return self._clone_config
+
+    @clone_config.setter
+    def clone_config(self, new):
+        assert isinstance(new, CloneConfig) or new is None
+        self._clone_config = new
+
+    @property
+    def prop_list(self):
+        &quot;&quot;&quot;List of Propagator objects.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_prop_list&quot;):
+            self._prop_list = list(self.propagators.__dict__.values())
+        return self._prop_list
+
+    @property
+    def base_units(self) -&gt; BaseUnits:
+        &quot;&quot;&quot;Base units of the model.&quot;&quot;&quot;
+        return self._base_units
+
+    @base_units.setter
+    def base_units(self, new_units):
+        assert isinstance(new_units, BaseUnits)
+        self._base_units = new_units
+
+    @property
+    def units(self) -&gt; Units:
+        &quot;&quot;&quot;Units of the model.&quot;&quot;&quot;
+        return self._units
+
+    @units.setter
+    def units(self, new_units):
+        assert isinstance(new_units, Units)
+        self._units = new_units
+
+    @property
+    def params(self) -&gt; dict:
+        &quot;&quot;&quot;Model parameters passed to __init__() of the class, as dictionary.&quot;&quot;&quot;
+        if not hasattr(self, &quot;_params&quot;):
+            self._params = {}
+        return self._params
+
+    @params.setter
+    def params(self, new):
+        assert isinstance(new, dict)
+        if &quot;self&quot; in new:
+            new.pop(&quot;self&quot;)
+        if &quot;__class__&quot; in new:
+            new.pop(&quot;__class__&quot;)
+        self._params = new</div>
+
+
+
+class Documentation:
+    def __init__(
+        self,
+        cls: StruphyModel,
+    ):
+        self.description = self.Content(cls.__doc__ if cls.__doc__ else &quot;Description not available for this model.&quot;)
+        self.pde = self.Content(cls.doc_pde.__doc__ if cls.doc_pde else &quot;PDE description not available for this model.&quot;)
+        self.normalization = self.Content(
+            cls.doc_normalization.__doc__
+            if cls.doc_normalization
+            else &quot;Description of normalization not available for this model.&quot;
+        )
+        self.scalar_quantities = self.Content(
+            cls.doc_scalar_quantities.__doc__
+            if cls.doc_scalar_quantities
+            else &quot;Description of scalar quantities not available for this model.&quot;
+        )
+        self.discretization = self.Content(
+            cls.doc_discretization()
+            if cls.doc_discretization
+            else &quot;Description of discretization not available for this model.&quot;
+        )
+        self.long_description = self.Content(
+            cls.doc_long_description.__doc__
+            if cls.doc_long_description
+            else &quot;Long description not available for this model.&quot;
+        )
+        self.examples = self.Content(
+            cls.doc_examples.__doc__ if cls.doc_examples else &quot;Examples not available for this model.&quot;
+        )
+        self.use_cases = self.Content(
+            cls.doc_use_cases.__doc__ if cls.doc_use_cases else &quot;Use cases not available for this model.&quot;
+        )
+        self.cannot_be_used_for = self.Content(
+            cls.doc_cannot_be_used_for.__doc__
+            if cls.doc_cannot_be_used_for
+            else &quot;Information on scenarios for which the model is not suitable is not available.&quot;
+        )
+        self.model_properties = self.Content(
+            f&quot;**Model type:** {cls.model_type()}\n- **Velocity scale:** {cls.velocity_scale}\n- **Bulk species:** {cls.bulk_species}&quot;
+        )
+
+    class Content:
+        def __init__(self, rst, md=None, html=None):
+            self.rst = rst
+            self.md = md or rst_to_markdown(rst)
+            self.html = html or rst_to_html(rst)
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

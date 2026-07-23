@@ -1,0 +1,2413 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Particle tracing &#8212; struphy 3.2.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_collections/tutorials/tutorial_particle_tracing';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SPH in Beltrami force field" href="tutorial_beltrami_sph.html" />
+    <link rel="prev" title="Kinetic Plasma Dynamics" href="tutorial_vlasov_ampere_one_species_weak_landau.html" />
+    <link href="../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.2.0 documentation - Home"/>
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.2.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="tutorial_vlasov_ampere_one_species_weak_landau.html"
+                          title="previous chapter">Kinetic Plasma Dynamics</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="tutorial_beltrami_sph.html"
+                          title="next chapter">SPH in Beltrami force field</a></p>
+  </div></div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../sections/tutorials.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Particle tracing</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Particle-tracing">
+<h1>Particle tracing<a class="headerlink" href="#Particle-tracing" title="Link to this heading">#</a></h1>
+<p>In this tutorial you will build and compare particle-tracing simulations with the toy models <a class="reference external" href="https://struphy.pages.mpcdf.de/struphy/sections/subsections/models_toy.html#struphy.models.toy.Vlasov">Vlasov</a> and <a class="reference external" href="https://struphy.pages.mpcdf.de/struphy/sections/subsections/models_toy.html#struphy.models.toy.GuidingCenter">GuidingCenter</a>.</p>
+<p>By the end, you will know how to:</p>
+<ol class="arabic simple">
+<li><p>change the geometry,</p></li>
+<li><p>choose different particle loading strategies,</p></li>
+<li><p>add a static background magnetic field.</p></li>
+</ol>
+<section id="Part-1:-Particles-in-a-cylinder">
+<h2>Part 1: Particles in a cylinder<a class="headerlink" href="#Part-1:-Particles-in-a-cylinder" title="Link to this heading">#</a></h2>
+<p>As in Tutorial 2, we recreate the setup directly in the notebook so each option is visible and easy to modify. If you prefer starting from default launch files in a terminal, run:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struphy params Vlasov
+struphy params GuidingCenter
+</pre></div>
+</div>
+<p>Here we set the simulation domain <span class="math notranslate nohighlight">\(\Omega\)</span> to a cylinder and compare two sampling strategies for particle positions:</p>
+<ul class="simple">
+<li><p>uniform in logical space <span class="math notranslate nohighlight">\([0,1]^3 = F^{-1}(\Omega)\)</span>,</p></li>
+<li><p>uniform directly in the physical cylinder <span class="math notranslate nohighlight">\(\Omega\)</span>.</p></li>
+</ul>
+<p>Start by importing the API and the model:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseUnits</span><span class="p">,</span> <span class="n">EnvironmentOptions</span><span class="p">,</span> <span class="n">Time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">equils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">domains</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">grids</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DerhamOptions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">maxwellians</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">BoundaryParameters</span><span class="p">,</span>
+                     <span class="n">LoadingParameters</span><span class="p">,</span>
+                     <span class="n">WeightsParameters</span><span class="p">,</span>
+                     <span class="n">SortingParameters</span><span class="p">,</span>
+                     <span class="n">SavingParameters</span><span class="p">,</span>
+                     <span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Simulation</span>
+
+<span class="c1"># import model</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Vlasov</span>
+</pre></div>
+</div>
+</div>
+<section id="Step-1:-define-separate-output-folders">
+<h3>Step 1: define separate output folders<a class="headerlink" href="#Step-1:-define-separate-output-folders" title="Link to this heading">#</a></h3>
+<p>We will run two comparable simulations and save them in different output folders. Set the folder names through environment variables:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># light-weight model instances</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Vlasov</span><span class="p">()</span>
+<span class="n">model_2</span> <span class="o">=</span> <span class="n">Vlasov</span><span class="p">()</span>
+
+<span class="c1"># environment options</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">EnvironmentOptions</span><span class="p">()</span>
+<span class="n">env_2</span> <span class="o">=</span> <span class="n">EnvironmentOptions</span><span class="p">(</span><span class="n">sim_folder</span><span class="o">=</span><span class="s2">&quot;sim_2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Step-2:-set-shared-simulation-options">
+<h3>Step 2: set shared simulation options<a class="headerlink" href="#Step-2:-set-shared-simulation-options" title="Link to this heading">#</a></h3>
+<p>Keep the generic options identical in both runs so the loading strategy is the main difference. We perform only one time step, use a cylindrical geometry, and leave the equilibrium empty:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># time stepping</span>
+<span class="n">time_opts</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Tend</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="c1"># geometry</span>
+<span class="n">a1</span> <span class="o">=</span> <span class="mf">1e-6</span> <span class="c1"># to avoid polar singularity, we cut a small hole around the axis.</span>
+<span class="n">a2</span> <span class="o">=</span> <span class="mf">5.0</span>
+<span class="n">Lz</span> <span class="o">=</span> <span class="mf">20.0</span>
+<span class="n">domain</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">HollowCylinder</span><span class="p">(</span><span class="n">a1</span><span class="o">=</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="o">=</span><span class="n">a2</span><span class="p">,</span> <span class="n">Lz</span><span class="o">=</span><span class="n">Lz</span><span class="p">)</span>
+
+<span class="c1"># fluid equilibrium (can be used as part of initial conditions)</span>
+<span class="n">equil</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># grid</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">TensorProductGrid</span><span class="p">()</span>
+
+<span class="c1"># derham options</span>
+<span class="n">derham_opts</span> <span class="o">=</span> <span class="n">DerhamOptions</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Step-3:-instantiate-the-first-simulation">
+<h3>Step 3: instantiate the first simulation<a class="headerlink" href="#Step-3:-instantiate-the-first-simulation" title="Link to this heading">#</a></h3>
+<p>Create the first simulation object with the baseline particle loading:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
+                 <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+                 <span class="n">time_opts</span><span class="o">=</span><span class="n">time_opts</span><span class="p">,</span>
+                 <span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">,</span>
+                 <span class="n">equil</span><span class="o">=</span><span class="n">equil</span><span class="p">,</span>
+                 <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+                 <span class="n">derham_opts</span><span class="o">=</span><span class="n">derham_opts</span><span class="p">,)</span>
+</pre></div>
+</div>
+</div>
+<p>Struphy provides a convenient way to clone a simulation and change only selected parameters.</p>
+<p>Use that pattern here to create a second simulation with modified model/environment options:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_2</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">spawn_sister</span><span class="p">(</span><span class="n">model</span><span class="o">=</span> <span class="n">model_2</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">env_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Step-4:-inspect-the-domain">
+<h3>Step 4: inspect the domain<a class="headerlink" href="#Step-4:-inspect-the-domain" title="Link to this heading">#</a></h3>
+<p>Before changing the loading options, verify the simulation domain visually:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">domain</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_particle_tracing_11_0.png" src="../../_images/_collections_tutorials_tutorial_particle_tracing_11_0.png" />
+</div>
+</div>
+<p>For the second simulation, set <code class="docutils literal notranslate"><span class="pre">spatial=&quot;disc&quot;</span></code> in the loading parameters.</p>
+<p>This samples particles uniformly on the cylinder cross section, which makes it easier to compare against logical-space loading:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># species parameters</span>
+<span class="n">loading_params</span> <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span><span class="n">Np</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">loading_params_2</span> <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span><span class="n">Np</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">spatial</span><span class="o">=</span><span class="s2">&quot;disc&quot;</span><span class="p">)</span>
+
+<span class="n">weights_params</span> <span class="o">=</span> <span class="n">WeightsParameters</span><span class="p">()</span>
+<span class="n">boundary_params</span> <span class="o">=</span> <span class="n">BoundaryParameters</span><span class="p">()</span>
+<span class="n">saving_params</span> <span class="o">=</span> <span class="n">SavingParameters</span><span class="p">(</span><span class="n">n_markers</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span>
+    <span class="n">loading_params</span><span class="o">=</span><span class="n">loading_params</span><span class="p">,</span>
+    <span class="n">weights_params</span><span class="o">=</span><span class="n">weights_params</span><span class="p">,</span>
+    <span class="n">boundary_params</span><span class="o">=</span><span class="n">boundary_params</span><span class="p">,</span>
+    <span class="n">saving_params</span><span class="o">=</span><span class="n">saving_params</span>
+<span class="p">)</span>
+<span class="n">model_2</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span>
+    <span class="n">loading_params</span><span class="o">=</span><span class="n">loading_params_2</span><span class="p">,</span>
+    <span class="n">weights_params</span><span class="o">=</span><span class="n">weights_params</span><span class="p">,</span>
+    <span class="n">boundary_params</span><span class="o">=</span><span class="n">boundary_params</span><span class="p">,</span>
+    <span class="n">saving_params</span><span class="o">=</span><span class="n">saving_params</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Use identical propagator options and initial conditions in both runs so that only the loading choice changes the result:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># propagator options</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+
+<span class="n">model_2</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model_2</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+<span class="n">model_2</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model_2</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initial conditions (background + perturbation)</span>
+<span class="n">perturbation</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">background</span> <span class="o">=</span> <span class="n">maxwellians</span><span class="o">.</span><span class="n">Maxwellian3D</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">perturbation</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+<span class="n">model_2</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Step-5:-run-simulation-A">
+<h3>Step 5: run simulation A<a class="headerlink" href="#Step-5:-run-simulation-A" title="Link to this heading">#</a></h3>
+<p>Execute the first simulation:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model Vlasov ...
+WARNING: Class &#34;BasisProjectionOperators&#34; called with degree=(1, 1, 1) (interpolation of piece-wise constants should be avoided).
+Time stepping: 100%|██████████| 1/1 [00:00&lt;00:00, 107.18step/s]
+Struphy run finished.
+</pre></div></div>
+</div>
+</section>
+<section id="Step-6:-run-simulation-B">
+<h3>Step 6: run simulation B<a class="headerlink" href="#Step-6:-run-simulation-B" title="Link to this heading">#</a></h3>
+<p>Now execute the second simulation with disc-based spatial loading:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_2</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model Vlasov ...
+WARNING: Class &#34;BasisProjectionOperators&#34; called with degree=(1, 1, 1) (interpolation of piece-wise constants should be avoided).
+Time stepping: 100%|██████████| 1/1 [00:00&lt;00:00, 115.60step/s]
+Struphy run finished.
+</pre></div></div>
+</div>
+</section>
+<section id="Step-7:-compare-initial-particle-distributions">
+<h3>Step 7: compare initial particle distributions<a class="headerlink" href="#Step-7:-compare-initial-particle-distributions" title="Link to this heading">#</a></h3>
+<p>Post-process both runs, load the generated data, and plot initial particle positions on a cylinder cross section.</p>
+<p>This plot is the key check for understanding how loading in logical space differs from loading in physical space:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1
+
+No feec fields found in hdf5 file, skipping post-processing of fields.
+Evaluation of 1000 marker orbits for kinetic_ions
+100%|██████████| 2/2 [00:00&lt;00:00, 212.93it/s]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_2</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_2
+
+No feec fields found in hdf5 file, skipping post-processing of fields.
+Evaluation of 1000 marker orbits for kinetic_ions
+100%|██████████| 2/2 [00:00&lt;00:00, 219.15it/s]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(2,)
+
+self.spline_values:
+
+self.orbits:
+    kinetic_ions, shape = (2, 1000, 8)
+        Number of time points: 2
+        Number of particles:   1000
+        Number of attributes:  8
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_2</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_2/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(2,)
+
+self.spline_values:
+
+self.orbits:
+    kinetic_ions, shape = (2, 1000, 8)
+        Number of time points: 2
+        Number of particles:   1000
+        Number of attributes:  8
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">orbits</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">orbits</span><span class="o">.</span><span class="n">kinetic_ions</span>
+<span class="n">orbits_uni</span> <span class="o">=</span> <span class="n">sim_2</span><span class="o">.</span><span class="n">orbits</span><span class="o">.</span><span class="n">kinetic_ions</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">orbits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">orbits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">circle1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">a2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;sim_1: draw uniform in logical space&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">orbits_uni</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">orbits_uni</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">circle2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">a2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;sim_2: draw uniform on disc&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 1.0, &#39;sim_2: draw uniform on disc&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_particle_tracing_26_1.png" src="../../_images/_collections_tutorials_tutorial_particle_tracing_26_1.png" />
+</div>
+</div>
+</section>
+<section id="Optional:-quasi-uniform-marker-loading-(Sobol)">
+<h3>Optional: quasi-uniform marker loading (Sobol)<a class="headerlink" href="#Optional:-quasi-uniform-marker-loading-(Sobol)" title="Link to this heading">#</a></h3>
+<p>For a more homogeneous particle representation with limited particle count, use Sobol-based loading.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">loading=&quot;sobol_standard&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">loading=&quot;sobol_antithetic&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">LoadingParameters</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env_3</span> <span class="o">=</span> <span class="n">EnvironmentOptions</span><span class="p">(</span><span class="n">sim_folder</span><span class="o">=</span><span class="s2">&quot;sim_3&quot;</span><span class="p">)</span>
+<span class="n">model_3</span> <span class="o">=</span> <span class="n">Vlasov</span><span class="p">()</span>
+<span class="n">sim_3</span> <span class="o">=</span> <span class="n">Simulation</span><span class="o">.</span><span class="n">spawn_sister</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">env_3</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model_3</span><span class="p">)</span>
+
+<span class="c1"># species parameters</span>
+<span class="n">loading_params_3</span> <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span><span class="n">Np</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">spatial</span><span class="o">=</span><span class="s2">&quot;disc&quot;</span><span class="p">,</span> <span class="n">loading</span><span class="o">=</span><span class="s2">&quot;sobol_standard&quot;</span><span class="p">)</span>
+
+<span class="n">model_3</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span>
+    <span class="n">loading_params</span><span class="o">=</span><span class="n">loading_params_3</span><span class="p">,</span>
+    <span class="n">weights_params</span><span class="o">=</span><span class="n">weights_params</span><span class="p">,</span>
+    <span class="n">boundary_params</span><span class="o">=</span><span class="n">boundary_params</span><span class="p">,</span>
+    <span class="n">saving_params</span><span class="o">=</span><span class="n">saving_params</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># propagator options</span>
+<span class="n">model_3</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model_3</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+<span class="n">model_3</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model_3</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+
+<span class="c1"># initial conditions (background + perturbation)</span>
+<span class="n">model_3</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+
+<span class="n">sim_3</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">sim_3</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+<span class="n">sim_3</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">orbits_standard</span> <span class="o">=</span> <span class="n">sim_3</span><span class="o">.</span><span class="n">orbits</span><span class="o">.</span><span class="n">kinetic_ions</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">orbits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">orbits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">circle1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">a2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;sim_1: draw uniform in logical space&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">orbits_uni</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">orbits_uni</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">circle2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">a2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;sim_2: draw uniform on disc&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">orbits_standard</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">orbits_standard</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">circle3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">a2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;sim_3: draw using sobol_standard&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model Vlasov ...
+WARNING: Class &#34;BasisProjectionOperators&#34; called with degree=(1, 1, 1) (interpolation of piece-wise constants should be avoided).
+Time stepping: 100%|██████████| 1/1 [00:00&lt;00:00, 111.23step/s]
+Struphy run finished.
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_3
+
+No feec fields found in hdf5 file, skipping post-processing of fields.
+Evaluation of 1000 marker orbits for kinetic_ions
+100%|██████████| 2/2 [00:00&lt;00:00, 220.57it/s]
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_3/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(2,)
+
+self.spline_values:
+
+self.orbits:
+    kinetic_ions, shape = (2, 1000, 8)
+        Number of time points: 2
+        Number of particles:   1000
+        Number of attributes:  8
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 1.0, &#39;sim_3: draw using sobol_standard&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_particle_tracing_28_2.png" src="../../_images/_collections_tutorials_tutorial_particle_tracing_28_2.png" />
+</div>
+</div>
+</section>
+<section id="Optional:-antithetic-Sobol-loading">
+<h3>Optional: antithetic Sobol loading<a class="headerlink" href="#Optional:-antithetic-Sobol-loading" title="Link to this heading">#</a></h3>
+<p>Repeat the same setup with <code class="docutils literal notranslate"><span class="pre">loading=&quot;sobol_antithetic&quot;</span></code> if you want a variance-reduced counterpart to standard Sobol loading:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env_3</span> <span class="o">=</span> <span class="n">EnvironmentOptions</span><span class="p">(</span><span class="n">sim_folder</span><span class="o">=</span><span class="s2">&quot;sim_3&quot;</span><span class="p">)</span>
+<span class="n">model_3</span> <span class="o">=</span> <span class="n">Vlasov</span><span class="p">()</span>
+<span class="n">sim_3</span> <span class="o">=</span> <span class="n">Simulation</span><span class="o">.</span><span class="n">spawn_sister</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">env_3</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model_3</span><span class="p">)</span>
+
+<span class="c1"># species parameters</span>
+<span class="n">loading_params_3</span> <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span><span class="n">Np</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">spatial</span><span class="o">=</span><span class="s2">&quot;disc&quot;</span><span class="p">,</span> <span class="n">loading</span><span class="o">=</span><span class="s2">&quot;sobol_standard&quot;</span><span class="p">)</span>
+
+<span class="n">model_3</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span>
+    <span class="n">loading_params</span><span class="o">=</span><span class="n">loading_params_3</span><span class="p">,</span>
+    <span class="n">weights_params</span><span class="o">=</span><span class="n">weights_params</span><span class="p">,</span>
+    <span class="n">boundary_params</span><span class="o">=</span><span class="n">boundary_params</span><span class="p">,</span>
+    <span class="n">saving_params</span><span class="o">=</span><span class="n">saving_params</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># propagator options</span>
+<span class="n">model_3</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model_3</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+<span class="n">model_3</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model_3</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+
+<span class="c1"># initial conditions (background + perturbation)</span>
+<span class="n">model_3</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+
+<span class="n">sim_3</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">sim_3</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+<span class="n">sim_3</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">orbits_standard</span> <span class="o">=</span> <span class="n">sim_3</span><span class="o">.</span><span class="n">orbits</span><span class="o">.</span><span class="n">kinetic_ions</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">orbits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">orbits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">circle1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">a2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;sim_1: draw uniform in logical space&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">orbits_uni</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">orbits_uni</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">circle2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">a2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;sim_2: draw uniform on disc&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">orbits_standard</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">orbits_standard</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">circle3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">a2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;sim_3: draw using sobol_standard&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model Vlasov ...
+WARNING: Class &#34;BasisProjectionOperators&#34; called with degree=(1, 1, 1) (interpolation of piece-wise constants should be avoided).
+Time stepping: 100%|██████████| 1/1 [00:00&lt;00:00, 113.89step/s]
+Struphy run finished.
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_3
+
+No feec fields found in hdf5 file, skipping post-processing of fields.
+Evaluation of 1000 marker orbits for kinetic_ions
+100%|██████████| 2/2 [00:00&lt;00:00, 215.11it/s]
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_3/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(2,)
+
+self.spline_values:
+
+self.orbits:
+    kinetic_ions, shape = (2, 1000, 8)
+        Number of time points: 2
+        Number of particles:   1000
+        Number of attributes:  8
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 1.0, &#39;sim_3: draw using sobol_standard&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_particle_tracing_30_2.png" src="../../_images/_collections_tutorials_tutorial_particle_tracing_30_2.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="Part-2:-Reflecting-boundary-conditions">
+<h2>Part 2: Reflecting boundary conditions<a class="headerlink" href="#Part-2:-Reflecting-boundary-conditions" title="Link to this heading">#</a></h2>
+<p>Next, create a new simulation with 50 time steps and 15 particles in the cylinder.</p>
+<p>In addition, enable reflecting boundary conditions in the radial direction. In Struphy this corresponds to logical direction <span class="math notranslate nohighlight">\(\eta_1\)</span>:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_opts</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Tend</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="n">loading_params</span> <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span><span class="n">Np</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">spatial</span><span class="o">=</span><span class="s2">&quot;disc&quot;</span><span class="p">)</span>
+<span class="n">boundary_params</span> <span class="o">=</span> <span class="n">BoundaryParameters</span><span class="p">(</span><span class="n">bc</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;reflect&quot;</span><span class="p">,</span> <span class="s2">&quot;periodic&quot;</span><span class="p">,</span> <span class="s2">&quot;periodic&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># light-weight model instance</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Vlasov</span><span class="p">()</span>
+
+<span class="n">sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
+                 <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+                 <span class="n">time_opts</span><span class="o">=</span><span class="n">time_opts</span><span class="p">,</span>
+                 <span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">,</span>
+                 <span class="n">equil</span><span class="o">=</span><span class="n">equil</span><span class="p">,</span>
+                 <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+                 <span class="n">derham_opts</span><span class="o">=</span><span class="n">derham_opts</span><span class="p">,)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span>
+    <span class="n">loading_params</span><span class="o">=</span><span class="n">loading_params</span><span class="p">,</span>
+    <span class="n">weights_params</span><span class="o">=</span><span class="n">weights_params</span><span class="p">,</span>
+    <span class="n">boundary_params</span><span class="o">=</span><span class="n">boundary_params</span><span class="p">,</span>
+    <span class="n">saving_params</span><span class="o">=</span><span class="n">saving_params</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Set propagator options and initial conditions as in the previous section:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># propagator options</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+
+<span class="c1"># initial conditions (background + perturbation)</span>
+<span class="n">perturbation</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">background</span> <span class="o">=</span> <span class="n">maxwellians</span><span class="o">.</span><span class="n">Maxwellian3D</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">perturbation</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Run the simulation, post-process the output, and plot the resulting trajectories to verify reflections at the radial boundary:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model Vlasov ...
+WARNING: Class &#34;BasisProjectionOperators&#34; called with degree=(1, 1, 1) (interpolation of piece-wise constants should be avoided).
+Time stepping: 100%|██████████| 50/50 [00:00&lt;00:00, 268.83step/s]
+Struphy run finished.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1
+
+No feec fields found in hdf5 file, skipping post-processing of fields.
+Evaluation of 15 marker orbits for kinetic_ions
+100%|██████████| 51/51 [00:00&lt;00:00, 845.41it/s]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(51,)
+
+self.spline_values:
+
+self.orbits:
+    kinetic_ions, shape = (51, 15, 8)
+        Number of time points: 51
+        Number of particles:   15
+        Number of attributes:  8
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<p>Under <code class="docutils literal notranslate"><span class="pre">sim.orbits[&lt;species_name&gt;]</span></code>, Struphy stores orbit data in a 3D NumPy array:</p>
+<ul class="simple">
+<li><p>axis 0: time step,</p></li>
+<li><p>axis 1: particle index,</p></li>
+<li><p>axis 2: particle attributes.</p></li>
+</ul>
+<p>The first three attributes are particle positions, followed by velocities and then weights (initial and time-dependent).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orbits</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">orbits</span><span class="o">.</span><span class="n">kinetic_ions</span>
+
+<span class="n">Nt</span> <span class="o">=</span> <span class="n">orbits</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Np</span> <span class="o">=</span> <span class="n">orbits</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">Nattr</span> <span class="o">=</span> <span class="n">orbits</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;tab:blue&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:orange&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:green&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:red&quot;</span><span class="p">]</span>
+
+<span class="c1"># create alpha for color scaling</span>
+<span class="n">Tend</span> <span class="o">=</span> <span class="n">time_opts</span><span class="o">.</span><span class="n">Tend</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">Nt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># loop through particles, plot all time steps</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Np</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">orbits</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">orbits</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+
+<span class="n">circle1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">a2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">Nt</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> time steps (full color at t=0)&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_particle_tracing_43_0.png" src="../../_images/_collections_tutorials_tutorial_particle_tracing_43_0.png" />
+</div>
+</div>
+</section>
+<section id="Part-3:-Particles-in-a-cylinder-with-a-magnetic-field">
+<h2>Part 3: Particles in a cylinder with a magnetic field<a class="headerlink" href="#Part-3:-Particles-in-a-cylinder-with-a-magnetic-field" title="Link to this heading">#</a></h2>
+<p>Now extend the setup by adding a static magnetic background field.</p>
+<p>You do this by assigning an object from the <code class="docutils literal notranslate"><span class="pre">equils</span></code> module:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B0x</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">B0y</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">B0z</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">equil</span> <span class="o">=</span> <span class="n">equils</span><span class="o">.</span><span class="n">HomogenSlab</span><span class="p">(</span><span class="n">B0x</span><span class="o">=</span><span class="n">B0x</span><span class="p">,</span> <span class="n">B0y</span><span class="o">=</span><span class="n">B0y</span><span class="p">,</span> <span class="n">B0z</span><span class="o">=</span><span class="n">B0z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>To evaluate the equilibrium efficiently in particle kernels, project it onto the spline basis. This requires creating a De Rham complex:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bcs</span> <span class="o">=</span> <span class="p">((</span><span class="s2">&quot;free&quot;</span><span class="p">,</span> <span class="s2">&quot;free&quot;</span><span class="p">),</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">derham_opts</span> <span class="o">=</span> <span class="n">DerhamOptions</span><span class="p">(</span><span class="n">bcs</span><span class="o">=</span><span class="n">bcs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Create a lightweight model instance and configure species options.</p>
+<p>Here we choose to <code class="docutils literal notranslate"><span class="pre">remove</span></code> particles that hit the boundary in radial direction <span class="math notranslate nohighlight">\(\eta_1\)</span>:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># light-weight model instance</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Vlasov</span><span class="p">()</span>
+
+<span class="n">sim_withB</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">spawn_sister</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+                             <span class="n">equil</span><span class="o">=</span><span class="n">equil</span><span class="p">,</span>
+                             <span class="n">derham_opts</span><span class="o">=</span><span class="n">derham_opts</span><span class="p">,)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loading_params</span> <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span><span class="n">Np</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">boundary_params</span> <span class="o">=</span> <span class="n">BoundaryParameters</span><span class="p">(</span><span class="n">bc</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;remove&quot;</span><span class="p">,</span> <span class="s2">&quot;periodic&quot;</span><span class="p">,</span> <span class="s2">&quot;periodic&quot;</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span>
+    <span class="n">loading_params</span><span class="o">=</span><span class="n">loading_params</span><span class="p">,</span>
+    <span class="n">weights_params</span><span class="o">=</span><span class="n">weights_params</span><span class="p">,</span>
+    <span class="n">boundary_params</span><span class="o">=</span><span class="n">boundary_params</span><span class="p">,</span>
+    <span class="n">saving_params</span><span class="o">=</span><span class="n">saving_params</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># propagator options</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+
+<span class="c1"># initial conditions (background + perturbation)</span>
+<span class="n">perturbation</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">background</span> <span class="o">=</span> <span class="n">maxwellians</span><span class="o">.</span><span class="n">Maxwellian3D</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">perturbation</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Run the case, post-process results, load the data, and plot trajectories to see how the magnetic field modifies particle motion:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_withB</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model Vlasov ...
+WARNING: Class &#34;BasisProjectionOperators&#34; called with degree=(1, 1, 1) (interpolation of piece-wise constants should be avoided).
+Time stepping: 100%|██████████| 50/50 [00:00&lt;00:00, 282.22step/s]
+Struphy run finished.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_withB</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1
+
+No feec fields found in hdf5 file, skipping post-processing of fields.
+Evaluation of 20 marker orbits for kinetic_ions
+100%|██████████| 51/51 [00:00&lt;00:00, 802.87it/s]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_withB</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(51,)
+
+self.spline_values:
+
+self.orbits:
+    kinetic_ions, shape = (51, 20, 8)
+        Number of time points: 51
+        Number of particles:   20
+        Number of attributes:  8
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orbits</span> <span class="o">=</span> <span class="n">sim_withB</span><span class="o">.</span><span class="n">orbits</span><span class="o">.</span><span class="n">kinetic_ions</span>
+
+<span class="n">Nt</span> <span class="o">=</span> <span class="n">orbits</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Np</span> <span class="o">=</span> <span class="n">orbits</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;tab:blue&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:orange&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:green&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:red&quot;</span><span class="p">]</span>
+
+<span class="c1"># create alpha for color scaling</span>
+<span class="n">Tend</span> <span class="o">=</span> <span class="n">time_opts</span><span class="o">.</span><span class="n">Tend</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">Nt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># loop through particles, plot all time steps</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Np</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">orbits</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">orbits</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+
+<span class="n">circle1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">a2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">Nt</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2"> time steps (full color at t=0)&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_particle_tracing_56_0.png" src="../../_images/_collections_tutorials_tutorial_particle_tracing_56_0.png" />
+</div>
+</div>
+</section>
+<section id="Part-4:-Particles-in-a-tokamak-equilibrium">
+<h2>Part 4: Particles in a tokamak equilibrium<a class="headerlink" href="#Part-4:-Particles-in-a-tokamak-equilibrium" title="Link to this heading">#</a></h2>
+<p>As a more realistic example, use an ASDEX-Upgrade equilibrium loaded from an EQDSK file.</p>
+<p>Instantiate an <code class="docutils literal notranslate"><span class="pre">EQDSKequilibrium</span></code> with mostly default settings and adjust the density:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n1</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">n2</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">na</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">equil</span> <span class="o">=</span> <span class="n">equils</span><span class="o">.</span><span class="n">EQDSKequilibrium</span><span class="p">(</span><span class="n">n1</span><span class="o">=</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="o">=</span><span class="n">n2</span><span class="p">,</span> <span class="n">na</span><span class="o">=</span><span class="n">na</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/hostedtoolcache/Python/3.10.20/x64/lib/python3.10/site-packages/struphy/fields_background/equils.py:1780: UserWarning: self.units =&lt;struphy.physics.physics.Units object at 0x7f8744b38670&gt;, no rescaling performed in EQDSK output.
+  warnings.warn(
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">EQDSKequilibrium</span></code> inherits from <code class="docutils literal notranslate"><span class="pre">AxisymmMHDequilibrium</span></code> and <code class="docutils literal notranslate"><span class="pre">CartesianMHDequilibrium</span></code>, so in principle you could choose different mappings.</p>
+<p>For a domain that matches the equilibrium boundary, use the <code class="docutils literal notranslate"><span class="pre">Tokamak</span></code> mapping:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_elements</span> <span class="o">=</span> <span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">72</span><span class="p">)</span>
+<span class="n">degree</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">psi_power</span> <span class="o">=</span> <span class="mf">0.6</span>
+<span class="n">psi_shifts</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">domain</span> <span class="o">=</span> <span class="n">domains</span><span class="o">.</span><span class="n">Tokamak</span><span class="p">(</span><span class="n">equilibrium</span><span class="o">=</span><span class="n">equil</span><span class="p">,</span> <span class="n">num_elements</span><span class="o">=</span><span class="n">num_elements</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="n">degree</span><span class="p">,</span> <span class="n">psi_power</span><span class="o">=</span><span class="n">psi_power</span><span class="p">,</span> <span class="n">psi_shifts</span><span class="o">=</span><span class="n">psi_shifts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Tokamak</span></code> domain is a <code class="docutils literal notranslate"><span class="pre">PoloidalSplineTorus</span></code>. The coordinate relation between Cartesian <span class="math notranslate nohighlight">\((x,y,z)\)</span> and Tokamak <span class="math notranslate nohighlight">\((R,Z,\phi)\)</span> variables is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+x &amp;= R \cos(\phi)\,,
+\\
+y &amp;= -R \sin(\phi)\,,
+\\
+z &amp;= Z\,,
+\end{aligned}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\((R,Z)\)</span> spans the poloidal plane.</p>
+<p>Tokamak coordinates are connected to torus coordinates <span class="math notranslate nohighlight">\((r,\theta,\phi)\)</span> through a polar mapping in the poloidal plane:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+R &amp;= R_0 + r \cos(\theta)\,,
+\\
+Z &amp;= r \sin(\theta)\,,
+\\
+\phi &amp;= \phi\,,
+\end{aligned}\end{split}\]</div>
+<p>and torus coordinates map to Struphy logical coordinates <span class="math notranslate nohighlight">\(\boldsymbol\eta=(\eta_1,\eta_2,\eta_3)\in[0,1]^3\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+r &amp;= a_1 + (a_2-a_1)\eta_1\,,
+\\
+\theta &amp;= 2\pi\eta_2\,,
+\\
+\phi &amp;= 2\pi\eta_3\,,
+\end{aligned}\end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(a_2&gt;a_1\geq 0\)</span> the radial bounds.</p>
+<p>You can inspect this relation in mappings such as <code class="docutils literal notranslate"><span class="pre">HollowTorus</span></code> (more advanced angle parametrizations <span class="math notranslate nohighlight">\(\theta(\eta_1,\eta_2)\)</span> also exist).</p>
+<p>As a quick sanity check, plot the magnetic-field magnitude:</p>
+<ol class="arabic simple">
+<li><p>in the poloidal plane at <span class="math notranslate nohighlight">\(\phi=0\)</span>,</p></li>
+<li><p>in the top view at <span class="math notranslate nohighlight">\(z=0\)</span>.</p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># logical grid on the unit cube</span>
+<span class="n">e1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="n">e2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="n">e3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+
+<span class="c1"># move away from the singular point r = 0</span>
+<span class="n">e1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1e-5</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># logical coordinates of the poloidal plane at phi = 0</span>
+<span class="n">eta_poloidal</span> <span class="o">=</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="c1"># logical coordinates of the top view at theta = 0</span>
+<span class="n">eta_topview_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">e3</span><span class="p">)</span>
+<span class="c1"># logical coordinates of the top view at theta = pi</span>
+<span class="n">eta_topview_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">e3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cartesian coordinates (squeezed)</span>
+<span class="n">x_pol</span><span class="p">,</span> <span class="n">y_pol</span><span class="p">,</span> <span class="n">z_pol</span> <span class="o">=</span> <span class="n">domain</span><span class="p">(</span><span class="o">*</span><span class="n">eta_poloidal</span><span class="p">,</span> <span class="n">squeeze_out</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">x_top1</span><span class="p">,</span> <span class="n">y_top1</span><span class="p">,</span> <span class="n">z_top1</span> <span class="o">=</span> <span class="n">domain</span><span class="p">(</span><span class="o">*</span><span class="n">eta_topview_1</span><span class="p">,</span> <span class="n">squeeze_out</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">x_top2</span><span class="p">,</span> <span class="n">y_top2</span><span class="p">,</span> <span class="n">z_top2</span> <span class="o">=</span> <span class="n">domain</span><span class="p">(</span><span class="o">*</span><span class="n">eta_topview_2</span><span class="p">,</span> <span class="n">squeeze_out</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x_pol</span><span class="o">.</span><span class="n">shape</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x_top1</span><span class="o">.</span><span class="n">shape</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x_top2</span><span class="o">.</span><span class="n">shape</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+x_pol.shape = (101, 101)
+x_top1.shape = (101, 101)
+x_top2.shape = (101, 101)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate two axes</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax_top</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># min/max of field strength</span>
+<span class="n">equil</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span>
+<span class="n">Bmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">equil</span><span class="o">.</span><span class="n">absB0</span><span class="p">(</span><span class="o">*</span><span class="n">eta_topview_2</span><span class="p">,</span> <span class="n">squeeze_out</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">Bmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">equil</span><span class="o">.</span><span class="n">absB0</span><span class="p">(</span><span class="o">*</span><span class="n">eta_topview_1</span><span class="p">,</span> <span class="n">squeeze_out</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">Bmin</span><span class="p">,</span> <span class="n">Bmax</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span>
+
+<span class="c1"># absolute magnetic field at phi = 0</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x_pol</span><span class="p">,</span> <span class="n">z_pol</span><span class="p">,</span> <span class="n">equil</span><span class="o">.</span><span class="n">absB0</span><span class="p">(</span><span class="o">*</span><span class="n">eta_poloidal</span><span class="p">,</span> <span class="n">squeeze_out</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">)</span>
+
+<span class="c1"># absolute magnetic field at Z = 0</span>
+<span class="n">im_top</span> <span class="o">=</span> <span class="n">ax_top</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x_top1</span><span class="p">,</span> <span class="n">y_top1</span><span class="p">,</span> <span class="n">equil</span><span class="o">.</span><span class="n">absB0</span><span class="p">(</span><span class="o">*</span><span class="n">eta_topview_1</span><span class="p">,</span> <span class="n">squeeze_out</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x_top2</span><span class="p">,</span> <span class="n">y_top2</span><span class="p">,</span> <span class="n">equil</span><span class="o">.</span><span class="n">absB0</span><span class="p">(</span><span class="o">*</span><span class="n">eta_topview_2</span><span class="p">,</span> <span class="n">squeeze_out</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">)</span>
+
+<span class="c1"># last closed flux surface, poloidal</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pol</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">z_pol</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+
+<span class="c1"># last closed flux surface, toroidal</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_top1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">y_top1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_top2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">y_top2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+
+<span class="c1"># limiter, poloidal</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">equil</span><span class="o">.</span><span class="n">limiter_pts_R</span><span class="p">,</span> <span class="n">equil</span><span class="o">.</span><span class="n">limiter_pts_Z</span><span class="p">,</span> <span class="s2">&quot;tab:orange&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;abs(B) at $\phi=0$&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c1"># limiter, toroidal</span>
+<span class="n">limiter_Rmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">equil</span><span class="o">.</span><span class="n">limiter_pts_R</span><span class="p">)</span>
+<span class="n">limiter_Rmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">equil</span><span class="o">.</span><span class="n">limiter_pts_R</span><span class="p">)</span>
+
+<span class="n">thetas</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">e2</span>
+<span class="n">limiter_x_max</span> <span class="o">=</span> <span class="n">limiter_Rmax</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+<span class="n">limiter_y_max</span> <span class="o">=</span> <span class="o">-</span><span class="n">limiter_Rmax</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+<span class="n">limiter_x_min</span> <span class="o">=</span> <span class="n">limiter_Rmin</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+<span class="n">limiter_y_min</span> <span class="o">=</span> <span class="o">-</span><span class="n">limiter_Rmin</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+
+<span class="n">ax_top</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">limiter_x_max</span><span class="p">,</span> <span class="n">limiter_y_max</span><span class="p">,</span> <span class="s2">&quot;tab:orange&quot;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">limiter_x_min</span><span class="p">,</span> <span class="n">limiter_y_min</span><span class="p">,</span> <span class="s2">&quot;tab:orange&quot;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;abs(B) at $Z=0$&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im_top</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_particle_tracing_65_0.png" src="../../_images/_collections_tutorials_tutorial_particle_tracing_65_0.png" />
+</div>
+</div>
+<p>As before, build a De Rham complex so the equilibrium can be projected onto the spline basis:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_elements</span> <span class="o">=</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">TensorProductGrid</span><span class="p">(</span><span class="n">num_elements</span><span class="o">=</span><span class="n">num_elements</span><span class="p">)</span>
+
+<span class="n">degree</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">bcs</span> <span class="o">=</span> <span class="p">((</span><span class="s2">&quot;free&quot;</span><span class="p">,</span> <span class="s2">&quot;free&quot;</span><span class="p">),</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">derham_opts</span> <span class="o">=</span> <span class="n">DerhamOptions</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="n">degree</span><span class="p">,</span> <span class="n">bcs</span><span class="o">=</span><span class="n">bcs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>For this example we run 15000 time steps using a second-order splitting scheme:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_opts</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Tend</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">split_algo</span><span class="o">=</span><span class="s2">&quot;Strang&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Set up a simulation with four hand-picked particle initial conditions to study representative orbit types in this equilibrium:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># light-weight model instance</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Vlasov</span><span class="p">()</span>
+
+<span class="n">sim_asdex</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
+                       <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+                       <span class="n">time_opts</span><span class="o">=</span><span class="n">time_opts</span><span class="p">,</span>
+                       <span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">,</span>
+                       <span class="n">equil</span><span class="o">=</span><span class="n">equil</span><span class="p">,</span>
+                       <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+                       <span class="n">derham_opts</span><span class="o">=</span><span class="n">derham_opts</span><span class="p">,)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initial particle positions in phase space</span>
+<span class="n">initial</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="mf">0.501</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0450</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.04</span><span class="p">),</span>  <span class="c1"># co-passing particle</span>
+    <span class="p">(</span><span class="mf">0.511</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0450</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.04</span><span class="p">),</span>  <span class="c1"># counter passing particle</span>
+    <span class="p">(</span><span class="mf">0.521</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0105</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.04</span><span class="p">),</span>  <span class="c1"># co-trapped particle</span>
+    <span class="p">(</span><span class="mf">0.531</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0155</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.04</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">loading_params</span> <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span><span class="n">Np</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1608</span><span class="p">,</span> <span class="n">specific_markers</span><span class="o">=</span><span class="n">initial</span><span class="p">)</span>
+<span class="n">boundary_params</span> <span class="o">=</span> <span class="n">BoundaryParameters</span><span class="p">(</span><span class="n">bc</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;remove&quot;</span><span class="p">,</span> <span class="s2">&quot;periodic&quot;</span><span class="p">,</span> <span class="s2">&quot;periodic&quot;</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span>
+    <span class="n">loading_params</span><span class="o">=</span><span class="n">loading_params</span><span class="p">,</span>
+    <span class="n">weights_params</span><span class="o">=</span><span class="n">weights_params</span><span class="p">,</span>
+    <span class="n">boundary_params</span><span class="o">=</span><span class="n">boundary_params</span><span class="p">,</span>
+    <span class="n">saving_params</span><span class="o">=</span><span class="n">saving_params</span><span class="p">,</span>
+    <span class="n">bufsize</span><span class="o">=</span><span class="mf">2.0</span>
+<span class="p">)</span>
+
+<span class="c1"># propagator options</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_vxb</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_eta</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+
+<span class="c1"># initial conditions (background + perturbation)</span>
+<span class="n">perturbation</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">background</span> <span class="o">=</span> <span class="n">maxwellians</span><span class="o">.</span><span class="n">Maxwellian3D</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">perturbation</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_asdex</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model Vlasov ...
+Time stepping: 15001step [00:58, 254.54step/s]
+Struphy run finished.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_asdex</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1
+
+No feec fields found in hdf5 file, skipping post-processing of fields.
+Evaluation of 4 marker orbits for kinetic_ions
+100%|██████████| 15002/15002 [00:17&lt;00:00, 854.31it/s]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_asdex</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(15002,)
+
+self.spline_values:
+
+self.orbits:
+    kinetic_ions, shape = (15002, 4, 8)
+        Number of time points: 15002
+        Number of particles:   4
+        Number of attributes:  8
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orbits</span> <span class="o">=</span> <span class="n">sim_asdex</span><span class="o">.</span><span class="n">orbits</span><span class="o">.</span><span class="n">kinetic_ions</span>
+
+<span class="n">Nt</span> <span class="o">=</span> <span class="n">orbits</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Np</span> <span class="o">=</span> <span class="n">orbits</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;tab:blue&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:orange&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:green&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:red&quot;</span><span class="p">]</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="n">time_opts</span><span class="o">.</span><span class="n">dt</span>
+<span class="n">Tend</span> <span class="o">=</span> <span class="n">time_opts</span><span class="o">.</span><span class="n">Tend</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Np</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">orbits</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">orbits</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># poloidal</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">orbits</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># top view</span>
+    <span class="n">ax_top</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">orbits</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">orbits</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">Tend</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span><span class="si">}</span><span class="s2"> time steps&quot;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">Tend</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span><span class="si">}</span><span class="s2"> time steps&quot;</span><span class="p">)</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_particle_tracing_77_0.png" src="../../_images/_collections_tutorials_tutorial_particle_tracing_77_0.png" />
+</div>
+</div>
+</section>
+<section id="Part-5:-Guiding-centers-in-a-tokamak-equilibrium">
+<h2>Part 5: Guiding centers in a tokamak equilibrium<a class="headerlink" href="#Part-5:-Guiding-centers-in-a-tokamak-equilibrium" title="Link to this heading">#</a></h2>
+<p>Finally, repeat the experiment with the guiding-center model and compare the trajectory behavior to full particle tracing:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">GuidingCenter</span>
+
+<span class="c1"># light-weight model instance</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GuidingCenter</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_opts</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">Tend</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">split_algo</span><span class="o">=</span><span class="s2">&quot;Strang&quot;</span><span class="p">)</span>
+
+<span class="n">sim_gc</span> <span class="o">=</span> <span class="n">sim_asdex</span><span class="o">.</span><span class="n">spawn_sister</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">time_opts</span><span class="o">=</span><span class="n">time_opts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initial phase space coordinates</span>
+<span class="n">initial</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="mf">0.501</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.935</span><span class="p">,</span> <span class="mf">1.72</span><span class="p">),</span>  <span class="c1"># co-passing particle</span>
+    <span class="p">(</span><span class="mf">0.501</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">1.935</span><span class="p">,</span> <span class="mf">1.72</span><span class="p">),</span>  <span class="c1"># couner-passing particle</span>
+    <span class="p">(</span><span class="mf">0.501</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6665</span><span class="p">,</span> <span class="mf">1.72</span><span class="p">),</span>  <span class="c1"># co-trapped particle</span>
+    <span class="p">(</span><span class="mf">0.501</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.4515</span><span class="p">,</span> <span class="mf">1.72</span><span class="p">),</span>
+<span class="p">)</span>  <span class="c1"># counter-trapped particl</span>
+
+<span class="n">loading_params</span> <span class="o">=</span> <span class="n">LoadingParameters</span><span class="p">(</span><span class="n">Np</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1608</span><span class="p">,</span> <span class="n">specific_markers</span><span class="o">=</span><span class="n">initial</span><span class="p">)</span>
+<span class="n">boundary_params</span> <span class="o">=</span> <span class="n">BoundaryParameters</span><span class="p">(</span><span class="n">bc</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;remove&quot;</span><span class="p">,</span> <span class="s2">&quot;periodic&quot;</span><span class="p">,</span> <span class="s2">&quot;periodic&quot;</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">set_markers</span><span class="p">(</span>
+    <span class="n">loading_params</span><span class="o">=</span><span class="n">loading_params</span><span class="p">,</span>
+    <span class="n">weights_params</span><span class="o">=</span><span class="n">weights_params</span><span class="p">,</span>
+    <span class="n">boundary_params</span><span class="o">=</span><span class="n">boundary_params</span><span class="p">,</span>
+    <span class="n">saving_params</span><span class="o">=</span><span class="n">saving_params</span><span class="p">,</span>
+    <span class="n">bufsize</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># propagator options</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_bxe</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_bxe</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_parallel</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">push_parallel</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+
+<span class="c1"># initial conditions (background + perturbation)</span>
+<span class="n">perturbation</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">background</span> <span class="o">=</span> <span class="n">maxwellians</span><span class="o">.</span><span class="n">GyroMaxwellian2D</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">perturbation</span><span class="p">),</span> <span class="n">equil</span><span class="o">=</span><span class="n">equil</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">add_background</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate two axes</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax_top</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># min/max of field strength</span>
+<span class="n">equil</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span>
+<span class="n">Bmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">equil</span><span class="o">.</span><span class="n">absB0</span><span class="p">(</span><span class="o">*</span><span class="n">eta_topview_2</span><span class="p">,</span> <span class="n">squeeze_out</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">Bmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">equil</span><span class="o">.</span><span class="n">absB0</span><span class="p">(</span><span class="o">*</span><span class="n">eta_topview_1</span><span class="p">,</span> <span class="n">squeeze_out</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">Bmin</span><span class="p">,</span> <span class="n">Bmax</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span>
+
+<span class="c1"># absolute magnetic field at phi = 0</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x_pol</span><span class="p">,</span> <span class="n">z_pol</span><span class="p">,</span> <span class="n">equil</span><span class="o">.</span><span class="n">absB0</span><span class="p">(</span><span class="o">*</span><span class="n">eta_poloidal</span><span class="p">,</span> <span class="n">squeeze_out</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">)</span>
+
+<span class="c1"># absolute magnetic field at Z = 0</span>
+<span class="n">im_top</span> <span class="o">=</span> <span class="n">ax_top</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x_top1</span><span class="p">,</span> <span class="n">y_top1</span><span class="p">,</span> <span class="n">equil</span><span class="o">.</span><span class="n">absB0</span><span class="p">(</span><span class="o">*</span><span class="n">eta_topview_1</span><span class="p">,</span> <span class="n">squeeze_out</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x_top2</span><span class="p">,</span> <span class="n">y_top2</span><span class="p">,</span> <span class="n">equil</span><span class="o">.</span><span class="n">absB0</span><span class="p">(</span><span class="o">*</span><span class="n">eta_topview_2</span><span class="p">,</span> <span class="n">squeeze_out</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">)</span>
+
+<span class="c1"># last closed flux surface, poloidal</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pol</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">z_pol</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+
+<span class="c1"># last closed flux surface, toroidal</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_top1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">y_top1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_top2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">y_top2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+
+<span class="c1"># limiter, poloidal</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">equil</span><span class="o">.</span><span class="n">limiter_pts_R</span><span class="p">,</span> <span class="n">equil</span><span class="o">.</span><span class="n">limiter_pts_Z</span><span class="p">,</span> <span class="s2">&quot;tab:orange&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;abs(B) at $\phi=0$&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c1"># limiter, toroidal</span>
+<span class="n">limiter_Rmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">equil</span><span class="o">.</span><span class="n">limiter_pts_R</span><span class="p">)</span>
+<span class="n">limiter_Rmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">equil</span><span class="o">.</span><span class="n">limiter_pts_R</span><span class="p">)</span>
+
+<span class="n">thetas</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">e2</span>
+<span class="n">limiter_x_max</span> <span class="o">=</span> <span class="n">limiter_Rmax</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+<span class="n">limiter_y_max</span> <span class="o">=</span> <span class="o">-</span><span class="n">limiter_Rmax</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+<span class="n">limiter_x_min</span> <span class="o">=</span> <span class="n">limiter_Rmin</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+<span class="n">limiter_y_min</span> <span class="o">=</span> <span class="o">-</span><span class="n">limiter_Rmin</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+
+<span class="n">ax_top</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">limiter_x_max</span><span class="p">,</span> <span class="n">limiter_y_max</span><span class="p">,</span> <span class="s2">&quot;tab:orange&quot;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">limiter_x_min</span><span class="p">,</span> <span class="n">limiter_y_min</span><span class="p">,</span> <span class="s2">&quot;tab:orange&quot;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;abs(B) at $Z=0$&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im_top</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_particle_tracing_82_0.png" src="../../_images/_collections_tutorials_tutorial_particle_tracing_82_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_gc</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Starting run for model GuidingCenter ...
+Time stepping: 1001step [00:05, 182.87step/s]
+Struphy run finished.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_gc</span><span class="o">.</span><span class="n">pproc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Post-processing path /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1
+
+No feec fields found in hdf5 file, skipping post-processing of fields.
+Evaluation of 4 marker orbits for kinetic_ions
+100%|██████████| 1002/1002 [00:01&lt;00:00, 843.30it/s]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_gc</span><span class="o">.</span><span class="n">load_plotting_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+
+Loading post-processed plotting data:
+Data path: /home/runner/work/struphy/struphy/doc/_collections/tutorials/sim_1/post_processing
+
+The following data has been loaded:
+
+grids:
+self.t_grid.shape =(1002,)
+
+self.spline_values:
+
+self.orbits:
+    kinetic_ions, shape = (1002, 4, 8)
+        Number of time points: 1002
+        Number of particles:   4
+        Number of attributes:  8
+
+self.f:
+
+self.n_sph:
+
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orbits</span> <span class="o">=</span> <span class="n">sim_gc</span><span class="o">.</span><span class="n">orbits</span><span class="o">.</span><span class="n">kinetic_ions</span>
+
+<span class="n">Nt</span> <span class="o">=</span> <span class="n">orbits</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Np</span> <span class="o">=</span> <span class="n">orbits</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;tab:blue&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:orange&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:green&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:red&quot;</span><span class="p">]</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="n">time_opts</span><span class="o">.</span><span class="n">dt</span>
+<span class="n">Tend</span> <span class="o">=</span> <span class="n">time_opts</span><span class="o">.</span><span class="n">Tend</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Np</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">orbits</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">orbits</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># poloidal</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">orbits</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># top view</span>
+    <span class="n">ax_top</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">orbits</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">orbits</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">Tend</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span><span class="si">}</span><span class="s2"> time steps&quot;</span><span class="p">)</span>
+<span class="n">ax_top</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">Tend</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span><span class="si">}</span><span class="s2"> time steps&quot;</span><span class="p">)</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/_collections_tutorials_tutorial_particle_tracing_87_0.png" src="../../_images/_collections_tutorials_tutorial_particle_tracing_87_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="tutorial_vlasov_ampere_one_species_weak_landau.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Kinetic Plasma Dynamics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tutorial_beltrami_sph.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SPH in Beltrami force field</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Part-1:-Particles-in-a-cylinder">Part 1: Particles in a cylinder</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1:-define-separate-output-folders">Step 1: define separate output folders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2:-set-shared-simulation-options">Step 2: set shared simulation options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-3:-instantiate-the-first-simulation">Step 3: instantiate the first simulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-4:-inspect-the-domain">Step 4: inspect the domain</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-5:-run-simulation-A">Step 5: run simulation A</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-6:-run-simulation-B">Step 6: run simulation B</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-7:-compare-initial-particle-distributions">Step 7: compare initial particle distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Optional:-quasi-uniform-marker-loading-(Sobol)">Optional: quasi-uniform marker loading (Sobol)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Optional:-antithetic-Sobol-loading">Optional: antithetic Sobol loading</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Part-2:-Reflecting-boundary-conditions">Part 2: Reflecting boundary conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Part-3:-Particles-in-a-cylinder-with-a-magnetic-field">Part 3: Particles in a cylinder with a magnetic field</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Part-4:-Particles-in-a-tokamak-equilibrium">Part 4: Particles in a tokamak equilibrium</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Part-5:-Guiding-centers-in-a-tokamak-equilibrium">Part 5: Guiding centers in a tokamak equilibrium</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/_collections/tutorials/tutorial_particle_tracing.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
