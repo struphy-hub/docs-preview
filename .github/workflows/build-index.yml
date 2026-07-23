@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
 
-# Avoid infinite loops: the commit this workflow makes includes "[skip ci]",
-# which GitHub Actions treats as a signal to not trigger further workflow runs.
+permissions:
+  contents: write
 
 jobs:
   rebuild-index:
@@ -20,7 +20,7 @@ jobs:
       - name: Generate index.html
         run: python3 generate_index.py
 
-      - name: Commit if changed
+      - name: Commit and push if changed
         run: |
           if git diff --quiet -- index.html; then
             echo "index.html unchanged"
@@ -29,5 +29,22 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Rebuild index.html [skip ci]"
-          git push
+          git commit -m "Rebuild index.html"
+
+          # PR preview builds can push concurrently; rebase and retry like the
+          # struphy repo's "Deploy PR docs preview" workflow does.
+          for i in 1 2 3 4 5; do
+            if git push; then
+              exit 0
+            fi
+            git fetch origin
+            git rebase origin/HEAD
+            python3 generate_index.py
+            if ! git diff --quiet -- index.html; then
+              git add index.html
+              git commit --amend --no-edit
+            fi
+            sleep $((RANDOM % 5 + 1))
+          done
+          echo "Failed to push index.html after retries" >&2
+          exit 1
