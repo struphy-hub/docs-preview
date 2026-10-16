@@ -1,0 +1,1114 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>struphy.pic.pushing.pusher &#8212; struphy 3.4.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../../_static/documentation_options.js?v=b0e360d0"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/struphy/pic/pushing/pusher';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link href="../../../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.4.0 documentation - Home"/>
+    <img src="../../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.4.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">struphy.pic.pushing.pusher</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for struphy.pic.pushing.pusher</h1><div class="highlight"><pre>
+<span></span>"Accelerated particle pushing."
+
+import logging
+from functools import cache
+from pathlib import Path
+
+import cunumpy as xp
+from cunumpy.kernels import CudaKernel, Kernel, PyccelKernel
+from line_profiler import profile
+from maybempi import MPI
+from scope_profiler import ProfileManager
+
+from struphy.kernel_arguments.pusher_args_kernels import DerhamArguments, DomainArguments
+from struphy.pic.base import Particles
+from struphy.pic.pushing.kernel_setup import KernelSetup
+from struphy.utils.cuda_arguments import check_mapping_on_device
+
+logger = logging.getLogger("struphy")
+
+
+@cache
+def _prepare_push_cuda() -&gt; CudaKernel:
+    """The CUDA kernel that fuses the column-slice assignments at the start of :meth:`Pusher._push`
+    (compiled on first call)."""
+    return CudaKernel.from_file(Path(__file__).with_name("prepare_push_cuda.cu"), "prepare_push")
+
+
+<div class="viewcode-block" id="Pusher">
+<a class="viewcode-back" href="../../../../sections/subsections/dev-pic.html#struphy.pic.pushing.pusher.Pusher">[docs]</a>
+class Pusher:
+    r"""
+    Class for solving particle ODEs
+
+    .. math::
+
+        \dot{\mathbf Z}_p(t) = \mathbf U(t, \mathbf Z_p(t))\,,
+
+    for each marker :math:`p` in :class:`~struphy.pic.base.Particles` class,
+    where :math:`\mathbf Z_p` are the marker coordinates and
+    the vector field :math:`\mathbf U` can contain discrete :class:`~struphy.feec.psydac_derham.Derham` splines
+    and metric coefficients from accelerated :mod:`~struphy.geometry.evaluation_kernels`.
+
+    The solve is MPI distributed and can handle multi-stage Runge-Kutta methods
+    for any :class:`~struphy.ode.utils.ButcherTableau`
+    as well as iterative nonlinear methods.
+
+    The particle push is performed via an accelerated kernel from :mod:`struphy.pic.pushing.kernels`,
+    e.g. ``push_eta_stage`` from :mod:`struphy.pic.pushing.kernels.push_eta_stage`.
+
+    Notes
+    -----
+
+    For iterative methods with iteration index :math:`k`, spline evaluations at positions
+    :math:`\alpha_i \eta_{p,i}^{n+1,k} + (1 - \alpha_i) \eta_{p,i}^n`
+    for :math:`i=1, 2, 3` and different :math:`\alpha_i \in [0,1]`
+    need particle MPI sorting in between.
+    This requires calling dedicated ``eval_kernels`` during the iteration. Here are some
+    rules to follow for iterative solvers:
+
+    * Spline/geometry evaluations at :math:`\boldsymbol \eta^n_p` can be be done via ``init_kernels``.
+    * Pusher ``kernel`` and ``eval_kernels`` can perform evaluations at arbitrary weighted averages :math:`\eta_{p,i} = \alpha_i \eta_{p,i}^{n+1,k} + (1 - \alpha_i) \eta_{p,i}^n`, for :math:`i=1,2,3`.
+    * MPI sorting is done automatically before kernel calls according to the specified values :math:`\alpha_i` for each kernel.
+
+    MPI sorting is skipped whenever it is known to be a no-op: markers are assumed to be sorted
+    according to the domain decomposition on entry, and they stay sorted for any :math:`\alpha`
+    until the pusher kernel has moved them. Pushers with ``pushes_eta=False`` hence never sort.
+    Pushers with ``pushes_eta=True`` always sort at least once after the last stage,
+    such that the above assumption holds for the next pusher.
+
+    Parameters
+    ----------
+    particles : Particles
+        Particles object holding the markers to push.
+
+    kernel : PyccelKernel | Kernel
+        The pusher kernel. A :class:`~cunumpy.kernels.Kernel` also holds its CUDA version;
+        on the CuPy backend, a kernel without CUDA version raises NotImplementedError.
+
+    args_kernel : tuple
+        Optional arguments passed to the kernel.
+
+    args_domain : DomainArguments
+        Mapping infos.
+
+    alpha_in_kernel: float | int | tuple | list
+        For i=0,1,2, the spline/geometry evaluations in kernel are at
+        alpha[i]*markers[:, i] + (1 - alpha[i])*markers[:, buffer_idx + i].
+        If float or int or then alpha = (alpha, alpha, alpha).
+        alpha must be between 0 and 1.
+        alpha[i]=0 means that evaluation is at the initial positions (time n),
+        stored at markers[:, buffer_idx + i].
+
+    init_kernels : tuple[KernelSetup, ...]
+        Evaluations at the initial state, executed once per push in tuple order.
+        Each setup specifies the kernel, arguments, and output marker indices.
+
+    eval_kernels : tuple[KernelSetup, ...]
+        Evaluations before each pusher stage/iteration. Each setup's alpha
+        weights determine the evaluation state and preceding MPI sort.
+
+    n_stages : int
+        Number of stages of the pusher (e.g. 4 for RK4)
+
+    maxiter : int
+        Maximum number of iterations (=1 for explicit pushers).
+
+    tol : float
+        Iteration terminates when residual&lt;tol.
+
+    mpi_sort : str
+        When to do MPI sorting:
+        * None : no sorting at all (only allowed for ``pushes_eta=False``, becomes "last" otherwise).
+        * each : sort markers after each stage.
+        * last : sort markers after last stage.
+
+    pushes_eta : bool
+        Whether the kernel updates the marker positions :math:`\boldsymbol \eta_p`.
+        If False, no MPI sorting is performed at all.
+
+    local_eval_only : bool
+        Set to True if the kernel does not evaluate distributed splines, i.e. it only calls
+        metric coefficients or equilibrium quantities, which are available on every process.
+        Markers then need not be on the right process during the stages;
+        they are sorted only once after the last stage (mpi_sort="last").
+    """
+
+    def __init__(
+        self,
+        particles: Particles,
+        kernel: PyccelKernel | Kernel,
+        args_kernel: tuple,
+        args_domain: DomainArguments,
+        pushes_eta: bool,
+        *,
+        alpha_in_kernel: float | int | tuple | list,
+        init_kernels: tuple[KernelSetup, ...] = (),
+        eval_kernels: tuple[KernelSetup, ...] = (),
+        n_stages: int = 1,
+        maxiter: int = 1,
+        tol: float = 1.0e-8,
+        mpi_sort: str = None,
+        local_eval_only: bool = False,
+    ):
+        # on the CuPy backend a kernel without CUDA version (yet) raises when called, see CUDA_STRATEGY.md
+        self._kernel = kernel if isinstance(kernel, Kernel) else Kernel(kernel)
+        self._cuda = xp.cupy_backend
+
+        self._particles = particles
+        self._newton = "newton" in kernel.name
+        self._args_kernel = args_kernel
+        self._args_domain = args_domain
+
+        # determines the evaluation points for kernel
+        self._alpha_in_kernel = alpha_in_kernel
+        self._n_stages = n_stages
+        self._maxiter = maxiter
+        self._tol = tol
+        self._pushes_eta = pushes_eta
+        self._local_eval_only = local_eval_only
+
+        if not pushes_eta:
+            assert mpi_sort is None, f"{mpi_sort =} makes no sense for a kernel that does not push eta."
+        elif local_eval_only or mpi_sort is None:
+            mpi_sort = "last"
+        self._mpi_sort = mpi_sort
+
+        if local_eval_only:
+            assert len(eval_kernels) == 0, "eval_kernels evaluate splines, not compatible with local_eval_only=True."
+
+        self._init_kernels = tuple(init_kernels)
+        self._eval_kernels = tuple(eval_kernels)
+        for setup in self._init_kernels + self._eval_kernels:
+            if not isinstance(setup, KernelSetup):
+                raise TypeError("init_kernels and eval_kernels must contain KernelSetup instances")
+            setup.validate_outputs(particles.n_cols)
+        if any(any(setup.alpha) for setup in self._init_kernels):
+            raise ValueError("init kernels must evaluate the initial state (alpha=0)")
+
+        # profiling region names (cached, they are looked up on every call)
+        self._region_name = "pusher: " + self.kernel.name
+
+        self._residuals = xp.zeros(self.particles.markers.shape[0])
+        self._converged_loc = self._residuals == 1.0
+        self._not_converged_loc = self._residuals == 0.0
+
+        if self.particles.sorting_boxes is not None:
+            self._box_comm = self.particles.sorting_boxes.communicate
+        else:
+            self._box_comm = False
+
+<div class="viewcode-block" id="Pusher.__call__">
+<a class="viewcode-back" href="../../../../sections/subsections/dev-pic.html#struphy.pic.pushing.pusher.Pusher.__call__">[docs]</a>
+    @profile
+    def __call__(self, dt: float):
+        """
+        Applies the chosen pusher kernel by a time step dt,
+        applies kinetic boundary conditions and performs MPI sorting.
+        """
+        with ProfileManager.profile_region(self._region_name):
+            self._push(dt)</div>
+
+
+    def _evaluate(self, setup: KernelSetup):
+        """Run a configured marker evaluation and communicate its outputs."""
+        with ProfileManager.profile_region("kernel: " + setup.name):
+            setup.evaluate(self.particles.args_markers, self.args_domain)
+        if self._box_comm:
+            self.particles.put_particles_in_boxes()
+
+    def _push(self, dt: float):
+        """Body of :meth:`__call__`, see there."""
+
+        # some idx and slice
+        markers = self.particles.markers
+        vdim = self.particles.vdim
+        first_pusher_idx = self.particles.first_pusher_idx
+        first_shift_idx = self.particles.first_shift_idx
+        residual_idx = self.particles.residual_idx
+
+        logger.debug(f"{first_pusher_idx =}")
+        logger.debug(f"{first_shift_idx =}")
+        logger.debug(f"{residual_idx =}")
+        logger.debug(f"{self.particles.n_cols =}")
+
+        if self._cuda:
+            # the three assignments below in one pass over the buffer (each slice is a strided pass on its own)
+            n_rows, n_cols = markers.shape
+            _prepare_push_cuda()(
+                markers,
+                n_rows,
+                n_cols,
+                first_pusher_idx,
+                3 + vdim,
+                n_threads=n_rows * (n_cols - 2 - first_pusher_idx),
+            )
+        else:
+            init_slice = slice(first_pusher_idx, first_shift_idx)
+            shift_slice = slice(first_shift_idx, residual_idx)
+
+            # save initial phase space coordinates
+            markers[:, init_slice] = markers[:, : 3 + vdim]
+
+            # set boundary shifts to zero
+            markers[:, shift_slice] = 0.0
+
+            # clear buffer columns starting from residual index, dont clear ID (last column) and loc_box
+            markers[:, residual_idx:-2] = 0.0
+
+        rank = self.particles.mpi_rank
+        logger.debug(f"rank {rank}: starting {self.kernel} ...")
+
+        # Evaluate the initial state once, before any stage or iteration.
+        for setup in self.init_kernels:
+            self._evaluate(setup)
+
+        # markers are sorted on entry and initial positions equal current positions,
+        # hence they are sorted for any alpha until the kernel moves them
+        self._sorted_for = "any"
+
+        # start stages (e.g. n_stages=4 for RK4)
+        for stage in range(self.n_stages):
+            # start iteration (maxiter=1 for explicit schemes)
+            if self.maxiter &gt; 1:
+                n_not_converged = xp.empty(1, dtype=int)
+                n_not_converged[0] = self.particles.n_mks_loc
+            k = 0
+
+            if self.maxiter &gt; 1:
+                max_res = 1.0
+                logger.debug(
+                    f"rank {rank}: {k =}, tol: {self._tol}, {n_not_converged[0] =}, {max_res =}",
+                )
+
+            if self.maxiter &gt; 1:
+                n_not_converged[0] = self.particles.Np
+            while True:
+                k += 1
+
+                for setup in self.eval_kernels:
+                    # sort according to alpha-weighted average
+                    self._sort_for_alpha(setup.sorting_alpha)
+                    self._evaluate(setup)
+
+                # sort according to alpha-weighted average
+                self._sort_for_alpha(self._alpha_in_kernel)
+
+                # push markers
+                with ProfileManager.profile_region("kernel: " + self.kernel.name):
+                    self.kernel(
+                        dt,
+                        stage,
+                        self.particles.args_markers,
+                        self._args_domain,
+                        *self._args_kernel,
+                    )
+
+                # markers have moved
+                if self.pushes_eta:
+                    self._sorted_for = None
+
+                # kinetic boundary conditions are applied per marker inside the kernel
+                self.particles.finish_kernel_bc(newton=self._newton)
+
+                # update boxes
+                if self._box_comm:
+                    self.particles.put_particles_in_boxes()
+
+                # compute number of non-converged particles (maxiter=1 for explicit schemes)
+                if self.maxiter &gt; 1:
+                    self._residuals[:] = markers[:, residual_idx]
+                    max_res = xp.max(self._residuals)
+                    if max_res &lt; 0.0:
+                        max_res = None
+                    self._converged_loc[:] = self._residuals &lt; self._tol
+                    self._not_converged_loc[:] = ~self._converged_loc
+                    n_not_converged[0] = xp.count_nonzero(
+                        self._not_converged_loc,
+                    )
+
+                    logger.debug(
+                        f"rank {rank}: {k =}, tol: {self._tol}, {n_not_converged[0] =}, {max_res =}",
+                    )
+
+                    if self.particles.mpi_comm is not None:
+                        self.particles.mpi_comm.Allreduce(
+                            MPI.IN_PLACE,
+                            n_not_converged,
+                            op=MPI.SUM,
+                        )
+
+                    # take converged markers out of the loop
+                    markers[self._converged_loc, first_pusher_idx] = -1.0
+
+                # maxiter=1 for explicit schemes
+                if k == self.maxiter:
+                    if self.maxiter &gt; 1:
+                        rank = self.particles.mpi_rank
+                        logger.info(
+                            f"rank {rank}: {k =}, maxiter={self.maxiter} reached! tol: {self._tol}, {n_not_converged[0] =}, {max_res =}",
+                        )
+                    # sort markers according to domain decomposition
+                    if self.mpi_sort == "each":
+                        self._sort_for_alpha(1.0, remove_ghost=True)
+                    break
+
+                # check for convergence
+                if n_not_converged[0] == 0:
+                    # sort markers according to domain decomposition
+                    if self.mpi_sort == "each":
+                        self._sort_for_alpha(1.0, remove_ghost=True)
+
+                    break
+
+            # print stage info
+            logger.debug(
+                f"rank {rank}: stage {stage + 1} of {self.n_stages} done.",
+            )
+
+        # sort markers according to domain decomposition
+        if self.mpi_sort == "last":
+            if self.particles.mpi_comm is not None and self.particles.mpi_size &gt; 1:
+                self.particles.mpi_sort_markers(apply_bc=False, do_test=not self._cuda)
+
+    def _sort_for_alpha(self, alpha: float | int | tuple | list, remove_ghost: bool = False):
+        """MPI sort markers according to the alpha-weighted average of positions,
+        unless they are already sorted accordingly or the kernel does not need it."""
+        if self.particles.mpi_comm is None or self.local_eval_only:
+            return
+
+        if xp.ndim(alpha) == 0:
+            alpha = (alpha, alpha, alpha)
+        alpha = tuple(float(a) for a in alpha)
+
+        if self._sorted_for == "any" or self._sorted_for == alpha:
+            return
+
+        self.particles.mpi_sort_markers(
+            apply_bc=False,
+            alpha=alpha,
+            remove_ghost=remove_ghost,
+        )
+        self._sorted_for = alpha
+
+    @property
+    def particles(self):
+        """Particle object."""
+        return self._particles
+
+    @property
+    def kernel(self) -&gt; Kernel:
+        """The pusher kernel for the active backend (pyccel or CUDA)."""
+        return self._kernel
+
+<div class="viewcode-block" id="Pusher.kernels">
+<a class="viewcode-back" href="../../../../sections/subsections/dev-pic.html#struphy.pic.pushing.pusher.Pusher.kernels">[docs]</a>
+    def kernels(self) -&gt; tuple[Kernel, ...]:
+        """The kernels this pusher calls: the pusher kernel and those of its init and eval kernel setups."""
+        return (self._kernel,) + tuple(setup.kernel for setup in self._init_kernels + self._eval_kernels)</div>
+
+
+    @property
+    def init_kernels(self) -&gt; tuple[KernelSetup, ...]:
+        """Ordered setups for evaluations at the initial state."""
+        return self._init_kernels
+
+    @property
+    def eval_kernels(self) -&gt; tuple[KernelSetup, ...]:
+        """Ordered setups for evaluations before each pusher stage/iteration."""
+        return self._eval_kernels
+
+    @property
+    def args_kernel(self):
+        """Optional arguments for kernel."""
+        return self._args_kernel
+
+    @property
+    def args_domain(self):
+        """Mandatory Domain arguments."""
+        return self._args_domain
+
+    @property
+    def n_stages(self):
+        """Number of stages of the pusher."""
+        return self._n_stages
+
+    @property
+    def maxiter(self):
+        """Maximum number of iterations (=1 for explicit pushers)."""
+        return self._maxiter
+
+    @property
+    def tol(self):
+        """Iteration terminates when residual&lt;tol."""
+        return self._tol
+
+    @property
+    def pushes_eta(self):
+        """Whether the kernel updates the marker positions."""
+        return self._pushes_eta
+
+    @property
+    def local_eval_only(self):
+        """Whether the kernel needs no distributed spline evaluations (sorting only after last stage)."""
+        return self._local_eval_only
+
+    @property
+    def mpi_sort(self):
+        """When to do MPI sorting:
+        * None : no sorting at all (only for ``pushes_eta=False``).
+        * each : sort markers after each stage.
+        * last : sort markers after last stage.
+        """
+        return self._mpi_sort</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
