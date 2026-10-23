@@ -993,23 +993,33 @@ supports an optional control-variate formulation for the field coupling.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="struphy.models.VlasovMaxwellQuasiNeutral">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.models.</span></span><span class="sig-name descname"><span class="pre">VlasovMaxwellQuasiNeutral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../api_guide.html#struphy.BaseUnits" title="struphy.io.options.BaseUnits"><span class="pre">BaseUnits</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">BaseUnits(x=1.0,</span> <span class="pre">B=1.0,</span> <span class="pre">n=1.0,</span> <span class="pre">kBT=None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">charge_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure_gauss_law</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/models/vlasov_maxwell_quasi_neutral.html#VlasovMaxwellQuasiNeutral"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.VlasovMaxwellQuasiNeutral" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.models.</span></span><span class="sig-name descname"><span class="pre">VlasovMaxwellQuasiNeutral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../api_guide.html#struphy.BaseUnits" title="struphy.io.options.BaseUnits"><span class="pre">BaseUnits</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">BaseUnits(x=1.0,</span> <span class="pre">B=1.0,</span> <span class="pre">n=1.0,</span> <span class="pre">kBT=None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">charge_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lam</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure_gauss_law</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/models/vlasov_maxwell_quasi_neutral.html#VlasovMaxwellQuasiNeutral"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.VlasovMaxwellQuasiNeutral" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#struphy.models.VlasovMaxwellOneSpecies" title="struphy.models.vlasov_maxwell_one_species.VlasovMaxwellOneSpecies"><code class="xref py py-class docutils literal notranslate"><span class="pre">VlasovMaxwellOneSpecies</span></code></a></p>
-<p>Vlasov-Maxwell equations for one kinetic species with an implicit, energy conserving field-particle coupling
-that also holds in the quasi-neutral limit (no displacement current).</p>
-<p>Same as <a class="reference internal" href="#struphy.models.VlasovMaxwellOneSpecies" title="struphy.models.vlasov_maxwell_one_species.VlasovMaxwellOneSpecies"><code class="xref py py-class docutils literal notranslate"><span class="pre">VlasovMaxwellOneSpecies</span></code></a>, but Ampère’s law, Faraday’s
+<p>Vlasov-Maxwell equations for one kinetic species in the cyclotron normalization, with an implicit, energy
+conserving field-particle coupling that also holds in the quasi-neutral limit (no displacement current).</p>
+<p>Same equations as <a class="reference internal" href="#struphy.models.VlasovMaxwellOneSpecies" title="struphy.models.vlasov_maxwell_one_species.VlasovMaxwellOneSpecies"><code class="xref py py-class docutils literal notranslate"><span class="pre">VlasovMaxwellOneSpecies</span></code></a>, normalized with the
+cyclotron frequency (velocity scale <code class="docutils literal notranslate"><span class="pre">&quot;cyclotron&quot;</span></code>), so that the coefficients <span class="math notranslate nohighlight">\(\lambda^2\)</span> of the
+displacement current and <span class="math notranslate nohighlight">\(\kappa^2\)</span> of the plasma current appear in Ampère’s law. Ampère’s law, Faraday’s
 law and the electric force on the particles are solved together in one Crank-Nicolson step
-(<a class="reference internal" href="propagators-avail.html#struphy.propagators.vlasov_maxwell_coupling.VlasovMaxwellCoupling" title="struphy.propagators.vlasov_maxwell_coupling.VlasovMaxwellCoupling"><code class="xref py py-class docutils literal notranslate"><span class="pre">VlasovMaxwellCoupling</span></code></a>). Its option <code class="docutils literal notranslate"><span class="pre">kappa</span></code> multiplies the
-displacement current; <code class="docutils literal notranslate"><span class="pre">kappa=0.0</span></code> is the quasi-neutral limit.</p>
+(<a class="reference internal" href="propagators-avail.html#struphy.propagators.vlasov_maxwell_coupling.VlasovMaxwellCoupling" title="struphy.propagators.vlasov_maxwell_coupling.VlasovMaxwellCoupling"><code class="xref py py-class docutils literal notranslate"><span class="pre">VlasovMaxwellCoupling</span></code></a>); <code class="docutils literal notranslate"><span class="pre">lam=0.0</span></code> is the quasi-neutral
+limit.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>base_units</strong> (<a class="reference internal" href="../api_guide.html#struphy.BaseUnits" title="struphy.BaseUnits"><em>BaseUnits</em></a>) – Base units for normalization (default: BaseUnits())</p></li>
 <li><p><strong>charge_number</strong> (<em>int</em>) – Charge number (in units of the positive elementary charge) of the species (default: 1)</p></li>
 <li><p><strong>mass_number</strong> (<em>float</em>) – Mass number (in units of Proton mass) of the species (default: 1.0)</p></li>
-<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – Dimensionless parameter: plasma frequency / cyclotron frequency. If None, computed from units and charge/mass numbers.</p></li>
-<li><p><strong>epsilon</strong> (<em>float</em><em>, </em><em>optional</em>) – Normalized cyclotron period: 1 / (cyclotron frequency × time unit). If None, computed from units and charge/mass numbers.</p></li>
-<li><p><strong>measure_gauss_law</strong> (<em>bool</em>) – Whether to track the Gauss-law error as a scalar quantity (default: False)</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – Dimensionless parameter: plasma frequency / cyclotron frequency. If None, computed from units and charge/mass numbers.
+It does not enter the equations of this model (which use lam and kappa = alpha lam); when overriding lam and
+kappa, alpha is not adapted.</p></li>
+<li><p><strong>epsilon</strong> (<em>float</em><em>, </em><em>optional</em>) – Normalized cyclotron period: 1 / (cyclotron frequency × time unit). If None, computed from units and charge/mass
+numbers (equal to 1 for this model’s cyclotron velocity scale; set -1 for electrons with the default charge
+number).</p></li>
+<li><p><strong>lam</strong> (<em>float</em><em>, </em><em>optional</em>) – Cyclotron frequency × length unit / speed of light (coefficient lam^2 of the displacement current; 0 is the
+quasi-neutral limit). If None, computed from units and charge/mass numbers.</p></li>
+<li><p><strong>kappa</strong> (<em>float</em><em>, </em><em>optional</em>) – Plasma frequency × length unit / speed of light (coefficient kappa^2 of the plasma current). If None, computed
+from units and charge/mass numbers.</p></li>
+<li><p><strong>measure_gauss_law</strong> (<em>bool</em>) – Whether to track the Gauss-law error as a scalar quantity (default: False; not available for lam = 0)</p></li>
 </ul>
 </dd>
 </dl>
@@ -1020,37 +1030,67 @@ displacement current; <code class="docutils literal notranslate"><span class="pr
 <p>Vlasov equation:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial f}{\partial t} + \mathbf{v} \cdot \nabla f + \frac{1}{\varepsilon} \left( \mathbf{E} + \mathbf{v} \times \left( \mathbf{B} + \mathbf{B}_0 \right) \right) \cdot \frac{\partial f}{\partial \mathbf{v}} = 0\]</div>
-<p>Ampère’s law, with the coefficient <span class="math notranslate nohighlight">\(\kappa \geq 0\)</span> of the displacement current (option <code class="docutils literal notranslate"><span class="pre">kappa</span></code> of
-<a class="reference internal" href="propagators-avail.html#struphy.propagators.vlasov_maxwell_coupling.VlasovMaxwellCoupling" title="struphy.propagators.vlasov_maxwell_coupling.VlasovMaxwellCoupling"><code class="xref py py-class docutils literal notranslate"><span class="pre">VlasovMaxwellCoupling</span></code></a>, not the species parameter):</p>
+<p>Ampère’s law:</p>
 <div class="math notranslate nohighlight">
-\[-\kappa \frac{\partial \mathbf{E}}{\partial t} + \nabla \times \mathbf{B} = \frac{\alpha^2}{\varepsilon} \int_{\mathbb{R}^3} \mathbf{v} f \, \text{d}^3 \mathbf{v}\]</div>
+\[-\lambda^2 \frac{\partial \mathbf{E}}{\partial t} + \nabla \times \mathbf{B} = \frac{\kappa^2}{\varepsilon} \int_{\mathbb{R}^3} \mathbf{v} f \, \text{d}^3 \mathbf{v}\]</div>
 <p>Faraday’s law:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial \mathbf{B}}{\partial t} + \nabla \times \mathbf{E} = 0\]</div>
-<p>For <span class="math notranslate nohighlight">\(\kappa = 1\)</span> these are the equations of
-<a class="reference internal" href="#struphy.models.VlasovMaxwellOneSpecies" title="struphy.models.vlasov_maxwell_one_species.VlasovMaxwellOneSpecies"><code class="xref py py-class docutils literal notranslate"><span class="pre">VlasovMaxwellOneSpecies</span></code></a>. For <span class="math notranslate nohighlight">\(\kappa = 0\)</span>
-(quasi-neutral limit) Ampère’s law becomes <span class="math notranslate nohighlight">\(\nabla \times \mathbf B = \frac{\alpha^2}{\varepsilon}
-\mathbf J\)</span>, which implies <span class="math notranslate nohighlight">\(\nabla \cdot \mathbf J = 0\)</span>; the electric field is then determined by this
-constraint, not by its own evolution. The coefficients of the three coupling terms can be changed by the
-options <code class="docutils literal notranslate"><span class="pre">c1</span></code>, <code class="docutils literal notranslate"><span class="pre">c2</span></code>, <code class="docutils literal notranslate"><span class="pre">c3</span></code> of the propagator.</p>
-<p>At initial time the weak Poisson equation is solved once to weakly satisfy Gauss’ law, as in
-<a class="reference internal" href="#struphy.models.VlasovMaxwellOneSpecies" title="struphy.models.vlasov_maxwell_one_species.VlasovMaxwellOneSpecies"><code class="xref py py-class docutils literal notranslate"><span class="pre">VlasovMaxwellOneSpecies</span></code></a> (for <span class="math notranslate nohighlight">\(\kappa = 0\)</span> the
-initial electric field does not enter the time stepping).</p>
+<p>with <span class="math notranslate nohighlight">\(\varepsilon = 1\)</span> in the cyclotron normalization (set <span class="math notranslate nohighlight">\(\varepsilon = -1\)</span> for electrons with the
+default charge number; then <span class="math notranslate nohighlight">\(\kappa^2/\varepsilon\)</span> carries the sign of the charge). These forms assume
+<span class="math notranslate nohighlight">\(\varepsilon = \pm 1\)</span>; for an overridden <span class="math notranslate nohighlight">\(\varepsilon\)</span> the coefficients of the displacement and
+the plasma current are <span class="math notranslate nohighlight">\(\varepsilon^2 \lambda^2\)</span> and <span class="math notranslate nohighlight">\(\kappa^2 \varepsilon\)</span> (see
+<a class="reference internal" href="models-normalization.html#equation-params"><span class="std std-ref">Equation parameters</span></a>). For
+<span class="math notranslate nohighlight">\(\lambda = 0\)</span> (quasi-neutral limit) Ampère’s law becomes <span class="math notranslate nohighlight">\(\nabla \times \mathbf B =
+\frac{\kappa^2}{\varepsilon} \int \mathbf v f \, \textrm d^3 \mathbf v\)</span>, which implies <span class="math notranslate nohighlight">\(\nabla \cdot \mathbf J = 0\)</span>; the electric field is then determined by this
+constraint, not by its own evolution. The coefficients of the coupling terms can be changed by the options
+<code class="docutils literal notranslate"><span class="pre">lam</span></code>, <code class="docutils literal notranslate"><span class="pre">c1</span></code>, <code class="docutils literal notranslate"><span class="pre">c2</span></code>, <code class="docutils literal notranslate"><span class="pre">c3</span></code> of the propagator
+<a class="reference internal" href="propagators-avail.html#struphy.propagators.vlasov_maxwell_coupling.VlasovMaxwellCoupling" title="struphy.propagators.vlasov_maxwell_coupling.VlasovMaxwellCoupling"><code class="xref py py-class docutils literal notranslate"><span class="pre">VlasovMaxwellCoupling</span></code></a>.</p>
+<p>At initial time the weak Poisson equation (Gauss’ law <span class="math notranslate nohighlight">\(\lambda^2 \nabla \cdot \mathbf E = \kappa^2 \rho\)</span>)
+(with the charge density <span class="math notranslate nohighlight">\(\rho = \frac{1}{\varepsilon} \int (f - f_0) \, \textrm d^3 \mathbf v\)</span>) is
+solved once for <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\lambda^2 \int_{\Omega} \nabla \psi^{\top} \cdot \nabla \phi \, \textrm{d} \mathbf{x} = \frac{\kappa^2}{\varepsilon} \int_{\Omega} \int_{\mathbb{R}^3} \psi \, (f - f_0) \, \text{d}^3 \mathbf{v} \, \textrm{d} \mathbf{x} \qquad \forall \ \psi \in H^1
+\\[2mm]
+\mathbf{E}(t=0) = -\nabla \phi(t=0)\end{split}\]</div>
+<p>(for <span class="math notranslate nohighlight">\(\lambda = 0\)</span> the initial electric field does not enter the time stepping). Moreover, it is assumed
+that <span class="math notranslate nohighlight">\(\nabla \times \mathbf{B}_0 = \frac{\kappa^2}{\varepsilon} \int_{\mathbb{R}^3} \mathbf{v} f_0 \, \text{d}^3 \mathbf{v}\)</span>,
+where <span class="math notranslate nohighlight">\(\mathbf{B}_0\)</span> is the static equilibrium magnetic field.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="struphy.models.VlasovMaxwellQuasiNeutral.doc_normalization">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">doc_normalization</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/models/vlasov_maxwell_quasi_neutral.html#VlasovMaxwellQuasiNeutral.doc_normalization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.VlasovMaxwellQuasiNeutral.doc_normalization" title="Link to this definition">#</a></dt>
+<dd><p>The model uses the cyclotron velocity of the species as reference velocity:</p>
+<div class="math notranslate nohighlight">
+\[\hat v = \hat\Omega_c \hat x,\qquad \hat t = \frac{1}{\hat\Omega_c},\qquad \hat E = \hat B \hat v,\qquad \hat\phi = \hat E \hat x.\]</div>
+<p>The species parameters (see <a class="reference internal" href="models-normalization.html#equation-params"><span class="std std-ref">Equation parameters</span></a>) are</p>
+<div class="math notranslate nohighlight">
+\[\lambda = \frac{\hat\Omega_c \hat x}{c}\,,\qquad \kappa = \frac{\hat\Omega_p \hat x}{c} = \alpha \lambda\,,
+\qquad \varepsilon = \frac{1}{\hat\Omega_c \hat t} = 1\,,\]</div>
+<p>where <span class="math notranslate nohighlight">\(c/\hat\Omega_c\)</span> and <span class="math notranslate nohighlight">\(c/\hat\Omega_p\)</span> are the inertial lengths (<span class="math notranslate nohighlight">\(\lambda\)</span> carries the
+sign of the charge, like <span class="math notranslate nohighlight">\(\hat\Omega_c\)</span>; only <span class="math notranslate nohighlight">\(\lambda^2\)</span> enters). The Vlasov equation and
+Faraday’s law then have no coefficients, and Ampère’s law
+<span class="math notranslate nohighlight">\(\frac{1}{c^2} \partial_t \mathbf E = \nabla \times \mathbf B - \mu_0 \mathbf J\)</span> becomes
+<span class="math notranslate nohighlight">\(\lambda^2 \partial_t \mathbf E = \nabla \times \mathbf B - \kappa^2 \mathbf J\)</span>. The quasi-neutral limit is
+<span class="math notranslate nohighlight">\(\lambda \to 0\)</span> at fixed <span class="math notranslate nohighlight">\(\kappa\)</span>. With <span class="math notranslate nohighlight">\(\lambda = \kappa = 1\)</span> (and <span class="math notranslate nohighlight">\(\varepsilon = -1\)</span> for
+electrons) the equations are those of <a class="reference internal" href="#struphy.models.VlasovMaxwellOneSpecies" title="struphy.models.vlasov_maxwell_one_species.VlasovMaxwellOneSpecies"><code class="xref py py-class docutils literal notranslate"><span class="pre">VlasovMaxwellOneSpecies</span></code></a>
+with <span class="math notranslate nohighlight">\(\alpha = 1\)</span>, i.e. lengths in units of <span class="math notranslate nohighlight">\(c/\hat\Omega_p\)</span> and <span class="math notranslate nohighlight">\(\hat\Omega_c = \hat\Omega_p\)</span>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="struphy.models.VlasovMaxwellQuasiNeutral.doc_scalar_quantities">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">doc_scalar_quantities</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/models/vlasov_maxwell_quasi_neutral.html#VlasovMaxwellQuasiNeutral.doc_scalar_quantities"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.VlasovMaxwellQuasiNeutral.doc_scalar_quantities" title="Link to this definition">#</a></dt>
-<dd><p><strong>The following scalars are tracked during simulation:</strong></p>
+<dd><p><strong>The following scalars are tracked during simulation</strong> (the parts of the energy conserved by the coupling
+step, with the coefficients <span class="math notranslate nohighlight">\(\lambda^2, c_1, c_2, c_3\)</span> of
+<a class="reference internal" href="propagators-avail.html#struphy.propagators.vlasov_maxwell_coupling.VlasovMaxwellCoupling" title="struphy.propagators.vlasov_maxwell_coupling.VlasovMaxwellCoupling"><code class="xref py py-class docutils literal notranslate"><span class="pre">VlasovMaxwellCoupling</span></code></a>):</p>
 <ul class="simple">
-<li><p>Electric field energy: <code class="docutils literal notranslate"><span class="pre">en_E</span></code></p></li>
-<li><p>Magnetic field energy: <code class="docutils literal notranslate"><span class="pre">en_B</span></code></p></li>
-<li><p>Particle kinetic energy: <code class="docutils literal notranslate"><span class="pre">en_f</span></code></p></li>
-<li><p>Total energy: <code class="docutils literal notranslate"><span class="pre">en_tot</span></code></p></li>
-<li><p>Energy conserved by the coupling step,
-<span class="math notranslate nohighlight">\(\frac{\kappa}{2} \| \mathbf E \|^2 + \frac{c_1}{2} \| \mathbf B \|^2 + \frac{c_2}{2 c_3} \sum_p w_p
-|\mathbf v_p|^2\)</span>: <code class="docutils literal notranslate"><span class="pre">en_H</span></code> (equal to <code class="docutils literal notranslate"><span class="pre">en_tot</span></code> for the default coefficients and <span class="math notranslate nohighlight">\(\kappa = 1\)</span>)</p></li>
-<li><p>Optional Gauss-law diagnostic: <code class="docutils literal notranslate"><span class="pre">gauss_error</span></code></p></li>
+<li><p>Electric field energy <span class="math notranslate nohighlight">\(\frac{\lambda^2}{2} \int |\mathbf E|^2 \textrm d \mathbf x\)</span>: <code class="docutils literal notranslate"><span class="pre">en_E</span></code></p></li>
+<li><p>Magnetic field energy <span class="math notranslate nohighlight">\(\frac{c_1}{2} \int |\mathbf B|^2 \textrm d \mathbf x\)</span>: <code class="docutils literal notranslate"><span class="pre">en_B</span></code></p></li>
+<li><p>Particle kinetic energy <span class="math notranslate nohighlight">\(\frac{c_2}{2 c_3} \sum_p w_p |\mathbf v_p|^2\)</span>: <code class="docutils literal notranslate"><span class="pre">en_f</span></code>
+(<span class="math notranslate nohighlight">\(\frac{\kappa^2}{2} \sum_p w_p |\mathbf v_p|^2\)</span> for the default coefficients)</p></li>
+<li><p>Total energy: <code class="docutils literal notranslate"><span class="pre">en_tot</span></code> (conserved by the coupling step up to the solver tolerance)</p></li>
+<li><p>Optional Gauss-law diagnostic: <code class="docutils literal notranslate"><span class="pre">gauss_error</span></code> (NaN for <span class="math notranslate nohighlight">\(\lambda = 0\)</span>)</p></li>
 </ul>
 </dd></dl>
 
@@ -1068,23 +1108,22 @@ initial electric field does not enter the time stepping).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="struphy.models.VlasovMaxwellQuasiNeutral.doc_long_description">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">doc_long_description</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/models/vlasov_maxwell_quasi_neutral.html#VlasovMaxwellQuasiNeutral.doc_long_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.VlasovMaxwellQuasiNeutral.doc_long_description" title="Link to this definition">#</a></dt>
-<dd><p>VlasovMaxwellQuasiNeutral solves the Vlasov-Maxwell system of
-<a class="reference internal" href="#struphy.models.VlasovMaxwellOneSpecies" title="struphy.models.vlasov_maxwell_one_species.VlasovMaxwellOneSpecies"><code class="xref py py-class docutils literal notranslate"><span class="pre">VlasovMaxwellOneSpecies</span></code></a> with one implicit step for
-Maxwell’s equations and the electric force, which conserves the energy exactly and allows time steps
-larger than the inverse plasma frequency and the light-wave CFL limit. Setting the coefficient of the
-displacement current to zero gives the quasi-neutral (Darwin-type) limit, in which the electric field is the
-Lagrange multiplier of a divergence-free current.</p>
+<dd><p>VlasovMaxwellQuasiNeutral solves the Vlasov-Maxwell system in the cyclotron normalization, with one
+implicit step for Maxwell’s equations and the electric force, which conserves the energy exactly and allows time
+steps larger than the inverse plasma frequency and the light-wave CFL limit. The coefficient <span class="math notranslate nohighlight">\(\lambda^2\)</span>
+of the displacement current can be set to zero (<code class="docutils literal notranslate"><span class="pre">lam=0</span></code>), which gives the quasi-neutral (Darwin-type) limit,
+in which the electric field is the Lagrange multiplier of a divergence-free current.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="struphy.models.VlasovMaxwellQuasiNeutral.doc_examples">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">doc_examples</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/models/vlasov_maxwell_quasi_neutral.html#VlasovMaxwellQuasiNeutral.doc_examples"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.VlasovMaxwellQuasiNeutral.doc_examples" title="Link to this definition">#</a></dt>
-<dd><p>Create a quasi-neutral Vlasov-Maxwell model:</p>
+<dd><p>Create a quasi-neutral Vlasov-Maxwell model (electrons, lengths in units of the electron skin depth):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">struphy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">VlasovMaxwellQuasiNeutral</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">VlasovMaxwellQuasiNeutral</span><span class="p">()</span>
-<span class="n">prop</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">propagators</span><span class="o">.</span><span class="n">coupling</span>
-<span class="n">prop</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">prop</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span><span class="n">kappa</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">VlasovMaxwellQuasiNeutral</span><span class="p">(</span><span class="n">epsilon</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">kappa</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">em_fields</span><span class="o">.</span><span class="n">b_field</span>
+<span class="n">model</span><span class="o">.</span><span class="n">kinetic_ions</span><span class="o">.</span><span class="n">var</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1095,7 +1134,7 @@ Lagrange multiplier of a divergence-free current.</p>
 <dd><p>This model is appropriate for:</p>
 <ul class="simple">
 <li><p>electromagnetic kinetic simulations with time steps above the plasma period</p></li>
-<li><p>the quasi-neutral limit of the Vlasov-Maxwell system (<code class="docutils literal notranslate"><span class="pre">kappa=0.0</span></code>)</p></li>
+<li><p>the quasi-neutral limit of the Vlasov-Maxwell system (<code class="docutils literal notranslate"><span class="pre">lam=0.0</span></code>)</p></li>
 <li><p>comparison with <a class="reference internal" href="#struphy.models.VlasovMaxwellOneSpecies" title="struphy.models.vlasov_maxwell_one_species.VlasovMaxwellOneSpecies"><code class="xref py py-class docutils literal notranslate"><span class="pre">VlasovMaxwellOneSpecies</span></code></a></p></li>
 </ul>
 </dd></dl>
@@ -1109,16 +1148,6 @@ Lagrange multiplier of a divergence-free current.</p>
 <li><p>multi-species plasma dynamics without extension</p></li>
 <li><p>collisional kinetic closures</p></li>
 </ul>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="struphy.models.VlasovMaxwellQuasiNeutral.doc_normalization">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">doc_normalization</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#struphy.models.VlasovMaxwellQuasiNeutral.doc_normalization" title="Link to this definition">#</a></dt>
-<dd><p>The model uses the light speed as reference velocity:</p>
-<div class="math notranslate nohighlight">
-\[\hat v = c,\qquad \hat E = \hat B \hat v,\qquad \hat\phi = \hat E \hat x.\]</div>
-<p>The species parameters are <span class="math notranslate nohighlight">\(\alpha=\hat\Omega_p/\hat\Omega_c\)</span> and
-<span class="math notranslate nohighlight">\(\varepsilon=1/(\hat\Omega_c\hat t)\)</span>.</p>
 </dd></dl>
 
 </dd></dl>
@@ -5832,13 +5861,13 @@ self-consistent field solve.</p>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.VlasovMaxwellQuasiNeutral"><code class="docutils literal notranslate"><span class="pre">VlasovMaxwellQuasiNeutral</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.VlasovMaxwellQuasiNeutral.doc_pde"><code class="docutils literal notranslate"><span class="pre">VlasovMaxwellQuasiNeutral.doc_pde()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.VlasovMaxwellQuasiNeutral.doc_normalization"><code class="docutils literal notranslate"><span class="pre">VlasovMaxwellQuasiNeutral.doc_normalization()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.VlasovMaxwellQuasiNeutral.doc_scalar_quantities"><code class="docutils literal notranslate"><span class="pre">VlasovMaxwellQuasiNeutral.doc_scalar_quantities()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.VlasovMaxwellQuasiNeutral.doc_discretization"><code class="docutils literal notranslate"><span class="pre">VlasovMaxwellQuasiNeutral.doc_discretization()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.VlasovMaxwellQuasiNeutral.doc_long_description"><code class="docutils literal notranslate"><span class="pre">VlasovMaxwellQuasiNeutral.doc_long_description()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.VlasovMaxwellQuasiNeutral.doc_examples"><code class="docutils literal notranslate"><span class="pre">VlasovMaxwellQuasiNeutral.doc_examples()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.VlasovMaxwellQuasiNeutral.doc_use_cases"><code class="docutils literal notranslate"><span class="pre">VlasovMaxwellQuasiNeutral.doc_use_cases()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.VlasovMaxwellQuasiNeutral.doc_cannot_be_used_for"><code class="docutils literal notranslate"><span class="pre">VlasovMaxwellQuasiNeutral.doc_cannot_be_used_for()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.VlasovMaxwellQuasiNeutral.doc_normalization"><code class="docutils literal notranslate"><span class="pre">VlasovMaxwellQuasiNeutral.doc_normalization()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.models.LinearVlasovMaxwellOneSpecies"><code class="docutils literal notranslate"><span class="pre">LinearVlasovMaxwellOneSpecies</span></code></a><ul class="nav section-nav flex-column">
