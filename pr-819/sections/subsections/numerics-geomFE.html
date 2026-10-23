@@ -806,7 +806,7 @@ via extraction operators <span class="math notranslate nohighlight">\(\mathbb E\
 poloidal plane <span class="math notranslate nohighlight">\((\eta_1, \eta_2)\)</span> only.</p>
 <p>Hence, the inter-/histopolation matrices of the commuting projectors, <span class="math notranslate nohighlight">\(\mathbb P \mathcal I \mathbb E^T\)</span>,
 and the mass matrices with weights independent of <span class="math notranslate nohighlight">\(\eta_3\)</span> have a 2D x 1D Kronecker structure
-<span class="math notranslate nohighlight">\(\mathbb A_\textnormal{pol} \otimes \mathbb A_3\)</span> (<code class="xref py py-mod docutils literal notranslate"><span class="pre">struphy.polar.kron_2dx1d</span></code>).
+<span class="math notranslate nohighlight">\(\mathbb A_\textnormal{pol} \otimes \mathbb A_3\)</span> (<a class="reference internal" href="dev-feec.html#module-struphy.polar.kron_2dx1d" title="struphy.polar.kron_2dx1d"><code class="xref py py-mod docutils literal notranslate"><span class="pre">struphy.polar.kron_2dx1d</span></code></a>).
 They are solved with a 1d direct solver in <span class="math notranslate nohighlight">\(\eta_3\)</span> and one of the following solvers for the
 sparse poloidal matrix <span class="math notranslate nohighlight">\(\mathbb A_\textnormal{pol}\)</span>:</p>
 <ul class="simple">
@@ -816,14 +816,14 @@ with an exact (Kronecker or sparse LU) solve of the outer block and a dense LU o
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;ilu&quot;</span></code>: incomplete LU factorization, used as preconditioner of an iterative solver.</p></li>
 </ul>
 <p>The solver of the projectors is set with <code class="docutils literal notranslate"><span class="pre">DerhamOptions(polar_poloidal_solver=...)</span></code>.
-For weighted mass matrices, use <code class="xref py py-class docutils literal notranslate"><span class="pre">PolarMassMatrixPreconditioner</span></code>
+For weighted mass matrices, use <a class="reference internal" href="dev-feec.html#struphy.feec.preconditioner.PolarMassMatrixPreconditioner" title="struphy.feec.preconditioner.PolarMassMatrixPreconditioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">PolarMassMatrixPreconditioner</span></code></a>
 (<code class="docutils literal notranslate"><span class="pre">precond=&quot;PolarMassMatrixPreconditioner&quot;</span></code> in the propagator options);
 it is exact for axisymmetric weights and mappings.</p>
 <p>Stiffness operators <span class="math notranslate nohighlight">\(\mathbb d^T \mathbb M_{k+1} \mathbb d + \sigma \mathbb M_k\)</span> (gradient and curl) are a sum of
 two Kronecker products, <span class="math notranslate nohighlight">\((\mathbb K_\textnormal{pol} + \sigma \mathbb M_\textnormal{pol}) \otimes \mathbb M_3 + \mathbb W_\textnormal{pol} \otimes \mathbb S_3\)</span>,
 where <span class="math notranslate nohighlight">\(\mathbb W_\textnormal{pol}\)</span> is the poloidal mass matrix of the <span class="math notranslate nohighlight">\(\eta_3\)</span>-derivative terms
 and <span class="math notranslate nohighlight">\(\mathbb S_3\)</span> the 1d stiffness matrix in <span class="math notranslate nohighlight">\(\eta_3\)</span>.
-<code class="xref py py-class docutils literal notranslate"><span class="pre">PolarStiffnessPreconditioner</span></code> inverts this sum by fast diagonalization in <span class="math notranslate nohighlight">\(\eta_3\)</span>,
+<a class="reference internal" href="dev-feec.html#struphy.feec.preconditioner.PolarStiffnessPreconditioner" title="struphy.feec.preconditioner.PolarStiffnessPreconditioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">PolarStiffnessPreconditioner</span></code></a> inverts this sum by fast diagonalization in <span class="math notranslate nohighlight">\(\eta_3\)</span>,
 with one poloidal solve per <span class="math notranslate nohighlight">\(\eta_3\)</span> mode.
 It is used automatically for <code class="docutils literal notranslate"><span class="pre">precond=&quot;StiffnessPreconditioner&quot;</span></code> with polar splines.
 For the gradient it is exact on axisymmetric domains (without straight field line coordinates).

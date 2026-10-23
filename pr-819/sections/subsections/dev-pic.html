@@ -3227,6 +3227,20 @@ kernel, a <code class="xref py py-class docutils literal notranslate"><span clas
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from struphy.pic.accumulation.kernels.charge_density_0form import charge_density_0form
 </pre></div>
 </div>
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.accumulation.kernels.vlasov_maxwell.vlasov_maxwell_kernels.vlasov_maxwell">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.accumulation.kernels.vlasov_maxwell.vlasov_maxwell_kernels.</span></span><span class="sig-name descname"><span class="pre">vlasov_maxwell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args_markers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MarkerArguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_derham</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DerhamArguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DomainArguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mat11</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float[:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mat12</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float[:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mat13</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float[:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mat22</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float[:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mat23</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float[:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mat33</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float[:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:,</span> <span class="pre">:]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float[:,</span> <span class="pre">:,</span> <span class="pre">:]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float[:,</span> <span class="pre">:,</span> <span class="pre">:]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float[:,</span> <span class="pre">:,</span> <span class="pre">:]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/pic/accumulation/kernels/vlasov_maxwell/vlasov_maxwell_kernels.html#vlasov_maxwell"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.pic.accumulation.kernels.vlasov_maxwell.vlasov_maxwell_kernels.vlasov_maxwell" title="Link to this definition">#</a></dt>
+<dd><p>Accumulates into V1 with the filling functions</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A_p^{\mu, \nu} &amp;= w_p \, G^{-1}_{\mu, \nu}(\boldsymbol \eta_p) \,,
+\\[2mm]
+B_p^\mu &amp;= w_p [DF^{-1}(\boldsymbol \eta_p) \cdot \mathbf{v}_p ]_\mu \,.\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The above parameter list contains only the model specific input arguments.</p>
+</div>
+</dd></dl>
+
 </section>
 <section id="pusher-class">
 <h2>Pusher class<a class="headerlink" href="#pusher-class" title="Link to this heading">#</a></h2>
@@ -3475,6 +3489,29 @@ applies kinetic boundary conditions and performs MPI sorting.</p>
 </dd></dl>
 
 </section>
+</section>
+<section id="pusher-kernels">
+<h2>Pusher kernels<a class="headerlink" href="#pusher-kernels" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="struphy.pic.pushing.kernels.push_v_with_efield.push_v_with_efield_kernels.push_v_with_efield">
+<span class="sig-prename descclassname"><span class="pre">struphy.pic.pushing.kernels.push_v_with_efield.push_v_with_efield_kernels.</span></span><span class="sig-name descname"><span class="pre">push_v_with_efield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_markers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MarkerArguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DomainArguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_derham</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DerhamArguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e1_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float[:,</span> <span class="pre">:,</span> <span class="pre">:]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e1_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float[:,</span> <span class="pre">:,</span> <span class="pre">:]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e1_3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float[:,</span> <span class="pre">:,</span> <span class="pre">:]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">const_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/pic/pushing/kernels/push_v_with_efield/push_v_with_efield_kernels.html#push_v_with_efield"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.pic.pushing.kernels.push_v_with_efield.push_v_with_efield_kernels.push_v_with_efield" title="Link to this definition">#</a></dt>
+<dd><p>Updates particle velocities as</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathbf v^{n+1} - \mathbf v^n}{\Delta t} = c \, \bar{DF}^{-\top}  (\mathbb L^1)^\top \mathbf e\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf e \in \mathbb R^{N_1}\)</span> are given FE coefficients of the 1-form spline field
+and <span class="math notranslate nohighlight">\(c \in \mathbb R\)</span> is some constant (<code class="docutils literal notranslate"><span class="pre">const_factor</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e1_1</strong> (<em>ndarray</em><em>[</em><em>float</em><em>]</em>) – 3d array of FE coeffs of E-field as 1-form.</p></li>
+<li><p><strong>e1_2</strong> (<em>ndarray</em><em>[</em><em>float</em><em>]</em>) – 3d array of FE coeffs of E-field as 1-form.</p></li>
+<li><p><strong>e1_3</strong> (<em>ndarray</em><em>[</em><em>float</em><em>]</em>) – 3d array of FE coeffs of E-field as 1-form.</p></li>
+<li><p><strong>const_factor</strong> (<em>float</em>) – A constant (usuallly related to the charge-to-mass ratio).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 
@@ -3808,7 +3845,10 @@ applies kinetic boundary conditions and performs MPI sorting.</p>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-struphy.pic.accumulation.kernels">Accumulation kernels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-struphy.pic.accumulation.kernels">Accumulation kernels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.accumulation.kernels.vlasov_maxwell.vlasov_maxwell_kernels.vlasov_maxwell"><code class="docutils literal notranslate"><span class="pre">vlasov_maxwell()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pusher-class">Pusher class</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marker-evaluation-setup">Marker evaluation setup</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.pushing.kernel_setup.KernelSetup"><code class="docutils literal notranslate"><span class="pre">KernelSetup</span></code></a><ul class="nav section-nav flex-column">
@@ -3839,6 +3879,10 @@ applies kinetic boundary conditions and performs MPI sorting.</p>
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pusher-kernels">Pusher kernels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struphy.pic.pushing.kernels.push_v_with_efield.push_v_with_efield_kernels.push_v_with_efield"><code class="docutils literal notranslate"><span class="pre">push_v_with_efield()</span></code></a></li>
 </ul>
 </li>
 </ul>

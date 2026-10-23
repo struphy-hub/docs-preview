@@ -1184,7 +1184,7 @@ We can write this in more compact notation by introducing the matrix</p>
  \mathbf v^{n}
  \end{pmatrix}\,.
 \end{split}\]</div>
-<p>The solution of this system requires the inversion of the large 2x2 block matrix on the left-hand side. In Struphy such systems can be conveniently solved with the <code class="xref py py-class docutils literal notranslate"><span class="pre">Schur</span> <span class="pre">solver</span> <span class="pre">class</span></code>. For this one needs to invert the Schur complement <span class="math notranslate nohighlight">\(S = A - BC\)</span> of the 2x2 block matrix, which in our case reads</p>
+<p>The solution of this system requires the inversion of the large 2x2 block matrix on the left-hand side. In Struphy such systems can be conveniently solved with the <a class="reference internal" href="../sections/subsections/dev-feec.html#module-struphy.linear_algebra.schur_solver" title="struphy.linear_algebra.schur_solver"><code class="xref py py-class docutils literal notranslate"><span class="pre">Schur</span> <span class="pre">solver</span> <span class="pre">class</span></code></a>. For this one needs to invert the Schur complement <span class="math notranslate nohighlight">\(S = A - BC\)</span> of the 2x2 block matrix, which in our case reads</p>
 <div class="math notranslate nohighlight">
 \[
  S = \mathbb M^1 + \frac{\Delta t^2 }{4} \frac{\alpha^2}{\varepsilon^2} \mathbb L^1 \bar{DF}^{-1} \bar{\mathbf w} \bar{DF}^{-\top} (\mathbb L^1)^\top \qquad \in \mathbb R^{N_1 \times N_1}\,.
