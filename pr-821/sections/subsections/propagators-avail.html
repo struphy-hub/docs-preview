@@ -3273,11 +3273,10 @@ the semi-discrete system reads</p>
 \qquad
 \dot{\mathbf V} = c_3\, \overline{DF^{-\top}} \, \mathbf \Lambda^1 \, \mathbf e\,,\]</div>
 <p>with the notation of <a class="reference internal" href="#struphy.propagators.vlasov_ampere_coupling.VlasovAmpereCoupling" title="struphy.propagators.vlasov_ampere_coupling.VlasovAmpereCoupling"><code class="xref py py-class docutils literal notranslate"><span class="pre">VlasovAmpereCoupling</span></code></a>. It conserves the
-energy</p>
+energy (<a class="reference internal" href="#struphy.propagators.vlasov_maxwell_coupling.VlasovMaxwellCoupling.energy" title="struphy.propagators.vlasov_maxwell_coupling.VlasovMaxwellCoupling.energy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">energy()</span></code></a>)</p>
 <div class="math notranslate nohighlight">
 \[H = \frac{\lambda^2}{2}\, \mathbf e^\top \mathbb M_1 \mathbf e + \frac{c_1}{2}\, \mathbf b^\top \mathbb M_2 \mathbf b
-+ \frac{c_2}{2 c_3}\, \mathbf V^\top \mathbb W \mathbf V
-\qquad (:meth:`~struphy.propagators.vlasov_maxwell_coupling.VlasovMaxwellCoupling.energy`)\,.\]</div>
++ \frac{c_2}{2 c_3}\, \mathbf V^\top \mathbb W \mathbf V\,.\]</div>
 <p><a class="reference internal" href="numerics-time-discrete.html#time-discret"><span class="std std-ref">Time discretization</span></a>: Crank-Nicolson (implicit mid-point), with
 <span class="math notranslate nohighlight">\(\mathbf e^\textnormal{mid} = \frac 12 (\mathbf e^{n+1} + \mathbf e^n)\)</span> etc.,</p>
 <div class="math notranslate nohighlight">

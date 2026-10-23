@@ -752,18 +752,6 @@ in the class <a class="reference internal" href="#struphy.physics.physics.Units"
 <div class="math notranslate nohighlight">
 \[\hat\Omega_\textnormal{ps} = \sqrt{\frac{\hat n (Z_\textrm{s}e)^2}{\epsilon_0 (A_\textrm{s} m_\textnormal{H})}} \,,\qquad \hat \Omega_{\textnormal{cs}} = \frac{(Z_\textrm{s}e) \hat B}{(A_\textrm{s} m_\textnormal{H})}\,,\]</div>
 <p>where <span class="math notranslate nohighlight">\(Z_\textrm{s}\)</span> and <span class="math notranslate nohighlight">\(A_\textrm{s}\)</span> stand for the species’ charge and mass number, respectively.</p>
-<p>The parameters <span class="math notranslate nohighlight">\(\lambda_\textrm{s}\)</span> and <span class="math notranslate nohighlight">\(\kappa_\textrm{s}\)</span> (<code class="docutils literal notranslate"><span class="pre">lam</span></code> and <code class="docutils literal notranslate"><span class="pre">kappa</span></code> in the code) measure the
-length unit in units of the inertial lengths <span class="math notranslate nohighlight">\(c/\hat \Omega_\textnormal{cs}\)</span> and <span class="math notranslate nohighlight">\(c/\hat \Omega_\textnormal{ps}\)</span>.
-With the <code class="docutils literal notranslate"><span class="pre">cyclotron</span></code> velocity scale of species <span class="math notranslate nohighlight">\(\textrm{s}\)</span> (hence <span class="math notranslate nohighlight">\(\varepsilon_\textrm{s} = 1\)</span>), Ampère’s law
-<span class="math notranslate nohighlight">\(\frac{1}{c^2} \partial_t \mathbf E = \nabla \times \mathbf B - \mu_0 \mathbf J\)</span> becomes</p>
-<div class="math notranslate nohighlight">
-\[\lambda_\textrm{s}^2 \frac{\partial \mathbf E'}{\partial t'} = \nabla' \times \mathbf B' - \kappa_\textrm{s}^2 \mathbf J'\,,\]</div>
-<p>with <span class="math notranslate nohighlight">\(\hat E = \hat B \hat v\)</span> and <span class="math notranslate nohighlight">\(\hat \jmath = q_\textrm{s} \hat n \hat v\)</span>, while the Vlasov equation and
-Faraday’s law have no coefficients. <span class="math notranslate nohighlight">\(\lambda_\textrm{s} \to 0\)</span> is the limit without displacement current
-(quasi-neutral limit). For a general velocity scale the coefficients are <span class="math notranslate nohighlight">\(\varepsilon_\textrm{s}^2 \lambda_\textrm{s}^2\)</span>
-and <span class="math notranslate nohighlight">\(\kappa_\textrm{s}^2 \varepsilon_\textrm{s}\)</span>, and <span class="math notranslate nohighlight">\(1/\varepsilon_\textrm{s}\)</span> in the Vlasov equation; for the
-<code class="docutils literal notranslate"><span class="pre">light</span></code> velocity scale <span class="math notranslate nohighlight">\(\varepsilon_\textrm{s} \lambda_\textrm{s} = 1\)</span> and
-<span class="math notranslate nohighlight">\(\kappa_\textrm{s}^2 \varepsilon_\textrm{s} = \alpha_\textrm{s}^2 / \varepsilon_\textrm{s}\)</span>.</p>
 <p>These equation parameters are defined in <a class="reference internal" href="#struphy.models.species.Species.EquationParameters" title="struphy.models.species.Species.EquationParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">EquationParameters</span></code></a> and can be overridden
 in the model constructor.</p>
 <dl class="py class">
