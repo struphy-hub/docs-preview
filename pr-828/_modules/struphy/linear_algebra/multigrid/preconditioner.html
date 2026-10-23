@@ -1,0 +1,1120 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>struphy.linear_algebra.multigrid.preconditioner &#8212; struphy 3.5.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../../_static/documentation_options.js?v=c1362a89"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/struphy/linear_algebra/multigrid/preconditioner';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link href="../../../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.5.0 documentation - Home"/>
+    <img src="../../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.5.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">struphy.linear_algebra.multigrid.preconditioner</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for struphy.linear_algebra.multigrid.preconditioner</h1><div class="highlight"><pre>
+<span></span>r"""Geometric multigrid V-cycle as a preconditioner.
+
+Given a symmetric positive (semi-)definite operator :math:`A` on one space of a :class:`Derham`,
+for example the Poisson operator :math:`\sigma \mathbb M^0 + \mathbb G^\top \mathbb M^1 \mathbb G`:
+
+1. A hierarchy of coarser Derhams is built (:class:`MultiGridHierarchy`).
+2. :math:`A` is re-discretized on every level from its expression tree (:class:`OperatorCoarsener`).
+3. One application of the preconditioner is a V-cycle with zero initial guess::
+
+       x_l = 0
+       smooth(A_l, b_l, x_l)                      # n_pre times
+       x_l += P_l V_cycle(l+1, R_l (b_l - A_l x_l))
+       smooth(A_l, b_l, x_l)                      # n_post times
+
+   with an exact solve on the coarsest level. With the same linear, :math:`A`-symmetric smoother before and
+   after the coarse-grid correction, the V-cycle is a symmetric positive definite preconditioner for CG.
+"""
+
+import logging
+from dataclasses import dataclass
+from typing import Literal
+
+import numpy as np
+import scipy.linalg as sla
+from feectools.linalg.basic import IdentityOperator, LinearOperator, Vector
+from feectools.linalg.block import BlockVector
+from feectools.linalg.solvers import inverse
+from maybempi import MPI
+from scope_profiler import ProfileManager
+
+from struphy.feec.mass import WeightedMassOperators
+from struphy.feec.preconditioner import MassMatrixPreconditioner
+from struphy.feec.psydac_derham import Derham
+from struphy.geometry.base import Domain
+from struphy.io.options import OptionsBase
+from struphy.linear_algebra.multigrid.coarsen import OperatorCoarsener
+from struphy.linear_algebra.multigrid.hierarchy import MultiGridHierarchy
+from struphy.linear_algebra.multigrid.smoothers import (
+    ChebyshevSmoother,
+    DiagonalComputer,
+    HiptmairSmoother,
+    JacobiSmoother,
+    KrylovSmoother,
+    Smoother,
+    _owned_slice,
+    _stencil_blocks,
+    inverse_diagonal,
+)
+from struphy.linear_algebra.multigrid.transfer import SplineProlongation
+from struphy.utils.utils import check_option
+
+logger = logging.getLogger("struphy")
+
+OptsSmoother = Literal["chebyshev", "jacobi", "cg"]
+OptsSmootherPrecond = Literal["mass", "jacobi", "identity"]
+OptsCoarseSolver = Literal["direct", "cg"]
+OptsNullspace = Literal["constants"]
+
+
+<div class="viewcode-block" id="MultiGridOptions">
+<a class="viewcode-back" href="../../../../sections/subsections/dev-feec.html#struphy.linear_algebra.multigrid.preconditioner.MultiGridOptions">[docs]</a>
+@dataclass
+class MultiGridOptions(OptionsBase):
+    r"""Options of :class:`MultiGridPreconditioner`.
+
+    Parameters
+    ----------
+    smoother : str
+        "chebyshev" (default), "jacobi" (damped) or "cg" (fixed number of PCG steps, non-linear).
+
+    smoother_precond : str
+        Preconditioner inside the Chebyshev and CG smoothers: "mass" (Kronecker-product approximation of
+        the inverse mass matrix of the space, default), "jacobi" (inverse diagonal of the operator) or "identity".
+
+    smoother_degree : int
+        Polynomial degree of the Chebyshev smoother, number of sweeps of the Jacobi smoother,
+        or number of iterations of the CG smoother.
+
+    n_pre, n_post : int
+        Number of smoother applications before and after the coarse-grid correction.
+
+    jacobi_omega : float
+        Damping factor of the Jacobi smoother.
+
+    chebyshev_bounds : tuple[float, float]
+        Smoothing interval of the Chebyshev smoother relative to the estimated largest eigenvalue.
+
+    eig_iter : int
+        Number of Lanczos steps for the eigenvalue estimate of the Chebyshev smoother.
+
+    max_levels : int | None
+        Maximal number of levels (None: coarsen as long as possible).
+
+    min_cells : int
+        Minimal number of elements per coarsened direction on the coarsest level.
+
+    coarse_solver : str
+        "direct" (LU factorization of the assembled coarsest operator, replicated on all processes)
+        or "cg" (PCG with the smoother preconditioner, to tolerance ``coarse_tol``).
+
+    coarse_tol : float
+        Relative tolerance of the "cg" coarse solver.
+
+    nullspace : str | None
+        "constants" if the operator is singular with the constant functions in its kernel (e.g. the
+        Poisson operator on 0-forms with periodic or Neumann boundary conditions).
+
+    matrix_free_mass : bool
+        Whether re-discretized mass matrices on coarse levels are matrix-free.
+
+    hiptmair : bool
+        Whether to use the hybrid smoother of Hiptmair for curl-curl operators on 1-forms
+        (:class:`~struphy.linear_algebra.multigrid.smoothers.HiptmairSmoother`): each smoothing step is followed
+        by a smoothing step on the potentials, with the same kind of smoother (``smoother``,
+        ``smoother_precond`` with the 0-form mass matrix for "mass").
+    """
+
+    smoother: OptsSmoother = "chebyshev"
+    smoother_precond: OptsSmootherPrecond = "mass"
+    smoother_degree: int = 3
+    n_pre: int = 1
+    n_post: int = 1
+    jacobi_omega: float = 2.0 / 3.0
+    chebyshev_bounds: tuple[float, float] = (0.1, 1.1)
+    eig_iter: int = 15
+    max_levels: int | None = None
+    min_cells: int = 2
+    coarse_solver: OptsCoarseSolver = "direct"
+    coarse_tol: float = 1e-10
+    nullspace: OptsNullspace | None = None
+    matrix_free_mass: bool = False
+    hiptmair: bool = False
+
+    def __post_init__(self):
+        check_option(self.smoother, OptsSmoother)
+        check_option(self.smoother_precond, OptsSmootherPrecond)
+        check_option(self.coarse_solver, OptsCoarseSolver)
+        if self.nullspace is not None:
+            check_option(self.nullspace, OptsNullspace)
+        assert self.smoother_degree &gt;= 1
+        assert self.n_pre &gt;= 0 and self.n_post &gt;= 0 and self.n_pre + self.n_post &gt;= 1</div>
+
+
+
+<div class="viewcode-block" id="MultiGridPreconditioner">
+<a class="viewcode-back" href="../../../../sections/subsections/dev-feec.html#struphy.linear_algebra.multigrid.preconditioner.MultiGridPreconditioner">[docs]</a>
+class MultiGridPreconditioner(LinearOperator):
+    r"""One geometric multigrid V-cycle as an approximate inverse of ``A`` (see module docstring).
+
+    Parameters
+    ----------
+    A : LinearOperator
+        Symmetric positive (semi-)definite operator on ``derham.coeff_spaces[form]``, built from struphy
+        operators (Derham derivatives, boundary operators, :class:`WeightedMassOperator`, ...) with
+        ``+``, ``-``, ``*`` and ``@``.
+
+    derham : Derham
+        The finest level.
+
+    domain : Domain
+        Mapping, used to re-discretize mass matrices on the coarse levels.
+
+    options : MultiGridOptions | None
+        Options (default: ``MultiGridOptions()``).
+
+    mass_ops : WeightedMassOperators | None
+        Mass operators of the finest level (only used by the "mass" smoother preconditioner).
+    """
+
+    def __init__(
+        self,
+        A: LinearOperator,
+        derham: Derham,
+        domain: Domain,
+        options: MultiGridOptions | None = None,
+        *,
+        mass_ops: WeightedMassOperators | None = None,
+    ):
+        self._options = MultiGridOptions() if options is None else options
+        opts = self._options
+        self._derham = derham
+        self._domain_map = domain
+
+        self._form = _find_form(derham, A.domain)
+        assert A.codomain is A.domain, "MultiGridPreconditioner requires a square operator."
+        if opts.nullspace == "constants":
+            assert self._form == "0", "nullspace='constants' is only implemented for 0-forms."
+        if opts.hiptmair:
+            assert self._form == "1", "The Hiptmair smoother is only implemented for 1-forms."
+
+        self._hierarchy = MultiGridHierarchy(derham, max_levels=opts.max_levels, min_cells=opts.min_cells)
+        L = self._hierarchy.n_levels
+        logger.info(f"Multigrid levels: {[d.num_elements for d in self._hierarchy.derhams]}")
+
+        self._P = [SplineProlongation(self._hierarchy[l + 1], self._hierarchy[l], self._form) for l in range(L - 1)]
+        self._R = [P.T for P in self._P]
+        self._coarseners = [
+            OperatorCoarsener(self._hierarchy[l], self._hierarchy[l + 1], domain, matrix_free=opts.matrix_free_mass)
+            for l in range(L - 1)
+        ]
+        self._diag = [DiagonalComputer(d.degree) for d in self._hierarchy.derhams]
+
+        if opts.smoother_precond == "mass":
+            fine_mass = WeightedMassOperators(derham, domain) if mass_ops is None else mass_ops
+            mass = [fine_mass] + [c.mass_ops for c in self._coarseners]
+            self._mass_pc = [MassMatrixPreconditioner(getattr(m, "M" + self._form)) for m in mass]
+            if opts.hiptmair:
+                self._mass_pc_0 = [MassMatrixPreconditioner(m.M0) for m in mass]
+        if opts.hiptmair:
+            self._grad = [d.grad for d in self._hierarchy.derhams]
+            # G^T A G couples one more index than A in every direction
+            self._diag_0 = [DiagonalComputer(tuple(p + 1 for p in d.degree)) for d in self._hierarchy.derhams]
+
+        # work vectors per level
+        self._b = [d.coeff_spaces[self._form].zeros() for d in self._hierarchy.derhams]
+        self._x = [d.coeff_spaces[self._form].zeros() for d in self._hierarchy.derhams]
+        self._r = [d.coeff_spaces[self._form].zeros() for d in self._hierarchy.derhams]
+        self._e = [d.coeff_spaces[self._form].zeros() for d in self._hierarchy.derhams]
+
+        self._A: list[LinearOperator] = []
+        self.update(A)
+
+    # ------------------------------------------------------------------
+    @property
+    def domain(self):
+        return self._A[0].domain
+
+    @property
+    def codomain(self):
+        return self._A[0].codomain
+
+    @property
+    def dtype(self):
+        return self._A[0].dtype
+
+    @property
+    def options(self) -&gt; MultiGridOptions:
+        return self._options
+
+    @property
+    def hierarchy(self) -&gt; MultiGridHierarchy:
+        return self._hierarchy
+
+    @property
+    def operators(self) -&gt; list[LinearOperator]:
+        """System operator on each level, ``operators[0]`` is the given one."""
+        return self._A
+
+    @property
+    def smoothers(self) -&gt; list[Smoother]:
+        return self._smoothers
+
+<div class="viewcode-block" id="MultiGridPreconditioner.transpose">
+<a class="viewcode-back" href="../../../../sections/subsections/dev-feec.html#struphy.linear_algebra.multigrid.preconditioner.MultiGridPreconditioner.transpose">[docs]</a>
+    def transpose(self, conjugate: bool = False) -&gt; "MultiGridPreconditioner":
+        assert all(s.is_symmetric for s in self._smoothers), "Only a symmetric V-cycle can be transposed."
+        assert self._options.n_pre == self._options.n_post
+        return self</div>
+
+
+    # ------------------------------------------------------------------
+<div class="viewcode-block" id="MultiGridPreconditioner.update">
+<a class="viewcode-back" href="../../../../sections/subsections/dev-feec.html#struphy.linear_algebra.multigrid.preconditioner.MultiGridPreconditioner.update">[docs]</a>
+    def update(self, A: LinearOperator) -&gt; None:
+        """Set a new fine-level operator (e.g. with changed scalars) and update all levels.
+
+        Mass matrices and derivative operators of coarse levels are re-used if ``A`` is built from the same objects.
+        """
+        assert A.domain is self._derham.coeff_spaces[self._form]
+        self._A = [A]
+        for c in self._coarseners:
+            self._A.append(c(self._A[-1]))
+        self._smoothers = [self._make_smoother(l) for l in range(self._hierarchy.n_levels - 1)]
+        self._setup_coarse_solver()</div>
+
+
+    def _smoother_precond(self, l: int, A: LinearOperator | None = None) -&gt; LinearOperator:
+        """Preconditioner of the smoother on level ``l`` for ``A`` (default: the system operator; else the
+        operator on the potentials of the Hiptmair smoother)."""
+        opts = self._options
+        potentials = A is not None
+        A = self._A[l] if A is None else A
+        if opts.smoother_precond == "mass":
+            return self._mass_pc_0[l] if potentials else self._mass_pc[l]
+        if opts.smoother_precond == "jacobi":
+            return inverse_diagonal((self._diag_0 if potentials else self._diag)[l](A))
+        return IdentityOperator(A.domain)
+
+    def _make_smoother(self, l: int) -&gt; Smoother:
+        S = self._make_simple_smoother(l, self._A[l])
+        if not self._options.hiptmair:
+            return S
+        G = self._grad[l]
+        A_0 = G.T @ self._A[l] @ G
+        return HiptmairSmoother(self._A[l], G, S, self._make_simple_smoother(l, A_0, potentials=True))
+
+    def _make_simple_smoother(self, l: int, A: LinearOperator, potentials: bool = False) -&gt; Smoother:
+        opts = self._options
+        M_inv = self._smoother_precond(l, A if potentials else None)
+        if opts.smoother == "chebyshev":
+            return ChebyshevSmoother(
+                A,
+                M_inv,
+                degree=opts.smoother_degree,
+                bounds=opts.chebyshev_bounds,
+                eig_iter=opts.eig_iter,
+            )
+        if opts.smoother == "jacobi":
+            D_inv = inverse_diagonal((self._diag_0 if potentials else self._diag)[l](A))
+            return JacobiSmoother(A, D_inv, omega=opts.jacobi_omega, sweeps=opts.smoother_degree)
+        return KrylovSmoother(A, M_inv, iterations=opts.smoother_degree)
+
+    def _setup_coarse_solver(self) -&gt; None:
+        opts = self._options
+        A = self._A[-1]
+        if opts.coarse_solver == "cg":
+            pc = self._smoother_precond(len(self._A) - 1) if opts.smoother_precond != "identity" else None
+            self._coarse_cg = inverse(A, "pcg", pc=pc, tol=1e-300, maxiter=1000, recycle=False)
+            return
+
+        Ad = _assemble_dense(A)
+        if opts.nullspace == "constants":
+            # A + s 1 1^T is regular; for b orthogonal to 1 its solution is the zero-mean solution of A x = b
+            n = Ad.shape[0]
+            Ad = Ad + np.mean(np.abs(np.diag(Ad))) / n * np.ones((n, n))
+        else:
+            # rows/cols of Dirichlet dofs are zero: put ones on the diagonal
+            zero = np.flatnonzero(np.all(Ad == 0.0, axis=1))
+            Ad[zero, zero] = 1.0
+        self._coarse_lu = sla.lu_factor(Ad)
+
+    # ------------------------------------------------------------------
+<div class="viewcode-block" id="MultiGridPreconditioner.dot">
+<a class="viewcode-back" href="../../../../sections/subsections/dev-feec.html#struphy.linear_algebra.multigrid.preconditioner.MultiGridPreconditioner.dot">[docs]</a>
+    def dot(self, b: Vector, out: Vector | None = None) -&gt; Vector:
+        """Apply one V-cycle (zero initial guess) to ``b``."""
+        assert b.space is self.domain
+        if out is None:
+            out = self.domain.zeros()
+        b.copy(out=self._b[0])
+        if self._options.nullspace == "constants":
+            _remove_mean(self._b[0])
+        with ProfileManager.profile_region("multigrid V-cycle", functions=[self._vcycle]):
+            self._vcycle(0)
+        self._x[0].copy(out=out)
+        if self._options.nullspace == "constants":
+            _remove_mean(out)
+        return out</div>
+
+
+    def _vcycle(self, l: int) -&gt; None:
+        b, x = self._b[l], self._x[l]
+        if l == len(self._A) - 1:
+            self._coarse_solve(b, x)
+            return
+
+        x *= 0.0
+        S = self._smoothers[l]
+        with ProfileManager.profile_region(f"pre-smoother level {l}", functions=[S.smooth]):
+            for _ in range(self._options.n_pre):
+                S.smooth(b, x)
+
+        r = S.residual(b, x, self._r[l])
+        self._R[l].dot(r, out=self._b[l + 1])
+        with ProfileManager.profile_region(f"coarse-grid correction level {l}", functions=[self._vcycle]):
+            self._vcycle(l + 1)
+        self._P[l].dot(self._x[l + 1], out=self._e[l])
+        x += self._e[l]
+
+        with ProfileManager.profile_region(f"post-smoother level {l}", functions=[S.smooth]):
+            for _ in range(self._options.n_post):
+                S.smooth_post(b, x)
+
+    def _coarse_solve(self, b: Vector, x: Vector) -&gt; None:
+        if self._options.coarse_solver == "cg":
+            nb = np.sqrt(b.inner(b))
+            if nb == 0.0:
+                x *= 0.0
+                return
+            self._coarse_cg._options["tol"] = self._options.coarse_tol * nb
+            self._coarse_cg.dot(b, out=x)
+            return
+
+        bg = _gather(b)
+        if self._options.nullspace == "constants":
+            bg -= bg.mean()
+        _scatter(sla.lu_solve(self._coarse_lu, bg), x)</div>
+
+
+
+# ----------------------------------------------------------------------------------------------------
+def _find_form(derham: Derham, V) -&gt; str:
+    for form in ("0", "1", "2", "3", "v"):
+        if derham.coeff_spaces[form] is V:
+            return form
+    raise ValueError("The operator does not act on a coefficient space of the given Derham.")
+
+
+def _comm(v: Vector):
+    blk = _stencil_blocks(v)[0]
+    return blk.space.cart.comm if blk.space.parallel else None
+
+
+def _gather(v: Vector) -&gt; np.ndarray:
+    """Global coefficient array of ``v`` (same on all processes)."""
+    a = v.toarray()
+    comm = _comm(v)
+    if comm is not None and comm.size &gt; 1:
+        comm.Allreduce(MPI.IN_PLACE, a, op=MPI.SUM)
+    return a
+
+
+def _scatter(a: np.ndarray, v: Vector) -&gt; None:
+    """Write the owned part of the global array ``a`` into ``v``."""
+    offset = 0
+    for blk in _stencil_blocks(v):
+        V = blk.space
+        n = int(np.prod(V.npts))
+        glob = a[offset : offset + n].reshape(tuple(int(m) for m in V.npts))
+        blk._data[_owned_slice(blk)] = glob[tuple(slice(s, e + 1) for s, e in zip(V.starts, V.ends))]
+        blk.ghost_regions_in_sync = False
+        offset += n
+
+
+def _assemble_dense(A: LinearOperator) -&gt; np.ndarray:
+    """Global dense matrix of ``A`` (same on all processes), by applying it to all unit vectors."""
+    e = A.domain.zeros()
+    blocks = _stencil_blocks(e)
+    sizes = [int(np.prod(b.space.npts)) for b in blocks]
+    N = sum(sizes)
+    out = np.zeros((N, N))
+    y = A.codomain.zeros()
+    col = 0
+    for blk, n in zip(blocks, sizes):
+        V = blk.space
+        for flat in range(n):
+            gidx = np.unravel_index(flat, tuple(int(m) for m in V.npts))
+            for b in blocks:
+                b._data[...] = 0.0
+                b.ghost_regions_in_sync = False
+            if all(s &lt;= i &lt;= e_ for i, s, e_ in zip(gidx, V.starts, V.ends)):
+                loc = tuple(int(i - s + p * m) for i, s, p, m in zip(gidx, V.starts, V.pads, V.shifts))
+                blk._data[loc] = 1.0
+            A.dot(e, out=y)
+            out[:, col] = _gather(y)
+            col += 1
+    return out
+
+
+def _remove_mean(v: Vector) -&gt; None:
+    """Subtract the mean of all coefficients (the projection orthogonal to the constant vector)."""
+    comm = _comm(v)
+    s = sum(float(np.sum(b._data[_owned_slice(b)])) for b in _stencil_blocks(v))
+    N = sum(int(np.prod(b.space.npts)) for b in _stencil_blocks(v))
+    if comm is not None and comm.size &gt; 1:
+        s = comm.allreduce(s, op=MPI.SUM)
+    mean = s / N
+    for b in _stencil_blocks(v):
+        b._data[_owned_slice(b)] -= mean
+        b.ghost_regions_in_sync = False
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
