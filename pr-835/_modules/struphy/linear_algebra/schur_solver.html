@@ -1,0 +1,1100 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>struphy.linear_algebra.schur_solver &#8212; struphy 3.5.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../_static/documentation_options.js?v=c1362a89"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/struphy/linear_algebra/schur_solver';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href="../../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.5.0 documentation - Home"/>
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.5.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">struphy.linear_algebra.schur_solver</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for struphy.linear_algebra.schur_solver</h1><div class="highlight"><pre>
+<span></span>from feectools.linalg.basic import IdentityOperator, LinearOperator, Vector
+from feectools.linalg.block import BlockLinearOperator, BlockVector
+from feectools.linalg.solvers import inverse
+from line_profiler import profile
+from scope_profiler import ProfileManager
+
+from struphy.linear_algebra.solver import SolverParameters
+
+
+<div class="viewcode-block" id="SchurSolver">
+<a class="viewcode-back" href="../../../sections/subsections/dev-feec.html#struphy.linear_algebra.schur_solver.SchurSolver">[docs]</a>
+class SchurSolver:
+    r"""Solves for :math:`x^{n+1}` in the block system
+
+    .. math::
+
+        \begin{pmatrix} A &amp; \Delta t\, B \\ \Delta t\, C &amp; \mathbb I \end{pmatrix}
+        \begin{pmatrix} x^{n+1} \\ y^{n+1} \end{pmatrix}
+        =
+        \begin{pmatrix} A &amp; - \Delta t\, B \\ - \Delta t\, C &amp; \mathbb I \end{pmatrix}
+        \begin{pmatrix} x^n \\ y^n \end{pmatrix}
+
+    using the Schur complement :math:`S = A - \Delta t^2 BC`, where :math:`\mathbb I` is the identity matrix
+    and :math:`(x^n, y^n)` is given. The solution is
+
+    .. math::
+
+        x^{n+1} = S^{-1} \left[ (A + \Delta t^2 BC) \, x^n - 2 \Delta t\, B \, y^n \right] \,.
+
+    The caller passes :math:`B y^n` and computes :math:`y^{n+1} = y^n - \Delta t\, C (x^{n+1} + x^n)` itself.
+
+    Parameters
+    ----------
+    A : LinearOperator
+        Upper left block :math:`A`.
+
+    BC : LinearOperator
+        Product :math:`BC` of the off-diagonal blocks (same domain and codomain as :math:`A`).
+
+    solver_name : str
+        Name of the iterative solver, passed to ``feectools.linalg.solvers.inverse`` (e.g. ``"pcg"``, ``"cg"``,
+        ``"pbicgstab"``, ``"gmres"``).
+
+    precond : LinearOperator, optional
+        Preconditioner of the Schur complement :math:`S` (can be replaced later with :attr:`precond`).
+
+    solver_params : SolverParameters, optional
+        Solver controls (``tol``, ``maxiter``, ...); defaults to ``SolverParameters()``.
+    """
+
+    def __init__(
+        self,
+        A: LinearOperator,
+        BC: LinearOperator,
+        solver_name: str,
+        precond=None,  # TODO: add Preconditioner base class
+        solver_params: SolverParameters = None,
+    ):
+        assert isinstance(A, LinearOperator)
+        assert isinstance(BC, LinearOperator)
+
+        assert A.domain == BC.domain
+        assert A.codomain == BC.codomain
+
+        if solver_params is None:
+            solver_params = SolverParameters()
+
+        # linear operators
+        self._A = A
+        self._BC = BC
+
+        # Allocate memory for matrices used in solving the Schur system
+        self._schur = A.copy()
+        self._rhs_m = A.copy()
+
+        # initialize solver with dummy matrix A
+        self._solver_name = solver_name
+
+        kwargs = solver_params.__dict__.copy()
+        kwargs.pop("info")
+        if precond is not None:
+            kwargs["pc"] = precond
+        self._solver_kwargs = kwargs
+
+        self._solver = inverse(A, solver_name, **kwargs)
+
+        # right-hand side vector (avoids temporary memory allocation!)
+        self._rhs = A.codomain.zeros()
+
+    @property
+    def A(self):
+        """Upper left block :math:`A`."""
+        return self._A
+
+    @property
+    def BC(self):
+        """Product :math:`BC` of the off-diagonal blocks."""
+        return self._BC
+
+    @property
+    def precond(self):
+        """Preconditioner of the Schur system (None without preconditioner)."""
+        return self._solver_kwargs.get("pc")
+
+    @precond.setter
+    def precond(self, pc):
+        """Replace the preconditioner, e.g. by one of the Schur system for the current dt (built at the first solve)."""
+        self._solver_kwargs.pop("pc", None)
+        if pc is not None:
+            self._solver_kwargs["pc"] = pc
+        self._solver = inverse(self._A, self._solver_name, **self._solver_kwargs)
+
+    @A.setter
+    def A(self, a):
+        """Upper left block :math:`A`."""
+        self._A = a
+
+    @BC.setter
+    def BC(self, bc):
+        """Product :math:`BC` of the off-diagonal blocks."""
+        self._BC = bc
+
+    @profile
+    @ProfileManager.profile("solve: SchurSolver")
+    def __call__(self, xn, Byn, dt, out=None):
+        """Solves the 2x2 block matrix linear system.
+
+        Parameters
+        ----------
+        xn : feectools.linalg.basic.Vector
+            Solution from previous time step.
+
+        Byn : feectools.linalg.basic.Vector
+            The product B*yn.
+
+        dt : float
+            Time step size.
+
+        out : feectools.linalg.basic.Vector, optional
+            If given, the converged solution will be written into this vector (in-place).
+
+        Returns
+        -------
+        out : feectools.linalg.basic.Vector
+            Converged solution.
+
+        info : dict
+            Convergence information.
+        """
+
+        assert isinstance(xn, Vector)
+        assert isinstance(Byn, Vector)
+        assert xn.space == self._A.domain
+        assert Byn.space == self._A.codomain
+
+        # left- and right-hand side operators
+        self._schur *= 0.0
+        self._schur += self._BC
+        self._schur *= -(dt**2)
+        self._schur += self._A
+
+        self._rhs_m *= 0.0
+        self._rhs_m += self._BC
+        self._rhs_m *= dt**2
+        self._rhs_m += self._A
+
+        # use setter to update lhs matrix
+        self._solver.linop = self._schur
+
+        # right-hand side vector rhs = 2*dt*[ rhs_m/(2*dt) @ xn - Byn ] (in-place!)
+        rhs = self._rhs_m.dot(xn, out=self._rhs)
+        rhs /= 2 * dt
+        rhs -= Byn
+        rhs *= 2 * dt
+
+        # solve linear system (in-place if out is not None)
+        x = self._solver.dot(rhs, out=out)
+
+        return x, self._solver._info</div>
+
+
+
+<div class="viewcode-block" id="SchurSolverFull">
+<a class="viewcode-back" href="../../../sections/subsections/dev-feec.html#struphy.linear_algebra.schur_solver.SchurSolverFull">[docs]</a>
+class SchurSolverFull:
+    r"""Solves the block system
+
+    .. math::
+
+        \begin{pmatrix} A &amp; B \\ C &amp; \mathbb I \end{pmatrix}
+        \begin{pmatrix} x \\ y \end{pmatrix}
+        =
+        \begin{pmatrix} b_x \\ b_y \end{pmatrix}
+
+    using the Schur complement :math:`S = A - BC`, where :math:`\mathbb I` is the identity matrix
+    and :math:`(b_x, b_y)^\top` is given. The solution is
+
+    .. math::
+
+        x &amp;= S^{-1} \, (b_x - B b_y ) \,,
+        \\
+        y &amp;= b_y - C x \,.
+
+    Parameters
+    ----------
+    M : BlockLinearOperator
+        Block matrix :math:`[[A, B], [C, \mathbb I]]`.
+
+    solver_name : str
+        Name of the iterative solver, passed to ``feectools.linalg.solvers.inverse`` (e.g. ``"pcg"``, ``"cg"``,
+        ``"pbicgstab"``, ``"gmres"``).
+
+    **solver_params :
+        Keyword arguments of the chosen solver; must contain ``pc`` (the preconditioner, None for none).
+    """
+
+    def __init__(self, M, solver_name, **solver_params):
+        assert isinstance(M, BlockLinearOperator)
+        assert M.domain == M.codomain  # solve square system
+
+        # initialize solver with dummy matrix A
+        self._solver_name = solver_name
+
+        if solver_params["pc"] is None:
+            solver_params.pop("pc")
+
+        self._M = M
+
+        self._A = M[0, 0]
+        self._B = M[0, 1]
+        self._C = M[1, 0]
+        assert isinstance(M[1, 1], IdentityOperator)
+
+        self._S = self._A - self._B @ self._C
+
+        self._solver_params = solver_params
+        self._solver = inverse(self._S, solver_name, **solver_params)
+
+        # right-hand side vector (avoids temporary memory allocation!)
+        self._rhs = self._A.codomain.zeros()
+
+    @property
+    def precond(self):
+        """Preconditioner of the Schur system (None without preconditioner)."""
+        return self._solver_params.get("pc")
+
+    @precond.setter
+    def precond(self, pc):
+        """Replace the preconditioner, e.g. by one of the Schur system for the current dt."""
+        self._solver_params.pop("pc", None)
+        if pc is not None:
+            self._solver_params["pc"] = pc
+        self._solver = inverse(self._S, self._solver_name, **self._solver_params)
+
+<div class="viewcode-block" id="SchurSolverFull.dot">
+<a class="viewcode-back" href="../../../sections/subsections/dev-feec.html#struphy.linear_algebra.schur_solver.SchurSolverFull.dot">[docs]</a>
+    @profile
+    @ProfileManager.profile("solve: SchurSolverFull")
+    def dot(self, v, out=None):
+        """Solves the 2x2 block matrix linear system.
+
+        Parameters
+        ----------
+        v : feectools.linalg.basic.Vector
+            Left hand side of the system.
+
+        out : feectools.linalg.basic.Vector, optional
+            If given, the converged solution will be written into this vector (in-place).
+
+        Returns
+        -------
+        out : feectools.linalg.block.BLockVector
+            Converged solution.
+
+        info : dict
+            Convergence information.
+        """
+
+        assert isinstance(v, BlockVector)
+        assert v.space == self._M.domain
+
+        if out is None:
+            out = self._M.codomain.zeros()
+        else:
+            assert out.space == self._M.codomain
+
+        bx = v[0]
+        by = v[1]
+
+        # right-hand side vector rhs bx - B by
+        rhs = self._B.dot(by, out=self._rhs)
+        rhs *= -1
+        rhs += bx
+
+        # solve linear system (in-place if out is not None)
+        x = self._solver.dot(rhs, out=out[0])
+        y = self._C.dot(x, out=out[1])
+        y *= -1
+        y += by
+
+        return out</div>
+</div>
+
+
+
+<div class="viewcode-block" id="SchurSolverFull3">
+<a class="viewcode-back" href="../../../sections/subsections/dev-feec.html#struphy.linear_algebra.schur_solver.SchurSolverFull3">[docs]</a>
+class SchurSolverFull3:
+    r"""Solves the block system
+
+    .. math::
+
+        \begin{pmatrix} A &amp; B &amp; D \\ C &amp; \mathbb I &amp; 0 \\ E &amp; 0 &amp; \mathbb I \end{pmatrix}
+        \begin{pmatrix} x \\ y \\ z \end{pmatrix}
+        =
+        \begin{pmatrix} b_x \\ b_y \\ b_z \end{pmatrix}
+
+    using the Schur complement :math:`S = A - BC - DE`, where :math:`\mathbb I` is the identity matrix
+    and :math:`(b_x, b_y, b_z)^\top` is given. The solution is
+
+    .. math::
+
+        x &amp;= S^{-1} \, (b_x - B b_y - D b_z) \,,
+        \\
+        y &amp;= b_y - C x \,,
+        \\
+        z &amp;= b_z - E x \,.
+
+    Parameters
+    ----------
+    M : BlockLinearOperator
+        Block matrix :math:`[[A, B, D], [C, \mathbb I, 0], [E, 0, \mathbb I]]`.
+
+    solver_name : str
+        Name of the iterative solver, passed to ``feectools.linalg.solvers.inverse`` (e.g. ``"pcg"``, ``"cg"``,
+        ``"pbicgstab"``, ``"gmres"``).
+
+    **solver_params :
+        Keyword arguments of the chosen solver; must contain ``pc`` (the preconditioner, None for none).
+    """
+
+    def __init__(self, M, solver_name, **solver_params):
+        assert isinstance(M, BlockLinearOperator)
+        assert M.domain == M.codomain  # solve square system
+
+        # initialize solver with dummy matrix A
+        self._solver_name = solver_name
+
+        if solver_params["pc"] is None:
+            solver_params.pop("pc")
+
+        self._M = M
+
+        self._A = M[0, 0]
+        self._B = M[0, 1]
+        self._C = M[1, 0]
+        self._D = M[0, 2]
+        self._E = M[2, 0]
+        NoneType = type(None)
+        assert isinstance(M[1, 1], IdentityOperator)
+        assert isinstance(M[2, 2], IdentityOperator)
+        assert isinstance(M[1, 2], NoneType)
+        assert isinstance(M[2, 1], NoneType)
+
+        self._S = self._A - self._B @ self._C - self._D @ self._E
+
+        self._solver_params = solver_params
+        self._solver = inverse(self._S, solver_name, **solver_params)
+
+        # right-hand side vector (avoids temporary memory allocation!)
+        self._rhs = self._A.codomain.zeros()
+        self._rhs2 = self._A.codomain.zeros()
+
+    @property
+    def precond(self):
+        """Preconditioner of the Schur system (None without preconditioner)."""
+        return self._solver_params.get("pc")
+
+    @precond.setter
+    def precond(self, pc):
+        """Replace the preconditioner, e.g. by one of the Schur system for the current dt."""
+        self._solver_params.pop("pc", None)
+        if pc is not None:
+            self._solver_params["pc"] = pc
+        self._solver = inverse(self._S, self._solver_name, **self._solver_params)
+
+<div class="viewcode-block" id="SchurSolverFull3.dot">
+<a class="viewcode-back" href="../../../sections/subsections/dev-feec.html#struphy.linear_algebra.schur_solver.SchurSolverFull3.dot">[docs]</a>
+    @profile
+    @ProfileManager.profile("solve: SchurSolverFull3")
+    def dot(self, v, out=None):
+        """Solves the 3x3 block matrix linear system.
+
+        Parameters
+        ----------
+        v : feectools.linalg.basic.Vector
+            Left hand side of the system.
+
+        out : feectools.linalg.basic.Vector, optional
+            If given, the converged solution will be written into this vector (in-place).
+
+        Returns
+        -------
+        out : feectools.linalg.block.BLockVector
+            Converged solution.
+
+        info : dict
+            Convergence information.
+        """
+
+        assert isinstance(v, BlockVector)
+        assert v.space == self._M.domain
+
+        if out is None:
+            out = self._M.codomain.zeros()
+        else:
+            assert out.space == self._M.codomain
+
+        bx = v[0]
+        by = v[1]
+        bz = v[2]
+
+        # right-hand side vector rhs bx - B by
+        rhs = self._B.dot(by, out=self._rhs)
+        rhs *= -1
+        rhs -= self._D.dot(bz, out=self._rhs2)
+        rhs += bx
+
+        # solve linear system (in-place if out is not None)
+        x = self._solver.dot(rhs, out=out[0])
+        y = self._C.dot(x, out=out[1])
+        y *= -1
+        y += by
+        z = self._E.dot(x, out=out[2])
+        z *= -1
+        z += bz
+
+        return out</div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
