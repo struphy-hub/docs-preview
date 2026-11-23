@@ -610,7 +610,12 @@ the derivations follow in <a class="reference internal" href="#sph-lagrange-eule
 representation of densities with the <a class="reference internal" href="numerics-pic.html#particle-discrete"><span class="std std-ref">Particle-in-cell methods (PIC)</span></a>, which is assumed known here.
 Parts of the material and the figures are adapted from the lecture
 <a class="reference external" href="https://github.com/spossann/2026_SPEGEO_Strasbourg_school">Meshless Structure-Preserving Algorithms</a>
-(SPEGEO school, Strasbourg 2026).</p>
+(SPEGEO school, Strasbourg 2026).
+SPH was introduced by Gingold and Monaghan<a class="footnote-reference brackets" href="#footcite-gingold1977" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> and Lucy<a class="footnote-reference brackets" href="#footcite-lucy1977" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>. Reviews of the method are
+Monaghan<a class="footnote-reference brackets" href="#footcite-monaghan2005" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>, Price<a class="footnote-reference brackets" href="#footcite-price2012" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> (with the derivation from a Lagrangian used here),
+Springel<a class="footnote-reference brackets" href="#footcite-springel2010" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> (astrophysics), Wang <em>et al.</em><a class="footnote-reference brackets" href="#footcite-wang2016" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> (multiphase flows) and
+Lind <em>et al.</em><a class="footnote-reference brackets" href="#footcite-lind2020" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> (convergence and accuracy); a textbook is Violeau<a class="footnote-reference brackets" href="#footcite-violeau2012" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>. A list of all
+references is at the <a class="reference internal" href="#sph-references"><span class="std std-ref">end of the page</span></a>.</p>
 <section id="overview">
 <span id="sph-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>We consider a compressible fluid with mass density <span class="math notranslate nohighlight">\(\rho(t, \mathbf x)\)</span> and velocity
@@ -654,7 +659,8 @@ below);</p></li>
 </ol>
 <p>Its weaknesses are the smoothing error (bias) of order <span class="math notranslate nohighlight">\(h^2\)</span>, the sampling noise for too few markers per
 kernel, the treatment of boundaries by ghost particles (<a class="reference internal" href="#sph-bcs"><span class="std std-ref">Boundary conditions</span></a>), and instabilities of regular marker
-arrangements (e.g. the “zig-zag” pattern of tessellated markers in shear flow).</p>
+arrangements (e.g. the “zig-zag” pattern of tessellated markers in shear flow, related to the tensile
+instability <a class="footnote-reference brackets" href="#footcite-swegle1995" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>).</p>
 </section>
 <section id="sph-algorithm-in-struphy">
 <span id="sph-algo"></span><h2>SPH algorithm in Struphy<a class="headerlink" href="#sph-algorithm-in-struphy" title="Link to this heading">#</a></h2>
@@ -757,12 +763,12 @@ and the unknown is the flow map <span class="math notranslate nohighlight">\(\Ph
 parcel is the material derivative,
 <span class="math notranslate nohighlight">\(\frac{\textrm d}{\textrm d t} \mathbf u(t, \Phi_t(\mathbf x_0)) = (\partial_t + \mathbf u \cdot \nabla) \mathbf u\)</span>.
 Particle methods discretize the Lagrangian description: the markers <em>are</em> the parcels.</p>
-<figure class="align-center" id="id1">
+<figure class="align-center" id="id25">
 <span id="fig-sph-lagrange-euler"></span><a class="reference internal image-reference" href="../../_images/sph_lagrange_euler.png"><img alt="../../_images/sph_lagrange_euler.png" src="../../_images/sph_lagrange_euler.png" style="width: 90%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">Lagrangian view: follow the parcel that starts at <span class="math notranslate nohighlight">\(\mathbf x_0\)</span> along its trajectory
-<span class="math notranslate nohighlight">\(\Phi_t(\mathbf x_0)\)</span>. Eulerian view: observe the parcels that pass a fixed point <span class="math notranslate nohighlight">\(\mathbf x_*\)</span>.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<span class="math notranslate nohighlight">\(\Phi_t(\mathbf x_0)\)</span>. Eulerian view: observe the parcels that pass a fixed point <span class="math notranslate nohighlight">\(\mathbf x_*\)</span>.</span><a class="headerlink" href="#id25" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><strong>Conservation of mass.</strong> The mass density <span class="math notranslate nohighlight">\(\rho\)</span> is a volume form transported by the flow: the mass in
@@ -786,7 +792,8 @@ makes the action stationary,</p>
 \qquad \delta \mathcal A = 0
 \qquad\Longleftrightarrow\qquad
 m \ddot{\mathbf x} = - \nabla V(\mathbf x)\,.\]</div>
-<p><strong>Lagrangian action of a fluid.</strong> For a fluid with initial mass density <span class="math notranslate nohighlight">\(\rho(0, \mathbf x_0)\)</span> and internal
+<p><strong>Lagrangian action of a fluid</strong> (see Salmon<a class="footnote-reference brackets" href="#footcite-salmon1988" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> and Morrison<a class="footnote-reference brackets" href="#footcite-morrison1998" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a> for the
+variational and Hamiltonian formulations of fluid mechanics). For a fluid with initial mass density <span class="math notranslate nohighlight">\(\rho(0, \mathbf x_0)\)</span> and internal
 energy per unit mass <span class="math notranslate nohighlight">\(\mathcal U(\rho)\)</span>, the action is the sum of the parcel actions, weighted by their
 masses:</p>
 <div class="math notranslate nohighlight">
@@ -800,7 +807,8 @@ masses:</p>
 <span class="eqno">(6)<a class="headerlink" href="#equation-sph-action" title="Link to this equation">#</a></span>\[\mathcal A_\textnormal{Euler}(\mathbf u, \rho) = \int_0^T \int_\Omega \left( \frac{|\mathbf u|^2}{2} - \frac 1m V - \mathcal U(\rho) \right)
 \rho\, \textrm d \mathbf x\, \textrm d t\,.\]</div>
 <p>The variations of <span class="math notranslate nohighlight">\(\mathbf u\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span> are not free: they are induced by variations of the flow map,
-<span class="math notranslate nohighlight">\(\boldsymbol\xi := \delta \Phi_t \circ \Phi_t^{-1}\)</span>, which gives (Euler-Poincaré reduction)</p>
+<span class="math notranslate nohighlight">\(\boldsymbol\xi := \delta \Phi_t \circ \Phi_t^{-1}\)</span>, which gives (Euler-Poincaré reduction,
+Holm <em>et al.</em><a class="footnote-reference brackets" href="#footcite-holm1998" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>)</p>
 <div class="math notranslate nohighlight">
 \[\delta \mathbf u = \partial_t \boldsymbol\xi + \mathbf u \cdot \nabla \boldsymbol\xi - \boldsymbol\xi \cdot \nabla \mathbf u\,,
 \qquad
@@ -841,44 +849,46 @@ W^\textnormal{lin}_h(x) = \frac 1h \left(1 - \frac{|x|}{h}\right)\,.\]</div>
 (<code class="docutils literal notranslate"><span class="pre">&quot;*_2d&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;*_3d&quot;</span></code>) are tensor products of these, with a width <span class="math notranslate nohighlight">\(h_i\)</span> per direction; <code class="docutils literal notranslate"><span class="pre">&quot;linear_isotropic_3d&quot;</span></code>
 is the radial kernel <span class="math notranslate nohighlight">\(\frac{3}{\pi h^3}(1 - |\mathbf x|/h)\)</span>. The kernels and their gradients are evaluated in
 logical coordinates <span class="math notranslate nohighlight">\(\boldsymbol \eta\)</span>; gradients are mapped to physical space with <span class="math notranslate nohighlight">\(DF^{-\top}\)</span>.</p>
-<figure class="align-center" id="id2">
+<figure class="align-center" id="id26">
 <span id="fig-sph-kernels"></span><a class="reference internal image-reference" href="../../_images/sph_kernels.png"><img alt="../../_images/sph_kernels.png" src="../../_images/sph_kernels.png" style="width: 90%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">The 1D smoothing kernels of Struphy (<code class="docutils literal notranslate"><span class="pre">trigonometric_1d</span></code>, <code class="docutils literal notranslate"><span class="pre">gaussian_1d</span></code>, <code class="docutils literal notranslate"><span class="pre">linear_1d</span></code>), scaled with the
-width <span class="math notranslate nohighlight">\(h\)</span>.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+width <span class="math notranslate nohighlight">\(h\)</span>.</span><a class="headerlink" href="#id26" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><a class="reference internal" href="#fig-sph-density-1d"><span class="std std-ref">Figures</span></a> below show the smoothed density <a class="reference internal" href="#equation-sph-density">(3)</a> of tessellated markers
 (4 per box, <span class="math notranslate nohighlight">\(h\)</span> = box size) for <span class="math notranslate nohighlight">\(\rho(\eta_1) = 1.5 + \cos(2\pi\eta_1)\)</span> and, in 2D, with 16 markers in each of
 <span class="math notranslate nohighlight">\(12 \times 12\)</span> boxes; all kernels recover the density well.</p>
-<figure class="align-center" id="id3">
+<figure class="align-center" id="id27">
 <span id="fig-sph-density-1d"></span><a class="reference internal image-reference" href="../../_images/sph_density_1d.png"><img alt="../../_images/sph_density_1d.png" src="../../_images/sph_density_1d.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">Smoothed density in 1D with the three kernels (tessellation, 4 markers per box, <span class="math notranslate nohighlight">\(h = 1/24\)</span>), computed
-with <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.eval_density" title="struphy.pic.base.Particles.eval_density"><code class="xref py py-meth docutils literal notranslate"><span class="pre">eval_density()</span></code></a>.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+with <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.eval_density" title="struphy.pic.base.Particles.eval_density"><code class="xref py py-meth docutils literal notranslate"><span class="pre">eval_density()</span></code></a>.</span><a class="headerlink" href="#id27" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<figure class="align-center" id="id4">
+<figure class="align-center" id="id28">
 <a class="reference internal image-reference" href="../../_images/sph_density_2d.png"><img alt="../../_images/sph_density_2d.png" src="../../_images/sph_density_2d.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">Smoothed density in 2D, <span class="math notranslate nohighlight">\(\rho = 1.5 + \cos(2\pi\eta_1)\cos(2\pi\eta_2)\)</span>, with the <code class="docutils literal notranslate"><span class="pre">gaussian_2d</span></code> kernel
-(tessellation, 16 markers in each of <span class="math notranslate nohighlight">\(12 \times 12\)</span> boxes, <span class="math notranslate nohighlight">\(h = 1/12\)</span>).</span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
+(tessellation, 16 markers in each of <span class="math notranslate nohighlight">\(12 \times 12\)</span> boxes, <span class="math notranslate nohighlight">\(h = 1/12\)</span>).</span><a class="headerlink" href="#id28" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><strong>Convergence.</strong> Two errors compete (<a class="reference internal" href="#fig-sph-convergence"><span class="std std-ref">figure</span></a>): the <em>smoothing bias</em> grows with
 <span class="math notranslate nohighlight">\(h\)</span> (the kernel is too wide and smooths out features), and the <em>sampling noise</em> grows when too few markers lie
 in the support of the kernel (small <span class="math notranslate nohighlight">\(h\)</span> at fixed <span class="math notranslate nohighlight">\(N\)</span>). For each <span class="math notranslate nohighlight">\(N\)</span> there is an optimal
 <span class="math notranslate nohighlight">\(h\)</span>, which decreases as <span class="math notranslate nohighlight">\(N\)</span> grows. Convergence <span class="math notranslate nohighlight">\(\rho_h \to \rho\)</span> requires <span class="math notranslate nohighlight">\(h \to 0\)</span> and
-<span class="math notranslate nohighlight">\(N \to \infty\)</span> with <span class="math notranslate nohighlight">\(N h^d \to \infty\)</span>, i.e. more and more markers per kernel support.</p>
-<figure class="align-center" id="id5">
+<span class="math notranslate nohighlight">\(N \to \infty\)</span> with <span class="math notranslate nohighlight">\(N h^d \to \infty\)</span>, i.e. more and more markers per kernel support. The
+truncation error of SPH sums is analysed in Quinlan <em>et al.</em><a class="footnote-reference brackets" href="#footcite-quinlan2006" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a>; corrected (renormalized) kernel gradients
+that improve the order of convergence are discussed in Oger <em>et al.</em><a class="footnote-reference brackets" href="#footcite-oger2007" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a> and Lind <em>et al.</em><a class="footnote-reference brackets" href="#footcite-lind2020" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>.</p>
+<figure class="align-center" id="id29">
 <span id="fig-sph-convergence"></span><a class="reference internal image-reference" href="../../_images/sph_convergence.png"><img alt="../../_images/sph_convergence.png" src="../../_images/sph_convergence.png" style="width: 55%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">Error of the smoothed density as a function of the kernel width <span class="math notranslate nohighlight">\(h\)</span> and of the number of markers
-(randomly drawn, logarithmic scales). The red line marks the optimal <span class="math notranslate nohighlight">\(h\)</span> for each number of markers.</span><a class="headerlink" href="#id5" title="Link to this image">#</a></p>
+(randomly drawn, logarithmic scales). The red line marks the optimal <span class="math notranslate nohighlight">\(h\)</span> for each number of markers.</span><a class="headerlink" href="#id29" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -907,7 +917,8 @@ with <span class="math notranslate nohighlight">\(\mathcal U' = \partial_\rho \m
 <span class="eqno">(8)<a class="headerlink" href="#equation-sph-pressure-force" title="Link to this equation">#</a></span>\[\dot{\mathbf v}_p = - \frac{1}{m} \nabla V(\mathbf x_p)
 - \sum_{j=1}^N w_j \Big( \mathcal U'(\rho_p) + \mathcal U'(\rho_j) \Big) \nabla W_h(\mathbf x_p - \mathbf x_j)\,,
 \qquad \mathcal U'(\rho) = \frac{p(\rho)}{\rho^2}\,.\]</div>
-<p>This is the standard symmetric SPH pressure force, here derived from a variational principle.</p>
+<p>This is the standard symmetric SPH pressure force, here derived from a variational principle, as in
+Bonet <em>et al.</em><a class="footnote-reference brackets" href="#footcite-bonet2004" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></a>, Price and Monaghan<a class="footnote-reference brackets" href="#footcite-price2004" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>16<span class="fn-bracket">]</span></a>, Springel and Hernquist<a class="footnote-reference brackets" href="#footcite-springel2002" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>17<span class="fn-bracket">]</span></a> and Price<a class="footnote-reference brackets" href="#footcite-price2012" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>.</p>
 <p><strong>Internal energies in Struphy</strong> (option <code class="docutils literal notranslate"><span class="pre">thermodynamics</span></code> of
 <a class="reference internal" href="propagators-avail.html#struphy.propagators.push_v_in_sph_pressure.PushVinSPHpressure" title="struphy.propagators.push_v_in_sph_pressure.PushVinSPHpressure"><code class="xref py py-class docutils literal notranslate"><span class="pre">PushVinSPHpressure</span></code></a>):</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -980,7 +991,8 @@ the velocity gradient,</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol\sigma = \mu \left( \nabla \mathbf u + (\nabla \mathbf u)^\top - \frac 23 (\nabla \cdot \mathbf u)\, \mathbb I \right)\,,
 \qquad \boldsymbol\sigma = \boldsymbol\sigma^\top\,, \quad \textnormal{tr}\, \boldsymbol\sigma = 0\,.\]</div>
-<p>The model docstrings of <a class="reference internal" href="models-all.html#struphy.models.ViscousEulerSPH" title="struphy.models.ViscousEulerSPH"><code class="xref py py-class docutils literal notranslate"><span class="pre">ViscousEulerSPH</span></code></a> and <a class="reference internal" href="models-all.html#struphy.models.IncompressibleNavierStokesSPH" title="struphy.models.IncompressibleNavierStokesSPH"><code class="xref py py-class docutils literal notranslate"><span class="pre">IncompressibleNavierStokesSPH</span></code></a> use the opposite sign convention (stress tensor <span class="math notranslate nohighlight">\(-\boldsymbol\sigma\)</span>). Viscosity is dissipative and not part of the Lagrangian; it is added to the equations of motion. In SPH, the stress is
+<p>The model docstrings of <a class="reference internal" href="models-all.html#struphy.models.ViscousEulerSPH" title="struphy.models.ViscousEulerSPH"><code class="xref py py-class docutils literal notranslate"><span class="pre">ViscousEulerSPH</span></code></a> and <a class="reference internal" href="models-all.html#struphy.models.IncompressibleNavierStokesSPH" title="struphy.models.IncompressibleNavierStokesSPH"><code class="xref py py-class docutils literal notranslate"><span class="pre">IncompressibleNavierStokesSPH</span></code></a> use the opposite sign convention (stress tensor <span class="math notranslate nohighlight">\(-\boldsymbol\sigma\)</span>). Viscosity is dissipative and not part of the Lagrangian; it is added to the equations of motion (for SPH
+formulations of viscous flows, see e.g. Morris <em>et al.</em><a class="footnote-reference brackets" href="#footcite-morris1997" id="id20" role="doc-noteref"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></a>). In SPH, the stress is
 evaluated at the markers from the gradient of the smoothed velocity <a class="reference internal" href="#equation-sph-velocity">(7)</a>,
 <span class="math notranslate nohighlight">\(\boldsymbol \sigma_i := \boldsymbol\sigma(\nabla \mathbf u_h(\mathbf x_i))\)</span>, and the force is the SPH estimate of
 its divergence:</p>
@@ -1063,7 +1075,7 @@ processes in the decomposed direction.</p>
 <span id="sph-incompressible"></span><h2>Incompressible flows<a class="headerlink" href="#incompressible-flows" title="Link to this heading">#</a></h2>
 <p>For incompressible flows, <span class="math notranslate nohighlight">\(\nabla \cdot \mathbf u = 0\)</span>, the pressure is not a function of the density but a
 Lagrange multiplier. <a class="reference internal" href="models-all.html#struphy.models.IncompressibleNavierStokesSPH" title="struphy.models.IncompressibleNavierStokesSPH"><code class="xref py py-class docutils literal notranslate"><span class="pre">IncompressibleNavierStokesSPH</span></code></a> computes it with <strong>Chorin’s projection
-method</strong> on the finite element grid (see <a class="reference internal" href="numerics-geomFE.html#geomfe"><span class="std std-ref">Geometric finite elements (FEEC)</span></a>): after the viscous step, the divergence of the marker
+method</strong> (for a projection method entirely in SPH, see Cummins and Rudman<a class="footnote-reference brackets" href="#footcite-cummins1999" id="id21" role="doc-noteref"><span class="fn-bracket">[</span>19<span class="fn-bracket">]</span></a>) on the finite element grid (see <a class="reference internal" href="numerics-geomFE.html#geomfe"><span class="std std-ref">Geometric finite elements (FEEC)</span></a>): after the viscous step, the divergence of the marker
 velocities is deposited on the grid, the pressure <span class="math notranslate nohighlight">\(p \in H^1\)</span> is found from the Poisson equation
 <span class="math notranslate nohighlight">\(\Delta p = \nabla \cdot \mathbf u / \Delta t\)</span> (<a class="reference internal" href="propagators-avail.html#struphy.propagators.poisson_solve.PoissonSolve" title="struphy.propagators.poisson_solve.PoissonSolve"><code class="xref py py-class docutils literal notranslate"><span class="pre">PoissonSolve</span></code></a>), and the
 markers are pushed by the pressure gradient
@@ -1112,12 +1124,104 @@ velocity.</p>
 splitting, mass conserved to machine precision);</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">EulerSPH</span></code>: isothermal standing sound wave in 1D over one period;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ViscousEulerSPH</span></code>: damped sound wave (decay rate <span class="math notranslate nohighlight">\(\frac 23 \mu k^2\)</span>), velocity diffusion (decay rate
-<span class="math notranslate nohighlight">\(\frac 43 \mu k^2\)</span>) and Hagen-Poiseuille flow (parabolic profile between no-slip walls);</p></li>
+<span class="math notranslate nohighlight">\(\frac 43 \mu k^2\)</span>) and Hagen-Poiseuille flow (parabolic profile between no-slip walls, as in
+Morris <em>et al.</em><a class="footnote-reference brackets" href="#footcite-morris1997" id="id22" role="doc-noteref"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></a>);</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">IncompressibleNavierStokesSPH</span></code>: Chorin projection and decay of a shear flow between no-slip walls.</p></li>
 </ul>
-<p>The dam break test (<code class="docutils literal notranslate"><span class="pre">ViscousEulerSPH</span></code>) is a robustness check only: it verifies that the markers stay in the domain.</p>
+<p>The dam break test (<code class="docutils literal notranslate"><span class="pre">ViscousEulerSPH</span></code>, a classic SPH free-surface problem <a class="footnote-reference brackets" href="#footcite-monaghan1994" id="id23" role="doc-noteref"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></a>) is a
+robustness check only: it verifies that the markers stay in the domain.</p>
 <p>The Hagen-Poiseuille flow and the dam break are shown with animations in the tutorials
 (see <a class="reference internal" href="#sph-algo"><span class="std std-ref">SPH algorithm in Struphy</span></a>).</p>
+</section>
+<section id="references">
+<span id="sph-references"></span><h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<div class="docutils container" id="id24">
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="footcite-gingold1977" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>R. A. Gingold and J. J. Monaghan. Smoothed particle hydrodynamics: theory and application to non-spherical stars. <em>Monthly Notices of the Royal Astronomical Society</em>, 181(3):375–389, 1977. <a class="reference external" href="https://doi.org/10.1093/mnras/181.3.375">doi:10.1093/mnras/181.3.375</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-lucy1977" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>L. B. Lucy. A numerical approach to the testing of the fission hypothesis. <em>The Astronomical Journal</em>, 82:1013–1024, 1977. <a class="reference external" href="https://doi.org/10.1086/112164">doi:10.1086/112164</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-monaghan2005" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>J. J. Monaghan. Smoothed particle hydrodynamics. <em>Reports on Progress in Physics</em>, 68(8):1703–1759, 2005. <a class="reference external" href="https://doi.org/10.1088/0034-4885/68/8/R01">doi:10.1088/0034-4885/68/8/R01</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-price2012" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id4">1</a>,<a role="doc-backlink" href="#id19">2</a>)</span>
+<p>Daniel J. Price. Smoothed particle hydrodynamics and magnetohydrodynamics. <em>Journal of Computational Physics</em>, 231(3):759–794, 2012. <a class="reference external" href="https://doi.org/10.1016/j.jcp.2010.12.011">doi:10.1016/j.jcp.2010.12.011</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-springel2010" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">5</a><span class="fn-bracket">]</span></span>
+<p>Volker Springel. Smoothed particle hydrodynamics in astrophysics. <em>Annual Review of Astronomy and Astrophysics</em>, 48:391–430, 2010. <a class="reference external" href="https://doi.org/10.1146/annurev-astro-081309-130914">doi:10.1146/annurev-astro-081309-130914</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-wang2016" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">6</a><span class="fn-bracket">]</span></span>
+<p>Zhi-Bin Wang, Rong Chen, Hong Wang, Qiang Liao, Xun Zhu, and Shu-Zhe Li. An overview of smoothed particle hydrodynamics for simulating multiphase flow. <em>Applied Mathematical Modelling</em>, 40(23–24):9625–9655, 2016. <a class="reference external" href="https://doi.org/10.1016/j.apm.2016.06.030">doi:10.1016/j.apm.2016.06.030</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-lind2020" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id7">1</a>,<a role="doc-backlink" href="#id15">2</a>)</span>
+<p>S. J. Lind, B. D. Rogers, and P. K. Stansby. Review of smoothed particle hydrodynamics: towards converged Lagrangian flow modelling. <em>Proceedings of the Royal Society A</em>, 476(2241):20190801, 2020. <a class="reference external" href="https://doi.org/10.1098/rspa.2019.0801">doi:10.1098/rspa.2019.0801</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-violeau2012" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">8</a><span class="fn-bracket">]</span></span>
+<p>Damien Violeau. <em>Fluid Mechanics and the SPH Method: Theory and Applications</em>. Oxford University Press, Oxford, 2012. ISBN 978-0-19-965552-6. <a class="reference external" href="https://doi.org/10.1093/acprof:oso/9780199655526.001.0001">doi:10.1093/acprof:oso/9780199655526.001.0001</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-swegle1995" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">9</a><span class="fn-bracket">]</span></span>
+<p>J. W. Swegle, D. L. Hicks, and S. W. Attaway. Smoothed particle hydrodynamics stability analysis. <em>Journal of Computational Physics</em>, 116(1):123–134, 1995. <a class="reference external" href="https://doi.org/10.1006/jcph.1995.1010">doi:10.1006/jcph.1995.1010</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-salmon1988" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">10</a><span class="fn-bracket">]</span></span>
+<p>R. Salmon. Hamiltonian fluid mechanics. <em>Annual Review of Fluid Mechanics</em>, 20:225–256, 1988. <a class="reference external" href="https://doi.org/10.1146/annurev.fl.20.010188.001301">doi:10.1146/annurev.fl.20.010188.001301</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-morrison1998" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">11</a><span class="fn-bracket">]</span></span>
+<p>P. J. Morrison. Hamiltonian description of the ideal fluid. <em>Reviews of Modern Physics</em>, 70(2):467–521, 1998. <a class="reference external" href="https://doi.org/10.1103/RevModPhys.70.467">doi:10.1103/RevModPhys.70.467</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-holm1998" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">12</a><span class="fn-bracket">]</span></span>
+<p>Darryl D. Holm, Jerrold E. Marsden, and Tudor S. Ratiu. The Euler-Poincaré equations and semidirect products with applications to continuum theories. <em>Advances in Mathematics</em>, 137(1):1–81, 1998. <a class="reference external" href="https://doi.org/10.1006/aima.1998.1721">doi:10.1006/aima.1998.1721</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-quinlan2006" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">13</a><span class="fn-bracket">]</span></span>
+<p>N. J. Quinlan, M. Basa, and M. Lastiwka. Truncation error in mesh-free particle methods. <em>International Journal for Numerical Methods in Engineering</em>, 66(13):2064–2085, 2006. <a class="reference external" href="https://doi.org/10.1002/nme.1617">doi:10.1002/nme.1617</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-oger2007" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">14</a><span class="fn-bracket">]</span></span>
+<p>G. Oger, M. Doring, B. Alessandrini, and P. Ferrant. An improved SPH method: towards higher order convergence. <em>Journal of Computational Physics</em>, 225(2):1472–1492, 2007. <a class="reference external" href="https://doi.org/10.1016/j.jcp.2007.01.039">doi:10.1016/j.jcp.2007.01.039</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-bonet2004" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">15</a><span class="fn-bracket">]</span></span>
+<p>J. Bonet, S. Kulasegaram, M. X. Rodriguez-Paz, and M. Profit. Variational formulation for the smooth particle hydrodynamics (SPH) simulation of fluid and solid problems. <em>Computer Methods in Applied Mechanics and Engineering</em>, 193(12–14):1245–1256, 2004. <a class="reference external" href="https://doi.org/10.1016/j.cma.2003.12.018">doi:10.1016/j.cma.2003.12.018</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-price2004" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">16</a><span class="fn-bracket">]</span></span>
+<p>D. J. Price and J. J. Monaghan. Smoothed particle magnetohydrodynamics – II. Variational principles and variable smoothing-length terms. <em>Monthly Notices of the Royal Astronomical Society</em>, 348(1):139–152, 2004. <a class="reference external" href="https://doi.org/10.1111/j.1365-2966.2004.07346.x">doi:10.1111/j.1365-2966.2004.07346.x</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-springel2002" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id18">17</a><span class="fn-bracket">]</span></span>
+<p>V. Springel and L. Hernquist. Cosmological smoothed particle hydrodynamics simulations: the entropy equation. <em>Monthly Notices of the Royal Astronomical Society</em>, 333(3):649–664, 2002. <a class="reference external" href="https://doi.org/10.1046/j.1365-8711.2002.05445.x">doi:10.1046/j.1365-8711.2002.05445.x</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-morris1997" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id20">1</a>,<a role="doc-backlink" href="#id22">2</a>)</span>
+<p>Joseph P. Morris, Patrick J. Fox, and Yi Zhu. Modeling low Reynolds number incompressible flows using SPH. <em>Journal of Computational Physics</em>, 136(1):214–226, 1997. <a class="reference external" href="https://doi.org/10.1006/jcph.1997.5776">doi:10.1006/jcph.1997.5776</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-cummins1999" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id21">19</a><span class="fn-bracket">]</span></span>
+<p>Sharen J. Cummins and Murray Rudman. An SPH projection method. <em>Journal of Computational Physics</em>, 152(2):584–607, 1999. <a class="reference external" href="https://doi.org/10.1006/jcph.1999.6246">doi:10.1006/jcph.1999.6246</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-monaghan1994" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id23">20</a><span class="fn-bracket">]</span></span>
+<p>J. J. Monaghan. Simulating free surface flows with SPH. <em>Journal of Computational Physics</em>, 110(2):399–406, 1994. <a class="reference external" href="https://doi.org/10.1006/jcph.1994.1034">doi:10.1006/jcph.1994.1034</a>.</p>
+</aside>
+</aside>
+</div>
 </section>
 </section>
 
@@ -1180,6 +1284,7 @@ splitting, mass conserved to machine precision);</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neighbour-search-and-parallelization">Neighbour search and parallelization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incompressible-flows">Incompressible flows</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sph-models-in-struphy">SPH models in Struphy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>
 

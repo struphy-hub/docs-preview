@@ -602,17 +602,37 @@
 <span id="gempic"></span><h1>Numerics<a class="headerlink" href="#numerics" title="Link to this heading">#</a></h1>
 <p>Struphy discretization is performed according to the GEMPIC (Geometric Electro-Magnetic Particle-In-Cell) framework.
 Relevant publications are (and the references therein):</p>
-<blockquote>
-<div><p>1. M. Kraus, K. Kormann, P. J. Morrison, E. Sonnendrücker, “GEMPIC: Geometric ElectroMagnetic
-Particle-In-Cell Methods”, <a class="reference external" href="https://www.cambridge.org/core/journals/journal-of-plasma-physics/article/gempic-geometric-electromagnetic-particleincell-methods/C32D97F1B5281878F094B7E5075D291A">Journal of Plasma Physics 83.4 (2017)</a></p>
-<p>2. A. Buffa, J. Rivas , G. Sangalli , R. Vasquez,
-“Isogeometric discrete differential forms in three dimensions”, <a class="reference external" href="https://epubs.siam.org/doi/10.1137/100786708">SIAM J. Numer. Anal. Vol. 49, No. 2 (2011)</a></p>
-<p>3. F. Holderied, S. Possanner, X. Wang, “MHD-kinetic hybrid code based on structure-preserving
-finite elements with particles-in-cell”, <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0021999121000358?via%3Dihub">J. Comp. Phys. 433 (2021) 110143</a></p>
-</div></blockquote>
-<p>In Struphy, kinetic equations are discretized with the <a class="reference internal" href="subsections/numerics-pic.html#particle-discrete"><span class="std std-ref">Particle-in-cell methods (PIC)</span></a>. Equations for electromagnetic fields and/or fluid species
-are discretized with <a class="reference internal" href="subsections/numerics-geomFE.html#geomfe"><span class="std std-ref">Geometric finite elements (FEEC)</span></a>. In what follows we provide a brief introduction to these methods. In section <a class="reference internal" href="../markdown/vlasov-maxwell.html#disc-example"><span class="std std-ref">Example: Vlasov-Maxwell-Poisson discretization</span></a>
-we detail the discretization of the Vlasov-Maxwell system implemented in Struphy.</p>
+<ol class="arabic simple">
+<li><p>the GEMPIC framework <a class="footnote-reference brackets" href="#footcite-kraus2017" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>;</p></li>
+<li><p>isogeometric discrete differential forms (the finite element spaces of Struphy) <a class="footnote-reference brackets" href="#footcite-buffa2011" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>;</p></li>
+<li><p>an MHD-kinetic hybrid code based on structure-preserving finite elements with particles-in-cell
+<a class="footnote-reference brackets" href="#footcite-holderied2021" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>;</p></li>
+<li><p>smoothed particle hydrodynamics (SPH) for fluids, derived from a Lagrangian <a class="footnote-reference brackets" href="#footcite-price2012" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>.</p></li>
+</ol>
+<p>In Struphy, kinetic equations are discretized with the <a class="reference internal" href="subsections/numerics-pic.html#particle-discrete"><span class="std std-ref">Particle-in-cell methods (PIC)</span></a>. Equations for electromagnetic fields
+and/or fluid species are discretized with <a class="reference internal" href="subsections/numerics-geomFE.html#geomfe"><span class="std std-ref">Geometric finite elements (FEEC)</span></a>, and fluids can also be discretized with
+<a class="reference internal" href="subsections/numerics-sph.html#sph-method"><span class="std std-ref">smoothed particle hydrodynamics</span></a>. In what follows we provide a brief introduction to these methods.
+In section <a class="reference internal" href="../markdown/vlasov-maxwell.html#disc-example"><span class="std std-ref">Example: Vlasov-Maxwell-Poisson discretization</span></a> we detail the discretization of the Vlasov-Maxwell system implemented in Struphy.</p>
+<div class="docutils container" id="id5">
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="footcite-kraus2017" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Michael Kraus, Katharina Kormann, Philip J. Morrison, and Eric Sonnendrücker. GEMPIC: geometric electromagnetic particle-in-cell methods. <em>Journal of Plasma Physics</em>, 83(4):905830401, 2017. <a class="reference external" href="https://doi.org/10.1017/S002237781700040X">doi:10.1017/S002237781700040X</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-buffa2011" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>A. Buffa, J. Rivas, G. Sangalli, and R. Vázquez. Isogeometric discrete differential forms in three dimensions. <em>SIAM Journal on Numerical Analysis</em>, 49(2):818–844, 2011. <a class="reference external" href="https://doi.org/10.1137/100786708">doi:10.1137/100786708</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-holderied2021" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>Florian Holderied, Stefan Possanner, and Xin Wang. MHD-kinetic hybrid code based on structure-preserving finite elements with particles-in-cell. <em>Journal of Computational Physics</em>, 433:110143, 2021. <a class="reference external" href="https://doi.org/10.1016/j.jcp.2021.110143">doi:10.1016/j.jcp.2021.110143</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-price2012" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p>Daniel J. Price. Smoothed particle hydrodynamics and magnetohydrodynamics. <em>Journal of Computational Physics</em>, 231(3):759–794, 2012. <a class="reference external" href="https://doi.org/10.1016/j.jcp.2010.12.011">doi:10.1016/j.jcp.2010.12.011</a>.</p>
+</aside>
+</aside>
+</div>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>

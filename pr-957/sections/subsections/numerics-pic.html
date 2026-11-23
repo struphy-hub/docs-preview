@@ -608,7 +608,11 @@ The first sections explain the idea and the algorithm without proofs; the deriva
 <a class="reference internal" href="#pic-eom"><span class="std std-ref">Marker equations of motion</span></a>, <a class="reference internal" href="#control-var"><span class="std std-ref">Control variate method</span></a> and the sections after them.
 Parts of the material and the figures are adapted from the lecture
 <a class="reference external" href="https://github.com/spossann/2026_SPEGEO_Strasbourg_school">Meshless Structure-Preserving Algorithms</a>
-(SPEGEO school, Strasbourg 2026).</p>
+(SPEGEO school, Strasbourg 2026).
+Classic introductions to particle methods for plasmas are the textbooks Birdsall and Langdon<a class="footnote-reference brackets" href="#footcite-birdsall1991" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> and
+Hockney and Eastwood<a class="footnote-reference brackets" href="#footcite-hockney1988" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, and the lecture notes Sonnendrücker<a class="footnote-reference brackets" href="#footcite-sonnendruecker2013" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>; the geometric PIC framework
+used in Struphy (GEMPIC) is described in Kraus <em>et al.</em><a class="footnote-reference brackets" href="#footcite-kraus2017" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>. A list of all references is at the
+<a class="reference internal" href="#pic-references"><span class="std std-ref">end of the page</span></a>.</p>
 <section id="overview">
 <span id="pic-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>Kinetic equations describe a distribution function <span class="math notranslate nohighlight">\(f(t, \mathbf z)\)</span> on phase space, where
@@ -641,13 +645,13 @@ For the Vlasov equation in Cartesian coordinates, for example, <span class="math
 <p>and without source term (<span class="math notranslate nohighlight">\(S = 0\)</span>) <strong>the weights stay constant</strong>. The initial condition
 <span class="math notranslate nohighlight">\(f^\textrm{vol}_\textnormal{in}\)</span> enters only through the initial weights. All of this is shown in
 <a class="reference internal" href="#pic-eom"><span class="std std-ref">Marker equations of motion</span></a>.</p>
-<figure class="align-center" id="id1">
+<figure class="align-center" id="id21">
 <span id="fig-pic-flow-map"></span><a class="reference internal image-reference" href="../../_images/pic_flow_map.png"><img alt="../../_images/pic_flow_map.png" src="../../_images/pic_flow_map.png" style="width: 90%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">Markers <span class="math notranslate nohighlight">\(\mathbf z_{p0}\)</span> in a region <span class="math notranslate nohighlight">\(\Omega_0\)</span> are transported by the flow map <span class="math notranslate nohighlight">\(\Phi_t\)</span>
 of the kinetic equation. The density <span class="math notranslate nohighlight">\(f^\textrm{vol}\)</span> is transported with them; the number of particles
-in <span class="math notranslate nohighlight">\(\Phi_t(\Omega_0)\)</span> is the same as in <span class="math notranslate nohighlight">\(\Omega_0\)</span>.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+in <span class="math notranslate nohighlight">\(\Phi_t(\Omega_0)\)</span> is the same as in <span class="math notranslate nohighlight">\(\Omega_0\)</span>.</span><a class="headerlink" href="#id21" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In Struphy, the initial markers are usually drawn at random (Monte-Carlo loading) from a <em>sampling density</em> <span class="math notranslate nohighlight">\(s^\textrm{vol}_\textnormal{in}\)</span>
@@ -655,7 +659,7 @@ in <span class="math notranslate nohighlight">\(\Phi_t(\Omega_0)\)</span> is the
 <div class="math notranslate nohighlight" id="equation-def-weights">
 <span class="eqno">(3)<a class="headerlink" href="#equation-def-weights" title="Link to this equation">#</a></span>\[w_{p0} = \frac{1}{N}\,\frac{f^\textrm{vol}_\textnormal{in}(\mathbf z_{p0})}{s^\textrm{vol}_\textnormal{in}(\mathbf z_{p0})}\,.\]</div>
 <p>This choice makes the marker sums Monte-Carlo estimates of the integrals, with an error that decreases like
-<span class="math notranslate nohighlight">\(1/\sqrt N\)</span> (see <a class="reference internal" href="#monte-carlo"><span class="std std-ref">Monte-Carlo integration</span></a>). Note that in Struphy the factor <span class="math notranslate nohighlight">\(1/N\)</span> is part of the weights.</p>
+<span class="math notranslate nohighlight">\(1/\sqrt N\)</span> (see <a class="reference internal" href="#monte-carlo"><span class="std std-ref">Monte-Carlo integration</span></a> and Aydemir<a class="footnote-reference brackets" href="#footcite-aydemir1994" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>). Note that in Struphy the factor <span class="math notranslate nohighlight">\(1/N\)</span> is part of the weights.</p>
 </section>
 <section id="pic-algorithm">
 <span id="pic-algo"></span><h2>PIC algorithm<a class="headerlink" href="#pic-algorithm" title="Link to this heading">#</a></h2>
@@ -745,7 +749,8 @@ coordinates <span class="math notranslate nohighlight">\(\boldsymbol\eta \in (0,
 <span id="pic-phase-space"></span><h2>Phase space, 0-forms and volume forms<a class="headerlink" href="#phase-space-0-forms-and-volume-forms" title="Link to this heading">#</a></h2>
 <p>Struphy computes in logical coordinates <span class="math notranslate nohighlight">\(\boldsymbol\eta \in (0,1)^3\)</span>, mapped to physical space by
 <span class="math notranslate nohighlight">\(\mathbf x = F(\boldsymbol\eta)\)</span> (see <a class="reference internal" href="numerics-geomFE.html#geomfe"><span class="std std-ref">Geometric finite elements (FEEC)</span></a>), and in velocity coordinates <span class="math notranslate nohighlight">\(\mathbf v\)</span>
-(Cartesian velocities in 6D, <span class="math notranslate nohighlight">\((v_\parallel, \mu)\)</span> in 5D). A phase-space volume element transforms as</p>
+(Cartesian velocities in 6D, guiding-center coordinates <span class="math notranslate nohighlight">\((v_\parallel, \mu)\)</span> in 5D
+<a class="footnote-reference brackets" href="#footcite-littlejohn1983" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a><a class="footnote-reference brackets" href="#footcite-possanner2018" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>). A phase-space volume element transforms as</p>
 <div class="math notranslate nohighlight">
 \[\textrm d^3 \mathbf x\, \textrm d \mathbf v_\textnormal{phys} = J(\mathbf z)\, \textrm d \mathbf z\,,
 \qquad J(\mathbf z) = |\det DF(\boldsymbol\eta)|\, J_v(\mathbf z)\,,\]</div>
@@ -797,7 +802,8 @@ is why Struphy evaluates <span class="math notranslate nohighlight">\(s^0\)</spa
 marker array, see <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles" title="struphy.pic.base.Particles"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particles</span></code></a>).</p>
 <p><strong>Guiding centers.</strong> The guiding-center flow conserves the phase-space volume
 <span class="math notranslate nohighlight">\(J^*\, \textrm d \mathbf z\)</span> with <span class="math notranslate nohighlight">\(J^* = |\det DF|\, B^*_\parallel\)</span>, where
-<span class="math notranslate nohighlight">\(B^*_\parallel = B_\parallel + O(\epsilon)\)</span> is the modified field of guiding-center theory. Struphy’s pushers
+<span class="math notranslate nohighlight">\(B^*_\parallel = B_\parallel + O(\epsilon)\)</span> is the modified field of guiding-center theory
+<a class="footnote-reference brackets" href="#footcite-littlejohn1983" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>. Struphy’s pushers
 use <span class="math notranslate nohighlight">\(B^*_\parallel\)</span>, so the argument above holds with <span class="math notranslate nohighlight">\(J^*\)</span>: without source, the weights are exactly
 constant along the orbits. The initial weights, however, are computed with <span class="math notranslate nohighlight">\(J_v = B_0\)</span>,</p>
 <div class="math notranslate nohighlight">
@@ -811,11 +817,13 @@ error of the initial condition only; it is then transported exactly and does not
 </section>
 <section id="monte-carlo-integration">
 <span id="monte-carlo"></span><h2>Monte-Carlo integration<a class="headerlink" href="#monte-carlo-integration" title="Link to this heading">#</a></h2>
-<p>At the core of the PIC method is the approximation of integrals</p>
+<p>At the core of the PIC method is the approximation of integrals by Monte-Carlo integration; a unified Monte-Carlo
+interpretation of particle simulations, including the error and noise estimates below, is given by
+Aydemir<a class="footnote-reference brackets" href="#footcite-aydemir1994" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>. We consider integrals</p>
 <div class="math notranslate nohighlight" id="equation-int-1">
 <span class="eqno">(6)<a class="headerlink" href="#equation-int-1" title="Link to this equation">#</a></span>\[I = \int_\Omega A(\mathbf z)\, f^\textrm{vol}(\mathbf z)\,\textrm d \mathbf z
   = \int_\Omega A(\mathbf z)\, f^0(\mathbf z)\, J(\mathbf z)\,\textrm d \mathbf z\]</div>
-<p>by Monte-Carlo (MC) integration, where <span class="math notranslate nohighlight">\(A\)</span> is a 0-form (e.g. a velocity moment times a finite element basis
+<p>where <span class="math notranslate nohighlight">\(A\)</span> is a 0-form (e.g. a velocity moment times a finite element basis
 function). Let <span class="math notranslate nohighlight">\(s^\textrm{vol}\)</span> be a probability density on <span class="math notranslate nohighlight">\(\Omega\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[s^\textrm{vol}(\mathbf z) &gt; 0 \quad \forall\, \mathbf z \in \Omega\,, \qquad \int_\Omega s^\textrm{vol}(\mathbf z)\,\textrm d \mathbf z = 1\,.\]</div>
@@ -856,7 +864,7 @@ Gaussian whose mean and thermal velocity can be adapted to the distribution func
 see <a class="reference internal" href="#control-var"><span class="std std-ref">Control variate method</span></a>.</p></li>
 </ul>
 <p>Quasi-random (low-discrepancy) samples such as Sobol sequences can also improve the convergence rate beyond
-<span class="math notranslate nohighlight">\(1/\sqrt N\)</span> for smooth integrands; they are available as loading options.</p>
+<span class="math notranslate nohighlight">\(1/\sqrt N\)</span> for smooth integrands <a class="footnote-reference brackets" href="#footcite-niederreiter1992" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>; they are available as loading options.</p>
 </section>
 <section id="two-ways-to-define-markers-and-weights">
 <span id="pic-two-ways"></span><h2>Two ways to define markers and weights<a class="headerlink" href="#two-ways-to-define-markers-and-weights" title="Link to this heading">#</a></h2>
@@ -873,13 +881,13 @@ particles, and so does the marker inside: <span class="math notranslate nohighli
 Approximating each subregion by its marker gives <a class="reference internal" href="#equation-pic-ansatz">(2)</a> with constant weights. The discrete
 <span class="math notranslate nohighlight">\(f_h\)</span> is still a density with the exact total number of particles,
 <span class="math notranslate nohighlight">\(\int f_h\, \textrm d \mathbf z = \sum_p w_p\)</span>.</p>
-<figure class="align-center" id="id2">
+<figure class="align-center" id="id22">
 <span id="fig-pic-partition"></span><a class="reference internal image-reference" href="../../_images/pic_partition.png"><img alt="../../_images/pic_partition.png" src="../../_images/pic_partition.png" style="width: 90%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">Partition of the initial region into subregions <span class="math notranslate nohighlight">\(\Omega_0^p\)</span> with one marker each. The flow map
 transports the subregions together with their markers; each subregion keeps its number of particles
-<span class="math notranslate nohighlight">\(w_p\)</span>.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+<span class="math notranslate nohighlight">\(w_p\)</span>.</span><a class="headerlink" href="#id22" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><strong>Monte-Carlo sampling.</strong> Draw the markers at random from a sampling density, <span class="math notranslate nohighlight">\(\mathbf z_{p0} \sim s^\textrm{vol}_\textnormal{in}\)</span>,
@@ -959,7 +967,8 @@ and the initial weights <span class="math notranslate nohighlight">\(w_{p0}\)</s
 <section id="marker-equations-of-motion">
 <span id="pic-eom"></span><h2>Marker equations of motion<a class="headerlink" href="#marker-equations-of-motion" title="Link to this heading">#</a></h2>
 <p>We now derive the equations for <span class="math notranslate nohighlight">\(\mathbf z_p(t)\)</span> and <span class="math notranslate nohighlight">\(w_p(t)\)</span> from the conservation law
-<a class="reference internal" href="#equation-conservelaw">(1)</a> with a general source <span class="math notranslate nohighlight">\(S\)</span>. Three derivations are given: a short one from the weak
+<a class="reference internal" href="#equation-conservelaw">(1)</a> with a general source <span class="math notranslate nohighlight">\(S\)</span> (see also Aydemir<a class="footnote-reference brackets" href="#footcite-aydemir1994" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> and
+Sonnendrücker<a class="footnote-reference brackets" href="#footcite-sonnendruecker2013" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>). Three derivations are given: a short one from the weak
 form (<a class="reference internal" href="#pic-eom-weak"><span class="std std-ref">Derivation from the weak form</span></a>), a longer one based on Monte-Carlo estimates of each term (<a class="reference internal" href="#pic-eom-mc"><span class="std std-ref">Derivation via Monte-Carlo estimates</span></a>), and a
 geometric argument for constant weights (<a class="reference internal" href="#pic-eom-flow"><span class="std std-ref">Constant weights from the flow map</span></a>). They lead to the same result.</p>
 <p>Throughout, <span class="math notranslate nohighlight">\(\frac{\textrm d}{\textrm d t} g\big(t, \mathbf z_p(t)\big) = \partial_t g + \dot{\mathbf z}_p \cdot \nabla_{\mathbf z} g\)</span>
@@ -1098,7 +1107,7 @@ consistency condition. The flow-map argument is the most direct, but covers only
 <p>The Monte-Carlo error <a class="reference internal" href="#equation-mc-error">(9)</a> is proportional to the standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> of the
 integrand. In many plasma applications, <span class="math notranslate nohighlight">\(f\)</span> stays close to a known background <span class="math notranslate nohighlight">\(\mathcal M\)</span> (e.g. a
 Maxwellian equilibrium), and only the small deviation <span class="math notranslate nohighlight">\(f - \mathcal M\)</span> carries the interesting physics. The
-control variate method exploits this. It relies on</p>
+control variate method exploits this <a class="footnote-reference brackets" href="#footcite-aydemir1994" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a><a class="footnote-reference brackets" href="#footcite-hatzky2002" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a><a class="footnote-reference brackets" href="#footcite-kleiber2011" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a>. It relies on</p>
 <ol class="arabic">
 <li><p>the ability to compute the integral <a class="reference internal" href="#equation-int-1">(6)</a> of the background without Monte-Carlo
 (analytically or by quadrature):</p>
@@ -1137,8 +1146,8 @@ array stores both: <code class="docutils literal notranslate"><span class="pre">
 <section id="delta-f-method">
 <span id="pic-deltaf"></span><h2>Delta-f method<a class="headerlink" href="#delta-f-method" title="Link to this heading">#</a></h2>
 <p>The control variate method solves the full equation for <span class="math notranslate nohighlight">\(f\)</span> and only changes how integrals are estimated. In
-the <strong>delta-f method</strong>, the markers instead solve an equation for the perturbation <span class="math notranslate nohighlight">\(\delta f = f - \mathcal M\)</span>
-directly. Writing the characteristics as <span class="math notranslate nohighlight">\(\mathbf u = \mathbf u_0 + \mathbf u_1\)</span>, where the background is
+the <strong>delta-f method</strong> <a class="footnote-reference brackets" href="#footcite-parker1993" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a><a class="footnote-reference brackets" href="#footcite-dimits1993" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a><a class="footnote-reference brackets" href="#footcite-hu1994" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a>, the markers instead solve an equation for the
+perturbation <span class="math notranslate nohighlight">\(\delta f = f - \mathcal M\)</span> directly. Writing the characteristics as <span class="math notranslate nohighlight">\(\mathbf u = \mathbf u_0 + \mathbf u_1\)</span>, where the background is
 stationary under <span class="math notranslate nohighlight">\(\mathbf u_0\)</span>, i.e. <span class="math notranslate nohighlight">\(\nabla_{\mathbf z} \cdot (\mathbf u_0 \mathcal M^\textrm{vol}) = 0\)</span>,
 the conservation law <a class="reference internal" href="#equation-conservelaw">(1)</a> (with <span class="math notranslate nohighlight">\(S = 0\)</span>) becomes</p>
 <div class="math notranslate nohighlight">
@@ -1229,7 +1238,8 @@ Besides the density, velocity moments can be binned by multiplying the weights w
 <span id="pic-kde"></span><h2>Kernel density estimation<a class="headerlink" href="#kernel-density-estimation" title="Link to this heading">#</a></h2>
 <p>The marker approximation <a class="reference internal" href="#equation-pic-ansatz">(2)</a> is a sum of delta distributions, while the true solution is
 smooth. A smooth approximation that can be evaluated at any point is obtained by convolution with a <strong>smoothing
-kernel</strong> <span class="math notranslate nohighlight">\(W_h\)</span> of width <span class="math notranslate nohighlight">\(h\)</span> (e.g. a Gaussian), normalized to <span class="math notranslate nohighlight">\(\int W_h\, \textrm d \mathbf z = 1\)</span>:</p>
+kernel</strong> <span class="math notranslate nohighlight">\(W_h\)</span> of width <span class="math notranslate nohighlight">\(h\)</span> (e.g. a Gaussian; kernel density estimation, see
+Silverman<a class="footnote-reference brackets" href="#footcite-silverman1986" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a>), normalized to <span class="math notranslate nohighlight">\(\int W_h\, \textrm d \mathbf z = 1\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\tilde f_h(t, \mathbf z) := (W_h * f_h)(t, \mathbf z) = \int_\Omega W_h(\mathbf z - \mathbf z')\, f_h(t, \mathbf z')\,\textrm d \mathbf z'
 = \sum_{p=1}^N w_p\, W_h\big(\mathbf z - \mathbf z_p(t)\big)\,.\]</div>
@@ -1237,24 +1247,24 @@ kernel</strong> <span class="math notranslate nohighlight">\(W_h\)</span> of wid
 point <span class="math notranslate nohighlight">\(\mathbf z^*\)</span> contribute (<a class="reference internal" href="#fig-pic-kernel-density"><span class="std std-ref">figure</span></a>):</p>
 <div class="math notranslate nohighlight">
 \[\tilde f_h(t, \mathbf z^*) = \sum_{p\,:\, |\mathbf z^* - \mathbf z_p(t)| &lt; h} w_p\, W_h\big(\mathbf z^* - \mathbf z_p(t)\big)\,.\]</div>
-<figure class="align-center" id="id3">
+<figure class="align-center" id="id23">
 <span id="fig-pic-kernel-density"></span><a class="reference internal image-reference" href="../../_images/pic_kernel_density.png"><img alt="../../_images/pic_kernel_density.png" src="../../_images/pic_kernel_density.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">Kernel density estimate at <span class="math notranslate nohighlight">\(\mathbf z^*\)</span>: only the markers within the support of <span class="math notranslate nohighlight">\(W_h\)</span> (orange)
-contribute, the others are ignored.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+contribute, the others are ignored.</span><a class="headerlink" href="#id23" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Summing over all <span class="math notranslate nohighlight">\(N\)</span> markers for each evaluation point would cost <span class="math notranslate nohighlight">\(O(N)\)</span> per point. Instead, the markers
 are sorted into <strong>boxes</strong> of size at least <span class="math notranslate nohighlight">\(h\)</span>. To evaluate at <span class="math notranslate nohighlight">\(\mathbf z^*\)</span>, one finds the box of
 <span class="math notranslate nohighlight">\(\mathbf z^*\)</span> and sums only over the markers in this box and in its neighbouring boxes
 (<a class="reference internal" href="#fig-pic-kernel-boxes"><span class="std std-ref">figure</span></a>).</p>
-<figure class="align-center" id="id4">
+<figure class="align-center" id="id24">
 <span id="fig-pic-kernel-boxes"></span><a class="reference internal image-reference" href="../../_images/pic_kernel_boxes.png"><img alt="../../_images/pic_kernel_boxes.png" src="../../_images/pic_kernel_boxes.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">Box-based evaluation: the markers are sorted into boxes of size <span class="math notranslate nohighlight">\(\geq h\)</span>; for the evaluation at
-<span class="math notranslate nohighlight">\(\mathbf z^*\)</span> only the box of <span class="math notranslate nohighlight">\(\mathbf z^*\)</span> (dark) and its neighbours (light) are searched.</span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
+<span class="math notranslate nohighlight">\(\mathbf z^*\)</span> only the box of <span class="math notranslate nohighlight">\(\mathbf z^*\)</span> (dark) and its neighbours (light) are searched.</span><a class="headerlink" href="#id24" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In Struphy, kernel density estimates are computed in position space only:
@@ -1269,6 +1279,72 @@ diagnostic, it is switched on with <a class="reference internal" href="../api_gu
 parameters; the kernel is then a Gaussian with a width of one sorting box in each direction. With the control
 variate or delta-f markers, the current weights are used, so the estimate is that of <span class="math notranslate nohighlight">\(\delta f\)</span>. The same technique is the basis of
 <a class="reference internal" href="numerics-sph.html#sph-method"><span class="std std-ref">smoothed particle hydrodynamics</span></a>.</p>
+</section>
+<section id="references">
+<span id="pic-references"></span><h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<div class="docutils container" id="id20">
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="footcite-birdsall1991" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>C. K. Birdsall and A. B. Langdon. <em>Plasma Physics via Computer Simulation</em>. IOP Publishing, Bristol, 1991. ISBN 0-7503-0117-1. First edition McGraw-Hill, 1985. <a class="reference external" href="https://doi.org/10.1887/0750301171">doi:10.1887/0750301171</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-hockney1988" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>R. W. Hockney and J. W. Eastwood. <em>Computer Simulation Using Particles</em>. Adam Hilger, Bristol, 1988. ISBN 0-85274-392-0. <a class="reference external" href="https://doi.org/10.1201/9781439822050">doi:10.1201/9781439822050</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-sonnendruecker2013" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id12">2</a>)</span>
+<p>Eric Sonnendrücker. Numerical methods for the Vlasov equations. Lecture notes, Max-Planck-Institut für Plasmaphysik and Technische Universität München, 2013. Winter semester 2012/2013. URL: <a class="reference external" href="http://web.archive.org/web/20221225173216/https://www-m16.ma.tum.de/foswiki/pub/M16/Allgemeines/NumMethVlasov/Num-Meth-Vlasov-Notes.pdf">http://web.archive.org/web/20221225173216/https://www-m16.ma.tum.de/foswiki/pub/M16/Allgemeines/NumMethVlasov/Num-Meth-Vlasov-Notes.pdf</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-kraus2017" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p>Michael Kraus, Katharina Kormann, Philip J. Morrison, and Eric Sonnendrücker. GEMPIC: geometric electromagnetic particle-in-cell methods. <em>Journal of Plasma Physics</em>, 83(4):905830401, 2017. <a class="reference external" href="https://doi.org/10.1017/S002237781700040X">doi:10.1017/S002237781700040X</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-aydemir1994" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id5">1</a>,<a role="doc-backlink" href="#id9">2</a>,<a role="doc-backlink" href="#id11">3</a>,<a role="doc-backlink" href="#id13">4</a>)</span>
+<p>A. Y. Aydemir. A unified Monte Carlo interpretation of particle simulations and applications to non-neutral plasmas. <em>Physics of Plasmas</em>, 1(4):822–831, 1994. <a class="reference external" href="https://doi.org/10.1063/1.870740">doi:10.1063/1.870740</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-littlejohn1983" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id6">1</a>,<a role="doc-backlink" href="#id8">2</a>)</span>
+<p>Robert G. Littlejohn. Variational principles of guiding centre motion. <em>Journal of Plasma Physics</em>, 29(1):111–125, 1983. <a class="reference external" href="https://doi.org/10.1017/S002237780000060X">doi:10.1017/S002237780000060X</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-possanner2018" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">7</a><span class="fn-bracket">]</span></span>
+<p>Stefan Possanner. Gyrokinetics from variational averaging: existence and error bounds. <em>Journal of Mathematical Physics</em>, 59(8):082702, 2018. <a class="reference external" href="https://doi.org/10.1063/1.5018354">doi:10.1063/1.5018354</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-niederreiter1992" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">8</a><span class="fn-bracket">]</span></span>
+<p>Harald Niederreiter. <em>Random Number Generation and Quasi-Monte Carlo Methods</em>. Volume 63 of CBMS-NSF Regional Conference Series in Applied Mathematics. SIAM, Philadelphia, 1992. ISBN 978-0-89871-295-7. <a class="reference external" href="https://doi.org/10.1137/1.9781611970081">doi:10.1137/1.9781611970081</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-hatzky2002" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">9</a><span class="fn-bracket">]</span></span>
+<p>R. Hatzky, T. M. Tran, A. Könies, R. Kleiber, and S. J. Allfrey. Energy conservation in a nonlinear gyrokinetic particle-in-cell code for ion-temperature-gradient-driven modes in θ-pinch geometry. <em>Physics of Plasmas</em>, 9(3):898–912, 2002. <a class="reference external" href="https://doi.org/10.1063/1.1449889">doi:10.1063/1.1449889</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-kleiber2011" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">10</a><span class="fn-bracket">]</span></span>
+<p>R. Kleiber, R. Hatzky, A. Könies, K. Kauffmann, and P. Helander. An improved control-variate scheme for particle-in-cell simulations with collisions. <em>Computer Physics Communications</em>, 182(4):1005–1012, 2011. <a class="reference external" href="https://doi.org/10.1016/j.cpc.2010.12.045">doi:10.1016/j.cpc.2010.12.045</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-parker1993" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">11</a><span class="fn-bracket">]</span></span>
+<p>S. E. Parker and W. W. Lee. A fully nonlinear characteristic method for gyrokinetic simulation. <em>Physics of Fluids B: Plasma Physics</em>, 5(1):77–86, 1993. <a class="reference external" href="https://doi.org/10.1063/1.860870">doi:10.1063/1.860870</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-dimits1993" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">12</a><span class="fn-bracket">]</span></span>
+<p>A. M. Dimits and W. W. Lee. Partially linearized algorithms in gyrokinetic particle simulation. <em>Journal of Computational Physics</em>, 107(2):309–323, 1993. <a class="reference external" href="https://doi.org/10.1006/jcph.1993.1146">doi:10.1006/jcph.1993.1146</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-hu1994" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id18">13</a><span class="fn-bracket">]</span></span>
+<p>G. Hu and J. A. Krommes. Generalized weighting scheme for δf particle-simulation method. <em>Physics of Plasmas</em>, 1(4):863–874, 1994. <a class="reference external" href="https://doi.org/10.1063/1.870745">doi:10.1063/1.870745</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-silverman1986" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id19">14</a><span class="fn-bracket">]</span></span>
+<p>B. W. Silverman. <em>Density Estimation for Statistics and Data Analysis</em>. Volume 26 of Monographs on Statistics and Applied Probability. Chapman and Hall, London, 1986. <a class="reference external" href="https://doi.org/10.1201/9781315140919">doi:10.1201/9781315140919</a>.</p>
+</aside>
+</aside>
+</div>
 </section>
 </section>
 
@@ -1336,6 +1412,7 @@ variate or delta-f markers, the current weights are used, so the estimate is tha
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particle-to-grid-coupling-accumulation">Particle-to-grid coupling (accumulation)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particle-binning">Particle binning</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation">Kernel density estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>
 
