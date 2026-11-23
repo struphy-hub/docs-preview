@@ -795,10 +795,19 @@ divergence-free in velocity space). In logical coordinates this means <span clas
 is constant along particle orbits. The same holds for the sampling density <span class="math notranslate nohighlight">\(s^0\)</span> (see <a class="reference internal" href="#pic-eom"><span class="std std-ref">Marker equations of motion</span></a>), which
 is why Struphy evaluates <span class="math notranslate nohighlight">\(s^0\)</span> only once, at loading, and stores it with each marker (column <code class="docutils literal notranslate"><span class="pre">s0</span></code> of the
 marker array, see <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles" title="struphy.pic.base.Particles"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particles</span></code></a>).</p>
-<p>For guiding centers, the phase-space volume conserved by the flow is <span class="math notranslate nohighlight">\(B^*_\parallel\, \textrm d v_\parallel\, \textrm d \mu\)</span>
-(times the spatial volume), with the modified field <span class="math notranslate nohighlight">\(B^*_\parallel = B_\parallel + O(\epsilon)\)</span> of
-guiding-center theory. With Struphy’s <span class="math notranslate nohighlight">\(J_v = B_0\)</span>, the 0-forms <span class="math notranslate nohighlight">\(f^0\)</span> and <span class="math notranslate nohighlight">\(s^0\)</span> are therefore
-constant along guiding-center orbits only up to the ratio <span class="math notranslate nohighlight">\(B^*_\parallel / B_0 = 1 + O(\epsilon)\)</span>.</p>
+<p><strong>Guiding centers.</strong> The guiding-center flow conserves the phase-space volume
+<span class="math notranslate nohighlight">\(J^*\, \textrm d \mathbf z\)</span> with <span class="math notranslate nohighlight">\(J^* = |\det DF|\, B^*_\parallel\)</span>, where
+<span class="math notranslate nohighlight">\(B^*_\parallel = B_\parallel + O(\epsilon)\)</span> is the modified field of guiding-center theory. Struphy’s pushers
+use <span class="math notranslate nohighlight">\(B^*_\parallel\)</span>, so the argument above holds with <span class="math notranslate nohighlight">\(J^*\)</span>: without source, the weights are exactly
+constant along the orbits. The initial weights, however, are computed with <span class="math notranslate nohighlight">\(J_v = B_0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[w_{p0} = \frac 1N \frac{f^0_\textnormal{in}\, |\det DF|\, B_0}{s^\textrm{vol}_\textnormal{in}}(\mathbf z_{p0})
+= \frac 1N \frac{f^0_\textnormal{in}\, J^*}{s^*}(\mathbf z_{p0})\,, \qquad
+s^* := s^\textrm{vol}_\textnormal{in}\, \frac{B^*_\parallel}{B_0}\,.\]</div>
+<p>They are the exact Monte-Carlo weights for markers distributed according to <span class="math notranslate nohighlight">\(s^*\)</span>. Since the markers are drawn
+from <span class="math notranslate nohighlight">\(s^\textrm{vol}_\textnormal{in}\)</span>, the marker ensemble represents the initial 0-form
+<span class="math notranslate nohighlight">\(f^0_\textnormal{in}\, B_0/B^*_\parallel\)</span> instead of <span class="math notranslate nohighlight">\(f^0_\textnormal{in}\)</span>. This is an <span class="math notranslate nohighlight">\(O(\epsilon)\)</span>
+error of the initial condition only; it is then transported exactly and does not accumulate in time.</p>
 </section>
 <section id="monte-carlo-integration">
 <span id="monte-carlo"></span><h2>Monte-Carlo integration<a class="headerlink" href="#monte-carlo-integration" title="Link to this heading">#</a></h2>
@@ -932,7 +941,7 @@ phase-space points (e.g. for orbit tests).</p></li>
 </ul>
 <p>For the Monte-Carlo algorithms the sampling density is a product of a spatial part and a Gaussian in velocity,</p>
 <div class="math notranslate nohighlight">
-\[s^\textrm{vol}_\textnormal{in}(\boldsymbol\eta, \mathbf v) = n^3(\boldsymbol\eta)\, \mathcal G(\mathbf v)\,,
+\[s^\textrm{vol}_\textnormal{in}(\boldsymbol\eta, \mathbf v) = n^{(3)}(\boldsymbol\eta)\, \mathcal G(\mathbf v)\,,
 \qquad
 \mathcal G(\mathbf v) = \prod_{i=1}^{d_v} \frac{1}{\sqrt{2\pi}\, v_{\textrm{th},i}}
 \exp\left[-\frac{(v_i - u_i)^2}{2 v_{\textrm{th},i}^2}\right]\,,\]</div>
@@ -940,7 +949,7 @@ phase-space points (e.g. for orbit tests).</p></li>
 <span class="math notranslate nohighlight">\(v_{\textrm{th},i}\)</span> are given by <code class="docutils literal notranslate"><span class="pre">moments</span></code>; the default is <span class="math notranslate nohighlight">\(u_i = 0\)</span> and
 <span class="math notranslate nohighlight">\(v_{\textrm{th},i} = 1\)</span>. Adapting them to the distribution function reduces the noise (importance sampling,
 see <a class="reference internal" href="#monte-carlo"><span class="std std-ref">Monte-Carlo integration</span></a>). The spatial part is a normalized 3-form on the unit cube, chosen with
-<code class="docutils literal notranslate"><span class="pre">spatial</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;uniform&quot;</span></code> gives <span class="math notranslate nohighlight">\(n^3 = 1\)</span>, <code class="docutils literal notranslate"><span class="pre">&quot;disc&quot;</span></code> gives <span class="math notranslate nohighlight">\(n^3 = 2\eta_1\)</span>, which is uniform on the
+<code class="docutils literal notranslate"><span class="pre">spatial</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;uniform&quot;</span></code> gives <span class="math notranslate nohighlight">\(n^{(3)} = 1\)</span>, <code class="docutils literal notranslate"><span class="pre">&quot;disc&quot;</span></code> gives <span class="math notranslate nohighlight">\(n^{(3)} = 2\eta_1\)</span>, which is uniform on the
 image of the unit square under a polar (disc) mapping. Velocities are drawn by inverse transform sampling, see
 <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.draw_markers" title="struphy.pic.base.Particles.draw_markers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">draw_markers()</span></code></a> for details, also for guiding-center markers.</p>
 <p>After loading, <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.initialize_weights" title="struphy.pic.base.Particles.initialize_weights"><code class="xref py py-meth docutils literal notranslate"><span class="pre">initialize_weights()</span></code></a> computes the 0-form <span class="math notranslate nohighlight">\(s^0_\textnormal{in}\)</span>
@@ -1104,13 +1113,15 @@ control variate method exploits this. It relies on</p>
 \\[2mm]
 &amp;= \int_\Omega A\, \frac{f^\textrm{vol} - \mathcal M^\textrm{vol}}{s^\textrm{vol}}\, s^\textrm{vol}\,\textrm d \mathbf z + I_{\mathcal M}
 \\[2mm]
-&amp;\approx \sum_{p=1}^N w_p^\delta(t)\, A\big(t, \mathbf z_p(t)\big) + I_{\mathcal M}\,,\end{split}\]</div>
+&amp;\approx \sum_{p=1}^N \delta w_p(t)\, A\big(t, \mathbf z_p(t)\big) + I_{\mathcal M}\,,\end{split}\]</div>
 <p>with the time-dependent <strong>delta-f weights</strong></p>
 <div class="math notranslate nohighlight" id="equation-pic-cv-weights">
-<span class="eqno">(19)<a class="headerlink" href="#equation-pic-cv-weights" title="Link to this equation">#</a></span>\[w^\delta_p(t) = \frac 1N \frac{f^\textrm{vol} - \mathcal M^\textrm{vol}}{s^\textrm{vol}}\Big|_{(t, \mathbf z_p(t))}
+<span class="eqno">(19)<a class="headerlink" href="#equation-pic-cv-weights" title="Link to this equation">#</a></span>\[\delta w_p(t) = \frac 1N \frac{f^\textrm{vol} - \mathcal M^\textrm{vol}}{s^\textrm{vol}}\Big|_{(t, \mathbf z_p(t))}
 = w_{p0} - \frac 1N \frac{\mathcal M^0\big(t, \mathbf z_p(t)\big)}{s^0_\textnormal{in}(\mathbf z_{p0})}\,.\]</div>
 <p>For the second equality we used that, without source, <span class="math notranslate nohighlight">\(f^0/s^0 = N w_{p0}\)</span> and <span class="math notranslate nohighlight">\(s^0\)</span> are constant along
-the trajectories (<a class="reference internal" href="#pic-eom"><span class="std std-ref">Marker equations of motion</span></a>; for guiding centers up to <span class="math notranslate nohighlight">\(O(\epsilon)\)</span>, see <a class="reference internal" href="#pic-phase-space"><span class="std std-ref">Phase space, 0-forms and volume forms</span></a>).
+the trajectories (<a class="reference internal" href="#pic-eom"><span class="std std-ref">Marker equations of motion</span></a>). For guiding centers, both terms carry the same factor <span class="math notranslate nohighlight">\(B_0/B^*_\parallel\)</span>
+at the initial marker position (see <a class="reference internal" href="#pic-phase-space"><span class="std std-ref">Phase space, 0-forms and volume forms</span></a>), so the delta-f weights are consistent with the
+initial condition represented by the markers.
 The full-f weights <span class="math notranslate nohighlight">\(w_{p0}\)</span> stay constant; the delta-f weights are
 recomputed from them whenever the markers have moved. The variance is now</p>
 <div class="math notranslate nohighlight">
@@ -1121,7 +1132,7 @@ reduced by roughly a factor <span class="math notranslate nohighlight">\(\epsilo
 <a class="reference internal" href="../api_guide.html#struphy.particles.parameters.WeightsParameters" title="struphy.particles.parameters.WeightsParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">WeightsParameters</span></code></a>; the background <span class="math notranslate nohighlight">\(\mathcal M\)</span> is the background of the
 species (<a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.f0" title="struphy.pic.base.Particles.f0"><code class="xref py py-attr docutils literal notranslate"><span class="pre">f0</span></code></a>). The weights <a class="reference internal" href="#equation-pic-cv-weights">(19)</a> are computed in
 <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.update_weights" title="struphy.pic.base.Particles.update_weights"><code class="xref py py-meth docutils literal notranslate"><span class="pre">struphy.pic.base.Particles.update_weights()</span></code></a>, which the propagators call after pushing the markers. The marker
-array stores both: <code class="docutils literal notranslate"><span class="pre">w0</span></code> (<span class="math notranslate nohighlight">\(w_{p0}\)</span>) and <code class="docutils literal notranslate"><span class="pre">weights</span></code> (<span class="math notranslate nohighlight">\(w^\delta_p\)</span>).</p>
+array stores both: <code class="docutils literal notranslate"><span class="pre">w0</span></code> (<span class="math notranslate nohighlight">\(w_{p0}\)</span>) and <code class="docutils literal notranslate"><span class="pre">weights</span></code> (<span class="math notranslate nohighlight">\(\delta w_p\)</span>).</p>
 </section>
 <section id="delta-f-method">
 <span id="pic-deltaf"></span><h2>Delta-f method<a class="headerlink" href="#delta-f-method" title="Link to this heading">#</a></h2>

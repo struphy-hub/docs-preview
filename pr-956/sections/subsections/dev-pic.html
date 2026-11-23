@@ -1343,20 +1343,20 @@ on phase space, <span class="math notranslate nohighlight">\(\mathbf z = (\bolds
 (standard or antithetic), a regular tesselation of the sorting boxes, or read from a restart or external
 file. For the random and Sobol algorithms, the initial marker distribution is of the form</p>
 <div class="math notranslate nohighlight">
-\[s^\textrm{vol}_{\textnormal{in}}(\boldsymbol \eta, \mathbf v) = n^3(\boldsymbol \eta)\, \mathcal G(\mathbf v)\,,\]</div>
+\[s^\textrm{vol}_{\textnormal{in}}(\boldsymbol \eta, \mathbf v) = n^{(3)}(\boldsymbol \eta)\, \mathcal G(\mathbf v)\,,\]</div>
 <p>with <span class="math notranslate nohighlight">\(\mathcal G(\mathbf v)\)</span> a multi-variate Gaussian:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal G(\mathbf v) = \prod_{i=1}^{d_v} \frac{1}{\sqrt{2\pi}\,v_{\mathrm{th},i}}
     \exp\left[-\frac{(v_i-u_i)^2}{2 v_{\mathrm{th},i}^2}\right]\,,\]</div>
 <p>where <span class="math notranslate nohighlight">\(d_v\)</span> stands for the dimension in velocity space, <span class="math notranslate nohighlight">\(u_i\)</span> are velocity constant shifts
 and <span class="math notranslate nohighlight">\(v_{\mathrm{th},i}\)</span> are constant thermal velocities (standard deviations).
-The function <span class="math notranslate nohighlight">\(n^3:(0,1)^3 \to \mathbb R^+\)</span> is a normalized 3-form on the unit cube,</p>
+The function <span class="math notranslate nohighlight">\(n^{(3)}:(0,1)^3 \to \mathbb R^+\)</span> is a normalized 3-form on the unit cube,</p>
 <div class="math notranslate nohighlight">
-\[\int_{(0,1)^3} n^3(\eta)\,\textnormal d \eta = 1\,.\]</div>
+\[\int_{(0,1)^3} n^{(3)}(\eta)\,\textnormal d \eta = 1\,.\]</div>
 <p>The following choices are available in Struphy:</p>
 <ol class="arabic simple">
-<li><p>Uniform distribution on the unit cube: <span class="math notranslate nohighlight">\(n^3(\eta) = 1\)</span></p></li>
-<li><p>Uniform distribution on the disc: <span class="math notranslate nohighlight">\(n^3(\eta) = 2\eta_1\)</span> (radial coordinate = volume element of square-to-disc mapping)</p></li>
+<li><p>Uniform distribution on the unit cube: <span class="math notranslate nohighlight">\(n^{(3)}(\eta) = 1\)</span></p></li>
+<li><p>Uniform distribution on the disc: <span class="math notranslate nohighlight">\(n^{(3)}(\eta) = 2\eta_1\)</span> (radial coordinate = volume element of square-to-disc mapping)</p></li>
 </ol>
 <p>Velocities are sampled via inverse transform sampling.
 In case of Particles6D, velocities are sampled as a Maxwellian in each 3 directions,</p>
@@ -2479,20 +2479,20 @@ on phase space, <span class="math notranslate nohighlight">\(\mathbf z = (\bolds
 (standard or antithetic), a regular tesselation of the sorting boxes, or read from a restart or external
 file. For the random and Sobol algorithms, the initial marker distribution is of the form</p>
 <div class="math notranslate nohighlight">
-\[s^\textrm{vol}_{\textnormal{in}}(\boldsymbol \eta, \mathbf v) = n^3(\boldsymbol \eta)\, \mathcal G(\mathbf v)\,,\]</div>
+\[s^\textrm{vol}_{\textnormal{in}}(\boldsymbol \eta, \mathbf v) = n^{(3)}(\boldsymbol \eta)\, \mathcal G(\mathbf v)\,,\]</div>
 <p>with <span class="math notranslate nohighlight">\(\mathcal G(\mathbf v)\)</span> a multi-variate Gaussian:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal G(\mathbf v) = \prod_{i=1}^{d_v} \frac{1}{\sqrt{2\pi}\,v_{\mathrm{th},i}}
     \exp\left[-\frac{(v_i-u_i)^2}{2 v_{\mathrm{th},i}^2}\right]\,,\]</div>
 <p>where <span class="math notranslate nohighlight">\(d_v\)</span> stands for the dimension in velocity space, <span class="math notranslate nohighlight">\(u_i\)</span> are velocity constant shifts
 and <span class="math notranslate nohighlight">\(v_{\mathrm{th},i}\)</span> are constant thermal velocities (standard deviations).
-The function <span class="math notranslate nohighlight">\(n^3:(0,1)^3 \to \mathbb R^+\)</span> is a normalized 3-form on the unit cube,</p>
+The function <span class="math notranslate nohighlight">\(n^{(3)}:(0,1)^3 \to \mathbb R^+\)</span> is a normalized 3-form on the unit cube,</p>
 <div class="math notranslate nohighlight">
-\[\int_{(0,1)^3} n^3(\eta)\,\textnormal d \eta = 1\,.\]</div>
+\[\int_{(0,1)^3} n^{(3)}(\eta)\,\textnormal d \eta = 1\,.\]</div>
 <p>The following choices are available in Struphy:</p>
 <ol class="arabic simple">
-<li><p>Uniform distribution on the unit cube: <span class="math notranslate nohighlight">\(n^3(\eta) = 1\)</span></p></li>
-<li><p>Uniform distribution on the disc: <span class="math notranslate nohighlight">\(n^3(\eta) = 2\eta_1\)</span> (radial coordinate = volume element of square-to-disc mapping)</p></li>
+<li><p>Uniform distribution on the unit cube: <span class="math notranslate nohighlight">\(n^{(3)}(\eta) = 1\)</span></p></li>
+<li><p>Uniform distribution on the disc: <span class="math notranslate nohighlight">\(n^{(3)}(\eta) = 2\eta_1\)</span> (radial coordinate = volume element of square-to-disc mapping)</p></li>
 </ol>
 <p>Velocities are sampled via inverse transform sampling.
 In case of Particles6D, velocities are sampled as a Maxwellian in each 3 directions,</p>
