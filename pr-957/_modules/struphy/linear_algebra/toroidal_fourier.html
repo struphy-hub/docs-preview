@@ -1,0 +1,962 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>struphy.linear_algebra.toroidal_fourier &#8212; struphy 3.6.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../_static/documentation_options.js?v=c0c9fa11"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/struphy/linear_algebra/toroidal_fourier';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href="../../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.6.2 documentation - Home"/>
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.6.2 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">struphy.linear_algebra.toroidal_fourier</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for struphy.linear_algebra.toroidal_fourier</h1><div class="highlight"><pre>
+<span></span>r"""Exact solver for linear operators that are invariant under shifts in the periodic direction :math:`\eta_3`.
+
+On a uniform, periodic grid in :math:`\eta_3`, the spline coefficients of each vector component are indexed by
+:math:`(p, j)`, with the index :math:`p` in the poloidal plane :math:`(\eta_1, \eta_2)` (including the polar
+coefficients of polar splines) and :math:`j = 0, \dots, N_3 - 1` along :math:`\eta_3`. If the weights of the operator do
+not depend on :math:`\eta_3` (e.g. an axisymmetric equilibrium in a torus or a cylinder), the operator commutes with the
+shifts :math:`j \mapsto j + 1`, i.e. it is block-circulant, :math:`A_{jk} = a_{j - k}`, and the discrete Fourier
+transform along :math:`\eta_3` splits it into one poloidal matrix per toroidal mode number :math:`n`,
+
+.. math::
+
+    \hat A(n) = \sum_{l=0}^{N_3 - 1} a_l \, e^{-2 \pi i n l / N_3}\,, \qquad n = 0, \dots, N_3 / 2\,,
+
+(:math:`\hat A(N_3 - n) = \overline{\hat A(n)}` for a real operator). Here the matrices :math:`\hat A(n)` are
+assembled by probing: :math:`A` is applied to the unit vectors :math:`e_p \otimes \delta_{j0}` of all poloidal
+unknowns :math:`p`, whose images are the columns :math:`p` of all :math:`a_l`. Each :math:`\hat A(n)` is factorized
+(Cholesky for Hermitian positive definite matrices, else LU), and the inverse is applied by a real FFT along
+:math:`\eta_3`, one poloidal solve per toroidal mode number and the inverse FFT. This is the exact inverse of
+:math:`A` (to round-off) whenever :math:`A` is shift invariant, including all couplings between the poloidal and the
+toroidal directions and between the vector components; otherwise it is an approximation (its quality is checked on
+a random vector, see :attr:`ToroidalFourierSolver.residual`).
+
+Cost: the setup needs one application of :math:`A` per poloidal unknown and dense factorizations of size
+:math:`N_\textnormal{pol}` (the number of unknowns in a poloidal plane, summed over the components); the toroidal mode
+numbers are distributed over the processes. Each application gathers the vector on all processes (allgather of
+:math:`N_\textnormal{pol} N_3` numbers). It is meant for moderate poloidal resolution (e.g. up to about 32 x 33
+elements with three components).
+"""
+
+from __future__ import annotations
+
+import logging
+
+import cunumpy as xp
+import numpy as np
+import scipy.linalg as sla
+from feectools.linalg.basic import LinearOperator, Vector
+from feectools.linalg.stencil import StencilVector
+from maybempi import MPI
+
+logger = logging.getLogger("struphy")
+
+
+def _interior_slices(sv: StencilVector) -&gt; tuple[slice, ...]:
+    """Slices of the owned data of a StencilVector (without ghost regions) in its local array."""
+    sp = sv.space
+    return tuple(slice(p * m, p * m + e - s + 1) for p, m, s, e in zip(sp.pads, sp.shifts, sp.starts, sp.ends))
+
+
+class _Layout:
+    """Global layout of the unknowns of a vector space as an array of shape (N_pol, N_3): per component, the polar
+    coefficients (polar splines) followed by the tensor-product coefficients outside the polar rings."""
+
+    def __init__(self, space):
+        self.polar = hasattr(space, "parent_space")
+        tp = space.parent_space if self.polar else space
+        sample = tp.zeros()
+        self.tp_spaces = [sample.space] if isinstance(sample, StencilVector) else [b.space for b in sample.blocks]
+        self.n_comps = len(self.tp_spaces)
+        self.n_rings = tuple(space.n_rings) if self.polar else (0,) * self.n_comps
+        self.n_polar = tuple(space.n_polar) if self.polar else (0,) * self.n_comps
+        n3 = {sp.npts[2] for sp in self.tp_spaces}
+        assert len(n3) == 1, f"All components need the same number of coefficients along eta_3, got {n3}."
+        self.n3 = n3.pop()
+        for sp in self.tp_spaces:
+            assert sp.periods[2], "The toroidal Fourier solver needs a periodic eta_3 direction."
+        # row offsets of the components and of their tensor-product parts
+        self.offsets, self.tp_offsets, self.tp_shapes = [], [], []
+        row = 0
+        for c, sp in enumerate(self.tp_spaces):
+            n1, n2 = sp.npts[:2]
+            self.offsets.append(row)
+            self.tp_offsets.append(row + self.n_polar[c])
+            self.tp_shapes.append((n1 - self.n_rings[c], n2))
+            row += self.n_polar[c] + (n1 - self.n_rings[c]) * n2
+        self.n_pol = row
+        comm = self.tp_spaces[0].cart.comm_cart if self.tp_spaces[0].cart is not None else None
+        self.comm = comm if comm is not None and comm.Get_size() &gt; 1 else None
+
+    def tp_blocks(self, v: Vector) -&gt; list[StencilVector]:
+        tp = v.tp if self.polar else v
+        return [tp] if isinstance(tp, StencilVector) else list(tp.blocks)
+
+    def gather(self, v: Vector) -&gt; np.ndarray:
+        """The global array (N_pol, N_3) of the unknowns of v (on all processes)."""
+        X = np.zeros((self.n_pol, self.n3))
+        pieces = []
+        for c, sv in enumerate(self.tp_blocks(v)):
+            sp = sv.space
+            # host copies (device arrays on the CuPy backend)
+            pieces.append((c, tuple(sp.starts), np.array(xp.to_numpy(sv._data[_interior_slices(sv)]))))
+        if self.comm is not None:
+            pieces = [p for chunk in self.comm.allgather(pieces) for p in chunk]
+        for c, starts, data in pieces:
+            r = self.n_rings[c]
+            s1, s2, s3 = starts
+            e1 = s1 + data.shape[0]
+            lo = max(s1, r)
+            if lo &gt;= e1:
+                continue
+            n1r, n2 = self.tp_shapes[c]
+            block = X[self.tp_offsets[c] : self.tp_offsets[c] + n1r * n2].reshape(n1r, n2, self.n3)
+            block[lo - r : e1 - r, s2 : s2 + data.shape[1], s3 : s3 + data.shape[2]] = data[lo - s1 :]
+        if self.polar:
+            for c, pol in enumerate(v.pol):
+                X[self.offsets[c] : self.offsets[c] + self.n_polar[c]] = xp.to_numpy(pol)
+        return X
+
+    def scatter(self, X: np.ndarray, v: Vector) -&gt; Vector:
+        """Write the global array X (N_pol, N_3) into v (each process its own part; the polar rings are zero)."""
+        for c, sv in enumerate(self.tp_blocks(v)):
+            sp = sv.space
+            r = self.n_rings[c]
+            s1, s2, s3 = sp.starts
+            e1, e2, e3 = (e + 1 for e in sp.ends)
+            n1r, n2 = self.tp_shapes[c]
+            block = X[self.tp_offsets[c] : self.tp_offsets[c] + n1r * n2].reshape(n1r, n2, self.n3)
+            local = sv._data[_interior_slices(sv)]
+            local[...] = 0.0
+            lo = max(s1, r)
+            if lo &lt; e1:
+                local[lo - s1 :] = xp.asarray(block[lo - r : e1 - r, s2:e2, s3:e3])
+        if self.polar:
+            for c in range(self.n_comps):
+                v.pol[c][:] = xp.asarray(X[self.offsets[c] : self.offsets[c] + self.n_polar[c]])
+        v.update_ghost_regions()
+        return v
+
+
+<div class="viewcode-block" id="ToroidalFourierSolver">
+<a class="viewcode-back" href="../../../sections/subsections/dev-feec.html#struphy.linear_algebra.toroidal_fourier.ToroidalFourierSolver">[docs]</a>
+class ToroidalFourierSolver(LinearOperator):
+    r"""Inverse of a linear operator :math:`A` (square, on Stencil-, Block- or PolarVectors) that is invariant under
+    shifts in :math:`\eta_3`, by a real FFT along :math:`\eta_3` and one dense poloidal solve per toroidal mode number,
+    see :mod:`struphy.linear_algebra.toroidal_fourier`. Use it as a preconditioner (``A`` then needs only to be close to
+    shift invariant) or as a direct solver.
+
+    Parameters
+    ----------
+    A : LinearOperator
+        The operator to invert (collective ``dot``; it is applied once per poloidal unknown in the setup).
+
+    check : bool
+        Apply ``A`` to the preconditioned random vector and store the relative residual
+        :math:`\|A P r - r\| / \|r\|` in :attr:`residual` (logged), a measure of the shift invariance of ``A``.
+
+    seed : int
+        Seed of the random vector of the check.
+    """
+
+    def __init__(self, A: LinearOperator, check: bool = True, seed: int = 1234):
+        assert A.domain == A.codomain, "A must be square."
+        self._space = A.domain
+        self._layout = L = _Layout(self._space)
+        n_modes = L.n3 // 2 + 1
+        rank = 0 if L.comm is None else L.comm.Get_rank()
+        size = 1 if L.comm is None else L.comm.Get_size()
+        self._my_modes = [n for n in range(n_modes) if n % size == rank]
+        self._n_modes = n_modes
+
+        # probing: the column p of the Fourier blocks of A for all toroidal mode numbers
+        mats = {n: np.zeros((L.n_pol, L.n_pol), dtype=complex) for n in self._my_modes}
+        constrained = np.zeros(L.n_pol, dtype=bool)
+        e = self._space.zeros()
+        Ae = self._space.zeros()
+        X = np.zeros((L.n_pol, L.n3))
+        for p in range(L.n_pol):
+            X[p, 0] = 1.0
+            L.scatter(X, e)
+            X[p, 0] = 0.0
+            A.dot(e, out=Ae)
+            Y = np.fft.rfft(L.gather(Ae), axis=1)
+            if not np.any(Y):
+                constrained[p] = True
+            for n in self._my_modes:
+                mats[n][:, p] = Y[:, n]
+
+        # constrained unknowns (e.g. essential boundary conditions): identity
+        scale = max((np.abs(M).max() for M in mats.values()), default=1.0)
+        self._factors = {}
+        self._cholesky = True
+        self._hermitian = True
+        for n, M in mats.items():
+            idx = np.flatnonzero(constrained)
+            M[idx, :] = 0.0
+            M[:, idx] = 0.0
+            M[idx, idx] = scale
+            # Cholesky only for Hermitian matrices (it reads one triangle), else LU
+            hermitian = np.allclose(M, M.conj().T, rtol=0.0, atol=1e-10 * scale)
+            self._hermitian = self._hermitian and hermitian
+            factor = None
+            if hermitian:
+                try:
+                    factor = ("cho", sla.cho_factor(M, lower=False, check_finite=False))
+                except np.linalg.LinAlgError:
+                    pass
+            if factor is None:
+                self._cholesky = False
+                factor = ("lu", sla.lu_factor(M, check_finite=False))
+            self._factors[n] = factor
+        if L.comm is not None:
+            self._cholesky = L.comm.allreduce(self._cholesky, op=MPI.LAND)
+            self._hermitian = L.comm.allreduce(self._hermitian, op=MPI.LAND)
+        self._constrained = constrained
+        self._n_constrained = int(constrained.sum())
+
+        self._residual = None
+        if check:
+            rng = np.random.default_rng(seed)
+            R = rng.standard_normal((L.n_pol, L.n3))
+            R[constrained] = 0.0
+            r = L.scatter(R, self._space.zeros())
+            Pr = self.dot(r)
+            APr = A.dot(Pr)
+            APr -= r
+            self._residual = float(np.sqrt(APr.inner(APr) / r.inner(r)))
+        if rank == 0:
+            logger.info(
+                f"ToroidalFourierSolver: {L.n_pol} poloidal unknowns ({self._n_constrained} constrained), "
+                f"{L.n3} toroidal coefficients, {n_modes} toroidal mode numbers, "
+                f"{'Cholesky' if self._cholesky else 'LU'} factorizations"
+                + ("" if self._residual is None else f", relative residual on a random vector {self._residual:.2e}")
+            )
+
+    @property
+    def domain(self):
+        return self._space
+
+    @property
+    def codomain(self):
+        return self._space
+
+    @property
+    def dtype(self):
+        return float
+
+    @property
+    def residual(self) -&gt; float | None:
+        r"""Relative residual :math:`\|A P r - r\| / \|r\|` on a random vector (None without ``check``): round-off
+        for a shift invariant operator."""
+        return self._residual
+
+    @property
+    def n_pol(self) -&gt; int:
+        """Number of unknowns in a poloidal plane (summed over the components)."""
+        return self._layout.n_pol
+
+<div class="viewcode-block" id="ToroidalFourierSolver.tosparse">
+<a class="viewcode-back" href="../../../sections/subsections/dev-feec.html#struphy.linear_algebra.toroidal_fourier.ToroidalFourierSolver.tosparse">[docs]</a>
+    def tosparse(self):
+        raise NotImplementedError()</div>
+
+
+<div class="viewcode-block" id="ToroidalFourierSolver.toarray">
+<a class="viewcode-back" href="../../../sections/subsections/dev-feec.html#struphy.linear_algebra.toroidal_fourier.ToroidalFourierSolver.toarray">[docs]</a>
+    def toarray(self):
+        raise NotImplementedError()</div>
+
+
+    @property
+    def symmetric(self) -&gt; bool:
+        """Whether the Fourier blocks of the operator are Hermitian (then the operator and its inverse are
+        symmetric)."""
+        return self._hermitian
+
+<div class="viewcode-block" id="ToroidalFourierSolver.transpose">
+<a class="viewcode-back" href="../../../sections/subsections/dev-feec.html#struphy.linear_algebra.toroidal_fourier.ToroidalFourierSolver.transpose">[docs]</a>
+    def transpose(self, conjugate: bool = False):
+        """The inverse of a symmetric operator is symmetric (not implemented for non-symmetric operators)."""
+        if not self._hermitian:
+            raise NotImplementedError("The transpose is only available for symmetric operators.")
+        return self</div>
+
+
+<div class="viewcode-block" id="ToroidalFourierSolver.dot">
+<a class="viewcode-back" href="../../../sections/subsections/dev-feec.html#struphy.linear_algebra.toroidal_fourier.ToroidalFourierSolver.dot">[docs]</a>
+    def dot(self, v: Vector, out: Vector | None = None) -&gt; Vector:
+        assert v.space == self._space
+        L = self._layout
+        B = np.fft.rfft(L.gather(v), axis=1)
+        Xhat = np.zeros_like(B)
+        for n in self._my_modes:
+            kind, fac = self._factors[n]
+            b = B[:, n].copy()
+            b[self._constrained] = 0.0
+            if kind == "cho":
+                Xhat[:, n] = sla.cho_solve(fac, b, check_finite=False)
+            else:
+                Xhat[:, n] = sla.lu_solve(fac, b, check_finite=False)
+        if L.comm is not None:
+            L.comm.Allreduce(MPI.IN_PLACE, Xhat, op=MPI.SUM)
+        X = np.fft.irfft(Xhat, n=L.n3, axis=1)
+        if out is None:
+            out = self._space.zeros()
+        else:
+            assert out.space == self._space
+        return L.scatter(X, out)</div>
+
+
+    def solve(self, rhs: Vector, out: Vector | None = None) -&gt; Vector:
+        return self.dot(rhs, out=out)</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
