@@ -6709,10 +6709,10 @@ Since the positions are fixed during this step, the update is exact.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">struphy.propagators.push_v_in_viscous_potential.</span></span><span class="sig-name descname"><span class="pre">PushVinViscousPotential</span></span><a class="reference internal" href="../../_modules/struphy/propagators/push_v_in_viscous_potential.html#PushVinViscousPotential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.propagators.push_v_in_viscous_potential.PushVinViscousPotential" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="propagators-base.html#struphy.propagators.base.Propagator" title="struphy.propagators.base.Propagator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Propagator</span></code></a></p>
 <p>Viscous force on SPH markers, see <a class="reference internal" href="numerics-sph.html#sph-viscosity"><span class="std std-ref">Viscosity</span></a>.</p>
-<p><strong>Continuous problem:</strong> the velocity is accelerated by the divergence of the viscous stress,</p>
+<p><strong>Continuous problem:</strong> the velocity changes by the divergence of the viscous stress (the viscous momentum flux),</p>
 <div class="math notranslate nohighlight">
-\[\rho\, \partial_t \mathbf u = \nabla \cdot \boldsymbol\sigma\,, \qquad
-\boldsymbol\sigma = \mu \left( \nabla \mathbf u + (\nabla \mathbf u)^\top - \frac 23 (\nabla \cdot \mathbf u)\, \mathbb I \right)\,,\]</div>
+\[\rho\, \partial_t \mathbf u = - \nabla \cdot \boldsymbol\sigma\,, \qquad
+\boldsymbol\sigma = -\mu \left( \nabla \mathbf u + (\nabla \mathbf u)^\top - \frac 23 (\nabla \cdot \mathbf u)\, \mathbb I \right)\,,\]</div>
 <p>with mass density <span class="math notranslate nohighlight">\(\rho\)</span> and dynamic viscosity <span class="math notranslate nohighlight">\(\mu \geq 0\)</span>.</p>
 <p><strong>Semi-discrete problem:</strong> the kernel <span class="math notranslate nohighlight">\(W_h\)</span> from <a class="reference internal" href="dev-sph.html#module-struphy.pic.sph_smoothing_kernels" title="struphy.pic.sph_smoothing_kernels"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sph_smoothing_kernels</span></code></a> is evaluated in
 logical coordinates. With the density 3-form and the velocity interpolant</p>
@@ -6723,12 +6723,12 @@ logical coordinates. With the density 3-form and the velocity interpolant</p>
 (transformed to Cartesian derivatives with <span class="math notranslate nohighlight">\(DF^{-1}\)</span>), and for each marker <span class="math notranslate nohighlight">\(p\)</span></p>
 <div class="math notranslate nohighlight">
 \[\frac{\textnormal d \mathbf v_p}{\textnormal d t}
-= \frac{1}{\rho_p\, \sqrt g(\boldsymbol\eta_p)} \sum_{i=1}^N \frac{w_i}{\rho^\eta_i}\, \sqrt g(\boldsymbol\eta_i)\,
+= - \frac{1}{\rho_p\, \sqrt g(\boldsymbol\eta_p)} \sum_{i=1}^N \frac{w_i}{\rho^\eta_i}\, \sqrt g(\boldsymbol\eta_i)\,
 \boldsymbol\sigma_i\, DF^{-\top}(\boldsymbol\eta_i)\, \nabla W_h(\boldsymbol\eta_p - \boldsymbol\eta_i)\,,\]</div>
-<p>which is the SPH estimate of <span class="math notranslate nohighlight">\(\frac 1\rho \nabla \cdot \boldsymbol\sigma\)</span> in Piola form, with the physical
+<p>which is the SPH estimate of <span class="math notranslate nohighlight">\(-\frac 1\rho \nabla \cdot \boldsymbol\sigma\)</span> in Piola form, with the physical
 density <span class="math notranslate nohighlight">\(\rho_p = \rho^\eta_p / \sqrt g(\boldsymbol\eta_p)\)</span> and <span class="math notranslate nohighlight">\(\sqrt g = |\det DF|\)</span>. The
 coefficients <span class="math notranslate nohighlight">\(w_i \mathbf v_i/\rho^\eta_i\)</span> and <span class="math notranslate nohighlight">\(\sqrt g\, (w_i/\rho^\eta_i) \boldsymbol\sigma_i DF^{-\top}\)</span>
-(with a minus sign) are computed once per time step and stored in the marker array.</p>
+are computed once per time step and stored in the marker array.</p>
 <p><strong>Time discretization:</strong> forward Euler (<code class="docutils literal notranslate"><span class="pre">algo=&quot;forward_euler&quot;</span></code>),</p>
 <div class="math notranslate nohighlight">
 \[\mathbf v_p^{n+1} = \mathbf v_p^n + \Delta t\, \frac{\textnormal d \mathbf v_p}{\textnormal d t}\Big|^n\,.\]</div>

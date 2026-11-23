@@ -623,7 +623,7 @@ references is at the <a class="reference internal" href="#sph-references"><span 
 <div class="math notranslate nohighlight" id="equation-sph-euler">
 <span class="eqno">(1)<a class="headerlink" href="#equation-sph-euler" title="Link to this equation">#</a></span>\[\begin{split}\partial_t \rho + \nabla \cdot (\rho\, \mathbf u) &amp;= 0\,,
 \\[2mm]
-\rho\, \big(\partial_t \mathbf u + (\mathbf u \cdot \nabla) \mathbf u\big) &amp;= - \nabla p(\rho) - \frac{\rho}{m} \nabla V + \nabla \cdot \boldsymbol\sigma\,,\end{split}\]</div>
+\rho\, \big(\partial_t \mathbf u + (\mathbf u \cdot \nabla) \mathbf u\big) &amp;= - \nabla p(\rho) - \frac{\rho}{m} \nabla V - \nabla \cdot \boldsymbol\sigma\,,\end{split}\]</div>
 <p>with a pressure <span class="math notranslate nohighlight">\(p(\rho)\)</span>, an external potential <span class="math notranslate nohighlight">\(V\)</span> (e.g. gravity) and, for viscous fluids, a viscous
 stress <span class="math notranslate nohighlight">\(\boldsymbol \sigma\)</span>.</p>
 <p><strong>The idea.</strong> The density is represented by <span class="math notranslate nohighlight">\(N\)</span> markers that move with the fluid. Marker <span class="math notranslate nohighlight">\(p\)</span> has a
@@ -645,7 +645,7 @@ equations of motion (<a class="reference internal" href="#sph-pressure"><span cl
 \\[2mm]
 \dot{\mathbf v}_p &amp;= - \frac{1}{m} \nabla V(\mathbf x_p)
 - \sum_{j=1}^N w_j \left( \frac{p(\rho_p)}{\rho_p^2} + \frac{p(\rho_j)}{\rho_j^2} \right) \nabla W_h(\mathbf x_p - \mathbf x_j)
-+ \big(\tfrac 1\rho \nabla \cdot \boldsymbol\sigma\big)_h(\mathbf x_p)\,.\end{split}\]</div>
+- \big(\tfrac 1\rho \nabla \cdot \boldsymbol\sigma\big)_h(\mathbf x_p)\,.\end{split}\]</div>
 <p>The pressure force is a sum over pairs of markers. Because <span class="math notranslate nohighlight">\(W_h\)</span> vanishes outside a box of half-width
 <span class="math notranslate nohighlight">\(h\)</span>, only neighbouring markers interact, and the cost is <span class="math notranslate nohighlight">\(O(N)\)</span> with a box-based neighbour search
 (<a class="reference internal" href="#sph-neighbours"><span class="std std-ref">Neighbour search and parallelization</span></a>).</p>
@@ -766,12 +766,12 @@ and the unknown is the flow map <span class="math notranslate nohighlight">\(\Ph
 parcel is the material derivative,
 <span class="math notranslate nohighlight">\(\frac{\textrm d}{\textrm d t} \mathbf u(t, \Phi_t(\mathbf x_0)) = (\partial_t + \mathbf u \cdot \nabla) \mathbf u\)</span>.
 Particle methods discretize the Lagrangian description: the markers <em>are</em> the parcels.</p>
-<figure class="align-center" id="id25">
+<figure class="align-center" id="id27">
 <span id="fig-sph-lagrange-euler"></span><a class="reference internal image-reference" href="../../_images/sph_lagrange_euler.png"><img alt="../../_images/sph_lagrange_euler.png" src="../../_images/sph_lagrange_euler.png" style="width: 90%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">Lagrangian view: follow the parcel that starts at <span class="math notranslate nohighlight">\(\mathbf x_0\)</span> along its trajectory
-<span class="math notranslate nohighlight">\(\Phi_t(\mathbf x_0)\)</span>. Eulerian view: observe the parcels that pass a fixed point <span class="math notranslate nohighlight">\(\mathbf x_*\)</span>.</span><a class="headerlink" href="#id25" title="Link to this image">#</a></p>
+<span class="math notranslate nohighlight">\(\Phi_t(\mathbf x_0)\)</span>. Eulerian view: observe the parcels that pass a fixed point <span class="math notranslate nohighlight">\(\mathbf x_*\)</span>.</span><a class="headerlink" href="#id27" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><strong>Conservation of mass.</strong> The mass density <span class="math notranslate nohighlight">\(\rho\)</span> is a volume form transported by the flow: the mass in
@@ -852,31 +852,31 @@ W^\textnormal{lin}_h(x) = \frac 1h \left(1 - \frac{|x|}{h}\right)\,.\]</div>
 (<code class="docutils literal notranslate"><span class="pre">&quot;*_2d&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;*_3d&quot;</span></code>) are tensor products of these, with a width <span class="math notranslate nohighlight">\(h_i\)</span> per direction; <code class="docutils literal notranslate"><span class="pre">&quot;linear_isotropic_3d&quot;</span></code>
 is the radial kernel <span class="math notranslate nohighlight">\(\frac{3}{\pi h^3}(1 - |\mathbf x|/h)\)</span>. The kernels and their gradients are evaluated in
 logical coordinates <span class="math notranslate nohighlight">\(\boldsymbol \eta\)</span>; gradients are mapped to physical space with <span class="math notranslate nohighlight">\(DF^{-\top}\)</span>.</p>
-<figure class="align-center" id="id26">
+<figure class="align-center" id="id28">
 <span id="fig-sph-kernels"></span><a class="reference internal image-reference" href="../../_images/sph_kernels.png"><img alt="../../_images/sph_kernels.png" src="../../_images/sph_kernels.png" style="width: 90%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">The 1D smoothing kernels of Struphy (<code class="docutils literal notranslate"><span class="pre">trigonometric_1d</span></code>, <code class="docutils literal notranslate"><span class="pre">gaussian_1d</span></code>, <code class="docutils literal notranslate"><span class="pre">linear_1d</span></code>), scaled with the
-width <span class="math notranslate nohighlight">\(h\)</span>.</span><a class="headerlink" href="#id26" title="Link to this image">#</a></p>
+width <span class="math notranslate nohighlight">\(h\)</span>.</span><a class="headerlink" href="#id28" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><a class="reference internal" href="#fig-sph-density-1d"><span class="std std-ref">Figures</span></a> below show the smoothed density <a class="reference internal" href="#equation-sph-density">(3)</a> of tessellated markers
 (4 per box, <span class="math notranslate nohighlight">\(h\)</span> = box size) for <span class="math notranslate nohighlight">\(\rho(\eta_1) = 1.5 + \cos(2\pi\eta_1)\)</span> and, in 2D, with 16 markers in each of
 <span class="math notranslate nohighlight">\(12 \times 12\)</span> boxes; all kernels recover the density well.</p>
-<figure class="align-center" id="id27">
+<figure class="align-center" id="id29">
 <span id="fig-sph-density-1d"></span><a class="reference internal image-reference" href="../../_images/sph_density_1d.png"><img alt="../../_images/sph_density_1d.png" src="../../_images/sph_density_1d.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">Smoothed density in 1D with the three kernels (tessellation, 4 markers per box, <span class="math notranslate nohighlight">\(h = 1/24\)</span>), computed
-with <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.eval_density" title="struphy.pic.base.Particles.eval_density"><code class="xref py py-meth docutils literal notranslate"><span class="pre">eval_density()</span></code></a>.</span><a class="headerlink" href="#id27" title="Link to this image">#</a></p>
+with <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.eval_density" title="struphy.pic.base.Particles.eval_density"><code class="xref py py-meth docutils literal notranslate"><span class="pre">eval_density()</span></code></a>.</span><a class="headerlink" href="#id29" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<figure class="align-center" id="id28">
+<figure class="align-center" id="id30">
 <a class="reference internal image-reference" href="../../_images/sph_density_2d.png"><img alt="../../_images/sph_density_2d.png" src="../../_images/sph_density_2d.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">Smoothed density in 2D, <span class="math notranslate nohighlight">\(\rho = 1.5 + \cos(2\pi\eta_1)\cos(2\pi\eta_2)\)</span>, with the <code class="docutils literal notranslate"><span class="pre">gaussian_2d</span></code> kernel
-(tessellation, 16 markers in each of <span class="math notranslate nohighlight">\(12 \times 12\)</span> boxes, <span class="math notranslate nohighlight">\(h = 1/12\)</span>).</span><a class="headerlink" href="#id28" title="Link to this image">#</a></p>
+(tessellation, 16 markers in each of <span class="math notranslate nohighlight">\(12 \times 12\)</span> boxes, <span class="math notranslate nohighlight">\(h = 1/12\)</span>).</span><a class="headerlink" href="#id30" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><strong>Convergence.</strong> Two errors compete (<a class="reference internal" href="#fig-sph-convergence"><span class="std std-ref">figure</span></a>): the <em>smoothing bias</em> grows with
@@ -886,12 +886,12 @@ in the support of the kernel (small <span class="math notranslate nohighlight">\
 <span class="math notranslate nohighlight">\(N \to \infty\)</span> with <span class="math notranslate nohighlight">\(N h^d \to \infty\)</span>, i.e. more and more markers per kernel support. The
 truncation error of SPH sums is analysed in Quinlan <em>et al.</em><a class="footnote-reference brackets" href="#footcite-quinlan2006" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a>; corrected (renormalized) kernel gradients
 that improve the order of convergence are discussed in Oger <em>et al.</em><a class="footnote-reference brackets" href="#footcite-oger2007" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a> and Lind <em>et al.</em><a class="footnote-reference brackets" href="#footcite-lind2020" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>.</p>
-<figure class="align-center" id="id29">
+<figure class="align-center" id="id31">
 <span id="fig-sph-convergence"></span><a class="reference internal image-reference" href="../../_images/sph_convergence.png"><img alt="../../_images/sph_convergence.png" src="../../_images/sph_convergence.png" style="width: 55%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">Error of the smoothed density as a function of the kernel width <span class="math notranslate nohighlight">\(h\)</span> and of the number of markers
-(randomly drawn, logarithmic scales). The red line marks the optimal <span class="math notranslate nohighlight">\(h\)</span> for each number of markers.</span><a class="headerlink" href="#id29" title="Link to this image">#</a></p>
+(randomly drawn, logarithmic scales). The red line marks the optimal <span class="math notranslate nohighlight">\(h\)</span> for each number of markers.</span><a class="headerlink" href="#id31" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -1003,18 +1003,22 @@ e.g. <span class="math notranslate nohighlight">\(\Delta t = 10^{-3}\)</span> in
 </section>
 <section id="viscosity">
 <span id="sph-viscosity"></span><h2>Viscosity<a class="headerlink" href="#viscosity" title="Link to this heading">#</a></h2>
-<p>The viscous stress of a Newtonian fluid with dynamic viscosity <span class="math notranslate nohighlight">\(\mu \geq 0\)</span> is the traceless symmetric part of
-the velocity gradient,</p>
+<p>The viscous stress of a Newtonian fluid with dynamic viscosity <span class="math notranslate nohighlight">\(\mu \geq 0\)</span> is the viscous momentum
+flux, minus <span class="math notranslate nohighlight">\(\mu\)</span> times twice the traceless symmetric part of the velocity gradient,</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol\sigma = \mu \left( \nabla \mathbf u + (\nabla \mathbf u)^\top - \frac 23 (\nabla \cdot \mathbf u)\, \mathbb I \right)\,,
+\[\boldsymbol\sigma = -\mu \left( \nabla \mathbf u + (\nabla \mathbf u)^\top - \frac 23 (\nabla \cdot \mathbf u)\, \mathbb I \right)\,,
 \qquad \boldsymbol\sigma = \boldsymbol\sigma^\top\,, \quad \textnormal{tr}\, \boldsymbol\sigma = 0\,.\]</div>
+<p>With this sign, momentum conservation reads
+<span class="math notranslate nohighlight">\(\partial_t (\rho \mathbf u) + \nabla \cdot (\rho\, \mathbf u \mathbf u^\top + p\, \mathbb I + \boldsymbol\sigma) = 0\)</span>, and the
+kinetic energy is dissipated, <span class="math notranslate nohighlight">\(\frac{\textrm d}{\textrm d t} \int \frac 12 \rho |\mathbf u|^2 \textrm d \mathbf x = \int \boldsymbol\sigma : \nabla \mathbf u\, \textrm d \mathbf x \leq 0\)</span>
+(without pressure work and with periodic or no-slip boundaries).</p>
 <p>Viscosity is dissipative and not part of the Lagrangian; it is added to the equations of motion (for SPH
 formulations of viscous flows, see e.g. Morris <em>et al.</em><a class="footnote-reference brackets" href="#footcite-morris1997" id="id20" role="doc-noteref"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></a>). In SPH, the stress is
 evaluated at the markers from the gradient of the smoothed velocity <a class="reference internal" href="#equation-sph-velocity">(7)</a>,
 <span class="math notranslate nohighlight">\(\boldsymbol \sigma_i := \boldsymbol\sigma(\nabla \mathbf u_h(\mathbf x_i))\)</span>, and the force is the SPH estimate of
-its divergence, divided by the density:</p>
+minus its divergence, divided by the density:</p>
 <div class="math notranslate nohighlight" id="equation-sph-viscous-force">
-<span class="eqno">(10)<a class="headerlink" href="#equation-sph-viscous-force" title="Link to this equation">#</a></span>\[\dot{\mathbf v}_p = \frac{1}{\rho_p} (\nabla \cdot \boldsymbol\sigma)_h(\mathbf x_p) = \frac{1}{\rho_p} \sum_{i=1}^N \frac{w_i}{\rho_i}\, \boldsymbol\sigma_i\, \nabla W_h(\mathbf x_p - \mathbf x_i)\,.\]</div>
+<span class="eqno">(10)<a class="headerlink" href="#equation-sph-viscous-force" title="Link to this equation">#</a></span>\[\dot{\mathbf v}_p = -\frac{1}{\rho_p} (\nabla \cdot \boldsymbol\sigma)_h(\mathbf x_p) = -\frac{1}{\rho_p} \sum_{i=1}^N \frac{w_i}{\rho_i}\, \boldsymbol\sigma_i\, \nabla W_h(\mathbf x_p - \mathbf x_i)\,.\]</div>
 <p>This is implemented in <a class="reference internal" href="propagators-avail.html#struphy.propagators.push_v_in_viscous_potential.PushVinViscousPotential" title="struphy.propagators.push_v_in_viscous_potential.PushVinViscousPotential"><code class="xref py py-class docutils literal notranslate"><span class="pre">PushVinViscousPotential</span></code></a> (in logical
 coordinates in Piola form, with the physical density <span class="math notranslate nohighlight">\(\rho_p = \rho^\eta_p/\sqrt g\)</span> and forward Euler time
 stepping). The force <a class="reference internal" href="#equation-sph-viscous-force">(10)</a> is not pairwise antisymmetric, so momentum is conserved only
@@ -1088,7 +1092,8 @@ processes in the decomposed direction.</p>
 <span id="sph-incompressible"></span><h2>Incompressible flows<a class="headerlink" href="#incompressible-flows" title="Link to this heading">#</a></h2>
 <p>For incompressible flows, <span class="math notranslate nohighlight">\(\nabla \cdot \mathbf u = 0\)</span>, the pressure is not a function of the density but a
 Lagrange multiplier. <a class="reference internal" href="models-all.html#struphy.models.IncompressibleNavierStokesSPH" title="struphy.models.IncompressibleNavierStokesSPH"><code class="xref py py-class docutils literal notranslate"><span class="pre">IncompressibleNavierStokesSPH</span></code></a> computes it with <strong>Chorin’s projection
-method</strong> (for a projection method entirely in SPH, see Cummins and Rudman<a class="footnote-reference brackets" href="#footcite-cummins1999" id="id21" role="doc-noteref"><span class="fn-bracket">[</span>19<span class="fn-bracket">]</span></a>) on the finite element grid (see <a class="reference internal" href="numerics-geomFE.html#geomfe"><span class="std std-ref">Geometric finite elements (FEEC)</span></a>): after the viscous step, the divergence of the marker
+method</strong> <a class="footnote-reference brackets" href="#footcite-chorin1968" id="id21" role="doc-noteref"><span class="fn-bracket">[</span>19<span class="fn-bracket">]</span></a> (for projection methods entirely in SPH, see Cummins and Rudman<a class="footnote-reference brackets" href="#footcite-cummins1999" id="id22" role="doc-noteref"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></a> and
+Shao and Lo<a class="footnote-reference brackets" href="#footcite-shao2003" id="id23" role="doc-noteref"><span class="fn-bracket">[</span>21<span class="fn-bracket">]</span></a>) on the finite element grid (see <a class="reference internal" href="numerics-geomFE.html#geomfe"><span class="std std-ref">Geometric finite elements (FEEC)</span></a>): after the viscous step, the divergence of the marker
 velocities is deposited on the grid, the pressure <span class="math notranslate nohighlight">\(p \in H^1\)</span> is found from the Poisson equation
 <span class="math notranslate nohighlight">\(\Delta p = \nabla \cdot \mathbf u / \Delta t\)</span> (<a class="reference internal" href="propagators-avail.html#struphy.propagators.poisson_solve.PoissonSolve" title="struphy.propagators.poisson_solve.PoissonSolve"><code class="xref py py-class docutils literal notranslate"><span class="pre">PoissonSolve</span></code></a>), and the
 markers are pushed by the pressure gradient
@@ -1138,17 +1143,17 @@ splitting, mass conserved to machine precision);</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">EulerSPH</span></code>: isothermal standing sound wave in 1D over one period;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ViscousEulerSPH</span></code>: damped sound wave (decay rate <span class="math notranslate nohighlight">\(\frac 23 \mu k^2 / \rho_0\)</span>), velocity diffusion (decay
 rate <span class="math notranslate nohighlight">\(\frac 43 \mu k^2 / \rho_0\)</span>, for <span class="math notranslate nohighlight">\(\rho_0 = 1\)</span> and <span class="math notranslate nohighlight">\(2\)</span>) and Hagen-Poiseuille flow (parabolic
-profile between no-slip walls, as in Morris <em>et al.</em><a class="footnote-reference brackets" href="#footcite-morris1997" id="id22" role="doc-noteref"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></a>);</p></li>
+profile between no-slip walls, as in Morris <em>et al.</em><a class="footnote-reference brackets" href="#footcite-morris1997" id="id24" role="doc-noteref"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></a>);</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">IncompressibleNavierStokesSPH</span></code>: Chorin projection and decay of a shear flow between no-slip walls.</p></li>
 </ul>
-<p>The dam break test (<code class="docutils literal notranslate"><span class="pre">ViscousEulerSPH</span></code>, a classic SPH free-surface problem <a class="footnote-reference brackets" href="#footcite-monaghan1994" id="id23" role="doc-noteref"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></a>) is a
+<p>The dam break test (<code class="docutils literal notranslate"><span class="pre">ViscousEulerSPH</span></code>, a classic SPH free-surface problem <a class="footnote-reference brackets" href="#footcite-monaghan1994" id="id25" role="doc-noteref"><span class="fn-bracket">[</span>22<span class="fn-bracket">]</span></a>) is a
 robustness check only: it verifies that the markers stay in the domain.</p>
 <p>The Hagen-Poiseuille flow and the dam break are shown with animations in the tutorials
 (see <a class="reference internal" href="#sph-algo"><span class="std std-ref">SPH algorithm in Struphy</span></a>).</p>
 </section>
 <section id="references">
 <span id="sph-references"></span><h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
-<div class="docutils container" id="id24">
+<div class="docutils container" id="id26">
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="footcite-gingold1977" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
@@ -1222,15 +1227,23 @@ robustness check only: it verifies that the markers stay in the domain.</p>
 </aside>
 <aside class="footnote brackets" id="footcite-morris1997" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id20">1</a>,<a role="doc-backlink" href="#id22">2</a>)</span>
+<span class="backrefs">(<a role="doc-backlink" href="#id20">1</a>,<a role="doc-backlink" href="#id24">2</a>)</span>
 <p>Joseph P. Morris, Patrick J. Fox, and Yi Zhu. Modeling low Reynolds number incompressible flows using SPH. <em>Journal of Computational Physics</em>, 136(1):214–226, 1997. <a class="reference external" href="https://doi.org/10.1006/jcph.1997.5776">doi:10.1006/jcph.1997.5776</a>.</p>
 </aside>
-<aside class="footnote brackets" id="footcite-cummins1999" role="doc-footnote">
+<aside class="footnote brackets" id="footcite-chorin1968" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id21">19</a><span class="fn-bracket">]</span></span>
+<p>Alexandre Joel Chorin. Numerical solution of the Navier-Stokes equations. <em>Mathematics of Computation</em>, 22(104):745–762, 1968. <a class="reference external" href="https://doi.org/10.1090/S0025-5718-1968-0242392-2">doi:10.1090/S0025-5718-1968-0242392-2</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-cummins1999" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id22">20</a><span class="fn-bracket">]</span></span>
 <p>Sharen J. Cummins and Murray Rudman. An SPH projection method. <em>Journal of Computational Physics</em>, 152(2):584–607, 1999. <a class="reference external" href="https://doi.org/10.1006/jcph.1999.6246">doi:10.1006/jcph.1999.6246</a>.</p>
 </aside>
+<aside class="footnote brackets" id="footcite-shao2003" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id23">21</a><span class="fn-bracket">]</span></span>
+<p>Songdong Shao and Edmond Y. M. Lo. Incompressible SPH method for simulating Newtonian and non-Newtonian flows with a free surface. <em>Advances in Water Resources</em>, 26(7):787–800, 2003. <a class="reference external" href="https://doi.org/10.1016/S0309-1708(03)00030-7">doi:10.1016/S0309-1708(03)00030-7</a>.</p>
+</aside>
 <aside class="footnote brackets" id="footcite-monaghan1994" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id23">20</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id25">22</a><span class="fn-bracket">]</span></span>
 <p>J. J. Monaghan. Simulating free surface flows with SPH. <em>Journal of Computational Physics</em>, 110(2):399–406, 1994. <a class="reference external" href="https://doi.org/10.1006/jcph.1994.1034">doi:10.1006/jcph.1994.1034</a>.</p>
 </aside>
 </aside>

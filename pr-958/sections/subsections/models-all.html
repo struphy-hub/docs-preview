@@ -1369,7 +1369,7 @@ it must stay small compared to the magnetic moments.</p></li>
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">doc_discretization</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/models/vlasov_poisson_adiabatic_pauli.html#VlasovPoissonAdiabaticPauli.doc_discretization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.VlasovPoissonAdiabaticPauli.doc_discretization" title="Link to this definition">#</a></dt>
 <dd><p>Time integration is performed by the following propagators (in sequence).
 With Strang splitting, a time step is a drift by dt/2, the Poisson solve, a kick by dt/2 with the modified
-field E† = -grad(phi + epsilon mu <a href="#id1"><span class="problematic" id="id2">|B0|</span></a>), the rotation by v x B0 over the full dt, a second kick by dt/2 and a
+field E† = -grad(phi + epsilon mu <a href="#id5"><span class="problematic" id="id6">|B0|</span></a>), the rotation by v x B0 over the full dt, a second kick by dt/2 and a
 drift by dt/2. With <code class="docutils literal notranslate"><span class="pre">PushVxB(algo=&quot;implicit&quot;)</span></code> (Crank-Nicolson, i.e. the Cayley rotation) this is the Boris
 scheme of the classical Pauli particle (BAP2 in Xiao and Qin 2021), which gives the E x B and grad-B drifts for
 any dt / epsilon. The exact rotation (<code class="docutils literal notranslate"><span class="pre">algo=&quot;analytic&quot;</span></code>) and Lie-Trotter splitting do not; they need
@@ -1537,7 +1537,7 @@ it must stay small compared to the magnetic moments.</p></li>
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">doc_discretization</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/models/vlasov_pauli.html#VlasovPauli.doc_discretization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.VlasovPauli.doc_discretization" title="Link to this definition">#</a></dt>
 <dd><p>Time integration is performed by the following propagators (in sequence).
 With Strang splitting, a time step is a drift by dt/2, a kick by dt/2 with the magnetic-moment force
--mu grad <a href="#id3"><span class="problematic" id="id4">|B0|</span></a>, the rotation by v x B0 over the full dt, a second kick by dt/2 and a drift by dt/2.
+-mu grad <a href="#id7"><span class="problematic" id="id8">|B0|</span></a>, the rotation by v x B0 over the full dt, a second kick by dt/2 and a drift by dt/2.
 With <code class="docutils literal notranslate"><span class="pre">PushVxB(algo=&quot;implicit&quot;)</span></code> (Crank-Nicolson, i.e. the Cayley rotation) this is the Boris scheme of the
 classical Pauli particle (BAP2 in Xiao and Qin 2021), which gives the grad-B and curvature drifts for any
 dt / epsilon. The exact rotation (<code class="docutils literal notranslate"><span class="pre">algo=&quot;analytic&quot;</span></code>) and Lie-Trotter splitting do not; they need dt &lt; epsilon.</p>
@@ -5498,17 +5498,17 @@ pressureless fluid), set <code class="docutils literal notranslate"><span class=
 \[\partial_t \rho + \nabla \cdot (\rho \mathbf{u}) = 0\]</div>
 <p>Momentum:</p>
 <div class="math notranslate nohighlight">
-\[\rho (\partial_t \mathbf{u} + \mathbf{u} \cdot \nabla \mathbf{u}) = -\nabla \left( \rho^2 \frac{\partial \mathcal{U}(\rho, S)}{\partial \rho} \right) + \nabla \cdot \boldsymbol{\sigma}
+\[\rho (\partial_t \mathbf{u} + \mathbf{u} \cdot \nabla \mathbf{u}) = -\nabla \left( \rho^2 \frac{\partial \mathcal{U}(\rho, S)}{\partial \rho} \right) - \nabla \cdot \boldsymbol{\sigma}
 + \rho \mathbf g + \frac{\rho}{\varepsilon} \left( \mathbf{F} + \mathbf{u} \times \mathbf{B}_0 \right)\]</div>
 <p>Entropy:</p>
 <div class="math notranslate nohighlight">
 \[\partial_t S + \mathbf{u} \cdot \nabla S = 0\]</div>
-<p>where <span class="math notranslate nohighlight">\(S\)</span> denotes the entropy per unit mass, <span class="math notranslate nohighlight">\(\boldsymbol{\sigma}\)</span> is the viscous stress tensor and
+<p>where <span class="math notranslate nohighlight">\(S\)</span> denotes the entropy per unit mass, <span class="math notranslate nohighlight">\(\boldsymbol{\sigma}\)</span> is the viscous stress tensor (the viscous momentum flux) and
 <span class="math notranslate nohighlight">\(\mathbf g\)</span>, <span class="math notranslate nohighlight">\(\mathbf F\)</span>, <span class="math notranslate nohighlight">\(\mathbf B_0\)</span>, <span class="math notranslate nohighlight">\(\varepsilon\)</span> are as in
 <a class="reference internal" href="#struphy.models.EulerSPH" title="struphy.models.EulerSPH"><code class="xref py py-class docutils literal notranslate"><span class="pre">EulerSPH</span></code></a>.</p>
 <p>The viscous stress tensor for a Newtonian fluid is given by:</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{\sigma} = \mu \left( \nabla \mathbf{u} + (\nabla \mathbf{u})^T - \frac{2}{3} (\nabla \cdot \mathbf{u}) \mathbf{I} \right)\]</div>
+\[\boldsymbol{\sigma} = -\mu \left( \nabla \mathbf{u} + (\nabla \mathbf{u})^T - \frac{2}{3} (\nabla \cdot \mathbf{u}) \mathbf{I} \right)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the dynamic (shear) viscosity and <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> is the identity tensor.</p>
 <p>The internal energy per unit mass can be defined in two ways:</p>
 <div class="math notranslate nohighlight">
@@ -5543,7 +5543,10 @@ pressureless fluid), set <code class="docutils literal notranslate"><span class=
 <dt class="sig sig-object py" id="struphy.models.ViscousEulerSPH.doc_long_description">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">doc_long_description</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/models/viscous_euler_sph.html#ViscousEulerSPH.doc_long_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.ViscousEulerSPH.doc_long_description" title="Link to this definition">#</a></dt>
 <dd><p>ViscousEulerSPH is the particle-based SPH fluid model with pressure and
-viscosity. It is intended for meshfree fluid experiments rather than FEEC-based field simulations.</p>
+viscosity. It is intended for meshfree fluid experiments rather than FEEC-based field simulations.
+The pressure force follows from a discrete Lagrangian of the particles (variational SPH, see
+<a class="footnote-reference brackets" href="#footcite-bonet2004" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> and <a class="reference internal" href="numerics-sph.html#sph-pressure"><span class="std std-ref">Discrete Lagrangian and pressure force</span></a>); the viscous force is added to the resulting equations of
+motion (see <a class="reference internal" href="numerics-sph.html#sph-viscosity"><span class="std std-ref">Viscosity</span></a>).</p>
 <p>In the SPH family it extends <a class="reference internal" href="#struphy.models.EulerSPH" title="struphy.models.EulerSPH"><code class="xref py py-class docutils literal notranslate"><span class="pre">EulerSPH</span></code></a> by the viscous force and inherits its
 species, propagators and scalars.</p>
 </dd></dl>
@@ -5621,16 +5624,16 @@ options of <code class="docutils literal notranslate"><span class="pre">push_vis
 <dd><p><strong>PDEs solved by model:</strong></p>
 <p>Incompressible Navier-Stokes:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\rho (\partial_t \mathbf{u} + \mathbf{u} \cdot \nabla \mathbf{u}) = -\nabla p + \nabla \cdot \boldsymbol{\sigma}
+\[\begin{split}\rho (\partial_t \mathbf{u} + \mathbf{u} \cdot \nabla \mathbf{u}) = -\nabla p - \nabla \cdot \boldsymbol{\sigma}
 + \frac{\rho}{\varepsilon} \left( \mathbf{F} + \mathbf{u} \times \mathbf{B}_0 \right)
 \\[2mm]
 \nabla \cdot \mathbf{u} = 0\,,\end{split}\]</div>
 <p>where the pressure <span class="math notranslate nohighlight">\(p\)</span> is the Lagrange multiplier of the incompressibility constraint,
-<span class="math notranslate nohighlight">\(\boldsymbol{\sigma}\)</span> is the viscous stress tensor, and <span class="math notranslate nohighlight">\(\mathbf F\)</span>, <span class="math notranslate nohighlight">\(\mathbf B_0\)</span>,
+<span class="math notranslate nohighlight">\(\boldsymbol{\sigma}\)</span> is the viscous stress tensor (the viscous momentum flux), and <span class="math notranslate nohighlight">\(\mathbf F\)</span>, <span class="math notranslate nohighlight">\(\mathbf B_0\)</span>,
 <span class="math notranslate nohighlight">\(\varepsilon\)</span> are as in <a class="reference internal" href="#struphy.models.ColdEulerSPH" title="struphy.models.ColdEulerSPH"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColdEulerSPH</span></code></a> (here <span class="math notranslate nohighlight">\(\varepsilon = 1\)</span>).</p>
 <p>The viscous stress tensor for a Newtonian fluid is given by:</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{\sigma} = \mu \left( \nabla \mathbf{u} + (\nabla \mathbf{u})^T - \frac{2}{3} (\nabla \cdot \mathbf{u}) \mathbf{I} \right)\]</div>
+\[\boldsymbol{\sigma} = -\mu \left( \nabla \mathbf{u} + (\nabla \mathbf{u})^T - \frac{2}{3} (\nabla \cdot \mathbf{u}) \mathbf{I} \right)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the dynamic (shear) viscosity and <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> is the identity tensor.</p>
 <p><strong>Conserved quantities</strong> (periodic boundaries or no outflow):</p>
 <p>Mass (volume):</p>
@@ -5640,7 +5643,7 @@ options of <code class="docutils literal notranslate"><span class="pre">push_vis
 dissipated by the viscosity:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\textnormal d}{\textnormal d t} \frac 12 \int \rho |\mathbf u|^2 \, \textnormal d \mathbf x
-= - \int \boldsymbol \sigma : \nabla \mathbf u \, \textnormal d \mathbf x \leq 0\]</div>
+= \int \boldsymbol \sigma : \nabla \mathbf u \, \textnormal d \mathbf x \leq 0\]</div>
 </dd></dl>
 
 <dl class="py method">
@@ -5664,7 +5667,7 @@ dissipated by the viscosity:</p>
 <dt class="sig sig-object py" id="struphy.models.IncompressibleNavierStokesSPH.doc_discretization">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">doc_discretization</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/struphy/models/incompressible_navier_stokes_sph.html#IncompressibleNavierStokesSPH.doc_discretization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.IncompressibleNavierStokesSPH.doc_discretization" title="Link to this definition">#</a></dt>
 <dd><p>Time integration is performed by the following propagators (in sequence). The pressure is computed with
-Chorin’s projection method: <code class="docutils literal notranslate"><span class="pre">pressure_poisson</span></code> solves a Poisson equation for the pressure with the
+Chorin’s projection method <a class="footnote-reference brackets" href="#footcite-chorin1968" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>: <code class="docutils literal notranslate"><span class="pre">pressure_poisson</span></code> solves a Poisson equation for the pressure with the
 divergence of the velocity (divided by the time step) on the right-hand side, and <code class="docutils literal notranslate"><span class="pre">chorin_projection</span></code>
 pushes the velocities with the pressure force, which makes them divergence free. This needs
 <code class="docutils literal notranslate"><span class="pre">Time(split_algo=&quot;LieTrotter&quot;)</span></code>.</p>
@@ -5683,7 +5686,7 @@ pushes the velocities with the pressure force, which makes them divergence free.
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">doc_long_description</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/struphy/models/incompressible_navier_stokes_sph.html#IncompressibleNavierStokesSPH.doc_long_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#struphy.models.IncompressibleNavierStokesSPH.doc_long_description" title="Link to this definition">#</a></dt>
 <dd><p>IncompressibleNavierStokesSPH is the particle-based SPH model of an incompressible, viscous fluid. The
 pressure is not given by an equation of state but is the Lagrange multiplier of the incompressibility
-constraint, computed on the FEEC grid with Chorin’s projection method.</p>
+constraint, computed on the FEEC grid with Chorin’s projection method <a class="footnote-reference brackets" href="#footcite-chorin1968" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
 <p>In the SPH family it extends <a class="reference internal" href="#struphy.models.ColdEulerSPH" title="struphy.models.ColdEulerSPH"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColdEulerSPH</span></code></a> by the viscous force and the
 incompressibility constraint, and inherits its species, propagators and scalars.</p>
 </dd></dl>
@@ -7823,6 +7826,23 @@ and profiling of the solver in a given MHD equilibrium.</p>
 
 </section>
 </section>
+<section id="references">
+<h1>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h1>
+<p>References cited in the model docstrings above.</p>
+<div class="docutils container" id="id4">
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="footcite-bonet2004" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>J. Bonet, S. Kulasegaram, M. X. Rodriguez-Paz, and M. Profit. Variational formulation for the smooth particle hydrodynamics (SPH) simulation of fluid and solid problems. <em>Computer Methods in Applied Mechanics and Engineering</em>, 193(12–14):1245–1256, 2004. <a class="reference external" href="https://doi.org/10.1016/j.cma.2003.12.018">doi:10.1016/j.cma.2003.12.018</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-chorin1968" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id3">2</a>)</span>
+<p>Alexandre Joel Chorin. Numerical solution of the Navier-Stokes equations. <em>Mathematics of Computation</em>, 22(104):745–762, 1968. <a class="reference external" href="https://doi.org/10.1090/S0025-5718-1968-0242392-2">doi:10.1090/S0025-5718-1968-0242392-2</a>.</p>
+</aside>
+</aside>
+</div>
+</section>
 
 
                 </article>
@@ -8471,6 +8491,7 @@ and profiling of the solver in a given MHD equilibrium.</p>
 </li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
 
   </nav></div>

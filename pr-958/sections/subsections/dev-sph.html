@@ -692,20 +692,20 @@ to be passed as an <code class="docutils literal notranslate"><span class="pre">
 <dd><p>Update each marker <span class="math notranslate nohighlight">\(p\)</span> according to</p>
 <div class="math notranslate nohighlight">
 \[\frac{v_{p,j}^{n+1} - v_{p,j}^n}{\Delta t}
-= \frac{1}{\rho_p \sqrt g(\boldsymbol \eta_p)} \sum_{i=1}^N
+= -\frac{1}{\rho_p \sqrt g(\boldsymbol \eta_p)} \sum_{i=1}^N
   \frac{w_i \, \sqrt g(\boldsymbol \eta_i) \, \sigma_{jm}(\boldsymbol \eta_i) \,
   (DF^{-1})_{km}(\boldsymbol \eta_i)}{\rho^{N,h}(\boldsymbol \eta_i)} \,
   (\nabla W_h)_k(\boldsymbol \eta_p - \boldsymbol \eta_i)\,,\]</div>
-<p>where <span class="math notranslate nohighlight">\(\sigma_{jm} = \mu \left[(\partial_{x_m} v_j^{N,h} + \partial_{x_j} v_m^{N,h}) - \tfrac{2}{3}\delta_{jm}\partial_{x_l} v_l^{N,h}\right]\)</span>
-is the (Cartesian) deviatoric strain rate, <span class="math notranslate nohighlight">\(\sqrt g = \det DF\)</span> and
+<p>where <span class="math notranslate nohighlight">\(\sigma_{jm} = -\mu \left[(\partial_{x_m} v_j^{N,h} + \partial_{x_j} v_m^{N,h}) - \tfrac{2}{3}\delta_{jm}\partial_{x_l} v_l^{N,h}\right]\)</span>
+is the (Cartesian) viscous stress (momentum flux), <span class="math notranslate nohighlight">\(\sqrt g = \det DF\)</span> and
 <span class="math notranslate nohighlight">\(\rho_p = \rho^{N,h}(\boldsymbol \eta_p) / |\det DF(\boldsymbol \eta_p)|\)</span> is the physical density,
 with the SPH density <span class="math notranslate nohighlight">\(\rho^{N,h}\)</span> evaluated at the marker. This is the SPH discretization of
-<span class="math notranslate nohighlight">\(\frac{1}{\rho} \nabla_x \cdot \sigma\)</span>, with the divergence written in logical coordinates (Piola form),
+<span class="math notranslate nohighlight">\(-\frac{1}{\rho} \nabla_x \cdot \sigma\)</span>, with the divergence written in logical coordinates (Piola form),
 <span class="math notranslate nohighlight">\((\nabla_x \cdot \sigma)_j = \frac{1}{\sqrt g} \partial_{\eta_k} \bigl(\sqrt g \, (DF^{-1})_{km} \sigma_{jm}\bigr)\)</span>,
 with the gradient of the smoothing kernel <span class="math notranslate nohighlight">\(W_h\)</span> chosen from <a class="reference internal" href="#module-struphy.pic.sph_smoothing_kernels" title="struphy.pic.sph_smoothing_kernels"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sph_smoothing_kernels</span></code></a>.</p>
 <p>This kernel requires the 9 coefficients</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(- w_i \, \sqrt g(\boldsymbol \eta_i) \, \sigma_{jm}(\boldsymbol \eta_i) \, (DF^{-1})_{km}(\boldsymbol \eta_i)
+<li><p><span class="math notranslate nohighlight">\(w_i \, \sqrt g(\boldsymbol \eta_i) \, \sigma_{jm}(\boldsymbol \eta_i) \, (DF^{-1})_{km}(\boldsymbol \eta_i)
 / \rho^{N,h}(\boldsymbol \eta_i)\)</span> to be
 pre-computed for each particle and stored at <code class="docutils literal notranslate"><span class="pre">markers[first_free_idx</span> <span class="pre">+</span> <span class="pre">3*(j+1)</span> <span class="pre">+</span> <span class="pre">k,</span> <span class="pre">:]</span></code>
 for <span class="math notranslate nohighlight">\(j, k = 0, 1, 2\)</span></p></li>
@@ -787,16 +787,17 @@ the SPH mean velocity field</p>
 <dd><p>For each particle, evaluate the smoothed SPH density <span class="math notranslate nohighlight">\(\rho^{N,h}(\boldsymbol \eta_i)\)</span> and the
 deviatoric strain rate, and store the 9 coefficients</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(- w_i \, \sqrt g(\boldsymbol \eta_i) \, \sigma_{jm}(\boldsymbol \eta_i) \, (DF^{-1})_{km}(\boldsymbol \eta_i)
+<li><p><span class="math notranslate nohighlight">\(w_i \, \sqrt g(\boldsymbol \eta_i) \, \sigma_{jm}(\boldsymbol \eta_i) \, (DF^{-1})_{km}(\boldsymbol \eta_i)
 / \rho^{N,h}(\boldsymbol \eta_i)\)</span> at <code class="docutils literal notranslate"><span class="pre">markers[output_indices[3*j</span> <span class="pre">+</span> <span class="pre">k],</span> <span class="pre">:]</span></code> for <span class="math notranslate nohighlight">\(j, k = 0, 1, 2\)</span></p></li>
 </ul>
 <p>where <span class="math notranslate nohighlight">\(\sqrt g = \det DF\)</span>, the smoothed SPH density is given by</p>
 <div class="math notranslate nohighlight">
 \[\rho^{N,h}(\boldsymbol \eta_i) = \sum_l w_l \, W_h(\boldsymbol \eta_i - \boldsymbol \eta_l)\,,\]</div>
-<p>and the deviatoric strain rate is the traceless symmetric part of the Cartesian mean velocity gradient,</p>
+<p>and the viscous stress (momentum flux) is minus <span class="math notranslate nohighlight">\(\mu\)</span> times twice the traceless symmetric part of the
+Cartesian mean velocity gradient,</p>
 <div class="math notranslate nohighlight">
 \[\sigma_{jm}(\boldsymbol \eta_i)
-= \mu\bigl[ \partial_{x_m} v_j^{N,h}(\boldsymbol \eta_i) + \partial_{x_j} v_m^{N,h}(\boldsymbol \eta_i)
+= -\mu\bigl[ \partial_{x_m} v_j^{N,h}(\boldsymbol \eta_i) + \partial_{x_j} v_m^{N,h}(\boldsymbol \eta_i)
 - \tfrac{2}{3}\delta_{jm} \, \partial_{x_l} v_l^{N,h}(\boldsymbol \eta_i)\bigr]\,,
 \qquad
 \partial_{x_m} v_j^{N,h} = \sum_k \partial_{\eta_k} v_j^{N,h} \, (DF^{-1})_{km}\,.\]</div>
@@ -805,7 +806,7 @@ deviatoric strain rate, and store the 9 coefficients</p>
 such that these coefficients serve as kernel weights to evaluate the viscous force</p>
 <div class="math notranslate nohighlight">
 \[(\nabla \cdot \sigma)^{N,h}_j(\boldsymbol \eta_i)
-= -\frac{1}{\sqrt g(\boldsymbol \eta_i)} \sum_l \frac{ w_l \, \sqrt g(\boldsymbol \eta_l) \,
+= \frac{1}{\sqrt g(\boldsymbol \eta_i)} \sum_l \frac{ w_l \, \sqrt g(\boldsymbol \eta_l) \,
   \sigma_{jm}(\boldsymbol \eta_l) \, (DF^{-1})_{km}(\boldsymbol \eta_l)}{\rho^{N,h}(\boldsymbol \eta_l)} \,
   (\nabla W_h)_k(\boldsymbol \eta_i - \boldsymbol \eta_l)\,.\]</div>
 <p>This kernel requires the coefficients of the mean velocity <span class="math notranslate nohighlight">\(v_k^{N,h}\)</span>
