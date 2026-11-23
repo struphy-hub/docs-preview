@@ -671,11 +671,12 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Physical parameters</span>
 <span class="n">kappa</span> <span class="o">=</span> <span class="mf">0.2</span>  <span class="c1"># isothermal coefficient (= c_s^2); weak compressibility</span>
-<span class="n">mu</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># dynamic viscosity (small, for stability)</span>
+<span class="n">nu</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># kinematic viscosity mu / rho (the explicit viscous step needs dt &lt;~ h^2 / nu)</span>
 <span class="n">g_y</span> <span class="o">=</span> <span class="mf">10.0</span>  <span class="c1"># gravitational acceleration (downward = -y direction)</span>
 <span class="n">r1</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># domain width  (x)</span>
 <span class="n">r2</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># domain height (y)</span>
 <span class="n">n_high</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># initial density of the fluid column</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">nu</span> <span class="o">*</span> <span class="n">n_high</span>  <span class="c1"># dynamic viscosity</span>
 
 <span class="c1"># Derived</span>
 <span class="n">c_s</span> <span class="o">=</span> <span class="n">kappa</span><span class="o">**</span><span class="mf">0.5</span>
