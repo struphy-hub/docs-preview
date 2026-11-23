@@ -1,0 +1,1485 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Particle-in-cell methods (PIC) &#8212; struphy 3.6.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../_static/documentation_options.js?v=c0c9fa11"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sections/subsections/numerics-pic';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Geometric finite elements (FEEC)" href="numerics-geomFE.html" />
+    <link rel="prev" title="Numerics" href="../numerics.html" />
+    <link href="../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.6.2 documentation - Home"/>
+    <img src="../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.6.2 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="../numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../numerics.html"
+                          title="previous chapter">Numerics</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="numerics-geomFE.html"
+                          title="next chapter">Geometric finite elements (FEEC)</a></p>
+  </div></div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../numerics.html" class="nav-link">Numerics</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Particle-in-cell methods (PIC)</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="particle-in-cell-methods-pic">
+<span id="particle-discrete"></span><h1>Particle-in-cell methods (PIC)<a class="headerlink" href="#particle-in-cell-methods-pic" title="Link to this heading">#</a></h1>
+<p>This page introduces the particle-in-cell (PIC) method as it is used in Struphy.
+The first sections explain the idea and the algorithm without proofs; the derivations follow in
+<a class="reference internal" href="#pic-eom"><span class="std std-ref">Marker equations of motion</span></a>, <a class="reference internal" href="#control-var"><span class="std std-ref">Control variate method</span></a> and the sections after them.
+Parts of the material and the figures are adapted from the lecture
+<a class="reference external" href="https://github.com/spossann/2026_SPEGEO_Strasbourg_school">Meshless Structure-Preserving Algorithms</a>
+(SPEGEO school, Strasbourg 2026).
+Classic introductions to particle methods for plasmas are the textbooks Birdsall and Langdon<a class="footnote-reference brackets" href="#footcite-birdsall1991" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> and
+Hockney and Eastwood<a class="footnote-reference brackets" href="#footcite-hockney1988" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, and the lecture notes Sonnendrücker<a class="footnote-reference brackets" href="#footcite-sonnendruecker2013" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>; the geometric PIC framework
+used in Struphy (GEMPIC) is described in Kraus <em>et al.</em><a class="footnote-reference brackets" href="#footcite-kraus2017" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>. A list of all references is at the
+<a class="reference internal" href="#pic-references"><span class="std std-ref">end of the page</span></a>.</p>
+<section id="overview">
+<span id="pic-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Kinetic equations describe a distribution function <span class="math notranslate nohighlight">\(f(t, \mathbf z)\)</span> on phase space, where
+<span class="math notranslate nohighlight">\(\mathbf z \in \Omega \subset \mathbb R^n\)</span> collects positions and velocities
+(<span class="math notranslate nohighlight">\(n = 6\)</span> for full orbits, <span class="math notranslate nohighlight">\(n=5\)</span> for guiding centers, <span class="math notranslate nohighlight">\(n&lt;6\)</span> in reduced test cases).
+Most kinetic equations in Struphy are conservation laws of the form</p>
+<div class="math notranslate nohighlight" id="equation-conservelaw">
+<span class="eqno">(1)<a class="headerlink" href="#equation-conservelaw" title="Link to this equation">#</a></span>\[\partial_t f^\textrm{vol} + \nabla_{\mathbf z} \cdot \big(\mathbf u(t, \mathbf z)\, f^\textrm{vol}\big) = S\,,
+\qquad f^\textrm{vol}(0, \mathbf z) = f^\textrm{vol}_\textnormal{in}(\mathbf z)\,,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf u: \mathbb R \times \Omega \to \mathbb R^n\)</span> is the phase-space velocity (the characteristics of
+the equation), <span class="math notranslate nohighlight">\(S\)</span> is a source term (zero for the Vlasov equation, non-zero e.g. for collisions or for the
+<a class="reference internal" href="#pic-deltaf"><span class="std std-ref">delta-f method</span></a>), and <span class="math notranslate nohighlight">\(f^\textrm{vol}\)</span> is the distribution function as a <em>density</em>
+(or <em>volume form</em>), whose integral over a region of phase space is the number of particles in that region
+(see <a class="reference internal" href="#pic-phase-space"><span class="std std-ref">Phase space, 0-forms and volume forms</span></a>).
+For the Vlasov equation in Cartesian coordinates, for example, <span class="math notranslate nohighlight">\(\mathbf z = (\mathbf x, \mathbf v)\)</span> and
+<span class="math notranslate nohighlight">\(\mathbf u = \big(\mathbf v, \tfrac{q}{m}(\mathbf E + \mathbf v \times \mathbf B)\big)\)</span>.</p>
+<p><strong>The idea.</strong> Instead of storing <span class="math notranslate nohighlight">\(f^\textrm{vol}\)</span> on a grid in <span class="math notranslate nohighlight">\(n\)</span> dimensions, PIC represents it by
+<span class="math notranslate nohighlight">\(N \gg 1\)</span> computational particles, called <strong>markers</strong>. Marker <span class="math notranslate nohighlight">\(p\)</span> has a position
+<span class="math notranslate nohighlight">\(\mathbf z_p(t)\)</span> in phase space and a <strong>weight</strong> <span class="math notranslate nohighlight">\(w_p(t)\)</span>, the amount of <span class="math notranslate nohighlight">\(f^\textrm{vol}\)</span> it carries:</p>
+<div class="math notranslate nohighlight" id="equation-pic-ansatz">
+<span class="eqno">(2)<a class="headerlink" href="#equation-pic-ansatz" title="Link to this equation">#</a></span>\[f^\textrm{vol}(t, \mathbf z) \approx f_h(t, \mathbf z) := \sum_{p=1}^N w_p(t)\, \delta\big(\mathbf z - \mathbf z_p(t)\big)\,.\]</div>
+<p>Integrals against <span class="math notranslate nohighlight">\(f^\textrm{vol}\)</span> (charge and current densities, energies, …) become sums over markers,</p>
+<div class="math notranslate nohighlight">
+\[\int_\Omega A(\mathbf z)\, f^\textrm{vol}(t, \mathbf z)\,\textrm d \mathbf z \approx \sum_{p=1}^N w_p(t)\, A\big(\mathbf z_p(t)\big)\,.\]</div>
+<p>The markers move along the characteristics of <span class="math notranslate nohighlight">\(\mathbf u\)</span>, i.e. with the flow map <span class="math notranslate nohighlight">\(\Phi_t\)</span> of the equation
+(<a class="reference internal" href="#fig-pic-flow-map"><span class="std std-ref">figure</span></a>),</p>
+<div class="math notranslate nohighlight">
+\[\dot{\mathbf z}_p = \mathbf u(t, \mathbf z_p)\,, \qquad \mathbf z_p(0) = \mathbf z_{p0}\,,
+\qquad\Longleftrightarrow\qquad \mathbf z_p(t) = \Phi_t(\mathbf z_{p0})\,,\]</div>
+<p>and without source term (<span class="math notranslate nohighlight">\(S = 0\)</span>) <strong>the weights stay constant</strong>. The initial condition
+<span class="math notranslate nohighlight">\(f^\textrm{vol}_\textnormal{in}\)</span> enters only through the initial weights. All of this is shown in
+<a class="reference internal" href="#pic-eom"><span class="std std-ref">Marker equations of motion</span></a>.</p>
+<figure class="align-center" id="id21">
+<span id="fig-pic-flow-map"></span><a class="reference internal image-reference" href="../../_images/pic_flow_map.png"><img alt="../../_images/pic_flow_map.png" src="../../_images/pic_flow_map.png" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Markers <span class="math notranslate nohighlight">\(\mathbf z_{p0}\)</span> in a region <span class="math notranslate nohighlight">\(\Omega_0\)</span> are transported by the flow map <span class="math notranslate nohighlight">\(\Phi_t\)</span>
+of the kinetic equation. The density <span class="math notranslate nohighlight">\(f^\textrm{vol}\)</span> is transported with them; the number of particles
+in <span class="math notranslate nohighlight">\(\Phi_t(\Omega_0)\)</span> is the same as in <span class="math notranslate nohighlight">\(\Omega_0\)</span>.</span><a class="headerlink" href="#id21" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In Struphy, the initial markers are usually drawn at random (Monte-Carlo loading) from a <em>sampling density</em> <span class="math notranslate nohighlight">\(s^\textrm{vol}_\textnormal{in}\)</span>
+(a probability density on <span class="math notranslate nohighlight">\(\Omega\)</span>), and the initial weights are</p>
+<div class="math notranslate nohighlight" id="equation-def-weights">
+<span class="eqno">(3)<a class="headerlink" href="#equation-def-weights" title="Link to this equation">#</a></span>\[w_{p0} = \frac{1}{N}\,\frac{f^\textrm{vol}_\textnormal{in}(\mathbf z_{p0})}{s^\textrm{vol}_\textnormal{in}(\mathbf z_{p0})}\,.\]</div>
+<p>This choice makes the marker sums Monte-Carlo estimates of the integrals, with an error that decreases like
+<span class="math notranslate nohighlight">\(1/\sqrt N\)</span> (see <a class="reference internal" href="#monte-carlo"><span class="std std-ref">Monte-Carlo integration</span></a> and Aydemir<a class="footnote-reference brackets" href="#footcite-aydemir1994" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>). Note that in Struphy the factor <span class="math notranslate nohighlight">\(1/N\)</span> is part of the weights.</p>
+</section>
+<section id="pic-algorithm">
+<span id="pic-algo"></span><h2>PIC algorithm<a class="headerlink" href="#pic-algorithm" title="Link to this heading">#</a></h2>
+<p>A PIC simulation in Struphy consists of the following steps:</p>
+<ol class="arabic">
+<li><p><strong>Loading.</strong> Draw <span class="math notranslate nohighlight">\(N \gg 1\)</span> markers <span class="math notranslate nohighlight">\(\mathbf z_{p0}\)</span> from the sampling density
+<span class="math notranslate nohighlight">\(s^\textrm{vol}_\textnormal{in}\)</span>, see <a class="reference internal" href="#pic-loading"><span class="std std-ref">Marker loading in Struphy</span></a>. Options:
+<a class="reference internal" href="../api_guide.html#struphy.particles.parameters.LoadingParameters" title="struphy.particles.parameters.LoadingParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoadingParameters</span></code></a>, implementation:
+<a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.draw_markers" title="struphy.pic.base.Particles.draw_markers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">struphy.pic.base.Particles.draw_markers()</span></code></a>.</p></li>
+<li><p><strong>Initial weights.</strong> Compute <span class="math notranslate nohighlight">\(w_{p0}\)</span> from equation <a class="reference internal" href="#equation-def-weights">(3)</a>. The initial condition of
+the kinetic equation enters here. Options: <a class="reference internal" href="../api_guide.html#struphy.particles.parameters.WeightsParameters" title="struphy.particles.parameters.WeightsParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">WeightsParameters</span></code></a>,
+implementation: <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.initialize_weights" title="struphy.pic.base.Particles.initialize_weights"><code class="xref py py-meth docutils literal notranslate"><span class="pre">struphy.pic.base.Particles.initialize_weights()</span></code></a>.</p></li>
+<li><p><strong>Time stepping.</strong> In each time step, the propagators of the model (see <a class="reference internal" href="numerics-time-discrete.html#time-discret"><span class="std std-ref">Time discretization</span></a>)</p>
+<ol class="loweralpha simple">
+<li><p><em>push</em> the markers along the characteristics, <span class="math notranslate nohighlight">\(\dot{\mathbf z}_p = \mathbf u(t, \mathbf z_p)\)</span>, where
+<span class="math notranslate nohighlight">\(\mathbf u\)</span> may depend on the electromagnetic fields evaluated at the marker positions;</p></li>
+<li><p>update the weights, if there is a source term, a <a class="reference internal" href="#control-var"><span class="std std-ref">control variate</span></a> or a
+<a class="reference internal" href="#pic-deltaf"><span class="std std-ref">delta-f</span></a> formulation;</p></li>
+<li><p><em>accumulate</em> marker sums on the finite element spaces (charge and current densities, particle
+contributions to matrices), see <a class="reference internal" href="#pic-accum"><span class="std std-ref">Particle-to-grid coupling (accumulation)</span></a>;</p></li>
+<li><p>solve the field equations with these sources, see <a class="reference internal" href="numerics-geomFE.html#geomfe"><span class="std std-ref">Geometric finite elements (FEEC)</span></a>.</p></li>
+</ol>
+<p>With MPI, markers are distributed over the processes by their position in space and are moved to another
+process when they leave its domain (sorting).</p>
+</li>
+<li><p><strong>Diagnostics.</strong> Compute scalar quantities (marker sums), and reconstruct distribution functions and
+densities on grids by <a class="reference internal" href="#binning"><span class="std std-ref">Particle binning</span></a> or by <a class="reference internal" href="#pic-kde"><span class="std std-ref">kernel density estimation</span></a>.</p></li>
+</ol>
+<p>PIC methods are popular for kinetic equations because</p>
+<ol class="loweralpha simple">
+<li><p>the Monte-Carlo error <span class="math notranslate nohighlight">\(\sim 1/\sqrt N\)</span> does not depend on the dimension <span class="math notranslate nohighlight">\(n\)</span> of phase space,
+while the cost of grids grows exponentially with <span class="math notranslate nohighlight">\(n\)</span>;</p></li>
+<li><p>markers move independently of each other, which makes PIC easy to parallelize;</p></li>
+<li><p>the markers follow the characteristics exactly (up to the time integrator): there is no numerical diffusion
+and no CFL condition from phase-space advection (the time step is still limited by the accuracy and
+stability of the pusher and of the coupling to the fields).</p></li>
+</ol>
+<p>The price is the slow convergence <span class="math notranslate nohighlight">\(\sim 1/\sqrt N\)</span> and the associated noise in the simulations.
+Noise reduction techniques such as the <a class="reference internal" href="#control-var"><span class="std std-ref">Control variate method</span></a> and the <a class="reference internal" href="#pic-deltaf"><span class="std std-ref">delta-f method</span></a> are therefore
+essential in many applications.</p>
+<p><strong>Notation used on this page:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Symbol</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathbf z \in \Omega \subset \mathbb R^n\)</span></p></td>
+<td><p>phase-space coordinates; in Struphy <span class="math notranslate nohighlight">\(\mathbf z = (\boldsymbol \eta, \mathbf v)\)</span> with logical
+coordinates <span class="math notranslate nohighlight">\(\boldsymbol\eta \in (0, 1)^3\)</span> (6D), or <span class="math notranslate nohighlight">\((\boldsymbol\eta, v_\parallel, \mu)\)</span> (5D)</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(f^\textrm{vol}\)</span>, <span class="math notranslate nohighlight">\(f^0\)</span></p></td>
+<td><p>distribution function as a volume form (density) and as a 0-form (scalar),
+<span class="math notranslate nohighlight">\(f^\textrm{vol} = J f^0\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(J(\mathbf z)\)</span></p></td>
+<td><p>Jacobian determinant of the phase-space coordinates, see <a class="reference internal" href="#pic-phase-space"><span class="std std-ref">Phase space, 0-forms and volume forms</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(s^\textrm{vol}\)</span>, <span class="math notranslate nohighlight">\(s^0\)</span></p></td>
+<td><p>sampling density of the markers (a probability density), <span class="math notranslate nohighlight">\(s^\textrm{vol} = J s^0\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(p\)</span></p></td>
+<td><p>number of markers, marker index</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathbf z_p(t)\)</span>, <span class="math notranslate nohighlight">\(\mathbf z_{p0}\)</span></p></td>
+<td><p>marker position at time <span class="math notranslate nohighlight">\(t\)</span> and at <span class="math notranslate nohighlight">\(t=0\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(w_p(t)\)</span>, <span class="math notranslate nohighlight">\(w_{p0}\)</span></p></td>
+<td><p>marker weight (including the factor <span class="math notranslate nohighlight">\(1/N\)</span>) at time <span class="math notranslate nohighlight">\(t\)</span> and at <span class="math notranslate nohighlight">\(t=0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\Phi_t\)</span></p></td>
+<td><p>flow map of <span class="math notranslate nohighlight">\(\dot{\mathbf z} = \mathbf u(t, \mathbf z)\)</span>, <span class="math notranslate nohighlight">\(\Phi_t(\mathbf z_{p0}) = \mathbf z_p(t)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathcal M\)</span></p></td>
+<td><p>background (control variate), usually a Maxwellian</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="phase-space-0-forms-and-volume-forms">
+<span id="pic-phase-space"></span><h2>Phase space, 0-forms and volume forms<a class="headerlink" href="#phase-space-0-forms-and-volume-forms" title="Link to this heading">#</a></h2>
+<p>Struphy computes in logical coordinates <span class="math notranslate nohighlight">\(\boldsymbol\eta \in (0,1)^3\)</span>, mapped to physical space by
+<span class="math notranslate nohighlight">\(\mathbf x = F(\boldsymbol\eta)\)</span> (see <a class="reference internal" href="numerics-geomFE.html#geomfe"><span class="std std-ref">Geometric finite elements (FEEC)</span></a>), and in velocity coordinates <span class="math notranslate nohighlight">\(\mathbf v\)</span>
+(Cartesian velocities in 6D, guiding-center coordinates <span class="math notranslate nohighlight">\((v_\parallel, \mu)\)</span> in 5D
+<a class="footnote-reference brackets" href="#footcite-littlejohn1983" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a><a class="footnote-reference brackets" href="#footcite-possanner2018" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>). A phase-space volume element transforms as</p>
+<div class="math notranslate nohighlight">
+\[\textrm d^3 \mathbf x\, \textrm d \mathbf v_\textnormal{phys} = J(\mathbf z)\, \textrm d \mathbf z\,,
+\qquad J(\mathbf z) = |\det DF(\boldsymbol\eta)|\, J_v(\mathbf z)\,,\]</div>
+<p>where <span class="math notranslate nohighlight">\(J_v\)</span> is the Jacobian determinant of the velocity coordinates (<span class="math notranslate nohighlight">\(J_v = 1\)</span> for Cartesian
+velocities, <span class="math notranslate nohighlight">\(J_v = B_0\)</span> (up to constants) for <span class="math notranslate nohighlight">\((v_\parallel, \mu)\)</span>, see <code class="docutils literal notranslate"><span class="pre">velocity_jacobian_det</span></code>
+of the backgrounds in <a class="reference internal" href="kinetic-bckgr-avail.html#module-struphy.kinetic_background.maxwellians" title="struphy.kinetic_background.maxwellians"><code class="xref py py-mod docutils literal notranslate"><span class="pre">struphy.kinetic_background.maxwellians</span></code></a>).</p>
+<p>A distribution function can therefore be given in two ways:</p>
+<ul class="simple">
+<li><p>as a <strong>0-form</strong> <span class="math notranslate nohighlight">\(f^0(t, \mathbf z)\)</span>: the value of the physical distribution function at the point
+<span class="math notranslate nohighlight">\(\mathbf z\)</span>, independent of the coordinates;</p></li>
+<li><p>as a <strong>volume form</strong> (density) <span class="math notranslate nohighlight">\(f^\textrm{vol} = J f^0\)</span>: the quantity whose integral
+<span class="math notranslate nohighlight">\(\int f^\textrm{vol}\,\textrm d \mathbf z\)</span> over a region of logical phase space gives the number of
+particles in that region.</p></li>
+</ul>
+<p>Kinetic backgrounds and initial conditions in Struphy are usually specified as 0-forms (e.g. Maxwellians), while
+the conservation law <a class="reference internal" href="#equation-conservelaw">(1)</a> and the marker ansatz <a class="reference internal" href="#equation-pic-ansatz">(2)</a> are for the volume
+form. The ratio of two volume forms equals the ratio of the corresponding 0-forms,</p>
+<div class="math notranslate nohighlight">
+\[\frac{f^\textrm{vol}}{s^\textrm{vol}} = \frac{J f^0}{J s^0} = \frac{f^0}{s^0}\,,\]</div>
+<p>which is why the weights <a class="reference internal" href="#equation-def-weights">(3)</a> can be computed from 0-forms; this is what
+<a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.initialize_weights" title="struphy.pic.base.Particles.initialize_weights"><code class="xref py py-meth docutils literal notranslate"><span class="pre">initialize_weights()</span></code></a> does.</p>
+<p><strong>Transport of densities.</strong> Without source, equation <a class="reference internal" href="#equation-conservelaw">(1)</a> conserves the number of particles
+in every region that moves with the flow (<a class="reference internal" href="#fig-pic-flow-map"><span class="std std-ref">figure</span></a>):</p>
+<div class="math notranslate nohighlight">
+\[\int_{\Phi_t(\Omega_0)} f^\textrm{vol}(t, \mathbf z)\,\textrm d \mathbf z = \int_{\Omega_0} f^\textrm{vol}(0, \mathbf z_0)\,\textrm d \mathbf z_0
+\qquad \forall\, \Omega_0 \subset \Omega\,.\]</div>
+<p>Changing variables <span class="math notranslate nohighlight">\(\mathbf z = \Phi_t(\mathbf z_0)\)</span> on the left and letting <span class="math notranslate nohighlight">\(\Omega_0\)</span> shrink to a
+point gives</p>
+<div class="math notranslate nohighlight" id="equation-pic-transport-vol">
+<span class="eqno">(4)<a class="headerlink" href="#equation-pic-transport-vol" title="Link to this equation">#</a></span>\[f^\textrm{vol}\big(t, \Phi_t(\mathbf z_0)\big) = \frac{f^\textrm{vol}(0, \mathbf z_0)}{\big|\det D\Phi_t(\mathbf z_0)\big|}\,.\]</div>
+<p>The density changes along a trajectory only through the compression of phase-space volume. Since
+<span class="math notranslate nohighlight">\(\tfrac{\textrm d}{\textrm d t} \det D\Phi_t = (\nabla_{\mathbf z} \cdot \mathbf u)(t, \Phi_t)\, \det D\Phi_t\)</span>,
+this is equivalent to</p>
+<div class="math notranslate nohighlight" id="equation-pic-transport-vol-ode">
+<span class="eqno">(5)<a class="headerlink" href="#equation-pic-transport-vol-ode" title="Link to this equation">#</a></span>\[\frac{\textrm d}{\textrm d t} f^\textrm{vol}\big(t, \mathbf z_p(t)\big) = - f^\textrm{vol}\, \nabla_{\mathbf z} \cdot \mathbf u
+\qquad \textnormal{along}\quad \dot{\mathbf z}_p = \mathbf u(t, \mathbf z_p)\,.\]</div>
+<p><strong>Liouville’s theorem.</strong> The Vlasov flow preserves the physical phase-space volume (the Lorentz force is
+divergence-free in velocity space). In logical coordinates this means <span class="math notranslate nohighlight">\(\nabla_{\mathbf z} \cdot (J \mathbf u) = 0\)</span>, i.e.
+<span class="math notranslate nohighlight">\(J\, \nabla_{\mathbf z} \cdot \mathbf u = - \mathbf u \cdot \nabla_{\mathbf z} J\)</span>. Then, from
+<a class="reference internal" href="#equation-pic-transport-vol-ode">(5)</a>,</p>
+<div class="math notranslate nohighlight">
+\[\frac{\textrm d}{\textrm d t} f^0\big(t, \mathbf z_p(t)\big)
+= \frac{\textrm d}{\textrm d t} \frac{f^\textrm{vol}}{J}
+= \frac{-f^\textrm{vol}\, \nabla_{\mathbf z} \cdot \mathbf u}{J} - \frac{f^\textrm{vol}}{J^2}\, \mathbf u \cdot \nabla_{\mathbf z} J
+= 0\,.\]</div>
+<p>Hence <strong>the 0-form is constant along the characteristics</strong>, the familiar statement that the distribution function
+is constant along particle orbits. The same holds for the sampling density <span class="math notranslate nohighlight">\(s^0\)</span> (see <a class="reference internal" href="#pic-eom"><span class="std std-ref">Marker equations of motion</span></a>), which
+is why Struphy evaluates <span class="math notranslate nohighlight">\(s^0\)</span> only once, at loading, and stores it with each marker (column <code class="docutils literal notranslate"><span class="pre">s0</span></code> of the
+marker array, see <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles" title="struphy.pic.base.Particles"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particles</span></code></a>).</p>
+<p><strong>Guiding centers.</strong> The guiding-center flow conserves the phase-space volume
+<span class="math notranslate nohighlight">\(J^*\, \textrm d \mathbf z\)</span> with <span class="math notranslate nohighlight">\(J^* = |\det DF|\, B^*_\parallel\)</span>, where
+<span class="math notranslate nohighlight">\(B^*_\parallel = B_\parallel + O(\epsilon)\)</span> is the modified field of guiding-center theory
+<a class="footnote-reference brackets" href="#footcite-littlejohn1983" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>. Struphy’s pushers
+use <span class="math notranslate nohighlight">\(B^*_\parallel\)</span>, so the argument above holds with <span class="math notranslate nohighlight">\(J^*\)</span>: without source, the weights are exactly
+constant along the orbits. The initial weights, however, are computed with <span class="math notranslate nohighlight">\(J_v = B_0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[w_{p0} = \frac 1N \frac{f^0_\textnormal{in}\, |\det DF|\, B_0}{s^\textrm{vol}_\textnormal{in}}(\mathbf z_{p0})
+= \frac 1N \frac{f^0_\textnormal{in}\, J^*}{s^*}(\mathbf z_{p0})\,, \qquad
+s^* := s^\textrm{vol}_\textnormal{in}\, \frac{B^*_\parallel}{B_0}\,.\]</div>
+<p>They are the exact Monte-Carlo weights for markers distributed according to <span class="math notranslate nohighlight">\(s^*\)</span>. Since the markers are drawn
+from <span class="math notranslate nohighlight">\(s^\textrm{vol}_\textnormal{in}\)</span>, the marker ensemble represents the initial 0-form
+<span class="math notranslate nohighlight">\(f^0_\textnormal{in}\, B_0/B^*_\parallel\)</span> instead of <span class="math notranslate nohighlight">\(f^0_\textnormal{in}\)</span>. This is an <span class="math notranslate nohighlight">\(O(\epsilon)\)</span>
+error of the initial condition only; it is then transported exactly and does not accumulate in time.</p>
+</section>
+<section id="monte-carlo-integration">
+<span id="monte-carlo"></span><h2>Monte-Carlo integration<a class="headerlink" href="#monte-carlo-integration" title="Link to this heading">#</a></h2>
+<p>At the core of the PIC method is the approximation of integrals by Monte-Carlo integration; a unified Monte-Carlo
+interpretation of particle simulations, including the error and noise estimates below, is given by
+Aydemir<a class="footnote-reference brackets" href="#footcite-aydemir1994" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>. We consider integrals</p>
+<div class="math notranslate nohighlight" id="equation-int-1">
+<span class="eqno">(6)<a class="headerlink" href="#equation-int-1" title="Link to this equation">#</a></span>\[I = \int_\Omega A(\mathbf z)\, f^\textrm{vol}(\mathbf z)\,\textrm d \mathbf z
+  = \int_\Omega A(\mathbf z)\, f^0(\mathbf z)\, J(\mathbf z)\,\textrm d \mathbf z\]</div>
+<p>where <span class="math notranslate nohighlight">\(A\)</span> is a 0-form (e.g. a velocity moment times a finite element basis
+function). Let <span class="math notranslate nohighlight">\(s^\textrm{vol}\)</span> be a probability density on <span class="math notranslate nohighlight">\(\Omega\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[s^\textrm{vol}(\mathbf z) &gt; 0 \quad \forall\, \mathbf z \in \Omega\,, \qquad \int_\Omega s^\textrm{vol}(\mathbf z)\,\textrm d \mathbf z = 1\,.\]</div>
+<p>Then <span class="math notranslate nohighlight">\(I\)</span> is an expectation value <span class="math notranslate nohighlight">\(\mathbb E\)</span> with respect to <span class="math notranslate nohighlight">\(s^\textrm{vol}\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-int-2">
+<span class="eqno">(7)<a class="headerlink" href="#equation-int-2" title="Link to this equation">#</a></span>\[I = \int_\Omega A\, \frac{f^\textrm{vol}}{s^\textrm{vol}}\, s^\textrm{vol}\,\textrm d \mathbf z
+  = \mathbb E\left[ A\, \frac{f^\textrm{vol}}{s^\textrm{vol}} \right]_{s^\textrm{vol}}\,.\]</div>
+<p><strong>Monte-Carlo estimate.</strong> Draw <span class="math notranslate nohighlight">\(N\)</span> independent samples <span class="math notranslate nohighlight">\(\mathbf z_p \sim s^\textrm{vol}\)</span> and approximate
+the expectation by the sample mean,</p>
+<div class="math notranslate nohighlight" id="equation-mcint">
+<span class="eqno">(8)<a class="headerlink" href="#equation-mcint" title="Link to this equation">#</a></span>\[I \approx I_N := \frac 1N \sum_{p=1}^N A(\mathbf z_p)\, \frac{f^\textrm{vol}(\mathbf z_p)}{s^\textrm{vol}(\mathbf z_p)}
+= \sum_{p=1}^N w_p\, A(\mathbf z_p)\,, \qquad
+w_p = \frac 1N \frac{f^\textrm{vol}(\mathbf z_p)}{s^\textrm{vol}(\mathbf z_p)} = \frac 1N \frac{f^0(\mathbf z_p)}{s^0(\mathbf z_p)}\,.\]</div>
+<p>This is the marker sum of the <a class="reference internal" href="#pic-overview"><span class="std std-ref">Overview</span></a>, obtained equally by inserting the ansatz
+<a class="reference internal" href="#equation-pic-ansatz">(2)</a> into <a class="reference internal" href="#equation-int-1">(6)</a>. In Struphy, MC integrals of the form <a class="reference internal" href="#equation-mcint">(8)</a> are
+implemented by accumulators, see <a class="reference internal" href="#pic-accum"><span class="std std-ref">Particle-to-grid coupling (accumulation)</span></a>.</p>
+<p><strong>Error.</strong> Viewing the samples as random variables, <span class="math notranslate nohighlight">\(I_N\)</span> is itself a random variable. It is <em>unbiased</em>,</p>
+<div class="math notranslate nohighlight">
+\[\mathbb E[I_N] = \frac 1N \sum_{p=1}^N \mathbb E\left[ A\, \frac{f^\textrm{vol}}{s^\textrm{vol}}\right]_{s^\textrm{vol}} = I\,,\]</div>
+<p>and its variance, the mean squared error, follows from Bienaymé’s identity
+<span class="math notranslate nohighlight">\(\mathbb V\big[\sum_p X_p\big] = \sum_p \mathbb V[X_p]\)</span> for independent random variables:</p>
+<div class="math notranslate nohighlight">
+\[\mathbb V[I_N] = \mathbb E\big[(I_N - I)^2\big]
+= \frac{1}{N^2} \sum_{p=1}^N \mathbb V\left[ A\, \frac{f^\textrm{vol}}{s^\textrm{vol}}\right]
+= \frac{\sigma^2}{N}\,, \qquad
+\sigma^2 := \mathbb V\left[ A\, \frac{f^\textrm{vol}}{s^\textrm{vol}}\right]_{s^\textrm{vol}}\,.\]</div>
+<p>Hence the root-mean-square error is</p>
+<div class="math notranslate nohighlight" id="equation-mc-error">
+<span class="eqno">(9)<a class="headerlink" href="#equation-mc-error" title="Link to this equation">#</a></span>\[\varepsilon_N := \sqrt{\mathbb E\big[(I_N - I)^2\big]} = \frac{\sigma}{\sqrt N}\,,\]</div>
+<p><strong>independent of the dimension</strong> <span class="math notranslate nohighlight">\(n\)</span> of phase space. Quadrature rules of order <span class="math notranslate nohighlight">\(k\)</span> with <span class="math notranslate nohighlight">\(N\)</span>
+points converge like <span class="math notranslate nohighlight">\(N^{-k/n}\)</span>, which becomes slow for <span class="math notranslate nohighlight">\(n = 5\)</span> or <span class="math notranslate nohighlight">\(6\)</span>.</p>
+<p>There are two ways to reduce the error at fixed <span class="math notranslate nohighlight">\(N\)</span>, both by making <span class="math notranslate nohighlight">\(\sigma\)</span> smaller:</p>
+<ul class="simple">
+<li><p><strong>Importance sampling:</strong> choose <span class="math notranslate nohighlight">\(s^\textrm{vol}\)</span> similar to <span class="math notranslate nohighlight">\(|A| f^\textrm{vol}\)</span>, so that
+<span class="math notranslate nohighlight">\(A f^\textrm{vol}/s^\textrm{vol}\)</span> varies little. In Struphy the velocities of the markers are drawn from a
+Gaussian whose mean and thermal velocity can be adapted to the distribution function, see <a class="reference internal" href="#pic-loading"><span class="std std-ref">Marker loading in Struphy</span></a>.</p></li>
+<li><p><strong>Control variates:</strong> subtract a known part of <span class="math notranslate nohighlight">\(f^\textrm{vol}\)</span> whose integral can be computed exactly,
+see <a class="reference internal" href="#control-var"><span class="std std-ref">Control variate method</span></a>.</p></li>
+</ul>
+<p>Quasi-random (low-discrepancy) samples such as Sobol sequences can also improve the convergence rate beyond
+<span class="math notranslate nohighlight">\(1/\sqrt N\)</span> for smooth integrands <a class="footnote-reference brackets" href="#footcite-niederreiter1992" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>; they are available as loading options.</p>
+</section>
+<section id="two-ways-to-define-markers-and-weights">
+<span id="pic-two-ways"></span><h2>Two ways to define markers and weights<a class="headerlink" href="#two-ways-to-define-markers-and-weights" title="Link to this heading">#</a></h2>
+<p>The ansatz <a class="reference internal" href="#equation-pic-ansatz">(2)</a> can be reached in two ways, which differ only in how the initial markers and
+weights are chosen.</p>
+<p><strong>Partition of phase space.</strong> Divide the initial region into small subregions
+<span class="math notranslate nohighlight">\(\Omega_0 = \bigcup_p \Omega_0^p\)</span>, place one marker <span class="math notranslate nohighlight">\(\mathbf z_{p0} \in \Omega_0^p\)</span> in each of them,
+and give it the number of particles of its subregion as weight (<a class="reference internal" href="#fig-pic-partition"><span class="std std-ref">figure</span></a>),</p>
+<div class="math notranslate nohighlight">
+\[w_p := \int_{\Omega_0^p} f^\textrm{vol}(0, \mathbf z_0)\,\textrm d \mathbf z_0\,,
+\qquad \sum_{p=1}^N w_p = \int_{\Omega_0} f^\textrm{vol}(0, \mathbf z_0)\,\textrm d \mathbf z_0\,.\]</div>
+<p>The subregions are transported by the flow, <span class="math notranslate nohighlight">\(\Omega_0^p \mapsto \Phi_t(\Omega_0^p)\)</span>, each keeping its number of
+particles, and so does the marker inside: <span class="math notranslate nohighlight">\(\mathbf z_p(t) = \Phi_t(\mathbf z_{p0}) \in \Phi_t(\Omega_0^p)\)</span>.
+Approximating each subregion by its marker gives <a class="reference internal" href="#equation-pic-ansatz">(2)</a> with constant weights. The discrete
+<span class="math notranslate nohighlight">\(f_h\)</span> is still a density with the exact total number of particles,
+<span class="math notranslate nohighlight">\(\int f_h\, \textrm d \mathbf z = \sum_p w_p\)</span>.</p>
+<figure class="align-center" id="id22">
+<span id="fig-pic-partition"></span><a class="reference internal image-reference" href="../../_images/pic_partition.png"><img alt="../../_images/pic_partition.png" src="../../_images/pic_partition.png" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Partition of the initial region into subregions <span class="math notranslate nohighlight">\(\Omega_0^p\)</span> with one marker each. The flow map
+transports the subregions together with their markers; each subregion keeps its number of particles
+<span class="math notranslate nohighlight">\(w_p\)</span>.</span><a class="headerlink" href="#id22" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Monte-Carlo sampling.</strong> Draw the markers at random from a sampling density, <span class="math notranslate nohighlight">\(\mathbf z_{p0} \sim s^\textrm{vol}_\textnormal{in}\)</span>,
+and define the weights by <a class="reference internal" href="#equation-def-weights">(3)</a>, as described in <a class="reference internal" href="#monte-carlo"><span class="std std-ref">Monte-Carlo integration</span></a>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 16.0%" />
+<col style="width: 42.0%" />
+<col style="width: 42.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Partition of phase space</p></th>
+<th class="head"><p>Monte-Carlo sampling</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Markers</p></td>
+<td><p>one marker per subregion, <span class="math notranslate nohighlight">\(\mathbf z_{p0} \in \Omega_0^p\)</span>; markers are placed regularly</p></td>
+<td><p>drawn at random, <span class="math notranslate nohighlight">\(\mathbf z_{p0} \sim s^\textrm{vol}_\textnormal{in}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Weights</p></td>
+<td><p><span class="math notranslate nohighlight">\(w_p = \int_{\Omega_0^p} f^\textrm{vol}_\textnormal{in}\,\textrm d \mathbf z_0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(w_p = \dfrac 1N \dfrac{f^\textrm{vol}_\textnormal{in}(\mathbf z_{p0})}{s^\textrm{vol}_\textnormal{in}(\mathbf z_{p0})}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Comments</p></td>
+<td><p>needs quadrature over the subregions; little noise initially, but markers become irregular in time</p></td>
+<td><p>noisy, but with the provable convergence <span class="math notranslate nohighlight">\(\sigma/\sqrt N\)</span> of integrals</p></td>
+</tr>
+<tr class="row-odd"><td><p>In Struphy</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">loading=&quot;tesselation&quot;</span></code> (used mainly for <a class="reference internal" href="numerics-sph.html#sph-method"><span class="std std-ref">SPH</span></a>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">loading=&quot;pseudo_random&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;sobol_standard&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;sobol_antithetic&quot;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In both cases the markers follow the flow and, without source, the weights are constant.</p>
+</section>
+<section id="marker-loading-in-struphy">
+<span id="pic-loading"></span><h2>Marker loading in Struphy<a class="headerlink" href="#marker-loading-in-struphy" title="Link to this heading">#</a></h2>
+<p>Loading is configured with <a class="reference internal" href="../api_guide.html#struphy.particles.parameters.LoadingParameters" title="struphy.particles.parameters.LoadingParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoadingParameters</span></code></a> and done in
+<a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.draw_markers" title="struphy.pic.base.Particles.draw_markers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">struphy.pic.base.Particles.draw_markers()</span></code></a>. The main options are:</p>
+<ul class="simple">
+<li><p><strong>Number of markers:</strong> <code class="docutils literal notranslate"><span class="pre">Np</span></code> (total), or <code class="docutils literal notranslate"><span class="pre">ppc</span></code> (per cell of the grid) or <code class="docutils literal notranslate"><span class="pre">ppb</span></code> (per sorting box).</p></li>
+<li><p><strong>Loading algorithm</strong> (<code class="docutils literal notranslate"><span class="pre">loading</span></code>):</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;pseudo_random&quot;</span></code>: independent pseudo-random samples (reproducible with <code class="docutils literal notranslate"><span class="pre">seed</span></code>);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;sobol_standard&quot;</span></code>: quasi-random Sobol sequence;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;sobol_antithetic&quot;</span></code>: Sobol points, each mirrored into 64 symmetric markers (only for 3 velocity
+dimensions), which removes odd moments of the sampling error;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;tesselation&quot;</span></code>: markers on a regular grid of tiles in each sorting box, with weights equal to the
+integrals of <span class="math notranslate nohighlight">\(f^\textrm{vol}_\textnormal{in}\)</span> over the tiles, computed by Gauss-Legendre quadrature
+(<code class="docutils literal notranslate"><span class="pre">n_quad</span></code> points), see <a class="reference internal" href="#pic-two-ways"><span class="std std-ref">Two ways to define markers and weights</span></a>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;restart&quot;</span></code> / <code class="docutils literal notranslate"><span class="pre">&quot;external&quot;</span></code>: read markers from a restart file or an external HDF5 file.</p></li>
+</ul>
+</li>
+<li><p><strong>Specific markers</strong> (<code class="docutils literal notranslate"><span class="pre">specific_markers</span></code>): after loading, the first markers are replaced by markers at given
+phase-space points (e.g. for orbit tests).</p></li>
+</ul>
+<p>For the Monte-Carlo algorithms the sampling density is a product of a spatial part and a Gaussian in velocity,</p>
+<div class="math notranslate nohighlight">
+\[s^\textrm{vol}_\textnormal{in}(\boldsymbol\eta, \mathbf v) = n^{(3)}(\boldsymbol\eta)\, \mathcal G(\mathbf v)\,,
+\qquad
+\mathcal G(\mathbf v) = \prod_{i=1}^{d_v} \frac{1}{\sqrt{2\pi}\, v_{\textrm{th},i}}
+\exp\left[-\frac{(v_i - u_i)^2}{2 v_{\textrm{th},i}^2}\right]\,,\]</div>
+<p>where <span class="math notranslate nohighlight">\(d_v\)</span> is the dimension of velocity space. The shifts <span class="math notranslate nohighlight">\(u_i\)</span> and thermal velocities
+<span class="math notranslate nohighlight">\(v_{\textrm{th},i}\)</span> are given by <code class="docutils literal notranslate"><span class="pre">moments</span></code>; the default is <span class="math notranslate nohighlight">\(u_i = 0\)</span> and
+<span class="math notranslate nohighlight">\(v_{\textrm{th},i} = 1\)</span>. Adapting them to the distribution function reduces the noise (importance sampling,
+see <a class="reference internal" href="#monte-carlo"><span class="std std-ref">Monte-Carlo integration</span></a>). The spatial part is a normalized 3-form on the unit cube, chosen with
+<code class="docutils literal notranslate"><span class="pre">spatial</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;uniform&quot;</span></code> gives <span class="math notranslate nohighlight">\(n^{(3)} = 1\)</span>, <code class="docutils literal notranslate"><span class="pre">&quot;disc&quot;</span></code> gives <span class="math notranslate nohighlight">\(n^{(3)} = 2\eta_1\)</span>, which is uniform on the
+image of the unit square under a polar (disc) mapping. Velocities are drawn by inverse transform sampling, see
+<a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.draw_markers" title="struphy.pic.base.Particles.draw_markers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">draw_markers()</span></code></a> for details, also for guiding-center markers.</p>
+<p>After loading, <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.initialize_weights" title="struphy.pic.base.Particles.initialize_weights"><code class="xref py py-meth docutils literal notranslate"><span class="pre">initialize_weights()</span></code></a> computes the 0-form <span class="math notranslate nohighlight">\(s^0_\textnormal{in}\)</span>
+and the initial weights <span class="math notranslate nohighlight">\(w_{p0}\)</span> at the markers. With <code class="docutils literal notranslate"><span class="pre">reject_weights=True</span></code> in
+<a class="reference internal" href="../api_guide.html#struphy.particles.parameters.WeightsParameters" title="struphy.particles.parameters.WeightsParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">WeightsParameters</span></code></a>, markers with weights below <code class="docutils literal notranslate"><span class="pre">threshold</span></code> are removed.</p>
+</section>
+<section id="marker-equations-of-motion">
+<span id="pic-eom"></span><h2>Marker equations of motion<a class="headerlink" href="#marker-equations-of-motion" title="Link to this heading">#</a></h2>
+<p>We now derive the equations for <span class="math notranslate nohighlight">\(\mathbf z_p(t)\)</span> and <span class="math notranslate nohighlight">\(w_p(t)\)</span> from the conservation law
+<a class="reference internal" href="#equation-conservelaw">(1)</a> with a general source <span class="math notranslate nohighlight">\(S\)</span> (see also Aydemir<a class="footnote-reference brackets" href="#footcite-aydemir1994" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> and
+Sonnendrücker<a class="footnote-reference brackets" href="#footcite-sonnendruecker2013" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>). Three derivations are given: a short one from the weak
+form (<a class="reference internal" href="#pic-eom-weak"><span class="std std-ref">Derivation from the weak form</span></a>), a longer one based on Monte-Carlo estimates of each term (<a class="reference internal" href="#pic-eom-mc"><span class="std std-ref">Derivation via Monte-Carlo estimates</span></a>), and a
+geometric argument for constant weights (<a class="reference internal" href="#pic-eom-flow"><span class="std std-ref">Constant weights from the flow map</span></a>). They lead to the same result.</p>
+<p>Throughout, <span class="math notranslate nohighlight">\(\frac{\textrm d}{\textrm d t} g\big(t, \mathbf z_p(t)\big) = \partial_t g + \dot{\mathbf z}_p \cdot \nabla_{\mathbf z} g\)</span>
+denotes the time derivative of a function <span class="math notranslate nohighlight">\(g\)</span> along a marker trajectory. Boundary terms are assumed to vanish.
+The <strong>weak form</strong> of <a class="reference internal" href="#equation-conservelaw">(1)</a> reads</p>
+<div class="math notranslate nohighlight" id="equation-pic-weak">
+<span class="eqno">(10)<a class="headerlink" href="#equation-pic-weak" title="Link to this equation">#</a></span>\[\frac{\textrm d}{\textrm d t} \int_\Omega f^\textrm{vol}\, \varphi\,\textrm d \mathbf z
+= \int_\Omega f^\textrm{vol}\, \mathbf u \cdot \nabla_{\mathbf z} \varphi\,\textrm d \mathbf z
++ \int_\Omega S\, \varphi\,\textrm d \mathbf z
+\qquad \forall\, \varphi \in C^\infty_c(\Omega)\,.\]</div>
+<p>The time derivative of the marker sum, for any test function <span class="math notranslate nohighlight">\(\varphi\)</span>, is</p>
+<div class="math notranslate nohighlight" id="equation-int-fh">
+<span class="eqno">(11)<a class="headerlink" href="#equation-int-fh" title="Link to this equation">#</a></span>\[\frac{\textrm d}{\textrm d t} \int_\Omega f_h\, \varphi\,\textrm d \mathbf z
+= \frac{\textrm d}{\textrm d t} \sum_{p=1}^N w_p\, \varphi(\mathbf z_p)
+= \sum_{p=1}^N \Big[ \dot w_p\, \varphi(\mathbf z_p) + w_p\, \dot{\mathbf z}_p \cdot \nabla_{\mathbf z} \varphi(\mathbf z_p) \Big]\,.\]</div>
+<section id="derivation-from-the-weak-form">
+<span id="pic-eom-weak"></span><h3>Derivation from the weak form<a class="headerlink" href="#derivation-from-the-weak-form" title="Link to this heading">#</a></h3>
+<p>We ask that <span class="math notranslate nohighlight">\(f_h\)</span> satisfies the weak form <a class="reference internal" href="#equation-pic-weak">(10)</a> up to a Monte-Carlo error. Inserting
+<span class="math notranslate nohighlight">\(f_h\)</span> into the right-hand side of <a class="reference internal" href="#equation-pic-weak">(10)</a>, the transport term is evaluated <strong>exactly</strong>,</p>
+<div class="math notranslate nohighlight">
+\[\int_\Omega f_h\, \mathbf u \cdot \nabla_{\mathbf z} \varphi\,\textrm d \mathbf z = \sum_{p=1}^N w_p\, \mathbf u(t, \mathbf z_p) \cdot \nabla_{\mathbf z}\varphi(\mathbf z_p)\,.\]</div>
+<p>Only the source term needs an approximation. The markers at time <span class="math notranslate nohighlight">\(t\)</span> are samples of a density
+<span class="math notranslate nohighlight">\(s^\textrm{vol}(t)\)</span> (the initial sampling density transported by the marker motion, see below), so
+by <a class="reference internal" href="#monte-carlo"><span class="std std-ref">Monte-Carlo integration</span></a></p>
+<div class="math notranslate nohighlight">
+\[\int_\Omega S\, \varphi\,\textrm d \mathbf z \approx \frac 1N \sum_{p=1}^N \frac{S(t, \mathbf z_p)}{s^\textrm{vol}(t, \mathbf z_p)}\, \varphi(\mathbf z_p)\,.\]</div>
+<p>Comparing with <a class="reference internal" href="#equation-int-fh">(11)</a> term by term (a sufficient condition for all <span class="math notranslate nohighlight">\(\varphi\)</span>), we obtain</p>
+<div class="math notranslate nohighlight" id="equation-def-dot-qw">
+<span class="eqno">(12)<a class="headerlink" href="#equation-def-dot-qw" title="Link to this equation">#</a></span>\[\begin{split}\dot{\mathbf z}_p &amp;= \mathbf u(t, \mathbf z_p)\,, \qquad \mathbf z_p(0) = \mathbf z_{p0}\,,
+\\[2mm]
+\dot w_p &amp;= \frac 1N\, \frac{S(t, \mathbf z_p)}{s^\textrm{vol}(t, \mathbf z_p)}\,, \qquad w_p(0) = w_{p0}\,.\end{split}\]</div>
+<p><strong>The sampling density.</strong> The markers are drawn from <span class="math notranslate nohighlight">\(s^\textrm{vol}_\textnormal{in}\)</span> and then move with
+<span class="math notranslate nohighlight">\(\dot{\mathbf z}_p = \mathbf u\)</span>. Their density at time <span class="math notranslate nohighlight">\(t\)</span> is therefore the transported density,
+the solution of</p>
+<div class="math notranslate nohighlight" id="equation-s-eq">
+<span class="eqno">(13)<a class="headerlink" href="#equation-s-eq" title="Link to this equation">#</a></span>\[\partial_t s^\textrm{vol} + \nabla_{\mathbf z} \cdot \big(\mathbf u\, s^\textrm{vol}\big) = 0\,,
+\qquad s^\textrm{vol}(0) = s^\textrm{vol}_\textnormal{in}\,,\]</div>
+<p>which stays normalized to 1. Along a trajectory it is given by <a class="reference internal" href="#equation-pic-transport-vol">(4)</a>:
+<span class="math notranslate nohighlight">\(s^\textrm{vol}(t, \mathbf z_p(t)) = s^\textrm{vol}_\textnormal{in}(\mathbf z_{p0}) / |\det D\Phi_t(\mathbf z_{p0})|\)</span>.
+For a Liouville flow (<a class="reference internal" href="#pic-phase-space"><span class="std std-ref">Phase space, 0-forms and volume forms</span></a>) the 0-form <span class="math notranslate nohighlight">\(s^0 = s^\textrm{vol}/J\)</span> is constant along
+trajectories, so that the weight equation becomes</p>
+<div class="math notranslate nohighlight" id="equation-pic-eqs">
+<span class="eqno">(14)<a class="headerlink" href="#equation-pic-eqs" title="Link to this equation">#</a></span>\[\dot w_p = \frac 1N\, \frac{S^0(t, \mathbf z_p)}{s^0_\textnormal{in}(\mathbf z_{p0})}\,, \qquad S^0 := S / J\,,\]</div>
+<p>with <span class="math notranslate nohighlight">\(s^0_\textnormal{in}(\mathbf z_{p0})\)</span> stored per marker. Without source, <strong>the weights are constant</strong>,
+<span class="math notranslate nohighlight">\(w_p(t) = w_{p0}\)</span>.</p>
+<p><strong>Consistency.</strong> The relation <a class="reference internal" href="#equation-def-weights">(3)</a> remains true at all times:
+<span class="math notranslate nohighlight">\(w_p(t) = \frac 1N f^\textrm{vol}(t, \mathbf z_p)/s^\textrm{vol}(t, \mathbf z_p)\)</span>. Indeed, using
+<a class="reference internal" href="#equation-pic-transport-vol-ode">(5)</a> with the source, <span class="math notranslate nohighlight">\(\frac{\textrm d}{\textrm d t} f^\textrm{vol} = S - f^\textrm{vol} \nabla_{\mathbf z} \cdot \mathbf u\)</span>,
+and <span class="math notranslate nohighlight">\(\frac{\textrm d}{\textrm d t} s^\textrm{vol} = - s^\textrm{vol} \nabla_{\mathbf z} \cdot \mathbf u\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\frac{\textrm d}{\textrm d t} \frac{f^\textrm{vol}}{s^\textrm{vol}}
+= \frac{S - f^\textrm{vol} \nabla_{\mathbf z} \cdot \mathbf u}{s^\textrm{vol}} + \frac{f^\textrm{vol}}{s^\textrm{vol}} \nabla_{\mathbf z} \cdot \mathbf u
+= \frac{S}{s^\textrm{vol}} = N \dot w_p\,.\]</div>
+<p>Note that the source <span class="math notranslate nohighlight">\(S\)</span> usually depends on <span class="math notranslate nohighlight">\(f\)</span> itself (e.g. collisions) or on fields; it is then
+evaluated from the markers or from the fields at the marker positions, see the <a class="reference internal" href="#pic-deltaf"><span class="std std-ref">Delta-f method</span></a> for an example.</p>
+</section>
+<section id="derivation-via-monte-carlo-estimates">
+<span id="pic-eom-mc"></span><h3>Derivation via Monte-Carlo estimates<a class="headerlink" href="#derivation-via-monte-carlo-estimates" title="Link to this heading">#</a></h3>
+<p>This derivation replaces <em>every</em> integral in the weak form by its Monte-Carlo estimate, instead of only the
+source term. It starts from the requirement</p>
+<div class="math notranslate nohighlight" id="equation-pic-principle">
+<span class="eqno">(15)<a class="headerlink" href="#equation-pic-principle" title="Link to this equation">#</a></span>\[\frac{\textrm d}{\textrm d t} \int_\Omega (f^\textrm{vol} - f_h)\, \varphi\,\textrm d \mathbf z = O(N^{-1/2})
+\qquad \forall\, \varphi \in C^\infty_c(\Omega)\,.\]</div>
+<p>The time derivative of the <span class="math notranslate nohighlight">\(f_h\)</span>-integral is <a class="reference internal" href="#equation-int-fh">(11)</a>. The time derivative of the
+<span class="math notranslate nohighlight">\(f^\textrm{vol}\)</span>-integral is given by the weak form <a class="reference internal" href="#equation-pic-weak">(10)</a>. Let <span class="math notranslate nohighlight">\(s^\textrm{vol}(t)\)</span>
+be a time-dependent probability density from which the markers <span class="math notranslate nohighlight">\(\mathbf z_p(t)\)</span> are samples at each time
+<span class="math notranslate nohighlight">\(t\)</span>. Then both integrals in <a class="reference internal" href="#equation-pic-weak">(10)</a> are expectation values with respect to
+<span class="math notranslate nohighlight">\(s^\textrm{vol}\)</span>, which we estimate from the markers:</p>
+<div class="math notranslate nohighlight" id="equation-expectvals">
+<span class="eqno">(16)<a class="headerlink" href="#equation-expectvals" title="Link to this equation">#</a></span>\[\begin{split}\int_\Omega f^\textrm{vol}\, \mathbf u \cdot \nabla_{\mathbf z} \varphi\,\textrm d \mathbf z
+&amp;= \mathbb E\left[\frac{f^\textrm{vol}}{s^\textrm{vol}}\,\mathbf u \cdot \nabla_{\mathbf z} \varphi \right]_{s^\textrm{vol}}
+= \frac 1N \sum_{p=1}^N \frac{f^\textrm{vol}(t, \mathbf z_p)}{s^\textrm{vol}(t, \mathbf z_p)}\,\mathbf u(t, \mathbf z_p) \cdot \nabla_{\mathbf z} \varphi(\mathbf z_p) + O(N^{-1/2})\,,
+\\[2mm]
+\int_\Omega S\, \varphi\,\textrm d \mathbf z
+&amp;= \mathbb E\left[\frac{S}{s^\textrm{vol}}\, \varphi \right]_{s^\textrm{vol}}
+= \frac 1N \sum_{p=1}^N \frac{S(t, \mathbf z_p)}{s^\textrm{vol}(t, \mathbf z_p)}\, \varphi(\mathbf z_p) + O(N^{-1/2})\,.\end{split}\]</div>
+<p>Comparing the coefficients of <span class="math notranslate nohighlight">\(\varphi(\mathbf z_p)\)</span> and <span class="math notranslate nohighlight">\(\nabla_{\mathbf z} \varphi(\mathbf z_p)\)</span>
+with <a class="reference internal" href="#equation-int-fh">(11)</a> (a sufficient condition for <a class="reference internal" href="#equation-pic-principle">(15)</a>) gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}w_p\, \dot{\mathbf z}_p &amp;= \frac 1N \frac{f^\textrm{vol}(t, \mathbf z_p)}{s^\textrm{vol}(t, \mathbf z_p)}\,\mathbf u(t, \mathbf z_p)\,,
+\\[2mm]
+\dot w_p &amp;= \frac 1N \frac{S(t, \mathbf z_p)}{s^\textrm{vol}(t, \mathbf z_p)}\,.\end{split}\]</div>
+<p>These are two equations for three unknowns (<span class="math notranslate nohighlight">\(\mathbf z_p\)</span>, <span class="math notranslate nohighlight">\(w_p\)</span> and <span class="math notranslate nohighlight">\(s^\textrm{vol}\)</span>). We close
+them by <em>defining</em> the weights as (assuming <span class="math notranslate nohighlight">\(f^\textrm{vol} \neq 0\)</span> at the markers, so that we can divide by
+<span class="math notranslate nohighlight">\(w_p\)</span> and <span class="math notranslate nohighlight">\(f^\textrm{vol}\)</span> below)</p>
+<div class="math notranslate nohighlight" id="equation-def-weights-t">
+<span class="eqno">(17)<a class="headerlink" href="#equation-def-weights-t" title="Link to this equation">#</a></span>\[w_p(t) := \frac 1N \frac{f^\textrm{vol}(t, \mathbf z_p(t))}{s^\textrm{vol}(t, \mathbf z_p(t))}\,,\]</div>
+<p>which implies the same marker equations as before,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\dot{\mathbf z}_p &amp;= \mathbf u(t, \mathbf z_p)\,,
+\\[2mm]
+\dot w_p &amp;= \frac 1N \frac{S(t, \mathbf z_p)}{s^\textrm{vol}(t, \mathbf z_p)}\,.\end{split}\]</div>
+<p>The definition <a class="reference internal" href="#equation-def-weights-t">(17)</a> also implies, by differentiating along the trajectory,</p>
+<div class="math notranslate nohighlight">
+\[\dot w_p = \frac 1N \left[ \frac{1}{s^\textrm{vol}} \frac{\textrm d f^\textrm{vol}}{\textrm d t} - \frac{f^\textrm{vol}}{(s^\textrm{vol})^2}\, \frac{\textrm d s^\textrm{vol}}{\textrm d t} \right]\,,\]</div>
+<p>where all functions are evaluated at <span class="math notranslate nohighlight">\((t, \mathbf z_p(t))\)</span>. Comparing the two expressions for
+<span class="math notranslate nohighlight">\(\dot w_p\)</span> yields the equation that the sampling density must satisfy along the trajectories,</p>
+<div class="math notranslate nohighlight">
+\[\frac{\textrm d s^\textrm{vol}}{\textrm d t} = \frac{s^\textrm{vol}}{f^\textrm{vol}} \left[ \frac{\textrm d f^\textrm{vol}}{\textrm d t} - S \right]\,.\]</div>
+<p>From the conservation law <a class="reference internal" href="#equation-conservelaw">(1)</a>, <span class="math notranslate nohighlight">\(\frac{\textrm d f^\textrm{vol}}{\textrm d t} = S - f^\textrm{vol}\, \nabla_{\mathbf z} \cdot \mathbf u\)</span>,
+hence</p>
+<div class="math notranslate nohighlight">
+\[\frac{\textrm d s^\textrm{vol}}{\textrm d t} = - s^\textrm{vol}\, \nabla_{\mathbf z} \cdot \mathbf u\,,\]</div>
+<p>which is the transport equation <a class="reference internal" href="#equation-s-eq">(13)</a> for <span class="math notranslate nohighlight">\(s^\textrm{vol}\)</span>. The PIC solution is therefore
+obtained by solving</p>
+<div class="math notranslate nohighlight" id="equation-pic-eqs-compressible">
+<span class="eqno">(18)<a class="headerlink" href="#equation-pic-eqs-compressible" title="Link to this equation">#</a></span>\[\begin{split}\dot{\mathbf z}_p &amp;= \mathbf u(t, \mathbf z_p)\,, \qquad \mathbf z_p(0) = \mathbf z_{p0} \sim s^\textrm{vol}_\textnormal{in}\,,
+\\[2mm]
+\dot w_p &amp;= \frac 1N \frac{S(t, \mathbf z_p)}{s^\textrm{vol}(t, \mathbf z_p)}\,, \qquad w_p(0) = \frac 1N \frac{f^\textrm{vol}_\textnormal{in}(\mathbf z_{p0})}{s^\textrm{vol}_\textnormal{in}(\mathbf z_{p0})}\,,\end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(s^\textrm{vol}(t, \mathbf z_p(t)) = s^\textrm{vol}_\textnormal{in}(\mathbf z_{p0}) \exp\big(-\int_0^t \nabla_{\mathbf z} \cdot \mathbf u(\tau, \mathbf z_p(\tau))\,\textrm d \tau\big)\)</span>.
+For incompressible flow, <span class="math notranslate nohighlight">\(\nabla_{\mathbf z} \cdot \mathbf u = 0\)</span>, the sampling density is constant along
+the trajectories and <span class="math notranslate nohighlight">\(s^\textrm{vol}(t, \mathbf z_p(t)) = s^\textrm{vol}_\textnormal{in}(\mathbf z_{p0})\)</span>;
+for Liouville flows the same holds for the 0-form <span class="math notranslate nohighlight">\(s^0\)</span>, which gives <a class="reference internal" href="#equation-pic-eqs">(14)</a>.</p>
+</section>
+<section id="constant-weights-from-the-flow-map">
+<span id="pic-eom-flow"></span><h3>Constant weights from the flow map<a class="headerlink" href="#constant-weights-from-the-flow-map" title="Link to this heading">#</a></h3>
+<p>Without source, constancy of the weights follows directly from the transport of densities
+<a class="reference internal" href="#equation-pic-transport-vol">(4)</a>. Both <span class="math notranslate nohighlight">\(f^\textrm{vol}\)</span> and the sampling density <span class="math notranslate nohighlight">\(s^\textrm{vol}\)</span> are
+transported by the same flow map, <span class="math notranslate nohighlight">\(\mathbf z_p(t) = \Phi_t(\mathbf z_{p0})\)</span>, so that the Jacobian
+determinants cancel in the weights <a class="reference internal" href="#equation-def-weights-t">(17)</a>:</p>
+<div class="math notranslate nohighlight">
+\[w_p(t) = \frac 1N \frac{f^\textrm{vol}(t, \mathbf z_p(t))}{s^\textrm{vol}(t, \mathbf z_p(t))}
+= \frac 1N \frac{f^\textrm{vol}_\textnormal{in}(\mathbf z_{p0}) / |\det D\Phi_t(\mathbf z_{p0})|}{s^\textrm{vol}_\textnormal{in}(\mathbf z_{p0}) / |\det D\Phi_t(\mathbf z_{p0})|}
+= w_{p0}\,.\]</div>
+<p>The information on the initial condition is encoded in the constant weights, and the markers just follow the flow.</p>
+<p><strong>Comparison.</strong> The derivation from the weak form (<a class="reference internal" href="#pic-eom-weak"><span class="std std-ref">Derivation from the weak form</span></a>) treats the transport term exactly and
+needs Monte-Carlo only for the source term; the relation <span class="math notranslate nohighlight">\(w_p = f^\textrm{vol}/(N s^\textrm{vol})\)</span> and the
+transport of <span class="math notranslate nohighlight">\(s^\textrm{vol}\)</span> are <em>results</em>. The derivation via Monte-Carlo estimates
+(<a class="reference internal" href="#pic-eom-mc"><span class="std std-ref">Derivation via Monte-Carlo estimates</span></a>) approximates the transport term as well and needs the weights <a class="reference internal" href="#equation-def-weights-t">(17)</a> as
+an additional <em>definition</em> to close the equations; the transport of <span class="math notranslate nohighlight">\(s^\textrm{vol}\)</span> then follows as a
+consistency condition. The flow-map argument is the most direct, but covers only the source-free case.</p>
+</section>
+</section>
+<section id="control-variate-method">
+<span id="control-var"></span><h2>Control variate method<a class="headerlink" href="#control-variate-method" title="Link to this heading">#</a></h2>
+<p>The Monte-Carlo error <a class="reference internal" href="#equation-mc-error">(9)</a> is proportional to the standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> of the
+integrand. In many plasma applications, <span class="math notranslate nohighlight">\(f\)</span> stays close to a known background <span class="math notranslate nohighlight">\(\mathcal M\)</span> (e.g. a
+Maxwellian equilibrium), and only the small deviation <span class="math notranslate nohighlight">\(f - \mathcal M\)</span> carries the interesting physics. The
+control variate method exploits this <a class="footnote-reference brackets" href="#footcite-aydemir1994" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a><a class="footnote-reference brackets" href="#footcite-hatzky2002" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a><a class="footnote-reference brackets" href="#footcite-kleiber2011" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a>. It relies on</p>
+<ol class="arabic">
+<li><p>the ability to compute the integral <a class="reference internal" href="#equation-int-1">(6)</a> of the background without Monte-Carlo
+(analytically or by quadrature):</p>
+<div class="math notranslate nohighlight">
+\[I_{\mathcal M} := \int_\Omega A\, \mathcal M^\textrm{vol}\,\textrm d \mathbf z = \int_\Omega A\, \mathcal M^0\, J\,\textrm d \mathbf z\,;\]</div>
+</li>
+<li><p>the assumption that <span class="math notranslate nohighlight">\(f(t)\)</span> is close to <span class="math notranslate nohighlight">\(\mathcal M(t)\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+</ol>
+<p>Then <a class="reference internal" href="#equation-int-1">(6)</a> is decomposed as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}I &amp;= \int_\Omega A\, (f^\textrm{vol} - \mathcal M^\textrm{vol})\,\textrm d \mathbf z + I_{\mathcal M}
+\\[2mm]
+&amp;= \int_\Omega A\, \frac{f^\textrm{vol} - \mathcal M^\textrm{vol}}{s^\textrm{vol}}\, s^\textrm{vol}\,\textrm d \mathbf z + I_{\mathcal M}
+\\[2mm]
+&amp;\approx \sum_{p=1}^N \delta w_p(t)\, A\big(t, \mathbf z_p(t)\big) + I_{\mathcal M}\,,\end{split}\]</div>
+<p>with the time-dependent <strong>delta-f weights</strong></p>
+<div class="math notranslate nohighlight" id="equation-pic-cv-weights">
+<span class="eqno">(19)<a class="headerlink" href="#equation-pic-cv-weights" title="Link to this equation">#</a></span>\[\delta w_p(t) = \frac 1N \frac{f^\textrm{vol} - \mathcal M^\textrm{vol}}{s^\textrm{vol}}\Big|_{(t, \mathbf z_p(t))}
+= w_{p0} - \frac 1N \frac{\mathcal M^0\big(t, \mathbf z_p(t)\big)}{s^0_\textnormal{in}(\mathbf z_{p0})}\,.\]</div>
+<p>For the second equality we used that, without source, <span class="math notranslate nohighlight">\(f^0/s^0 = N w_{p0}\)</span> and <span class="math notranslate nohighlight">\(s^0\)</span> are constant along
+the trajectories (<a class="reference internal" href="#pic-eom"><span class="std std-ref">Marker equations of motion</span></a>). For guiding centers, both terms carry the same factor <span class="math notranslate nohighlight">\(B_0/B^*_\parallel\)</span>
+at the initial marker position (see <a class="reference internal" href="#pic-phase-space"><span class="std std-ref">Phase space, 0-forms and volume forms</span></a>), so the delta-f weights are consistent with the
+initial condition represented by the markers.
+The full-f weights <span class="math notranslate nohighlight">\(w_{p0}\)</span> stay constant; the delta-f weights are
+recomputed from them whenever the markers have moved. The variance is now</p>
+<div class="math notranslate nohighlight">
+\[\sigma^2_\delta = \mathbb V\left[ A\, \frac{f^\textrm{vol} - \mathcal M^\textrm{vol}}{s^\textrm{vol}}\right]_{s^\textrm{vol}}\,,\]</div>
+<p>which is small when <span class="math notranslate nohighlight">\(f \approx \mathcal M\)</span>: for a perturbation of relative size <span class="math notranslate nohighlight">\(\epsilon\)</span>, the noise is
+reduced by roughly a factor <span class="math notranslate nohighlight">\(\epsilon\)</span>, which would otherwise need <span class="math notranslate nohighlight">\(1/\epsilon^2\)</span> times more markers.</p>
+<p>In Struphy, the control variate is switched on with <code class="docutils literal notranslate"><span class="pre">control_variate=True</span></code> in
+<a class="reference internal" href="../api_guide.html#struphy.particles.parameters.WeightsParameters" title="struphy.particles.parameters.WeightsParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">WeightsParameters</span></code></a>; the background <span class="math notranslate nohighlight">\(\mathcal M\)</span> is the background of the
+species (<a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.f0" title="struphy.pic.base.Particles.f0"><code class="xref py py-attr docutils literal notranslate"><span class="pre">f0</span></code></a>). The weights <a class="reference internal" href="#equation-pic-cv-weights">(19)</a> are computed in
+<a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.update_weights" title="struphy.pic.base.Particles.update_weights"><code class="xref py py-meth docutils literal notranslate"><span class="pre">struphy.pic.base.Particles.update_weights()</span></code></a>, which the propagators call after pushing the markers. The marker
+array stores both: <code class="docutils literal notranslate"><span class="pre">w0</span></code> (<span class="math notranslate nohighlight">\(w_{p0}\)</span>) and <code class="docutils literal notranslate"><span class="pre">weights</span></code> (<span class="math notranslate nohighlight">\(\delta w_p\)</span>).</p>
+</section>
+<section id="delta-f-method">
+<span id="pic-deltaf"></span><h2>Delta-f method<a class="headerlink" href="#delta-f-method" title="Link to this heading">#</a></h2>
+<p>The control variate method solves the full equation for <span class="math notranslate nohighlight">\(f\)</span> and only changes how integrals are estimated. In
+the <strong>delta-f method</strong> <a class="footnote-reference brackets" href="#footcite-parker1993" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a><a class="footnote-reference brackets" href="#footcite-dimits1993" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a><a class="footnote-reference brackets" href="#footcite-hu1994" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a>, the markers instead solve an equation for the
+perturbation <span class="math notranslate nohighlight">\(\delta f = f - \mathcal M\)</span> directly. Writing the characteristics as <span class="math notranslate nohighlight">\(\mathbf u = \mathbf u_0 + \mathbf u_1\)</span>, where the background is
+stationary under <span class="math notranslate nohighlight">\(\mathbf u_0\)</span>, i.e. <span class="math notranslate nohighlight">\(\nabla_{\mathbf z} \cdot (\mathbf u_0 \mathcal M^\textrm{vol}) = 0\)</span>,
+the conservation law <a class="reference internal" href="#equation-conservelaw">(1)</a> (with <span class="math notranslate nohighlight">\(S = 0\)</span>) becomes</p>
+<div class="math notranslate nohighlight">
+\[\partial_t \delta f^\textrm{vol} + \nabla_{\mathbf z} \cdot \big(\mathbf u\, \delta f^\textrm{vol}\big)
+= - \nabla_{\mathbf z} \cdot \big(\mathbf u_1 \mathcal M^\textrm{vol}\big)\,.\]</div>
+<p>This is again of the form <a class="reference internal" href="#equation-conservelaw">(1)</a>, now for <span class="math notranslate nohighlight">\(\delta f^\textrm{vol}\)</span> with the source
+<span class="math notranslate nohighlight">\(S = - \nabla_{\mathbf z} \cdot (\mathbf u_1 \mathcal M^\textrm{vol})\)</span>. The marker equations of
+<a class="reference internal" href="#pic-eom"><span class="std std-ref">Marker equations of motion</span></a> apply: the markers follow the characteristics, and the weights
+<span class="math notranslate nohighlight">\(w_p \approx \delta f^\textrm{vol}/(N s^\textrm{vol})\)</span> evolve by <a class="reference internal" href="#equation-pic-eqs">(14)</a>. In a <em>linearized</em>
+model, <span class="math notranslate nohighlight">\(\mathbf u\)</span> is replaced by <span class="math notranslate nohighlight">\(\mathbf u_0\)</span> on the left-hand side.</p>
+<p><strong>Example: linearized Vlasov-Ampère.</strong> For a uniform Maxwellian background
+<span class="math notranslate nohighlight">\(\mathcal M^0 \propto \exp\big(-|\mathbf v|^2/(2 v_\textrm{th}^2)\big)\)</span> and the electric force
+<span class="math notranslate nohighlight">\(\mathbf u_1 = (0, \tfrac{q}{m} \mathbf E)\)</span>, we have <span class="math notranslate nohighlight">\(\nabla_{\mathbf v} \cdot \mathbf u_1 = 0\)</span> and
+<span class="math notranslate nohighlight">\(\nabla_{\mathbf v} \mathcal M^0 = - \mathbf v\, \mathcal M^0 / v_\textrm{th}^2\)</span>, hence the source
+<span class="math notranslate nohighlight">\(S^0 = \tfrac{q}{m v_\textrm{th}^2}\, \mathbf E \cdot \mathbf v\, \mathcal M^0\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\dot w_p = \frac 1N\, \frac{q}{m v_\textrm{th}^2}\, \frac{\mathcal M^0(\mathbf z_p)}{s^0_\textnormal{in}(\mathbf z_{p0})}\, \mathbf E(\boldsymbol \eta_p) \cdot \mathbf v_p\,.\]</div>
+<p>In Struphy, delta-f markers are <a class="reference internal" href="dev-pic.html#struphy.pic.particles.DeltaFParticles6D" title="struphy.pic.particles.DeltaFParticles6D"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeltaFParticles6D</span></code></a>, used by
+<a class="reference internal" href="models-all.html#struphy.models.LinearVlasovAmpereOneSpecies" title="struphy.models.LinearVlasovAmpereOneSpecies"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearVlasovAmpereOneSpecies</span></code></a> and <a class="reference internal" href="models-all.html#struphy.models.LinearVlasovMaxwellOneSpecies" title="struphy.models.LinearVlasovMaxwellOneSpecies"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearVlasovMaxwellOneSpecies</span></code></a>.
+Their initial weights are computed from the perturbation of the initial condition only, and the weight equation
+above (in normalized units) is solved, coupled to the electric field, in
+<a class="reference internal" href="propagators-avail.html#struphy.propagators.efield_weights_coupling.EfieldWeightsCoupling" title="struphy.propagators.efield_weights_coupling.EfieldWeightsCoupling"><code class="xref py py-class docutils literal notranslate"><span class="pre">EfieldWeightsCoupling</span></code></a>.</p>
+</section>
+<section id="particle-to-grid-coupling-accumulation">
+<span id="pic-accum"></span><h2>Particle-to-grid coupling (accumulation)<a class="headerlink" href="#particle-to-grid-coupling-accumulation" title="Link to this heading">#</a></h2>
+<p>Kinetic species couple to the fields through velocity moments of <span class="math notranslate nohighlight">\(f\)</span>, such as the charge density
+<span class="math notranslate nohighlight">\(\rho = q \int f\,\textrm d \mathbf v\)</span> or the current density <span class="math notranslate nohighlight">\(\mathbf j = q \int \mathbf v f\,\textrm d \mathbf v\)</span>.
+In the finite element discretization (see <a class="reference internal" href="numerics-geomFE.html#geomfe"><span class="std std-ref">Geometric finite elements (FEEC)</span></a>) these moments appear tested with basis functions
+<span class="math notranslate nohighlight">\(\Lambda_i\)</span>. In logical coordinates, for example,</p>
+<div class="math notranslate nohighlight">
+\[\int \rho\, \Lambda^0_i\,\textrm d^3 \mathbf x
+= q \int_\Omega f^\textrm{vol}(\boldsymbol \eta, \mathbf v)\, \Lambda^0_i(\boldsymbol\eta)\,\textrm d \mathbf z
+\approx q \sum_{p=1}^N w_p\, \Lambda^0_i(\boldsymbol\eta_p)\,,\]</div>
+<p>which is a Monte-Carlo integral <a class="reference internal" href="#equation-mcint">(8)</a> with <span class="math notranslate nohighlight">\(A = \Lambda^0_i\)</span>. In general, particle
+contributions to vectors and matrices have the form</p>
+<div class="math notranslate nohighlight">
+\[V_i = \sum_{p=1}^N w_p\, B_p\, \Lambda_i(\boldsymbol\eta_p)\,, \qquad
+M_{ij} = \sum_{p=1}^N w_p\, B_p\, \Lambda_i(\boldsymbol\eta_p)\, \Lambda_j(\boldsymbol\eta_p)\,,\]</div>
+<p>with a <em>filling</em> <span class="math notranslate nohighlight">\(B_p\)</span> depending on the marker (e.g. its velocity and the metric at its position). Since only
+the basis functions that are non-zero at <span class="math notranslate nohighlight">\(\boldsymbol\eta_p\)</span> contribute, the cost is <span class="math notranslate nohighlight">\(O(N)\)</span>. These sums
+are computed by the accumulators (<a class="reference internal" href="dev-pic.html#struphy.pic.accumulation.particles_to_grid.AccumulatorVector" title="struphy.pic.accumulation.particles_to_grid.AccumulatorVector"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccumulatorVector</span></code></a>,
+<a class="reference internal" href="dev-pic.html#struphy.pic.accumulation.particles_to_grid.Accumulator" title="struphy.pic.accumulation.particles_to_grid.Accumulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Accumulator</span></code></a> and the matrix-free
+<a class="reference internal" href="dev-pic.html#struphy.pic.accumulation.particles_to_grid.MarkerOperator" title="struphy.pic.accumulation.particles_to_grid.MarkerOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">MarkerOperator</span></code></a>), see the <a class="reference internal" href="../dev_reference.html#dev-reference"><span class="std std-ref">Developer reference</span></a> for details. The weights
+already contain the factor <span class="math notranslate nohighlight">\(1/N\)</span>; with the control variate or the delta-f method, <span class="math notranslate nohighlight">\(w_p\)</span> is the delta-f
+weight. The opposite direction, fields evaluated at the marker positions in the pushers, uses the same basis
+functions.</p>
+</section>
+<section id="particle-binning">
+<span id="binning"></span><h2>Particle binning<a class="headerlink" href="#particle-binning" title="Link to this heading">#</a></h2>
+<p>The aim of particle binning is to obtain a grid representation of the distribution function, which is represented
+by markers in Struphy. The approximation is obtained by integrating over small volumes of phase space, called
+“bins”. These bins are not necessarily related to the FE grid used for the fields (but they can be). Moreover, bins
+do not have to be defined in all <span class="math notranslate nohighlight">\(n\)</span> directions of phase space; one can do 1D or 2D binning, integrating over
+the other coordinates.</p>
+<p>For example, let us bin in the <span class="math notranslate nohighlight">\((\eta_1, v_1)\)</span> plane of the phase space <span class="math notranslate nohighlight">\(\mathbf z = (\boldsymbol\eta, \mathbf v) \in (0,1)^3 \times \mathbb R^3\)</span>.
+We want an approximation of the <em>reduced</em> 2D density</p>
+<div class="math notranslate nohighlight">
+\[f^\textnormal{red}(t, \eta_1, v_1) := \int_{(0, 1)^2}\int_{\mathbb R^2} g(t, \boldsymbol\eta, \mathbf v)\,\textrm d \eta_2\, \textrm d \eta_3\, \textrm d v_2\, \textrm dv_3\,,\]</div>
+<p>where <span class="math notranslate nohighlight">\(g\)</span> is either the volume form <span class="math notranslate nohighlight">\(f^\textrm{vol}\)</span> or the distribution function per logical volume,
+<span class="math notranslate nohighlight">\(f^\textrm{vol}/|\det DF|\)</span> (which equals the 0-form <span class="math notranslate nohighlight">\(f^0\)</span> for Cartesian velocities). Note that the
+reduced function depends on the choice of coordinates (it is not invariant); it is still a useful picture of the
+distribution function. Given bin edges <span class="math notranslate nohighlight">\((\eta_{1,i})_i\)</span> and <span class="math notranslate nohighlight">\((v_{1,j})_j\)</span>, we approximate
+<span class="math notranslate nohighlight">\(f^\textnormal{red}\)</span> on a bin <span class="math notranslate nohighlight">\(\Omega_{ij} = (\eta_{1,i}, \eta_{1,i+1}) \times (v_{1,j}, v_{1,j+1})\)</span> by its
+mean value over that bin:</p>
+<div class="math notranslate nohighlight" id="equation-f-approx">
+<span class="eqno">(20)<a class="headerlink" href="#equation-f-approx" title="Link to this equation">#</a></span>\[f^\textnormal{red}(t, \eta_1, v_1)\Big|_{\Omega_{ij}} \approx R_{ij}(t) := \frac{1}{|\Omega_{ij}|} \int_{\Omega_{ij}} f^\textnormal{red}(t, \eta_1, v_1)\,\textrm d\eta_1\, \textrm d v_1\,,
+\qquad |\Omega_{ij}| = (\eta_{1,i+1} - \eta_{1,i})(v_{1,j+1} - v_{1,j})\,.\]</div>
+<p><span class="math notranslate nohighlight">\(R_{ij}\)</span> has the same dimension as <span class="math notranslate nohighlight">\(f^\textnormal{red}\)</span>, due to the one-over-volume prefactor. With the
+indicator function <span class="math notranslate nohighlight">\(\chi_{ij}(\eta_1, v_1)\)</span> of the bin (1 inside <span class="math notranslate nohighlight">\(\Omega_{ij}\)</span>, 0 otherwise),
+<span class="math notranslate nohighlight">\(R_{ij}\)</span> is a Monte-Carlo integral <a class="reference internal" href="#equation-mcint">(8)</a>:</p>
+<div class="math notranslate nohighlight" id="equation-def-rij">
+<span class="eqno">(21)<a class="headerlink" href="#equation-def-rij" title="Link to this equation">#</a></span>\[R_{ij}(t) = \frac{1}{|\Omega_{ij}|} \int_\Omega \chi_{ij}(\eta_1, v_1)\, \frac{g}{f^\textrm{vol}}\, f^\textrm{vol}\,\textrm d \mathbf z
+\approx \frac{1}{|\Omega_{ij}|} \sum_{p\,:\, \mathbf z_p \in \Omega_{ij}} w_p\, \frac{g}{f^\textrm{vol}}(\mathbf z_p)\,,\]</div>
+<p>where the sum runs over all markers in the bin, and <span class="math notranslate nohighlight">\(g/f^\textrm{vol}\)</span> is 1 or <span class="math notranslate nohighlight">\(1/|\det DF(\boldsymbol\eta_p)|\)</span>.
+This is a weighted histogram of the markers.</p>
+<p>In Struphy, binning is done by <a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.binning" title="struphy.pic.base.Particles.binning"><code class="xref py py-meth docutils literal notranslate"><span class="pre">struphy.pic.base.Particles.binning()</span></code></a>, configured with
+<a class="reference internal" href="../api_guide.html#struphy.particles.parameters.BinningPlot" title="struphy.particles.parameters.BinningPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">BinningPlot</span></code></a>. It returns two histograms: the <strong>full-f</strong> histogram with the
+initial weights <span class="math notranslate nohighlight">\(w_{p0}\)</span> (which represent <span class="math notranslate nohighlight">\(f\)</span> when there is no source), and the <strong>delta-f</strong> histogram with
+the current weights <span class="math notranslate nohighlight">\(w_p\)</span> (equal to <span class="math notranslate nohighlight">\(w_{p0}\)</span> without control variate, the delta-f weights
+<a class="reference internal" href="#equation-pic-cv-weights">(19)</a> with control variate). For <a class="reference internal" href="#pic-deltaf"><span class="std std-ref">delta-f markers</span></a>, both histograms
+represent the perturbation: the initial weights carry <span class="math notranslate nohighlight">\(\delta f_\textnormal{in}\)</span> and the current weights
+<span class="math notranslate nohighlight">\(\delta f(t)\)</span>. <code class="docutils literal notranslate"><span class="pre">divide_by_jac=True</span></code> (default) selects <span class="math notranslate nohighlight">\(g = f^\textrm{vol}/|\det DF|\)</span>; only the spatial
+Jacobian is divided out, so for guiding-center markers <span class="math notranslate nohighlight">\(g = J_v f^0\)</span>.
+Besides the density, velocity moments can be binned by multiplying the weights with <span class="math notranslate nohighlight">\(v_i\)</span>
+(<code class="docutils literal notranslate"><span class="pre">&quot;current&quot;</span></code>), <span class="math notranslate nohighlight">\(v_i v_j\)</span> (<code class="docutils literal notranslate"><span class="pre">&quot;energy_tensor&quot;</span></code>) or <span class="math notranslate nohighlight">\(|\mathbf v|^2 v_i\)</span> (<code class="docutils literal notranslate"><span class="pre">&quot;heat_flux&quot;</span></code>).</p>
+</section>
+<section id="kernel-density-estimation">
+<span id="pic-kde"></span><h2>Kernel density estimation<a class="headerlink" href="#kernel-density-estimation" title="Link to this heading">#</a></h2>
+<p>The marker approximation <a class="reference internal" href="#equation-pic-ansatz">(2)</a> is a sum of delta distributions, while the true solution is
+smooth. A smooth approximation that can be evaluated at any point is obtained by convolution with a <strong>smoothing
+kernel</strong> <span class="math notranslate nohighlight">\(W_h\)</span> of width <span class="math notranslate nohighlight">\(h\)</span> (e.g. a Gaussian; kernel density estimation, see
+Silverman<a class="footnote-reference brackets" href="#footcite-silverman1986" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a>), normalized to <span class="math notranslate nohighlight">\(\int W_h\, \textrm d \mathbf z = 1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\tilde f_h(t, \mathbf z) := (W_h * f_h)(t, \mathbf z) = \int_\Omega W_h(\mathbf z - \mathbf z')\, f_h(t, \mathbf z')\,\textrm d \mathbf z'
+= \sum_{p=1}^N w_p\, W_h\big(\mathbf z - \mathbf z_p(t)\big)\,.\]</div>
+<p>If <span class="math notranslate nohighlight">\(W_h\)</span> vanishes outside a ball of radius <span class="math notranslate nohighlight">\(h\)</span>, only markers within distance <span class="math notranslate nohighlight">\(h\)</span> of the evaluation
+point <span class="math notranslate nohighlight">\(\mathbf z^*\)</span> contribute (<a class="reference internal" href="#fig-pic-kernel-density"><span class="std std-ref">figure</span></a>):</p>
+<div class="math notranslate nohighlight">
+\[\tilde f_h(t, \mathbf z^*) = \sum_{p\,:\, |\mathbf z^* - \mathbf z_p(t)| &lt; h} w_p\, W_h\big(\mathbf z^* - \mathbf z_p(t)\big)\,.\]</div>
+<figure class="align-center" id="id23">
+<span id="fig-pic-kernel-density"></span><a class="reference internal image-reference" href="../../_images/pic_kernel_density.png"><img alt="../../_images/pic_kernel_density.png" src="../../_images/pic_kernel_density.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Kernel density estimate at <span class="math notranslate nohighlight">\(\mathbf z^*\)</span>: only the markers within the support of <span class="math notranslate nohighlight">\(W_h\)</span> (orange)
+contribute, the others are ignored.</span><a class="headerlink" href="#id23" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Summing over all <span class="math notranslate nohighlight">\(N\)</span> markers for each evaluation point would cost <span class="math notranslate nohighlight">\(O(N)\)</span> per point. Instead, the markers
+are sorted into <strong>boxes</strong> of size at least <span class="math notranslate nohighlight">\(h\)</span>. To evaluate at <span class="math notranslate nohighlight">\(\mathbf z^*\)</span>, one finds the box of
+<span class="math notranslate nohighlight">\(\mathbf z^*\)</span> and sums only over the markers in this box and in its neighbouring boxes
+(<a class="reference internal" href="#fig-pic-kernel-boxes"><span class="std std-ref">figure</span></a>).</p>
+<figure class="align-center" id="id24">
+<span id="fig-pic-kernel-boxes"></span><a class="reference internal image-reference" href="../../_images/pic_kernel_boxes.png"><img alt="../../_images/pic_kernel_boxes.png" src="../../_images/pic_kernel_boxes.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Box-based evaluation: the markers are sorted into boxes of size <span class="math notranslate nohighlight">\(\geq h\)</span>; for the evaluation at
+<span class="math notranslate nohighlight">\(\mathbf z^*\)</span> only the box of <span class="math notranslate nohighlight">\(\mathbf z^*\)</span> (dark) and its neighbours (light) are searched.</span><a class="headerlink" href="#id24" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In Struphy, kernel density estimates are computed in position space only:
+<a class="reference internal" href="dev-pic.html#struphy.pic.base.Particles.eval_density" title="struphy.pic.base.Particles.eval_density"><code class="xref py py-meth docutils literal notranslate"><span class="pre">struphy.pic.base.Particles.eval_density()</span></code></a> evaluates</p>
+<div class="math notranslate nohighlight">
+\[n_h(t, \boldsymbol\eta) = \sum_{p=1}^N w_p\, W_h\big(\boldsymbol\eta - \boldsymbol\eta_p(t)\big)
+\approx \int f^\textrm{vol}(t, \boldsymbol\eta, \mathbf v)\,\textrm d \mathbf v\,,\]</div>
+<p>the number density as a 3-form in logical coordinates (divide by <span class="math notranslate nohighlight">\(|\det DF|\)</span> to get the physical density).
+It uses the sorting boxes (<code class="docutils literal notranslate"><span class="pre">boxes_per_dim</span></code> in <a class="reference internal" href="../api_guide.html#struphy.particles.parameters.SortingParameters" title="struphy.particles.parameters.SortingParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">SortingParameters</span></code></a>) and the
+smoothing kernels in <code class="docutils literal notranslate"><span class="pre">struphy.pic.sph_smoothing_kernels</span></code> (trigonometric, Gaussian, linear; 1D, 2D, 3D). As a
+diagnostic, it is switched on with <a class="reference internal" href="../api_guide.html#struphy.particles.parameters.KernelDensityPlot" title="struphy.particles.parameters.KernelDensityPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">KernelDensityPlot</span></code></a> in the saving
+parameters; the kernel is then a Gaussian with a width of one sorting box in each direction. With the control
+variate or delta-f markers, the current weights are used, so the estimate is that of <span class="math notranslate nohighlight">\(\delta f\)</span>. The same technique is the basis of
+<a class="reference internal" href="numerics-sph.html#sph-method"><span class="std std-ref">smoothed particle hydrodynamics</span></a>.</p>
+</section>
+<section id="references">
+<span id="pic-references"></span><h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<div class="docutils container" id="id20">
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="footcite-birdsall1991" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>C. K. Birdsall and A. B. Langdon. <em>Plasma Physics via Computer Simulation</em>. IOP Publishing, Bristol, 1991. ISBN 0-7503-0117-1. First edition McGraw-Hill, 1985. <a class="reference external" href="https://doi.org/10.1887/0750301171">doi:10.1887/0750301171</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-hockney1988" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>R. W. Hockney and J. W. Eastwood. <em>Computer Simulation Using Particles</em>. Adam Hilger, Bristol, 1988. ISBN 0-85274-392-0. <a class="reference external" href="https://doi.org/10.1201/9781439822050">doi:10.1201/9781439822050</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-sonnendruecker2013" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id12">2</a>)</span>
+<p>Eric Sonnendrücker. Numerical methods for the Vlasov equations. Lecture notes, Max-Planck-Institut für Plasmaphysik and Technische Universität München, 2013. Winter semester 2012/2013. URL: <a class="reference external" href="http://web.archive.org/web/20221225173216/https://www-m16.ma.tum.de/foswiki/pub/M16/Allgemeines/NumMethVlasov/Num-Meth-Vlasov-Notes.pdf">http://web.archive.org/web/20221225173216/https://www-m16.ma.tum.de/foswiki/pub/M16/Allgemeines/NumMethVlasov/Num-Meth-Vlasov-Notes.pdf</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-kraus2017" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p>Michael Kraus, Katharina Kormann, Philip J. Morrison, and Eric Sonnendrücker. GEMPIC: geometric electromagnetic particle-in-cell methods. <em>Journal of Plasma Physics</em>, 83(4):905830401, 2017. <a class="reference external" href="https://doi.org/10.1017/S002237781700040X">doi:10.1017/S002237781700040X</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-aydemir1994" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id5">1</a>,<a role="doc-backlink" href="#id9">2</a>,<a role="doc-backlink" href="#id11">3</a>,<a role="doc-backlink" href="#id13">4</a>)</span>
+<p>A. Y. Aydemir. A unified Monte Carlo interpretation of particle simulations and applications to non-neutral plasmas. <em>Physics of Plasmas</em>, 1(4):822–831, 1994. <a class="reference external" href="https://doi.org/10.1063/1.870740">doi:10.1063/1.870740</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-littlejohn1983" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id6">1</a>,<a role="doc-backlink" href="#id8">2</a>)</span>
+<p>Robert G. Littlejohn. Variational principles of guiding centre motion. <em>Journal of Plasma Physics</em>, 29(1):111–125, 1983. <a class="reference external" href="https://doi.org/10.1017/S002237780000060X">doi:10.1017/S002237780000060X</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-possanner2018" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">7</a><span class="fn-bracket">]</span></span>
+<p>Stefan Possanner. Gyrokinetics from variational averaging: existence and error bounds. <em>Journal of Mathematical Physics</em>, 59(8):082702, 2018. <a class="reference external" href="https://doi.org/10.1063/1.5018354">doi:10.1063/1.5018354</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-niederreiter1992" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">8</a><span class="fn-bracket">]</span></span>
+<p>Harald Niederreiter. <em>Random Number Generation and Quasi-Monte Carlo Methods</em>. Volume 63 of CBMS-NSF Regional Conference Series in Applied Mathematics. SIAM, Philadelphia, 1992. ISBN 978-0-89871-295-7. <a class="reference external" href="https://doi.org/10.1137/1.9781611970081">doi:10.1137/1.9781611970081</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-hatzky2002" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">9</a><span class="fn-bracket">]</span></span>
+<p>R. Hatzky, T. M. Tran, A. Könies, R. Kleiber, and S. J. Allfrey. Energy conservation in a nonlinear gyrokinetic particle-in-cell code for ion-temperature-gradient-driven modes in θ-pinch geometry. <em>Physics of Plasmas</em>, 9(3):898–912, 2002. <a class="reference external" href="https://doi.org/10.1063/1.1449889">doi:10.1063/1.1449889</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-kleiber2011" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">10</a><span class="fn-bracket">]</span></span>
+<p>R. Kleiber, R. Hatzky, A. Könies, K. Kauffmann, and P. Helander. An improved control-variate scheme for particle-in-cell simulations with collisions. <em>Computer Physics Communications</em>, 182(4):1005–1012, 2011. <a class="reference external" href="https://doi.org/10.1016/j.cpc.2010.12.045">doi:10.1016/j.cpc.2010.12.045</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-parker1993" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">11</a><span class="fn-bracket">]</span></span>
+<p>S. E. Parker and W. W. Lee. A fully nonlinear characteristic method for gyrokinetic simulation. <em>Physics of Fluids B: Plasma Physics</em>, 5(1):77–86, 1993. <a class="reference external" href="https://doi.org/10.1063/1.860870">doi:10.1063/1.860870</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-dimits1993" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">12</a><span class="fn-bracket">]</span></span>
+<p>A. M. Dimits and W. W. Lee. Partially linearized algorithms in gyrokinetic particle simulation. <em>Journal of Computational Physics</em>, 107(2):309–323, 1993. <a class="reference external" href="https://doi.org/10.1006/jcph.1993.1146">doi:10.1006/jcph.1993.1146</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-hu1994" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id18">13</a><span class="fn-bracket">]</span></span>
+<p>G. Hu and J. A. Krommes. Generalized weighting scheme for δf particle-simulation method. <em>Physics of Plasmas</em>, 1(4):863–874, 1994. <a class="reference external" href="https://doi.org/10.1063/1.870745">doi:10.1063/1.870745</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-silverman1986" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id19">14</a><span class="fn-bracket">]</span></span>
+<p>B. W. Silverman. <em>Density Estimation for Statistics and Data Analysis</em>. Volume 26 of Monographs on Statistics and Applied Probability. Chapman and Hall, London, 1986. <a class="reference external" href="https://doi.org/10.1201/9781315140919">doi:10.1201/9781315140919</a>.</p>
+</aside>
+</aside>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../numerics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Numerics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="numerics-geomFE.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Geometric finite elements (FEEC)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pic-algorithm">PIC algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-space-0-forms-and-volume-forms">Phase space, 0-forms and volume forms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-integration">Monte-Carlo integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-ways-to-define-markers-and-weights">Two ways to define markers and weights</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marker-loading-in-struphy">Marker loading in Struphy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marker-equations-of-motion">Marker equations of motion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-from-the-weak-form">Derivation from the weak form</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-via-monte-carlo-estimates">Derivation via Monte-Carlo estimates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-weights-from-the-flow-map">Constant weights from the flow map</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-variate-method">Control variate method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#delta-f-method">Delta-f method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particle-to-grid-coupling-accumulation">Particle-to-grid coupling (accumulation)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particle-binning">Particle binning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation">Kernel density estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/sections/subsections/numerics-pic.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
