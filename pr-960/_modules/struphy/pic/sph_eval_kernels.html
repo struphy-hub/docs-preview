@@ -1,0 +1,1245 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>struphy.pic.sph_eval_kernels &#8212; struphy 3.6.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=af96bc2c" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../_static/documentation_options.js?v=c0c9fa11"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/struphy/pic/sph_eval_kernels';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href="../../../_static/my_theme.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-light" alt="struphy 3.6.2 documentation - Home"/>
+    <img src="../../../_static/dog-cartoon-struphy.jpg" class="logo__image only-dark pst-js-only" alt="struphy 3.6.2 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/abstract.html">
+    Tl;dr
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/userguide.html">
+    Userguide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/api_guide.html">
+    API Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/models.html">
+    Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/propagators.html">
+    Propagators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/tutorials.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/numerics.html">
+    Numerics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/domains.html">
+    Geometry
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/fluid-equils.html">
+    Fluid Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/kinetic-equils.html">
+    Kinetic Equilibrium
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/perturbations.html">
+    Perturbation Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_guide.html">
+    Developer’s guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../sections/dev_reference.html">
+    Developer reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/struphy-hub/struphy">
+    Struphy repo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://www.linkedin.com/company/struphy/">
+    Struphy LinkedIn
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://matrix.to/#/!wqjcJpsUvAbTPOUXen:mpg.de?via=mpg.de&via=academiccloud.de">
+    Struphy MatrixChat
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../../../index.html">Table of Contents</a></h3>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/abstract.html">Tl;dr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/userguide.html">Userguide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/api_guide.html">API Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/propagators.html">Propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/numerics.html">Numerics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/domains.html">Geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/fluid-equils.html">Fluid Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/kinetic-equils.html">Kinetic Equilibrium</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/perturbations.html">Perturbation Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_guide.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sections/dev_reference.html">Developer reference</a></li>
+</ul>
+</div>
+        <div class="sidebar-primary-item">
+<div id="searchbox"></div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">struphy.pic.sph_eval_kernels</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for struphy.pic.sph_eval_kernels</h1><div class="highlight"><pre>
+<span></span>r"""SPH evaluation in physical space.
+
+The smoothing kernel :math:`W_h` is radial and normalized in physical space (:mod:`~struphy.pic.sph_radial_kernels`)
+and pulled back to the logical unit cube as a 0-form,
+
+.. math::
+
+    \hat W_h(\boldsymbol\eta, \boldsymbol\eta') = W_h\big(|F(\boldsymbol\eta) - F(\boldsymbol\eta')|\big)\,,
+    \qquad
+    \hat\rho_h(\boldsymbol\eta) = \sum_j c_j\, \hat W_h(\boldsymbol\eta, \boldsymbol\eta_j)\,.
+
+The physical marker positions :math:`\mathbf x_j = F(\boldsymbol\eta_j)` are stored in the marker array (columns
+``x_idx, x_idx + 1, x_idx + 2``, filled by :func:`physical_positions`). The physical distance vector between an
+evaluation point and marker :math:`j` is
+
+.. math::
+
+    \mathbf r = P_\textnormal{res} \Big( \mathbf x - \mathbf x_j - \sum_{i\,\textnormal{periodic}} k_i\, \mathbf P_i \Big)\,,
+    \qquad k_i = \textnormal{round}(\eta_i - \eta_{j,i})\,,
+
+with the period vectors :math:`\mathbf P_i = F(\boldsymbol\eta + \mathbf e_i) - F(\boldsymbol\eta)` of the periodic
+directions (constant, checked at setup) and the projection :math:`P_\textnormal{res}` onto the directions resolved
+by the kernel (the identity for 3D kernels).
+"""
+
+from numpy import shape, sqrt, zeros
+from pyccel.decorators import stack_array
+
+import struphy.geometry.evaluation_kernels as evaluation_kernels
+import struphy.kernel_arguments.pusher_args_kernels as pusher_args_kernels  # do not remove; needed to identify dependencies
+import struphy.pic.sph_radial_kernels as sph_radial_kernels
+from struphy.kernel_arguments.pusher_args_kernels import DomainArguments, MarkerArguments
+
+
+<div class="viewcode-block" id="distance">
+<a class="viewcode-back" href="../../../sections/subsections/dev-sph.html#struphy.pic.sph_eval_kernels.distance">[docs]</a>
+def distance(x: "float", y: "float", periodic: "bool") -&gt; float:
+    r"""Return the signed one-dimensional distance ``x - y``, adjusted for periodicity on ``[0, 1]``.
+
+    Parameters
+    ----------
+    x, y : float
+        Two coordinates on the domain.
+
+    periodic : bool
+        If ``True``, the result is folded into :math:`(-\tfrac{1}{2}, \tfrac{1}{2}]` so that
+        the shortest path across the periodic boundary is returned.
+
+    Returns
+    -------
+    float
+        Signed distance ``x - y``, adjusted for periodicity.
+    """
+    d = x - y
+    if periodic:
+        if d &gt; 0.5:
+            while d &gt; 0.5:
+                d -= 1.0
+        elif d &lt; -0.5:
+            while d &lt; -0.5:
+                d += 1.0
+    return d</div>
+
+
+
+<div class="viewcode-block" id="fold">
+<a class="viewcode-back" href="../../../sections/subsections/dev-sph.html#struphy.pic.sph_eval_kernels.fold">[docs]</a>
+def fold(eta: float) -&gt; float:
+    """Map a logical coordinate of a mirrored ghost particle back into the unit interval.
+
+    Parameters
+    ----------
+    eta : float
+        Logical coordinate, in (-1, 2).
+
+    Returns
+    -------
+    float
+        ``-eta`` if ``eta &lt; 0``, ``2 - eta`` if ``eta &gt; 1``, else ``eta``.
+    """
+    if eta &lt; 0.0:
+        return -eta
+    elif eta &gt; 1.0:
+        return 2.0 - eta
+    return eta</div>
+
+
+
+<div class="viewcode-block" id="clamp">
+<a class="viewcode-back" href="../../../sections/subsections/dev-sph.html#struphy.pic.sph_eval_kernels.clamp">[docs]</a>
+def clamp(eta: float) -&gt; float:
+    """Clamp a logical coordinate to the unit interval.
+
+    Parameters
+    ----------
+    eta : float
+        Logical coordinate.
+
+    Returns
+    -------
+    float
+        ``eta`` restricted to [0, 1].
+    """
+    if eta &lt; 0.0:
+        return 0.0
+    elif eta &gt; 1.0:
+        return 1.0
+    return eta</div>
+
+
+
+<div class="viewcode-block" id="physical_positions">
+<a class="viewcode-back" href="../../../sections/subsections/dev-sph.html#struphy.pic.sph_eval_kernels.physical_positions">[docs]</a>
+@stack_array("eta", "eta_f", "eta_w", "x_f", "dfm")
+def physical_positions(
+    args_markers: "MarkerArguments",
+    args_domain: "DomainArguments",
+    holes: "bool[:]",
+    x_idx: "int",
+):
+    r"""Store the physical positions :math:`\mathbf x_p = F(\boldsymbol\eta_p)` of all markers (including ghost
+    particles) in ``markers[x_idx:x_idx + 3, :]``.
+
+    Mirrored ghost particles of wall boundary conditions sit outside the unit cube (at :math:`-\eta` or
+    :math:`2 - \eta`). Their physical position is the first-order extrapolation from the foot point
+    :math:`\boldsymbol\eta_w` on the wall (the clamped position),
+
+    .. math::
+
+        \mathbf x_g = F(\boldsymbol\eta_f) + DF(\boldsymbol\eta_w)\, (\boldsymbol\eta_g - \boldsymbol\eta_f)\,,
+
+    where :math:`\boldsymbol\eta_f` is the folded position (the marker that was mirrored). This is the exact mirror
+    image for planar walls whose logical normal column of :math:`DF` is orthogonal to the wall (e.g.
+    :class:`~struphy.geometry.domains.Cuboid`); otherwise it is an oblique reflection.
+
+    Parameters
+    ----------
+    args_markers : MarkerArguments
+        Marker arguments.
+
+    args_domain : DomainArguments
+        Arguments of the mapping.
+
+    holes : bool[:]
+        ``True`` for holes in the marker array.
+
+    x_idx : int
+        First of the three marker columns for the physical position.
+    """
+    markers = args_markers.markers
+    n_cols_markers = shape(markers)[1]
+
+    eta = zeros(3, dtype=float)
+    eta_f = zeros(3, dtype=float)
+    eta_w = zeros(3, dtype=float)
+    x_f = zeros(3, dtype=float)
+    dfm = zeros((3, 3), dtype=float)
+
+    for p in range(n_cols_markers):
+        if holes[p]:
+            continue
+        mirrored = False
+        for i in range(3):
+            eta[i] = markers[i, p]
+            eta_f[i] = fold(eta[i])
+            eta_w[i] = clamp(eta[i])
+            if eta[i] &lt; 0.0 or eta[i] &gt; 1.0:
+                mirrored = True
+
+        evaluation_kernels.f(eta_f[0], eta_f[1], eta_f[2], args_domain, x_f)
+        if mirrored:
+            evaluation_kernels.df(eta_w[0], eta_w[1], eta_w[2], args_domain, dfm)
+            for i in range(3):
+                markers[x_idx + i, p] = x_f[i]
+                for k in range(3):
+                    markers[x_idx + i, p] += dfm[i, k] * (eta[k] - eta_f[k])
+        else:
+            for i in range(3):
+                markers[x_idx + i, p] = x_f[i]</div>
+
+
+
+<div class="viewcode-block" id="distance_vector">
+<a class="viewcode-back" href="../../../sections/subsections/dev-sph.html#struphy.pic.sph_eval_kernels.distance_vector">[docs]</a>
+@stack_array("dx")
+def distance_vector(
+    markers: "float[:,:]",
+    p: "int",
+    x1: "float",
+    x2: "float",
+    x3: "float",
+    eta1: "float",
+    eta2: "float",
+    eta3: "float",
+    periodic1: "bool",
+    periodic2: "bool",
+    periodic3: "bool",
+    period: "float[:,:]",
+    proj: "float[:,:]",
+    x_idx: "int",
+    r_out: "float[:]",
+) -&gt; float:
+    r"""Physical distance vector :math:`\mathbf r` from marker ``p`` to the point :math:`(\mathbf x, \boldsymbol\eta)`,
+    with periodic images and projected onto the resolved directions; returns :math:`|\mathbf r|`.
+
+    Parameters
+    ----------
+    markers : array[float]
+        Marker array (physical positions at ``x_idx``).
+
+    p : int
+        Marker index.
+
+    x1, x2, x3 : float
+        Physical position of the evaluation point.
+
+    eta1, eta2, eta3 : float
+        Logical position of the evaluation point (to count periodic images).
+
+    periodic1, periodic2, periodic3 : bool
+        Periodicity of the logical directions.
+
+    period : array[float]
+        Period vectors, ``period[i, :]`` for logical direction ``i`` (zero if not periodic).
+
+    proj : array[float]
+        Projection onto the directions resolved by the kernel (3 x 3).
+
+    x_idx : int
+        First marker column of the physical position.
+
+    r_out : array[float]
+        Output: the distance vector (length 3).
+
+    Returns
+    -------
+    float
+        :math:`|\mathbf r|`.
+    """
+    dx = zeros(3, dtype=float)
+    dx[0] = x1 - markers[x_idx, p]
+    dx[1] = x2 - markers[x_idx + 1, p]
+    dx[2] = x3 - markers[x_idx + 2, p]
+
+    if periodic1:
+        k = int(round(eta1 - markers[0, p]))
+        for c in range(3):
+            dx[c] -= k * period[0, c]
+    if periodic2:
+        k = int(round(eta2 - markers[1, p]))
+        for c in range(3):
+            dx[c] -= k * period[1, c]
+    if periodic3:
+        k = int(round(eta3 - markers[2, p]))
+        for c in range(3):
+            dx[c] -= k * period[2, c]
+
+    r2 = 0.0
+    for c in range(3):
+        r_out[c] = proj[c, 0] * dx[0] + proj[c, 1] * dx[1] + proj[c, 2] * dx[2]
+        r2 += r_out[c] * r_out[c]
+    return sqrt(r2)</div>
+
+
+
+<div class="viewcode-block" id="naive_physical">
+<a class="viewcode-back" href="../../../sections/subsections/dev-sph.html#struphy.pic.sph_eval_kernels.naive_physical">[docs]</a>
+@stack_array("r_vec")
+def naive_physical(
+    args_markers: "MarkerArguments",
+    x1: "float",
+    x2: "float",
+    x3: "float",
+    eta1: "float",
+    eta2: "float",
+    eta3: "float",
+    holes: "bool[:]",
+    periodic1: "bool",
+    periodic2: "bool",
+    periodic3: "bool",
+    period: "float[:,:]",
+    proj: "float[:,:]",
+    x_idx: "int",
+    index: "int",
+    kernel: "int",
+    dim: "int",
+    h: "float",
+    scale: "float",
+    out: "float[:]",
+):
+    r"""SPH sum over all markers (no neighbour search, ghost particles skipped), for testing:
+    ``out[0]`` :math:`= \sum_j c_j W_h(|\mathbf r_j|)`, ``out[1:4]`` :math:`= \sum_j c_j \nabla W_h(\mathbf r_j)`,
+    with :math:`c_j` = ``markers[index, j]``. The cost is :math:`O(N)` per point.
+
+    Parameters
+    ----------
+    args_markers : MarkerArguments
+        Marker arguments.
+
+    x1, x2, x3 : float
+        Physical evaluation point.
+
+    eta1, eta2, eta3 : float
+        Logical evaluation point.
+
+    holes : bool[:]
+        ``True`` for holes.
+
+    periodic1, periodic2, periodic3 : bool
+        Periodicity of the logical directions.
+
+    period : array[float]
+        Period vectors (3 x 3).
+
+    proj : array[float]
+        Projection onto the resolved directions (3 x 3).
+
+    x_idx : int
+        First marker column of the physical position.
+
+    index : int
+        Marker column of the coefficients :math:`c_j`.
+
+    kernel : int
+        Kernel id, see :mod:`~struphy.pic.sph_radial_kernels`.
+
+    dim : int
+        Number of resolved directions.
+
+    h : float
+        Kernel width in physical units.
+
+    scale : float
+        Factor multiplying the kernel: :math:`1/A_\perp` with the physical measure :math:`A_\perp` of the
+        directions not resolved by the kernel (1 for 3D kernels).
+
+    out : array[float]
+        Output (length 4): value and gradient.
+    """
+    markers = args_markers.markers
+    n_cols_markers = shape(markers)[1]
+    r_vec = zeros(3, dtype=float)
+
+    for c in range(4):
+        out[c] = 0.0
+    for p in range(n_cols_markers):
+        if holes[p] or markers[-1, p] == -2.0:
+            continue
+        r = distance_vector(
+            markers, p, x1, x2, x3, eta1, eta2, eta3, periodic1, periodic2, periodic3, period, proj, x_idx, r_vec
+        )
+        if r &gt;= h:
+            continue
+        coeff = markers[index, p] * scale
+        out[0] += coeff * sph_radial_kernels.kernel_value(kernel, dim, r, h)
+        if r &gt; 0.0:
+            dw = coeff * sph_radial_kernels.kernel_dr(kernel, dim, r, h) / r
+            for c in range(3):
+                out[1 + c] += dw * r_vec[c]</div>
+
+
+
+<div class="viewcode-block" id="box_based_physical">
+<a class="viewcode-back" href="../../../sections/subsections/dev-sph.html#struphy.pic.sph_eval_kernels.box_based_physical">[docs]</a>
+@stack_array("r_vec")
+def box_based_physical(
+    args_markers: "MarkerArguments",
+    x1: "float",
+    x2: "float",
+    x3: "float",
+    eta1: "float",
+    eta2: "float",
+    eta3: "float",
+    loc_box: "int",
+    boxes: "int[:,:]",
+    neighbours: "int[:,:]",
+    holes: "bool[:]",
+    periodic1: "bool",
+    periodic2: "bool",
+    periodic3: "bool",
+    period: "float[:,:]",
+    proj: "float[:,:]",
+    x_idx: "int",
+    index: "int",
+    kernel: "int",
+    dim: "int",
+    h: "float",
+    scale: "float",
+    out: "float[:]",
+):
+    r"""SPH sum over the markers in the 27 neighbour boxes of ``loc_box`` (including ghost particles):
+    ``out[0]`` :math:`= \sum_j c_j W_h(|\mathbf r_j|)` and ``out[1:4]`` :math:`= \sum_j c_j \nabla W_h(\mathbf r_j)`
+    (the physical gradient with respect to the evaluation point), with :math:`c_j` = ``markers[index, j]``.
+    The kernel width :math:`h` is chosen at setup such that the support lies in the 27 boxes.
+
+    Parameters
+    ----------
+    args_markers : MarkerArguments
+        Marker arguments.
+
+    x1, x2, x3 : float
+        Physical evaluation point.
+
+    eta1, eta2, eta3 : float
+        Logical evaluation point.
+
+    loc_box : int
+        Box of the evaluation point.
+
+    boxes : array[int]
+        Box array of the sorting boxes.
+
+    neighbours : array[int]
+        The 27 neighbour boxes of each box.
+
+    holes : bool[:]
+        ``True`` for holes.
+
+    periodic1, periodic2, periodic3 : bool
+        Periodicity of the logical directions.
+
+    period : array[float]
+        Period vectors (3 x 3).
+
+    proj : array[float]
+        Projection onto the resolved directions (3 x 3).
+
+    x_idx : int
+        First marker column of the physical position.
+
+    index : int
+        Marker column of the coefficients :math:`c_j`.
+
+    kernel : int
+        Kernel id, see :mod:`~struphy.pic.sph_radial_kernels`.
+
+    dim : int
+        Number of resolved directions.
+
+    h : float
+        Kernel width in physical units.
+
+    scale : float
+        Factor multiplying the kernel: :math:`1/A_\perp` with the physical measure :math:`A_\perp` of the
+        directions not resolved by the kernel (1 for 3D kernels).
+
+    out : array[float]
+        Output (length 4): value and gradient.
+    """
+    markers = args_markers.markers
+    r_vec = zeros(3, dtype=float)
+
+    for c in range(4):
+        out[c] = 0.0
+    for neigh in range(27):
+        box_to_search = neighbours[loc_box, neigh]
+        n = 0
+        while boxes[box_to_search, n] != -1:
+            p = boxes[box_to_search, n]
+            n += 1
+            if holes[p]:
+                continue
+            r = distance_vector(
+                markers, p, x1, x2, x3, eta1, eta2, eta3, periodic1, periodic2, periodic3, period, proj, x_idx, r_vec
+            )
+            if r &gt;= h:
+                continue
+            coeff = markers[index, p] * scale
+            out[0] += coeff * sph_radial_kernels.kernel_value(kernel, dim, r, h)
+            if r &gt; 0.0:
+                dw = coeff * sph_radial_kernels.kernel_dr(kernel, dim, r, h) / r
+                for c in range(3):
+                    out[1 + c] += dw * r_vec[c]</div>
+
+
+
+<div class="viewcode-block" id="box_based_columns">
+<a class="viewcode-back" href="../../../sections/subsections/dev-sph.html#struphy.pic.sph_eval_kernels.box_based_columns">[docs]</a>
+@stack_array("r_vec")
+def box_based_columns(
+    args_markers: "MarkerArguments",
+    x1: "float",
+    x2: "float",
+    x3: "float",
+    eta1: "float",
+    eta2: "float",
+    eta3: "float",
+    loc_box: "int",
+    boxes: "int[:,:]",
+    neighbours: "int[:,:]",
+    holes: "bool[:]",
+    periodic1: "bool",
+    periodic2: "bool",
+    periodic3: "bool",
+    period: "float[:,:]",
+    proj: "float[:,:]",
+    x_idx: "int",
+    first_idx: "int",
+    n_idx: "int",
+    kernel: "int",
+    dim: "int",
+    h: "float",
+    scale: "float",
+    values: "float[:]",
+    grads: "float[:,:]",
+):
+    r"""As :func:`box_based_physical`, for the ``n_idx`` consecutive coefficient columns
+    ``first_idx, ..., first_idx + n_idx - 1`` in one sweep over the neighbour boxes:
+    ``values[a]`` :math:`= \sum_j c_{a,j} W_h(|\mathbf r_j|)` and ``grads[a, :]``
+    :math:`= \sum_j c_{a,j} \nabla W_h(\mathbf r_j)` with :math:`c_{a,j}` = ``markers[first_idx + a, j]``.
+
+    Parameters
+    ----------
+    args_markers : MarkerArguments
+        Marker arguments.
+
+    x1, x2, x3 : float
+        Physical evaluation point.
+
+    eta1, eta2, eta3 : float
+        Logical evaluation point.
+
+    loc_box : int
+        Box of the evaluation point.
+
+    boxes, neighbours : array[int]
+        Sorting-box arrays.
+
+    holes : bool[:]
+        ``True`` for holes.
+
+    periodic1, periodic2, periodic3 : bool
+        Periodicity of the logical directions.
+
+    period, proj : array[float]
+        Period vectors and projection onto the resolved directions (3 x 3).
+
+    x_idx : int
+        First marker column of the physical position.
+
+    first_idx, n_idx : int
+        First coefficient column and number of columns.
+
+    kernel, dim : int
+        Kernel id and number of resolved directions.
+
+    h, scale : float
+        Kernel width (physical) and kernel factor :math:`1/A_\perp`.
+
+    values : array[float]
+        Output, length at least ``n_idx``.
+
+    grads : array[float]
+        Output, shape at least ``(n_idx, 3)``.
+    """
+    markers = args_markers.markers
+    r_vec = zeros(3, dtype=float)
+
+    for a in range(n_idx):
+        values[a] = 0.0
+        for c in range(3):
+            grads[a, c] = 0.0
+    for neigh in range(27):
+        box_to_search = neighbours[loc_box, neigh]
+        n = 0
+        while boxes[box_to_search, n] != -1:
+            p = boxes[box_to_search, n]
+            n += 1
+            if holes[p]:
+                continue
+            r = distance_vector(
+                markers, p, x1, x2, x3, eta1, eta2, eta3, periodic1, periodic2, periodic3, period, proj, x_idx, r_vec
+            )
+            if r &gt;= h:
+                continue
+            w = scale * sph_radial_kernels.kernel_value(kernel, dim, r, h)
+            dw = 0.0
+            if r &gt; 0.0:
+                dw = scale * sph_radial_kernels.kernel_dr(kernel, dim, r, h) / r
+            for a in range(n_idx):
+                coeff = markers[first_idx + a, p]
+                values[a] += coeff * w
+                for c in range(3):
+                    grads[a, c] += coeff * dw * r_vec[c]</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2019-2026 (c) Struphy dev team | Max Planck Institute for Plasma Physics.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
